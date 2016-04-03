@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const extend = require('mongoose-schema-extend');
 
 const userSchema = new Schema({
-
+  email: String,
 }, { collection: 'users', discriminatorKey: '_type' });
 
 const studentSchema = userSchema.extend({
