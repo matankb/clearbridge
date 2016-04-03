@@ -11,5 +11,10 @@
     "url": "ssh://56fbf7ab7628e16976000003@bridge-jcdsboston.rhcloud.com/~/git/bridge.git/"
   },
   "author": "Matan Kotler-Berkowitz",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^2.6.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3"
+  }
 }
