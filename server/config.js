@@ -7,6 +7,6 @@ module.exports = {
     callbackURL: production ? 'https://bridge-jcdsboston.rhcloud.com/callback' : 'http://127.0.0.1/auth/callback',
   },
   db: {
-    url: production ? process.env.OPENSHIFT_MONGODB_DB_URL : 'mongodb://localhost/users',
+    url: production ? process.env.OPENSHIFT_MONGODB_DB_URL : 'mongodb://127.0.0.1/bridge',
   },
 };
