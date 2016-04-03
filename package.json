@@ -1,0 +1,15 @@
+{
+  "name": "bridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://56fbf7ab7628e16976000003@bridge-jcdsboston.rhcloud.com/~/git/bridge.git/"
+  },
+  "author": "Matan Kotler-Berkowitz",
+  "license": "ISC"
+}
