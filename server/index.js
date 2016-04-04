@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config');
+const session = require('express-session');
 
 const routes = require('./routes');
 const auth = require('./auth');
@@ -12,6 +13,8 @@ const SERVER_IP = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 mongoose.connect(config.db.url);
 
 const app = express();
+
+app.use(session({ secret: 'Reflectbridge1' }));
 
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
