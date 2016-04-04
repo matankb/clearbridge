@@ -26,4 +26,4 @@ const Admin = mongoose.model('Admin', adminSchema);
 module.exports = User;
 module.exports.Student = Student;
 module.exports.Teacher = Teacher;
-module.exports.admin = Admin;
+module.exports.Admin = Admin;
