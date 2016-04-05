@@ -7,15 +7,15 @@ const userSchema = new Schema({
 }, { collection: 'users', discriminatorKey: '_type' });
 
 const studentSchema = userSchema.extend({
-
+  type: { type: Number, default: 0 },
 });
 
 const teacherSchema = userSchema.extend({
-
+  type: { type: Number, default: 1 },
 });
 
 const adminSchema = userSchema.extend({
-
+  type: { type: Number, default: 2 },
 });
 
 const User = mongoose.model('User', userSchema);
