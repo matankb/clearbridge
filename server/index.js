@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('./config');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
+const config = require('./config');
 const routes = require('./routes');
 const auth = require('./auth');
 
@@ -15,6 +16,8 @@ mongoose.connect(config.db.url);
 const app = express();
 
 app.use(session({ secret: 'Reflectbridge1' }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
