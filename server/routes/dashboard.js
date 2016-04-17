@@ -1,4 +1,5 @@
 const express = require('express');
+const loginProtected = require('../middleware/login-protected');
 
 function handleDashboardRoute(req, res, next) {
 
@@ -28,8 +29,8 @@ function handleDashboardRoute(req, res, next) {
 module.exports = function(app) {
 
   // two routes because /dashboard/* doesnt handle /dashboard/
-  app.get('/dashboard/*', handleDashboardRoute);
-  app.get('/dashboard', handleDashboardRoute);
+  app.get('/dashboard/*', loginProtected, handleDashboardRoute);
+  app.get('/dashboard', loginProtected, handleDashboardRoute);
 
   app.use('/dashboard/build/', express.static('client/dashboard/build/'));
 
