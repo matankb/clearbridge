@@ -5,25 +5,33 @@
 
 // TODO: find better name for module
 
-function ensureUserType(req, res, next, type) {
-  if (!req.user) {
-    return res.status(403).end();
-  }
-  if (req.user.type === type) {
-    next();
+function ensureAuthenticated(types) {
+  if ((types || []).length === 0) {
+    return function(req, res, next) { // this function will only check for user
+      if (req.user) {
+        next();
+      } else {
+        res.status(403).end();
+      }
+    };
   } else {
-    res.status(403).end();
+    return function(req, res, next) {
+      if (req.user) {
+        if (types.indexOf(req.user.type) > -1) {
+          next();
+        } else {
+          res.status(403).end();
+        }
+      } else {
+        res.status(403).end();
+      }
+    };
   }
+
 }
 
-module.exports = function(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.status(403).end();
-  }
-};
+module.exports = ensureAuthenticated;
 
-module.exports.student = function(req, res, next) { ensureUserType(req, res, next, 0); };
-module.exports.teacher = function(req, res, next) { ensureUserType(req, res, next, 1); };
-module.exports.admin = function(req, res, next) { ensureUserType(req, res, next, 2); };
+module.exports.student = ensureAuthenticated([0]);
+module.exports.teacher = ensureAuthenticated([1]);
+module.exports.admin = ensureAuthenticated([2]);
