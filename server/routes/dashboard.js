@@ -32,6 +32,8 @@ module.exports = function(app) {
   app.get('/dashboard/*', loginProtected, handleDashboardRoute);
   app.get('/dashboard', loginProtected, handleDashboardRoute);
 
-  app.use('/dashboard/build/', express.static('client/dashboard/build/'));
+  if(process.env.NODE_ENV === 'production') {
+    app.use('/dashboard/build/', express.static('client/dashboard/build/'));
+  } // else continue middleware trains - next stop, webpack-dev-server
 
 };
