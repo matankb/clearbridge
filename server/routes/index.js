@@ -1,7 +1,8 @@
-const routes = require('require-all')({
+const flatten = require('flat');
+const routes = flatten(require('require-all')({
   dirname: __dirname,
   recursive: true,
-});
+}));
 
 module.exports = function (app) {
   for (var key in routes) {

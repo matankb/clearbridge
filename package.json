@@ -36,6 +36,7 @@
     "classnames": "^2.2.4",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "flat": "^2.0.0",
     "material-ui": "^0.14.4",
     "mongoose": "^4.4.10",
     "mongoose-schema-extend": "^0.2.0",
