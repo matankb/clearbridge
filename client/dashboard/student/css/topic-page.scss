@@ -91,7 +91,7 @@ nav {
     padding: 0;
     li {
       transition: background 500ms;
-      text-transform: uppercase;
+      text-transform: capitalize;;
       cursor: pointer;
       color: $grayColor;
       &:hover {
