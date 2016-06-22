@@ -51,6 +51,16 @@ function topics(state = defaultState, action) {
         }),
       });
 
+    case 'SELECT_TOPIC':
+      return Object.assign({}, state, {
+        selectedTopic: action.id,
+      });
+
+    case 'TOGGLE_TOPIC_PAGE':
+      return Object.assign({}, state, {
+        topicPageOpen: !state.topicPageOpen,
+      });
+
     default:
       return state;
   }

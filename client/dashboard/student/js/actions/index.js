@@ -59,3 +59,19 @@ export function fetchTopic(id) {
   };
 
 }
+
+export function selectTopic(id) {
+  return {
+    type: SELECT_TOPIC,
+    id,
+  };
+}
+export function toggleTopicPage() {
+  return {
+    type: TOGGLE_TOPIC_PAGE,
+  };
+}
+
+window.selectTopic = selectTopic;
+window.fetchTopicList = fetchTopicList;
+window.toggleTopicPage = toggleTopicPage;
