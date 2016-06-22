@@ -1,6 +1,7 @@
 const defaultState = {
   selectedTopic: null,
-  isFetchingTopicList: null,
+  isFetchingTopicList: false,
+  topicPageOpen: false,
   topics: [],
 };
 
@@ -15,7 +16,12 @@ function topics(state = defaultState, action) {
     case 'RECEIVE_TOPIC_LIST':
       return Object.assign({}, state, {
         isFetchingTopicList: false,
-        topics: action.topics,
+        topics: action.topics.map(topic => {
+          return Object.assign({}, topic, {
+            isFetching: false,
+            hasFull: false,
+          });
+        }),
       });
 
     case 'REQUEST_TOPIC':
@@ -33,7 +39,12 @@ function topics(state = defaultState, action) {
       return Object.assign({}, state, {
         topics: state.topics.map(topic => {
           if (topic.id === action.id) {
-            return Object.assign({}, topic, { isFetching: false });
+            return Object.assign({}, topic, {
+              isFetching: false,
+              hasFull: true,
+              blurb: action.blurb,
+              sections: action.sections,
+            });
           } else {
             return topic;
           }

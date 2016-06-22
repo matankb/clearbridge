@@ -45,3 +45,17 @@ export function fetchTopicList(user) {
   };
 
 }
+
+export function fetchTopic(id) {
+
+  return function(dispatch) {
+
+    dispatch(requestTopic(id));
+
+    fetch(`/api/topics/${id}`, { credentials: 'same-origin' })
+      .then(res => res.json())
+      .then(topic => dispatch(receiveTopic(topic)));
+
+  };
+
+}
