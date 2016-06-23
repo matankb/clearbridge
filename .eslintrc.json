@@ -3,6 +3,12 @@
     "plugins": [
         "react"
     ],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    },
     "rules": {
       "func-names": 0,
       "space-before-function-paren": 0,
@@ -21,11 +27,5 @@
       "no-param-reassign": 0,
       "prefer-const": 0,
       "react/jsx-no-bind": 0
-    },
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread ": true
-        }
     }
 }
