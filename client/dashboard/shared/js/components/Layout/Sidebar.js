@@ -1,7 +1,7 @@
 import React from 'react';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import Divider from 'material-ui/lib/divider';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/divider';
 import { Link } from 'react-router';
 
 const style = {
@@ -28,42 +28,44 @@ const style = {
     textDecoration: 'none',
   },
   divider: {
-    height: 1,
     marginTop: 5,
     marginBottom: 5,
   },
 };
 
-const Sidebar = ({ open, items, location }) => {
+const Sidebar = props => {
+
   return (
-    <List
-      style = {{
-        ...style.list,
-        left: open ? '0' : '-15%', // hide sidebar if closed
-      }}
+    <Drawer
+      docked={ false }
+      open={ props.open }
+      onRequestChange={ props.handleChange }
     >
-    {
-      items.map(item => {
-        if (item === null) {
-          return <Divider style={ style.divider } />;
-        } else {
-          return (
-            <Link to={ `/dashboard${item.url}` } style={ style.link }>
-              <ListItem
-                primaryText={ item.name }
-                leftIcon={ item.icon }
-                style={
-                  location.pathname === `/dashboard${item.url}` ?
-                  style.listItemSelected :
-                  style.listItem
-                }
-              />
-            </Link>
-          );
+        {
+          props.items.map(item => {
+            if (item === null) {
+              return <Divider style={ style.divider } />;
+            } else {
+              return (
+                <Link to={ `/dashboard${item.url}` } style={ style.link }>
+                  <MenuItem
+                    leftIcon={ item.icon }
+                    style={
+                      `/dashboard${item.url}` === props.location.pathname ?
+                      style.listItemSelected :
+                      {}
+                    }
+                    onTouchTap={ props.onItemClick }
+                    onClick={ props.onItemClick }
+                  >
+                    { item.name }
+                  </MenuItem>
+                </Link>
+              );
+            }
+          })
         }
-      })
-    }
-    </List>
+    </Drawer>
   );
 };
 

@@ -22,26 +22,35 @@ const styles = {
   },
 };
 
-let Layout = props => {
-  return (
-    <div className="layout">
-      <Header />
-      <Sidebar items={ props.sidebarItems } open={ props.open } location={ props.location } />
-      <main style={ styles.main(props) }>
-        { props.children }
-      </main>
-    </div>
-  );
-};
-
-function mapStateToProps(state) {
-  return {
-    open: state.layout.sidebar.open,
-  };
+class Layout extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      sidebar: { open: false },
+    };
+  }
+  openSidebar() {
+    this.setState({ sidebar: { open: true } });
+  }
+  closeSidebar() {
+    this.setState({ sidebar: { open: false } });
+  }
+  render() {
+    return (
+      <div className="layout">
+        <Header handleIconClick={ this.openSidebar.bind(this) } />
+        <Sidebar
+          items={ this.props.sidebarItems }
+          open={ this.state.sidebar.open }
+          location={ this.props.location }
+          onItemClick={ this.closeSidebar.bind(this) }
+        />
+        <main style={ styles.main(this.props) }>
+          { this.props.children }
+        </main>
+      </div>
+    );
+  }
 }
-
-Layout = connect(
-  mapStateToProps
-)(Layout);
 
 export default Layout;
