@@ -1,13 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 
-import { toggleSidebarOpen } from '../../actions/layout';
+import { colors } from '../../constants';
 
 const styles = {
   header: {
     fontSize: 10,
-    backgroundColor: '#4285f4',
+    backgroundColor: colors.primary.dark,
   },
   icon: {
     marginLeft: 10,
@@ -27,16 +26,5 @@ let Header = props => {
     />
   );
 };
-
-function mapDispatchToProps(dispatch) {
-  return {
-    handleIconClick: () => dispatch(toggleSidebarOpen()),
-  };
-}
-
-Header = connect(
-  () => { return {}; },
-  mapDispatchToProps
-)(Header);
 
 export default Header;
