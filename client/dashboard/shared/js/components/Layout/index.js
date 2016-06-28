@@ -44,6 +44,7 @@ class Layout extends React.Component {
           open={ this.state.sidebar.open }
           location={ this.props.location }
           onItemClick={ this.closeSidebar.bind(this) }
+          onRequestChange={ this.closeSidebar.bind(this) }
         />
         <main style={ styles.main(this.props) }>
           { this.props.children }

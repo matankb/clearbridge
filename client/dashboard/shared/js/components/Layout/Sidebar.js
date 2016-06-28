@@ -39,7 +39,7 @@ const Sidebar = props => {
     <Drawer
       docked={ false }
       open={ props.open }
-      onRequestChange={ props.handleChange }
+      onRequestChange={ props.onRequestChange }
     >
         {
           props.items.map(item => {
