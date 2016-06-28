@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AppBar from 'material-ui/lib/app-bar';
-import IconButton from 'material-ui/lib/icon-button';
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import { toggleTopicPage } from '../actions';
 

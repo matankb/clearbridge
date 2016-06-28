@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AppBar from 'material-ui/lib/app-bar';
+import AppBar from 'material-ui/AppBar';
 
 import { toggleSidebarOpen } from '../../actions/layout';
 
