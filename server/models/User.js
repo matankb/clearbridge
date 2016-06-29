@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const extend = require('mongoose-schema-extend');
+const extend = require('mongoose-schema-extend'); // eslint-disable-line no-unused-vars
 
 const userSchema = new Schema({
   email: String,
+  name: { type: String },
+  google: { id: String },
 }, { collection: 'users', discriminatorKey: '_type' });
 
 const studentSchema = userSchema.extend({
