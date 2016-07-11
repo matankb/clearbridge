@@ -11,9 +11,10 @@ const auth = require('./auth');
 const SERVER_PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 const SERVER_IP = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
+mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
 mongoose.connect(config.db.url);
 
-const app = express();
+let app = express();
 
 app.use(session({ secret: 'Reflectbridge1' }));
 app.use(bodyParser.urlencoded({ extended: true }));
