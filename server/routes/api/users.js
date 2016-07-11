@@ -77,7 +77,7 @@ module.exports = function(app) {
         if (!removedUser) { // user did not exist
           return handleNotFound(res);
         } else {
-          res.status(204).end();
+          res.status(204).json({});
         }
       })
       .catch(handleErrors(res));
