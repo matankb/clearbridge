@@ -19,4 +19,4 @@ app.use(bodyParser.json());
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
 
-app.listen(SERVER_PORT, SERVER_IP);
+app.listen(config.SERVER_PORT, config.SERVER_IP);
