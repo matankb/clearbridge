@@ -37,10 +37,6 @@ function shouldFetchTopic(id, topics) {
 
 function mapStateToProps(state, ownProps) {
   return {
-    name: ownProps.name,
-    image: ownProps.image,
-    color: ownProps.color,
-    id: ownProps.id,
     shouldFetchTopic: shouldFetchTopic(ownProps.id, state.topics),
   };
 }
