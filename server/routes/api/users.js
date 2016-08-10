@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
 const User = require('../../models/User');
 const { handleErrors, handleNotFound } = require('../../helpers/db');
