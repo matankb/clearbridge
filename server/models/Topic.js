@@ -5,10 +5,13 @@ const topicSchema = new Schema({
   name: String,
   color: String, // hex code
   image: String, // path to image
+  blurb: String,
   sections: [{
     title: String,
     content: String,
   }],
+  students: [],
+  groups: [],
 });
 
 const Topic = mongoose.model('Topic', topicSchema);
