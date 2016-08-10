@@ -10,6 +10,7 @@ const userSchema = new Schema({
 
 const studentSchema = userSchema.extend({
   type: { type: Number, default: 0 },
+  topics: [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
 });
 
 const teacherSchema = userSchema.extend({
