@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  devtool: 'inline-eval-cheap-source-map',
   entry: {
     student: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './client/dashboard/student/js/index.js'],
     teacher: ['react-hot-loader/patch', 'webpack-hot-middleware/client','./client/dashboard/teacher/js/index.js'],
