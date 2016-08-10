@@ -109,7 +109,7 @@ module.exports = function(app) {
       .then(user => {
         user.topics.push(mongoose.Types.ObjectId(req.body._id)); // eslint-disable-line new-cap
         user.save()
-          .then(res.status(201).send(mongoose.Types.ObjectId(req.body._id))) // TODO: replace with... something else
+          .then(res.status(201).send(mongoose.Types.ObjectId(req.body._id))) // eslint-disable-line new-cap, max-len
           .catch(handleErrors(res));
       })
       .catch(handleErrors(res));
