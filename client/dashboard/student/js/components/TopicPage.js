@@ -45,8 +45,8 @@ let TopicPage = props => {
 };
 
 
-function getTopicById(id, topics) {
-  return topics.filter(topic => topic.id === id)[0] || '';
+function getTopicById(_id, topics) {
+  return topics.filter(topic => topic._id === _id)[0] || {};
 }
 
 function mapStateToProps(state) {

@@ -26,29 +26,29 @@ class TopicCard extends React.Component {
   }
 }
 
-function getTopicById(id, topics) {
-  return topics.filter(topic => topic.id === id)[0] || '';
+function getTopicById(_id, topics) {
+  return topics.filter(topic => topic._id === _id)[0] || '';
 }
 
-function shouldFetchTopic(id, topics) {
-  let topic = getTopicById(id, topics);
+function shouldFetchTopic(_id, topics) {
+  let topic = getTopicById(_id, topics);
   return !topic.hasFull || !topic.isFetching;
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    shouldFetchTopic: shouldFetchTopic(ownProps.id, state.topics),
+    shouldFetchTopic: shouldFetchTopic(ownProps._id, state.topics),
   };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     openTopicPage: () => {
-      dispatch(selectTopic(ownProps.id));
+      dispatch(selectTopic(ownProps._id));
       dispatch(toggleTopicPage());
     },
     fetchTopic: () => {
-      dispatch(fetchTopic(ownProps.id));
+      dispatch(fetchTopic(ownProps._id));
     },
   };
 }

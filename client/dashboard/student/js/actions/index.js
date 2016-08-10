@@ -7,17 +7,17 @@ export const FETCH_TOPIC = 'FETCH_TOPIC';
 export const SELECT_TOPIC = 'SELECT_TOPIC';
 export const TOGGLE_TOPIC_PAGE = 'TOGGLE_TOPIC_PAGE';
 
-export function requestTopic(topic) {
+export function requestTopic(_id) {
   return {
     type: REQUEST_TOPIC,
-    id: topic.id,
+    id: _id,
   };
 }
 
 export function receiveTopic(topic) {
   return {
     type: RECEIVE_TOPIC,
-    id: topic.id,
+    id: topic._id,
     blurb: topic.blurb,
     sections: topic.sections,
   };
