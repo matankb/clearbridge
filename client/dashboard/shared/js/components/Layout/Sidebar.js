@@ -42,13 +42,18 @@ const Sidebar = props => {
       onRequestChange={ props.onRequestChange }
     >
         {
-          props.items.map(item => {
+          props.items.map((item, index) => {
             if (item === null) {
-              return <Divider style={ style.divider } />;
+              return <Divider key={ index } style={ style.divider } />;
             } else {
               return (
-                <Link to={ `/dashboard${item.url}` } style={ style.link }>
+                <Link
+                  key={ index }
+                  to={ `/dashboard${item.url}` }
+                  style={ style.link }
+                >
                   <MenuItem
+                    key={ index }
                     leftIcon={ item.icon }
                     style={
                       `/dashboard${item.url}` === props.location.pathname ?
