@@ -16,7 +16,14 @@ module.exports = function(app) {
   });
 
   app.get('/api/user/', ensureAuthenticated(), (req, res) => {
-    res.json(req.user);
+    // redirect so not to duplicate other /users/ routes for /user/
+    // I'm like 90% sure this will work
+    res.redirect(`/api/users/${req.user._id}/`);
+  });
+
+  app.get('/api/user/:resource/', ensureAuthenticated(), (req, res) => {
+    // similar to above, but for linked resources
+    res.redirect(`/api/users/${req.user._id}/${req.params.resource}/`);
   });
 
   app.get('/api/users/:id/', ensureAuthenticated([1, 2]), (req, res) => {
