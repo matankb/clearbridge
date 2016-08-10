@@ -36,13 +36,13 @@ export function receiveTopicList(topics) {
   };
 }
 
-export function fetchTopicList(user) {
+export function fetchTopicList() {
 
   return function(dispatch) {
 
     dispatch(requestTopicList());
 
-    fetch(`/api/topics?user=${user}&short=true`, { credentials: 'same-origin' })
+    fetch('/api/user/topics/', { credentials: 'same-origin' })
       .then(res => res.json())
       .then(topics => dispatch(receiveTopicList(topics)));
 
