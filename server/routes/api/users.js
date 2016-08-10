@@ -90,4 +90,27 @@ module.exports = function(app) {
       .catch(handleErrors(res));
   });
 
+  /* LINKED RESOURCES */
+
+  app.get('/api/users/:id/topics/', ensureAuthenticated(), (req, res) => {
+    // population won't work with just User, and only Students will have topics field
+    User.Student.findById(req.params.id)
+      .populate('topics')
+      .then(user => {
+        res.json(user.topics);
+      })
+      .catch(handleErrors(res));
+  });
+
+  app.post('/api/users/:id/topics/', ensureAuthenticated(), (req, res) => {
+    User.findById(req.params.id)
+      .then(user => {
+        user.topics.push(mongoose.Types.ObjectId(req.body._id)); // eslint-disable-line new-cap
+        user.save()
+          .then(res.status(201).send(mongoose.Types.ObjectId(req.body._id))) // TODO: replace with... something else
+          .catch(handleErrors(res));
+      })
+      .catch(handleErrors(res));
+  });
+
 };
