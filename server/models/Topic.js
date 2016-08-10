@@ -5,7 +5,6 @@ const topicSchema = new Schema({
   name: String,
   color: String, // hex code
   image: String, // path to image
-  creator: { type: Schema.Types.ObjectId, ref: 'Teacher' },
   sections: [{
     title: String,
     content: String,
