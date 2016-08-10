@@ -1,11 +1,11 @@
-const flatten = require('flat');
-const routes = flatten(require('require-all')({
+const flat = require('flat');
+const routes = flat(require('require-all')({
   dirname: __dirname,
   recursive: true,
 }));
 
 module.exports = function (app) {
-  for (var key in routes) {
+  for (let key in routes) {
     if (routes.hasOwnProperty(key) && key !== 'index') {
       routes[key](app);
     }
