@@ -33,6 +33,7 @@ module.exports = function(app) {
   app.get('/dashboard', loginProtected, handleDashboardRoute);
 
   if(process.env.NODE_ENV === 'production') {
+    console.log('getting dash in prod');
     app.use('/dashboard/build/', express.static('client/dashboard/build/'));
   } // else continue middleware trains - next stop, webpack-dev-server
 

@@ -2,9 +2,9 @@ module.exports = {
   google: {
     clientID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
     clientSecret: 'EiYNNkSRbpcne6EImk3AgD27',
-    callbackURL: process.env.NODE_ENV ?
+    callbackURL: process.env.NODE_ENV === 'production' ?
                 'https://bridge-jcdsboston.rhcloud.com/auth/callback/' :
-                'http://127.0.0.1:8080/auth/callback',
+                'http://127.0.0.1:8080/auth/callback/',
   },
   // allow for both local and openshift envs
   db: {
