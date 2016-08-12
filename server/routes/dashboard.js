@@ -16,7 +16,7 @@ function handleDashboardRoute(req, res, next) {
         res.sendFile('dashboard/admin/index.html', { root: './client' });
         break;
       default:
-        res.sendFile('login/index.html', { root: './client' });
+        res.redirect('/'); // TODO: flash message with 'invalid user' or something
         break;
     }
 
@@ -32,8 +32,7 @@ module.exports = function(app) {
   app.get('/dashboard/*', loginProtected, handleDashboardRoute);
   app.get('/dashboard', loginProtected, handleDashboardRoute);
 
-  if(process.env.NODE_ENV === 'production') {
-    console.log('getting dash in prod');
+  if (process.env.NODE_ENV === 'production') {
     app.use('/dashboard/build/', express.static('client/dashboard/build/'));
   } // else continue middleware trains - next stop, webpack-dev-server
 
