@@ -2,4 +2,4 @@
 cd app-root/repo
 echo 'Starting Webpack Build'
 npm run build
-echo 'Webpack Building'
+echo 'Webpack Building' 
