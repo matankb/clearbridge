@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 
 import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
@@ -18,9 +18,9 @@ const LayoutWrapper = props => {
  );
 };
 
-const Routes = () => {
+const Routes = ({ history }) => {
   return (
-    <Router history={ browserHistory }>
+    <Router history={ history }>
       <Route path="/dashboard/" component={ LayoutWrapper } >
         <IndexRoute component={ Home } />
         <Route path="/dashboard/classes/" component={ Users } />
