@@ -7,7 +7,8 @@ const topicSchema = new Schema({
   image: String, // path to image
   blurb: String,
   sections: [{
-    title: String,
+    _id: Schema.Types.ObjectId,
+    name: String,
     content: String,
   }],
   students: [],
