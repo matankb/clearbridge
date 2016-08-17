@@ -19,4 +19,6 @@ app.use(bodyParser.json());
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
 
-app.listen(config.SERVER_PORT, config.SERVER_IP);
+app.listen(config.SERVER_PORT, config.SERVER_IP, () => {
+  console.log(`Server started on port ${config.SERVER_PORT}`); // eslint-disable-line no-console
+});
