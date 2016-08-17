@@ -1,0 +1,49 @@
+@import "../../shared/css/_vars";
+
+.topic-card {
+
+  .image-wrap {
+    height: 100%;
+    width: 20%;
+    float: left;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 80%;
+  }
+
+  main {
+    float: right;
+    width: 80%;
+    position: relative;
+    .content {
+      padding: 40px;
+    }
+    .name {
+      font-size: 24px;
+      font-weight: 400;
+      color: $gray;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+    .blurb {
+      font-weight: 300;
+      color: $gray;
+    }
+    .action {
+      color: $accent;
+      border-top: 1px solid $lightGray;
+      margin-top: 7px; /* push to bottom */
+    }
+    .menu {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+  }
+
+}
