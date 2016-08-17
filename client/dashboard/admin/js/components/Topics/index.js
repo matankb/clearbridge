@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
+  setCreationStatus,
   fetchTopics,
 } from '../../actions/topics/';
 
@@ -35,6 +36,8 @@ class Topics extends React.Component {
         <TopicList
           topics={ this.props.topics }
           setSelectedTopic={ this.props.setSelectedTopic }
+          toggleTopicPage={ this.props.toggleTopicPage }
+        />
         />
       </div>
     );
@@ -49,6 +52,7 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchTopics: () => dispatch(fetchTopics()),
     setSelectedTopic: id => () => dispatch(selectTopic(id)),
+    toggleTopicPage: () => dispatch(toggleTopicPage()),
   };
 }
 
