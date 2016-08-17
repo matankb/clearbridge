@@ -4,9 +4,18 @@ import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Routes from './routes.js';
+import { theme } from '../../shared/js/constants';
 
-const App = ({ store }) => (
-  <Provider store={ store }><MuiThemeProvider><Routes /></MuiThemeProvider></Provider>
-);
+const App = ({ store, history }) => {
+  return (
+    <Provider store={ store }>
+      <MuiThemeProvider
+        muiTheme={ theme }
+      >
+        <Routes history={ history } />
+      </MuiThemeProvider>
+    </Provider>
+  );
+};
 
 export default App;
