@@ -1,5 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
+
+import { removeSelectedUsers } from '../../actions/users';
 
 const style = {
   icons: {
@@ -11,8 +15,29 @@ const style = {
 let ActionBar = props => {
   return (
     <div className={ props.shown ? 'action-bar shown' : 'action-bar' } >
+      <IconButton
+        style={ style.icons }
+        onTouchTap={ props.handleRemove }
+      >
+        <DeleteIcon color="#5f6265" hoverColor="black" />
+      </IconButton>
     </div>
   );
 };
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleRemove: () => dispatch(removeSelectedUsers()),
+  };
+}
+
+ActionBar = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ActionBar);
 
 export default ActionBar;
