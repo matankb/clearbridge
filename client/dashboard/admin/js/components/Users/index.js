@@ -1,4 +1,12 @@
 import CreateUser from './CreateUser';
+const style = {
+  fab: {
+    position: 'fixed',
+    bottom: 50,
+    right: 82,
+    zIndex: 2,
+  },
+};
 class Users extends React.Component {
   componentWillMount() {
     this.props.fetchUsers();
