@@ -8,7 +8,10 @@ import VisibleUserList from './VisibleUserList';
 import FilterBar from './FilterBar';
 import ActionBar from './ActionBar';
 import CreateUser from './CreateUser';
+
 import '../../../css/users.scss';
+import { colors } from '../../../../shared/js/constants/';
+
 const style = {
   fab: {
     position: 'fixed',
