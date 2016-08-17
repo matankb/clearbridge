@@ -1,5 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import AddIcon from 'material-ui/svg-icons/content/add';
+
+import TopicList from './TopicList/';
+import CreateTopic from './CreateTopic/';
 import {
   setCreationStatus,
   fetchTopics,
@@ -41,7 +46,12 @@ class Topics extends React.Component {
           setSelectedTopic={ this.props.setSelectedTopic }
           toggleTopicPage={ this.props.toggleTopicPage }
         />
+
+        <CreateTopic
+          open={ this.props.isCreating }
+          stage={ this.props.createStage }
         />
+
       </div>
     );
   }
@@ -49,13 +59,21 @@ class Topics extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    isCreating: state.topics.create.isCreating,
+    createStage: state.topics.create.stage,
+    topics: state.topics.topicList.topics,
+    topicPageOpen: state.topics.topicPage.open,
+    topicPageTab: state.topics.topicPage.tab,
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
+    handleFABClick: () => dispatch(setCreationStatus(true)),
     fetchTopics: () => dispatch(fetchTopics()),
     setSelectedTopic: id => () => dispatch(selectTopic(id)),
     toggleTopicPage: () => dispatch(toggleTopicPage()),
+    handleTabClick: index => () => dispatch(setTopicPageTab(index)),
   };
 }
 
@@ -65,3 +83,4 @@ Topics = connect(
 )(Topics);
 
 export default Topics;
+export { TopicPage };
