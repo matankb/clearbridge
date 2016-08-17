@@ -10,6 +10,9 @@ class Topics extends React.Component {
   render() {
     return (
       <div className="topics">
+        <TopicList
+          topics={ this.props.topics }
+        />
       </div>
     );
   }
