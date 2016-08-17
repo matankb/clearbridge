@@ -1,7 +1,7 @@
 {
   "name": "bridge",
   "version": "1.0.0",
-  "description": "JCDS Bridge",
+  "description": "JCDS Bridg",
   "main": "src/server",
   "scripts": {
     "start": "node src/server",
