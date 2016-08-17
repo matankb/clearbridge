@@ -9,7 +9,7 @@ import {
 } from 'material-ui/Stepper';
 
 import stages from './stages';
-import Actions from './Actions';
+import Actions from './actions';
 
 import '../../../../css/create-topic.scss';
 import { colors } from '../../../../../shared/js/constants/';

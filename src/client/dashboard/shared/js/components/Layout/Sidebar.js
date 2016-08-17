@@ -1,7 +1,7 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import Divider from 'material-ui/divider';
+import Divider from 'material-ui/Divider';
 import { Link } from 'react-router';
 
 const style = {
