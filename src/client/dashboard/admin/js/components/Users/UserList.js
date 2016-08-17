@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import isEqual from 'lodash.isEqual';
+import isEqual from 'lodash.isequal';
 import { Table,
   TableBody,
   TableHeader,
