@@ -64,6 +64,6 @@
     "node-sass": "^3.7.0",
     "react-hot-loader": "^3.0.0-alpha.9",
     "sass-loader": "^3.2.0",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
   }
 }
