@@ -8,6 +8,7 @@ import VisibleUserList from './VisibleUserList';
 import FilterBar from './FilterBar';
 import ActionBar from './ActionBar';
 import CreateUser from './CreateUser';
+import '../../../css/users.scss';
 const style = {
   fab: {
     position: 'fixed',
@@ -16,6 +17,7 @@ const style = {
     zIndex: 2,
   },
 };
+
 class Users extends React.Component {
   componentWillMount() {
     this.props.fetchUsers();
@@ -29,7 +31,9 @@ class Users extends React.Component {
           onClick={ this.props.handleFABClick }
         >
           <AddIcon />
+        </FloatingActionButton>
         <FilterBar shown={ this.props.filterBarShown} />
+        <ActionBar shown={ this.props.actionBarShown } />
         <VisibleUserList handleRowSelection={ this.props.handleRowSelection } />
         <CreateUser open={ this.props.isCreating } />
       </div>
@@ -40,6 +44,7 @@ class Users extends React.Component {
 function mapStateToProps(state) {
   return {
     filterBarShown: !state.users.userList.isSelecting,
+    actionBarShown: state.users.userList.isSelecting,
     isCreating: state.users.create.isCreating,
   };
 }

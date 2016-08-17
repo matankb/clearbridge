@@ -1,0 +1,16 @@
+@import "../../shared/css/_vars";
+
+.users {
+  padding: 10px;
+  .action-bar {
+    background: $highlight;
+    height: 48px;
+    width: 100%;
+    &.shown {
+      display: block;
+    }
+    &:not(.shown) {
+      display: none;
+    }
+  }
+}
