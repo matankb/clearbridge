@@ -12,6 +12,7 @@ class Users extends React.Component {
           onClick={ this.props.handleFABClick }
         >
           <AddIcon />
+        <VisibleUserList handleRowSelection={ this.props.handleRowSelection } />
         <CreateUser open={ this.props.isCreating } />
       </div>
     );
