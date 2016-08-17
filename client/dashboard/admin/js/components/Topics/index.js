@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import {
   setCreationStatus,
   fetchTopics,
+  selectTopic,
+  toggleTopicPage,
+  setTopicPageTab,
 } from '../../actions/topics/';
 
 import '../../../css/topics.scss';
