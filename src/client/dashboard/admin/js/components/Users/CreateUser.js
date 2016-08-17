@@ -16,7 +16,6 @@ import {
   postUser,
 } from '../../actions/users';
 
-import '../../../css/create-user.scss';
 import { colors } from '.././../../../shared/js/constants';
 
 const style = {

@@ -4,13 +4,13 @@ const path = require('path');
 module.exports = {
   devtool: 'inline-eval-cheap-source-map',
   entry: {
-    student: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './client/dashboard/student/js/index.js'],
-    teacher: ['react-hot-loader/patch', 'webpack-hot-middleware/client','./client/dashboard/teacher/js/index.js'],
-    admin: ['react-hot-loader/patch', 'webpack-hot-middleware/client','./client/dashboard/admin/js/index.js'],
+    student: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './src/client/dashboard/student/js/index.js'],
+    teacher: ['react-hot-loader/patch', 'webpack-hot-middleware/client','./src/client/dashboard/teacher/js/index.js'],
+    admin: ['react-hot-loader/patch', 'webpack-hot-middleware/client','./src/client/dashboard/admin/js/index.js'],
   },
   output: {
     publicPath: '/dashboard/build/js/',
-    path: path.join(__dirname, 'client/dashboard/build/js'),
+    path: path.join(__dirname, 'src/client/dashboard/build/js'),
     filename: '[name].min.js',
   },
   module: {

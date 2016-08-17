@@ -7,13 +7,13 @@ function handleDashboardRoute(req, res, next) {
 
     switch (req.user.type) { // send different dashboard based on user type
       case 0:
-        res.sendFile('dashboard/student/index.html', { root: './client' });
+        res.sendFile('dashboard/student/index.html', { root: './src/client' });
         break;
       case 1:
-        res.sendFile('dashboard/teacher/index.html', { root: './client' });
+        res.sendFile('dashboard/teacher/index.html', { root: './src/client' });
         break;
       case 2:
-        res.sendFile('dashboard/admin/index.html', { root: './client' });
+        res.sendFile('dashboard/admin/index.html', { root: './src/client' });
         break;
       default:
         res.redirect('/'); // TODO: flash message with 'invalid user' or something
