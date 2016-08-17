@@ -1,3 +1,11 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+
+import { fetchUsers, setSelectedUsers, setCreationStatus } from '../../actions/users';
+import VisibleUserList from './VisibleUserList';
+import FilterBar from './FilterBar';
+import ActionBar from './ActionBar';
 import CreateUser from './CreateUser';
 const style = {
   fab: {
@@ -20,6 +28,7 @@ class Users extends React.Component {
           onClick={ this.props.handleFABClick }
         >
           <AddIcon />
+        <FilterBar shown={ this.props.filterBarShown} />
         <VisibleUserList handleRowSelection={ this.props.handleRowSelection } />
         <CreateUser open={ this.props.isCreating } />
       </div>
@@ -29,6 +38,7 @@ class Users extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    filterBarShown: !state.users.userList.isSelecting,
     isCreating: state.users.create.isCreating,
   };
 }

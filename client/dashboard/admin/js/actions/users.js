@@ -1,3 +1,4 @@
+export const SET_VISIBILITY_FILTER = 'USERS/SET_VISIBILITY_FILTER';
 export const REQUEST_USERS = 'USERS/REQUEST_USERS';
 export const RECEIVE_USERS = 'USERS/RECEIVE_USERS';
 export const FETCH_USERS = 'USERS/FETCH_USERS';
@@ -10,6 +11,13 @@ export const SHOW_MORE_CREATION_OPTIONS = 'USERS/SHOW_MORE_CREATION_OPTIONS';
 export const RESET_CREATION_DATA = 'USERS/RESET_CREATION_DATA';
 export const REQUEST_USER_CREATION = 'USERS/REQUEST_USER_CREATION';
 export const RECEIVE_USER_CREATION = 'USERS/RECEIVE_USER_CREATION';
+
+export function setVisibilityFilter(filterLevel) {
+  return {
+    type: SET_VISIBILITY_FILTER,
+    filterLevel,
+  };
+}
 
 export function requestUsers() {
   return {
