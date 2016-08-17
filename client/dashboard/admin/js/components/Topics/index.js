@@ -5,6 +5,7 @@ import AddIcon from 'material-ui/svg-icons/content/add';
 
 import TopicList from './TopicList/';
 import CreateTopic from './CreateTopic/';
+import TopicPage from './TopicPage/';
 import {
   setCreationStatus,
   fetchTopics,
@@ -45,6 +46,12 @@ class Topics extends React.Component {
           topics={ this.props.topics }
           setSelectedTopic={ this.props.setSelectedTopic }
           toggleTopicPage={ this.props.toggleTopicPage }
+        />
+
+        <TopicPage
+          open={ this.props.topicPageOpen }
+          tab={ this.props.topicPageTab }
+          handleTabClick={ this.props.handleTabClick }
         />
 
         <CreateTopic
