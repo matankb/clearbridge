@@ -52,6 +52,42 @@ export function fetchUsers() {
   };
 }
 
+export function requestUserRemoval(id) {
+  return {
+    type: REQUEST_USER_REMOVAL,
+    id,
+  };
+}
+
+export function receiveUserRemoval(id) {
+  return {
+    type: RECEIVE_USER_REMOVAL,
+    id,
+  };
+}
+
+export function removeUser(id) {
+  return function(dispatch) {
+    dispatch(requestUserRemoval(id));
+    fetch(`/api/users/${id}/`, {
+      credentials: 'same-origin',
+      method: 'DELETE',
+    })
+      .then(() => dispatch(receiveUserRemoval(id)));
+  };
+}
+
+export function removeSelectedUsers() {
+  return function(dispatch, getState) {
+
+    let state = getState();
+
+    state.users.userList.selected.forEach(id => {
+      dispatch(removeUser(id));
+    });
+
+  };
+}
 
 export function setCreationStatus(isCreating) {
   return {
