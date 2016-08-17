@@ -1,4 +1,5 @@
 export const SET_VISIBILITY_FILTER = 'USERS/SET_VISIBILITY_FILTER';
+export const SET_SELECTED_USERS = 'USERS/SET_SELECTED_USERS';
 export const REQUEST_USERS = 'USERS/REQUEST_USERS';
 export const RECEIVE_USERS = 'USERS/RECEIVE_USERS';
 export const FETCH_USERS = 'USERS/FETCH_USERS';
@@ -16,6 +17,14 @@ export function setVisibilityFilter(filterLevel) {
   return {
     type: SET_VISIBILITY_FILTER,
     filterLevel,
+  };
+}
+
+export function setSelectedUsers(indexes) {
+  // index must be used as it is passed to callback by table
+  return {
+    type: SET_SELECTED_USERS,
+    indexes,
   };
 }
 

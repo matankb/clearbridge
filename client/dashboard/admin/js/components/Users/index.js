@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import AddIcon from 'material-ui/svg-icons/content/add';
 
 import { fetchUsers, setSelectedUsers, setCreationStatus } from '../../actions/users';
 import VisibleUserList from './VisibleUserList';
@@ -46,6 +47,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchUsers: () => dispatch(fetchUsers()),
+    handleRowSelection: index => dispatch(setSelectedUsers(index)),
     handleFABClick: () => dispatch(setCreationStatus(true)),
   };
 }
