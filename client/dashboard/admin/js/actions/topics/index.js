@@ -1,3 +1,4 @@
+export const ADD_TOPIC = 'TOPICS/ADD_TOPIC';
 export const SELECT_CREATION_STAGE = 'TOPICS/SELECT_CREATION_STAGE';
 export const NEXT_CREATION_STAGE = 'TOPICS/NEXT_CREATION_STAGE';
 export const SET_CREATION_STATUS = 'TOPICS/SET_CREATION_STATUS';
@@ -6,6 +7,14 @@ export const RESET_CREATION_DATA = 'TOPICS/RESET_CREATION_DATA';
 export const REQUEST_TOPICS = 'TOPICS/REQUEST_TOPICS';
 export const RECEIVE_TOPICS = 'TOPICS/RECEIVE_TOPICS';
 export const SELECT_TOPIC = 'TOPICS/SELECT_TOPIC';
+export const REQUEST_TOPIC_CREATION = 'TOPICs/REQUEST_TOPIC_CREATION';
+export const RECEIVE_TOPIC_CREATION = 'TOPICs/RECEIVE_TOPIC_CREATION';
+export const REQUEST_TOPIC_REMOVAL = 'TOPICS/REQUEST_TOPIC_REMOVAL';
+export const RECEIVE_TOPIC_REMOVAL = 'TOPICS/RECEIVE_TOPIC_REMOVAL';
+
+export function addTopic() {
+  return {};
+}
 
 export function selectCreationStage(stage) {
   return {
@@ -71,3 +80,93 @@ export function selectTopic(id) {
   };
 }
 
+export function requestSectionCreation() {
+  return {
+    type: REQUEST_SECTION_CREATION,
+  };
+}
+
+export function receiveSectionCreation() {
+  return {
+    type: RECEIVE_SECTION_CREATION,
+  };
+}
+
+export function putSection(topic) {
+  return function(dispatch) {
+
+    dispatch(requestSectionCreation());
+
+    fetch(`/api/topics/${topic.id}/`, {
+      method: 'PATCH',
+      credentials: 'same-origin',
+      data: JSON.stringify({
+        sections: topic.sections,
+      }),
+    });
+
+  };
+}
+window.putSection = putSection;
+export function requestTopicCreation() {
+  return {
+    type: REQUEST_TOPIC_CREATION,
+  };
+}
+
+export function receiveTopicCreation(topic) {
+  return {
+    type: RECEIVE_TOPIC_CREATION,
+    topic,
+  };
+}
+
+export function postTopic() {
+  return function(dispatch, getState) {
+
+    let state = getState();
+    dispatch(requestTopicCreation());
+
+    fetch('/api/topics/', {
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        data: state.topics.create.data,
+      }),
+    })
+      .then(data => data.json())
+      .then(user => dispatch(receiveTopicCreation(user)));
+
+  };
+}
+
+export function requestTopicRemoval(id) {
+  return {
+    type: REQUEST_TOPIC_REMOVAL,
+    id,
+  };
+}
+
+export function receiveTopicRemoval(id) {
+  return {
+    type: RECEIVE_TOPIC_REMOVAL,
+    id,
+  };
+}
+
+export function removeTopic(id) {
+  return function(dispatch) {
+    dispatch(requestTopicRemoval(id));
+    fetch(`/api/topics/${id}/`, {
+      credentials: 'same-origin',
+      method: 'DELETE',
+    })
+    .then(() => dispatch(receiveTopicRemoval(id)));
+  };
+}
+
+export * from './topic-page';

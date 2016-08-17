@@ -1,0 +1,82 @@
+@import "../../shared/css/_vars";
+
+.topic-page {
+  .left, .right { height: 20%; display: inline-block }
+  .left { width: 50%; }
+  .right { width: 50%; }
+  .top { margin: auto }
+  .tile {
+    text-align: center;
+    margin: 0 auto 10px auto;
+    width: 80%;
+    img {
+      height: 150px;
+    }
+  }
+  .info {
+    margin-left: 35px;
+  }
+
+  nav {
+    text-align: center;
+    border-bottom: 1px solid $lightGray;
+    line-height: 0.1em;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 5%; // to center due to width: 80%
+    clear: both;
+    width: 90%;
+    span {
+      background: $background; // get rid of line when passing through text
+      cursor: pointer;
+      &:first-child { padding: 0 30px; margin: 0 10px 0 0; }
+      &:last-child { padding: 0 30px; margin: 0 0 0 10px; }
+      &.current { font-weight: 500; color: $primaryDark }
+    }
+  }
+
+  .sections {
+    .add-section {
+      margin-left: 5%;
+    }
+  }
+
+  .section {
+    padding: 10px 10%;
+    margin-bottom: 10px;
+    cursor: pointer;
+    p {
+      margin-top: 0;
+      font-family: 'Arial', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1em;
+    }
+    &:hover:not(.editing) {
+      background: rgba(143, 143, 143, 0.1);
+    }
+    .action-bar {
+      text-align: right;
+      margin-right: 10px;
+    }
+  }
+
+  .students {
+    width: 90%;
+    margin-left: 5%;
+    .button-wrap {
+      margin-left: 2px;
+    }
+    .heading {
+      font-weight: 500;
+      color: #1f1f1f;
+      display: block;
+      margin: 20px 0 25px 2px;
+    }
+    .group-marker {
+      color: $primaryLight;
+      font-weight: 500;
+    }
+  }
+
+}
