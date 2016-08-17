@@ -1,5 +1,6 @@
 export const REQUEST_TOPICS = 'TOPICS/REQUEST_TOPICS';
 export const RECEIVE_TOPICS = 'TOPICS/RECEIVE_TOPICS';
+export const SELECT_TOPIC = 'TOPICS/SELECT_TOPIC';
 
 export function requestTopics() {
   return {
@@ -24,3 +25,11 @@ export function fetchTopics() {
     });
   };
 }
+
+export function selectTopic(id) {
+  return {
+    type: SELECT_TOPIC,
+    id,
+  };
+}
+

@@ -34,6 +34,7 @@ class Topics extends React.Component {
 
         <TopicList
           topics={ this.props.topics }
+          setSelectedTopic={ this.props.setSelectedTopic }
         />
       </div>
     );
@@ -47,6 +48,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchTopics: () => dispatch(fetchTopics()),
+    setSelectedTopic: id => () => dispatch(selectTopic(id)),
   };
 }
 
