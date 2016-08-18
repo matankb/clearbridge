@@ -1,10 +1,9 @@
 @import "../../shared/css/_vars";
 
 .topic-page {
-  .left, .right { height: 20%; display: inline-block }
-  .left { width: 50%; }
-  .right { width: 50%; }
-  .top { margin: auto }
+  .left, .right { width: 50%; display: inline-block; }
+  .left { position: relative; top: 12px } /* counter .left being higher than .right */
+  .top { margin: auto; width: 100% }
   .tile {
     text-align: center;
     margin: 0 auto 10px auto;
