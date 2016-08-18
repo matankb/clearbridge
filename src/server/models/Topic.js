@@ -11,8 +11,8 @@ const topicSchema = new Schema({
     name: String,
     content: String,
   }],
-  students: [],
-  groups: [],
+  students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
+  groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
 });
 
 const Topic = mongoose.model('Topic', topicSchema);
