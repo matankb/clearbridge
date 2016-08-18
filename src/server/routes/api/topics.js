@@ -125,4 +125,33 @@ module.exports = function(app) {
 
   });
 
+  /* LINKED RESOURCES */
+
+  app.get('/api/topics/:id/students/', ensureAuthenticated([1, 2]), (req, res) => {
+    Topic.findById(req.params.id).populate('students').exec()
+      .then(topic => {
+        if (!topic) {
+          return handleNotFound(res);
+        } else {
+          res.json(topic.students);
+        }
+      })
+      .catch(handleErrors(res));
+  });
+
+  app.post('/api/topics/:id/students/', ensureAuthenticated([1, 2]), (req, res) => {
+    Topic.findById(req.params.id).exec()
+      .then(topic => {
+        if (!topic) {
+          return handleNotFound(res);
+        } else {
+          topic.students.push(req.body._id);
+          topic.save()
+            .then(() => res.json({}))
+            .catch(handleErrors(res));
+        }
+      })
+      .catch(handleErrors(res));
+  });
+
 };
