@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import TextField from 'material-ui/TextField';
 
@@ -7,6 +6,9 @@ const style = {
   name: {
     fontSize: 30,
     fontWeight: 300,
+  },
+  blurb: {
+    width: '100%',
   },
   hiddenUnderline: {
     visibility: 'hidden',
@@ -16,11 +18,11 @@ const style = {
   },
 };
 
-const Info = () => {
+const Info = props => {
   return (
     <div className="info">
       <TextField
-        value="T'fillah - Prayer"
+        value={ props.name }
         style={ style.name }
         underlineStyle={ style.hiddenUnderline }
         underlineFocusStyle={ style.shownUnderline }
@@ -29,9 +31,10 @@ const Info = () => {
         multiLine
         rows={ 4 }
         rowsMax={ 4 }
+        style={ style.blurb }
         underlineStyle={ style.hiddenUnderline }
         underlineFocusStyle={ style.shownUnderline }
-        value="This is the blurb LoremLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+        value={ props.blurb }
       />
     </div>
   );
