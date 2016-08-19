@@ -1,2 +1,3 @@
 node_modules
-src/client/dashboard/build
+npm-debug.log
+src/client/dashboard/build/*
