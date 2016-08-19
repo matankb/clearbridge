@@ -31,7 +31,7 @@ function toTableRows(arr, extra) {
   });
 }
 
-const StudentList = ({ students, groups }) => {
+const StudentList = ({ students }) => {
   return (
     <Table
       bodyStyle={ style.table.body }
@@ -43,7 +43,7 @@ const StudentList = ({ students, groups }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        { toTableRows(groups, <span className="group-marker">Group</span>) }
+        {/* { toTableRows(groups, <span className="group-marker">Group</span>) } */}
         { toTableRows(students) }
       </TableBody>
     </Table>

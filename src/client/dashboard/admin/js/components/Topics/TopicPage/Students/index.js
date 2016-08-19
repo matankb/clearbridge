@@ -44,15 +44,12 @@ class Students extends React.Component {
       <div className="students">
         <div className="button-wrap">
           <AssignStudent
-            students={ students }
             assignStudent={ this.props.assignStudent }
           />
-          <FlatButton label="Add Group" style={ style.button } primary />
           <FlatButton label="Remove" style={ style.button } />
         </div>
         <StudentList
           students={ students }
-          groups={ groups }
         />
       </div>
     );
@@ -62,8 +59,6 @@ class Students extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    students: state.users.userList.users.filter(user => user.type === 0),
-    groups: state.users.userList.users.filter(user => user.type === 0),
   };
 }
 
