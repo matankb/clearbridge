@@ -39,7 +39,7 @@ class Students extends React.Component {
   }
 
   render() {
-    const { students, groups } = this.props;
+    const { assignedStudents, allStudents } = this.props;
     return (
       <div className="students">
         <div className="button-wrap">
@@ -49,7 +49,7 @@ class Students extends React.Component {
           <FlatButton label="Remove" style={ style.button } />
         </div>
         <StudentList
-          students={ students }
+          students={ assignedStudents }
         />
       </div>
     );
@@ -59,6 +59,10 @@ class Students extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    allStudents: state.users.userList.users.filter(user => user.type === 0),
+    assignedStudents: state.users.userList.users.filter(user => {
+      return user.type === 0 && user.topics.indexOf(state.topics.topicList.selected) > -1;
+    }),
   };
 }
 
