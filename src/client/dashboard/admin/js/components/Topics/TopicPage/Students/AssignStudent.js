@@ -17,11 +17,12 @@ class AssignStudent extends React.Component {
 
   constructor() {
     super();
-    this.state = { assigning: false };
+    this.state = { studentId: '' };
   }
 
-  handleButtonClick() {
-    this.setState({ assigning: !this.state.assigning });
+  handleInputChange(value) {
+    let selectedStudent = this.props.students.filter(student => student.name === value)[0] || {};
+    this.setState({ studentId: selectedStudent._id || '' });
   }
 
   render() {
@@ -33,7 +34,14 @@ class AssignStudent extends React.Component {
             label="Add Student"
             style={ style.button }
             primary
-            onClick={ this.handleButtonClick.bind(this) }
+            onClick={ () => this.props.assignStudent(this.state.studentId) }
+          />
+          <AutoComplete
+            dataSource={ studentNames }
+            hintText="Student Name"
+            style={ style.input }
+            onNewRequest={ this.handleInputChange.bind(this) }
+            onUpdateInput={ this.handleInputChange.bind(this) }
           />
           What
           {
