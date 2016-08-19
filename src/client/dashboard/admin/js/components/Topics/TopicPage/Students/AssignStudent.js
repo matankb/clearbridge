@@ -43,14 +43,6 @@ class AssignStudent extends React.Component {
             onNewRequest={ this.handleInputChange.bind(this) }
             onUpdateInput={ this.handleInputChange.bind(this) }
           />
-          What
-          {
-            this.state.assigning &&
-            <AutoComplete
-              dataSource={ studentNames }
-              style={ style.input }
-            />
-          }
         </label>
       </span>
     );

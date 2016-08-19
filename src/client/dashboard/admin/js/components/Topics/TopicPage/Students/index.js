@@ -44,6 +44,7 @@ class Students extends React.Component {
       <div className="students">
         <div className="button-wrap">
           <AssignStudent
+            students={ allStudents }
             assignStudent={ this.props.assignStudent }
           />
           <FlatButton label="Remove" style={ style.button } />
