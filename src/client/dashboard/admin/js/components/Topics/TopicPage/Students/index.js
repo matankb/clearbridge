@@ -6,6 +6,9 @@ import FlatButton from 'material-ui/FlatButton';
 import StudentList from './StudentList';
 import AssignStudent from './AssignStudent';
 
+import { fetchUsers } from '../../../../actions/users';
+import { assignStudent } from '../../../../actions/topics/';
+
 const style = {
   button: {
     marginRight: 10,
@@ -29,30 +32,51 @@ const style = {
   },
 };
 
-let Students = ({ students, groups }) => {
+class Students extends React.Component {
 
-  return (
-    <div className="students">
-      <div className="button-wrap">
-        <AssignStudent students={ students } />
-        <FlatButton label="Add Group" style={ style.button } primary />
-        <FlatButton label="Remove" style={ style.button } />
+  componentWillMount() {
+    this.props.fetchUsers();
+  }
+
+  render() {
+    const { students, groups } = this.props;
+    return (
+      <div className="students">
+        <div className="button-wrap">
+          <AssignStudent
+            students={ students }
+            assignStudent={ this.props.assignStudent }
+          />
+          <FlatButton label="Add Group" style={ style.button } primary />
+          <FlatButton label="Remove" style={ style.button } />
+        </div>
+        <StudentList
+          students={ students }
+          groups={ groups }
+        />
       </div>
-      <StudentList
-        students={ students }
-        groups={ groups }
-      />
-    </div>
-  );
-};
+    );
+  }
+
+}
+
+function mapStateToProps(state) {
+  return {
+    students: state.users.userList.users.filter(user => user.type === 0),
+    groups: state.users.userList.users.filter(user => user.type === 0),
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchUsers: () => dispatch(fetchUsers()),
+    assignStudent: _id => dispatch(assignStudent(_id, true)),
+  };
+}
 
 Students = connect(
-  state => {
-    return {
-      students: state.users.userList.users.filter(user => user.type === 0),
-      groups: state.users.userList.users.filter(user => user.type === 0),
-    };
-  }
+  mapStateToProps,
+  mapDispatchToProps
 )(Students);
 
 export default Students;
