@@ -8,6 +8,8 @@ import {
   RECEIVE_USER_CREATION,
 } from '../../actions/users.js';
 
+import { RECEIVE_STUDENT_ASSIGNMENT } from '../../actions/topics/';
+
 const defaultState = {
   isSelecting: false,
   visibilityFilter: 0, // all
@@ -79,6 +81,17 @@ function users(state = defaultState, action) {
           ...state.users,
           action.user,
         ],
+      };
+    case RECEIVE_STUDENT_ASSIGNMENT:
+      return {
+        ...state,
+        users: state.users.map(user => {
+          if (user._id === action.studentId) {
+            return { ...user, topics: [...user.topics, action.topicId] };
+          } else {
+            return user;
+          }
+        }),
       };
     default:
       return state;

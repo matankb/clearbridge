@@ -1,13 +1,15 @@
 export const TOGGLE_TOPIC_PAGE = 'TOPICS/TOGGLE_TOPIC_PAGE';
-export const SET_TOPIC_PAGE_TAB = 'TOPICs/SET_TOPIC_PAGE_TAB';
+export const SET_TOPIC_PAGE_TAB = 'TOPICS/SET_TOPIC_PAGE_TAB';
 export const REQUEST_USER_REMOVAL = 'TOPICS/REQUEST_USER_REMOVAL';
 export const RECEIVE_USER_REMOVAL = 'TOPICS/RECEIVE_USER_REMOVAL';
-export const REQUEST_SECTION_CREATION = 'TOPICs/REQUEST_SECTION_CREATION';
-export const RECEIVE_SECTION_CREATION = 'TOPICs/RECEIVE_SECTION_CREATION';
-export const SET_EDITING_SECTION = 'TOPICs/SET_EDITING_SECTION';
-export const SET_EDITING_DATA = 'TOPICs/SET_EDITING_DATA';
+export const REQUEST_SECTION_CREATION = 'TOPICS/REQUEST_SECTION_CREATION';
+export const RECEIVE_SECTION_CREATION = 'TOPICS/RECEIVE_SECTION_CREATION';
+export const SET_EDITING_SECTION = 'TOPICS/SET_EDITING_SECTION';
+export const SET_EDITING_DATA = 'TOPICS/SET_EDITING_DATA';
 export const REQUEST_SECTION_UPDATING = 'TOPICS/REQUEST_SECTION_UPDATING';
-export const RECEIVE_SECTION_UPDATING = 'TOPIC/REQUEST_RECEIVE_SECTION_UPDATING';
+export const RECEIVE_SECTION_UPDATING = 'TOPICS/REQUEST_RECEIVE_SECTION_UPDATING';
+export const REQUEST_STUDENTS_ASSIGNMENT = 'TOPICS/RECEIVE_STUDENT_ASSIGNMENT';
+export const RECEIVE_STUDENT_ASSIGNMENT = 'TOPICS/RECEIVE_STUDENT_ASSIGNMENT';
 
 export function toggleTopicPage() {
   return {
@@ -108,5 +110,44 @@ export function patchSection(data, sectionId, onCurrentTopic, topicId) {
       .then(updatedSection => {
         dispatch(receiveSectionUpdating(updatedSection, sectionId, onCurrentTopic, topicId));
       });
+  };
+}
+
+export function requestStudentAssignment() {
+  return {
+    type: REQUEST_STUDENTS_ASSIGNMENT,
+  };
+}
+
+export function receiveStudentAssignment(studentId, topicId) {
+  return {
+    type: RECEIVE_STUDENT_ASSIGNMENT,
+    studentId,
+    topicId, // alas, this is neccesary, but only to ship
+  };
+}
+
+export function assignStudent(studentId, onCurrentTopic, topicId) {
+  return function(dispatch, getState) {
+
+    let state = getState();
+    let topic = topicId || state.topics.topicList.selected;
+
+    dispatch(requestStudentAssignment());
+
+    fetch(`/api/topics/${topic}/students/`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        _id: studentId,
+      }),
+    })
+      // TODO: do something with data from backend
+      .then(() => dispatch(receiveStudentAssignment(studentId, topic)));
+
   };
 }
