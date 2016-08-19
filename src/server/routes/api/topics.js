@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
-const Topic = require('../../models/Topic');
-const Group = require('../../models/Group');
 const { handleErrors, handleNotFound } = require('../../helpers/db');
+
+const Topic = require('../../models/Topic');
+const User = require('../../models/User');
 
 function extractShortTopic(topics) {
   return topics.map(topic => {
@@ -139,6 +140,7 @@ module.exports = function(app) {
       .catch(handleErrors(res));
   });
 
+
   app.post('/api/topics/:id/students/', ensureAuthenticated([1, 2]), (req, res) => {
     Topic.findById(req.params.id).exec()
       .then(topic => {
@@ -147,7 +149,20 @@ module.exports = function(app) {
         } else {
           topic.students.push(req.body._id);
           topic.save()
-            .then(() => res.json({}))
+            .then(() => {
+              User.Student.findById(req.body._id).exec()
+                .then(student => {
+                  if (!student) {
+                    return handleNotFound(res);
+                  } else {
+                    student.topics.push(req.params.id);
+                    student.save()
+                      .then(updatedStudent => res.json(updatedStudent))
+                      .catch(handleErrors(res));
+                  }
+                });
+            }
+            )
             .catch(handleErrors(res));
         }
       })

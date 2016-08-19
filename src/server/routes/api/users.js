@@ -104,6 +104,7 @@ module.exports = function(app) {
       .catch(handleErrors(res));
   });
 
+  // TODO: also update topic on request
   app.post('/api/users/:id/topics/', ensureAuthenticated(), (req, res) => {
     User.findById(req.params.id)
       .then(user => {
