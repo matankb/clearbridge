@@ -45,7 +45,7 @@ function calculateEmail(user, type) {
   // calculate year of graduation
   let year = ((new Date().getYear()) - 100) + (8 - user.grade);
 
-  if (type > 0) { // is teacher of admin
+  if (type > 0) { // is teacher or admin
     email = `${firstName}${initials}`.toLowerCase();
   } else {
     email = `${year}${firstName}${initials}`.toLowerCase();
