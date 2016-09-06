@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
 import Topics from './components/Topics';
-import Home from './App1/Home';
+import Home from './components/Home';
 
 import { sidebarItems } from './constants';
 
