@@ -30,8 +30,6 @@ const style = {
 
 const TopicCard = props => {
 
-
-
   return (
     <div className="topic-card">
       <Paper style={ style.paper }>
@@ -62,7 +60,7 @@ const TopicCard = props => {
               onClick={ props.handleTopicClick }
             />
           </div>
-          <TopicMenu />
+          <TopicMenu color="black" />
         </main>
       </Paper>
     </div>

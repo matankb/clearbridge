@@ -9,7 +9,7 @@ import StarBorderIcon from 'material-ui/svg-icons/toggle/star-border';
 import AddToGroupIcon from 'material-ui/svg-icons/social/group-add';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
-const TopicCardMenu = ({ color }) => {
+const TopicMenu = ({ color }) => {
 
   const menuItems = [
     <MenuItem
@@ -47,4 +47,4 @@ const TopicCardMenu = ({ color }) => {
   );
 };
 
-export default TopicCardMenu;
+export default TopicMenu;

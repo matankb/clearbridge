@@ -2,6 +2,7 @@ import React from 'react';
 
 import IconButton from 'material-ui/IconButton';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-back';
+import TopicMenu from '../../TopicMenu';
 
 import { colors } from '../../../../../../shared/js/constants';
 const style = {
@@ -18,6 +19,12 @@ const style = {
     top: 5,
     padding: 0,
   },
+  menuWrap: {
+    display: 'inline-block',
+    position: 'relative',
+    top: 6,
+    left: '75%',
+  },
 };
 
 const Buttons = props => {
@@ -30,6 +37,9 @@ const Buttons = props => {
         <ArrowIcon style={ style.icon } color="white" />
       </IconButton>
       <span style={ style.text } >Edit Topic</span>
+      <span style={ style.menuWrap }>
+        <TopicMenu color="white" />
+      </span>
     </div>
   );
 };
