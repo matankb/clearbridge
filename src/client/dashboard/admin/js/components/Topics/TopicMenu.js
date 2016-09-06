@@ -9,7 +9,7 @@ import StarBorderIcon from 'material-ui/svg-icons/toggle/star-border';
 import AddToGroupIcon from 'material-ui/svg-icons/social/group-add';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
-const TopicCardMenu = () => {
+const TopicCardMenu = ({ color }) => {
 
   const menuItems = [
     <MenuItem
@@ -37,7 +37,7 @@ const TopicCardMenu = () => {
   return (
     <div className="menu">
       <IconMenu
-        iconButtonElement={ <IconButton><MoreVertIcon /></IconButton> }
+        iconButtonElement={ <IconButton><MoreVertIcon color={ color } /></IconButton> }
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
