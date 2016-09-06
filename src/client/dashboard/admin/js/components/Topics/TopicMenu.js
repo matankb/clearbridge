@@ -44,7 +44,7 @@ const TopicCardMenu = () => {
         { menuItems }
       </IconMenu>
     </div>
-  )
-}
+  );
+};
 
 export default TopicCardMenu;

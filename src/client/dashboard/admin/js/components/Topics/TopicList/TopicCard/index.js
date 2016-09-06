@@ -3,7 +3,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 
-import TopicCardMenu from './TopicCardMenu';
+import TopicMenu from '../../TopicMenu';
 
 import { colors } from '../../../../../../shared/js/constants';
 import '../../../../../css/topic-card.scss';
@@ -62,7 +62,7 @@ const TopicCard = props => {
               onClick={ props.handleTopicClick }
             />
           </div>
-          <TopicCardMenu />
+          <TopicMenu />
         </main>
       </Paper>
     </div>
