@@ -51,6 +51,7 @@ export function postSection(onCurrentTopic, topicId) {
       method: 'POST',
       credentials: 'same-origin',
     })
+      .then(data => data.json())
       .then(createdSection => {
         dispatch(receiveSectionCreation(createdSection, onCurrentTopic, topicId));
       });
