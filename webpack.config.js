@@ -35,4 +35,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
   ],
+  resolve: {
+    root: path.resolve('./src/client/dashboard/'),
+  },
 };
