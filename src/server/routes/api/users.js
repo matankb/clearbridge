@@ -108,6 +108,9 @@ module.exports = function(app) {
   app.post('/api/users/:id/topics/', ensureAuthenticated(), (req, res) => {
     User.findById(req.params.id)
       .then(user => {
+        if (user.topics.indexOf(req.body._id) > -1) {
+          return res.status(409).json({ message: 'Topic already assigned' }); // 409 conflict
+        }
         user.topics.push(mongoose.Types.ObjectId(req.body._id)); // eslint-disable-line new-cap
         user.save()
           .then(res.status(201).send(mongoose.Types.ObjectId(req.body._id))) // eslint-disable-line new-cap, max-len
