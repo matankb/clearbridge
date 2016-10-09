@@ -12,7 +12,8 @@ mongoose.connect(config.db.URL);
 
 let app = express();
 
-app.use(session({ secret: 'Reflectbridge1' }));
+// enable POST parsing and session storage
+app.use(session({ secret: config.session.SECRET }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
