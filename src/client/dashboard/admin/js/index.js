@@ -1,37 +1,49 @@
+// react core
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+
+// redux + middleware
 import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { thunkMiddleware } from 'redux-thunk';
+import { createSagaMiddleware } from 'redux-saga';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
-import thunkMiddleware from 'redux-thunk';
+
+// material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import App from './App';
+import theme from '../../shared/js/constants/theme';
+import Routes from './routes.js';
 import rootReducer from './reducers';
 
-injectTapEventPlugin();
 
-const store = createStore(
+// setup store with middleware
+const sagaMiddleware = createSagaMiddleware();
+
+let store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware)
+  applyMiddleware(thunkMiddleware),
+  applyMiddleware(sagaMiddleware)
 );
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+/* RENDER */
+
 ReactDOM.render(
-  <App store={ store } history={ history } />,
+
+  <Provider store={ store }>
+    <MuiThemeProvider
+      muiTheme={ theme }
+    >
+      <Routes history={ history } />
+    </MuiThemeProvider>
+  </Provider>,
+
   document.getElementById('root')
+
 );
 
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    let NextApp = require('./App').default;
-    ReactDOM.render(
-      <NextApp store={ store } />,
-      document.getElementById('root')
-    );
-  });
-}
-
-window.store = store;
+injectTapEventPlugin(); // neccesary for material-ui
