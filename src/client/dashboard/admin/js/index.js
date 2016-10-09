@@ -33,6 +33,8 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 /* RENDER */
 
+injectTapEventPlugin(); // neccesary for material-ui
+
 ReactDOM.render(
 
   <Provider store={ store }>
@@ -46,5 +48,3 @@ ReactDOM.render(
   document.getElementById('root')
 
 );
-
-injectTapEventPlugin(); // neccesary for material-ui
