@@ -5,10 +5,11 @@ import ReactDOM from 'react-dom';
 // redux + middleware
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { thunkMiddleware } from 'redux-thunk';
-import { createSagaMiddleware } from 'redux-saga';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
+
+import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 // material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
