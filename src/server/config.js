@@ -1,15 +1,33 @@
-module.exports = {
-  google: {
-    clientID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
-    clientSecret: 'EiYNNkSRbpcne6EImk3AgD27',
-    callbackURL: process.env.NODE_ENV === 'production' ?
-                'https://bridge-jcdsboston.rhcloud.com/auth/callback/' :
-                'http://127.0.0.1:8080/auth/callback/',
-  },
-  // allow for both local and openshift envs
+const isProduction = process.env.NODE_ENV === 'production';
+
+const prod = {
   db: {
-    url: process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://127.0.0.1/bridge',
+    URL: process.env.OPENSHIFT_MONGODB_DB_URL,
   },
-  SERVER_PORT: process.env.NODE_PORT || 8080,
-  SERVER_IP: process.env.NODE_IP || '127.0.0.1',
+  server: {
+    PORT: process.env.NODE_PORT,
+    IP: process.env.NODE_IP,
+  },
+  google: {
+    CLIENT_ID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
+    CLIENT_SECRET: 'EiYNNkSRbpcne6EImk3AgD27',
+    CALLBACK_URL: 'https://bridge-jcdsboston.rhcloud.com/auth/callback/',
+  },
 };
+
+const dev = {
+  db: {
+    URL: 'mongodb://127.0.0.1/bridge',
+  },
+  server: {
+    PORT: 8080,
+    IP: '127.0.0.1',
+  },
+  google: {
+    CLIENT_ID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
+    CLIENT_SECRET: 'EiYNNkSRbpcne6EImk3AgD27',
+    CALLBACK_URL: 'http://127.0.0.1:8080/auth/callback/',
+  },
+};
+
+module.exports = isProduction ? prod : dev;

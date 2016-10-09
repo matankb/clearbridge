@@ -7,9 +7,9 @@ module.exports = function(passport) {
 
   passport.use(new GoogleStrategy({
 
-    clientID: config.google.clientID,
-    clientSecret: config.google.clientSecret,
-    callbackURL: config.google.callbackURL,
+    clientID: config.google.CLIENT_ID,
+    clientSecret: config.google.CLIENT_SECRET,
+    callbackURL: config.google.CALLBACK_URL,
 
   },
   (token, refreshToken, profile, done) => {

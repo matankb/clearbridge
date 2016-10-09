@@ -8,7 +8,7 @@ const routes = require('./routes');
 const auth = require('./auth');
 
 mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
-mongoose.connect(config.db.url);
+mongoose.connect(config.db.URL);
 
 let app = express();
 
@@ -19,6 +19,6 @@ app.use(bodyParser.json());
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
 
-app.listen(config.SERVER_PORT, config.SERVER_IP, () => {
-  console.log(`Server started on port ${config.SERVER_PORT}`); // eslint-disable-line no-console
+app.listen(config.server.PORT, config.server.IP, () => {
+  console.log(`Server started on port ${config.server.PORT}`); // eslint-disable-line no-console
 });
