@@ -18,9 +18,10 @@ function handleSent(res, error, info) {
   }
 
   if (gotErrors) {
-    res.status(500).json({ message: errorMessage });
+    return res.status(500).json({ message: errorMessage });
   }
 
+  res.status(200).end();
 }
 
 module.exports = function sendFeedback(req, res) {
