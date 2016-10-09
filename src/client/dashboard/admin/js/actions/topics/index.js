@@ -80,34 +80,6 @@ export function selectTopic(id) {
   };
 }
 
-export function requestSectionCreation() {
-  return {
-    type: REQUEST_SECTION_CREATION,
-  };
-}
-
-export function receiveSectionCreation() {
-  return {
-    type: RECEIVE_SECTION_CREATION,
-  };
-}
-
-export function putSection(topic) {
-  return function(dispatch) {
-
-    dispatch(requestSectionCreation());
-
-    fetch(`/api/topics/${topic.id}/`, {
-      method: 'PATCH',
-      credentials: 'same-origin',
-      data: JSON.stringify({
-        sections: topic.sections,
-      }),
-    });
-
-  };
-}
-window.putSection = putSection;
 export function requestTopicCreation() {
   return {
     type: REQUEST_TOPIC_CREATION,
@@ -139,7 +111,7 @@ export function postTopic() {
       }),
     })
       .then(data => data.json())
-      .then(user => dispatch(receiveTopicCreation(user)));
+      .then(topic => dispatch(receiveTopicCreation(topic)));
 
   };
 }
