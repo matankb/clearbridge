@@ -1,3 +1,6 @@
+// polyfills!
+import 'babel-polyfill';
+
 // react core
 import React from 'react';
 import ReactDOM from 'react-dom';
