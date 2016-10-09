@@ -1,3 +1,5 @@
+const assign = require('deep-assign');
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 const prod = {
@@ -9,8 +11,6 @@ const prod = {
     IP: process.env.NODE_IP,
   },
   google: {
-    CLIENT_ID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
-    CLIENT_SECRET: 'EiYNNkSRbpcne6EImk3AgD27',
     CALLBACK_URL: 'https://bridge-jcdsboston.rhcloud.com/auth/callback/',
   },
 };
@@ -24,10 +24,16 @@ const dev = {
     IP: '127.0.0.1',
   },
   google: {
-    CLIENT_ID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
-    CLIENT_SECRET: 'EiYNNkSRbpcne6EImk3AgD27',
     CALLBACK_URL: 'http://127.0.0.1:8080/auth/callback/',
   },
 };
 
-module.exports = isProduction ? prod : dev;
+// will be applied to both dev and prod
+const general = {
+  google: {
+    CLIENT_ID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
+    CLIENT_SECRET: 'EiYNNkSRbpcne6EImk3AgD27',
+  },
+};
+
+module.exports = assign(general, isProduction ? prod : dev);
