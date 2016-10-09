@@ -1,10 +1,9 @@
 const mailer = require('nodemailer');
 
-const baseSubject = 'New Bridge Feedback: ';
-
 const defaultOpts = {
   from: '"Bridge Feedback" <bridge@jcdsboston.org>',
   to: '205matan+bridgefeedback@gmail.com',
+  subject: 'Bridge Feedback',
 };
 
 const sender = mailer.createTransport('smtps://bridge%40jcdsboston.org:Reflectbridge1@smtp.gmail.com'); // eslint-disable-line max-len
@@ -27,6 +26,5 @@ function handleSent(res, error, info) {
 module.exports = function sendFeedback(req, res) {
   let opts = req.body.data;
   Object.assign(opts, defaultOpts);
-  opts.subject = `${baseSubject}${opts.subject}`;
   sender.sendMail(opts, handleSent.bind(null, res));
 };
