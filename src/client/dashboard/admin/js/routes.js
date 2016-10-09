@@ -22,13 +22,8 @@ const Routes = ({ history }) => {
   return (
     <Router history={ history }>
       <Route path="/dashboard/" component={ LayoutWrapper } >
-        <IndexRoute component={ Home } />
-        <Route path="/dashboard/classes/" component={ Users } />
+        <IndexRoute component={ Topics } />
         <Route path="/dashboard/users/" component={ Users } />
-        <Route path="/dashboard/topics/" component={ Topics } />
-        <Route path="/dashboard/settings/" component={ Users } />
-        <Route path="/dashboard/about/" component={ Users } />
-        <Route path="/dashboard/help/" component={ Users } />
       </Route>
     </Router>
   );
