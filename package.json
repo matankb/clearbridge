@@ -5,7 +5,8 @@
   "main": "src/server",
   "scripts": {
     "start": "node src/server",
-    "build": "webpack"
+    "build": "webpack",
+    "build-dev": "webpack --config webpack.config.dev.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,7 @@
     "deep-assign": "^2.0.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "fetch-reject": "^1.2.0",
+    "fetch-reject": "^1.2.4",
     "flat": "^2.0.0",
     "lodash.isequal": "^4.4.0",
     "material-ui": "^0.15.1",
