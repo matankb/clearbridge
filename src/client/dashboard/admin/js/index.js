@@ -17,7 +17,7 @@ import createSagaMiddleware from 'redux-saga';
 // material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
+import rootSaga from '../../shared/js/sagas/';
 import theme from '../../shared/js/constants/theme';
 import Routes from './routes.js';
 import rootReducer from './reducers';
@@ -31,6 +31,8 @@ let store = createStore(
   applyMiddleware(thunkMiddleware),
   applyMiddleware(sagaMiddleware)
 );
+
+sagaMiddleware.run(rootSaga);
 
 const history = syncHistoryWithStore(browserHistory, store);
 
