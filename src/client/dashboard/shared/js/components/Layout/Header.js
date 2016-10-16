@@ -1,6 +1,8 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 
+import Feedback from './Feedback';
+
 import { colors } from '../../constants';
 
 const styles = {
@@ -23,6 +25,7 @@ let Header = props => {
       style={ styles.header }
       title="JCDS Bridge"
       onLeftIconButtonTouchTap={ props.handleIconClick }
+      iconElementRight={ <Feedback /> }
     />
   );
 };
