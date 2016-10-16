@@ -16,7 +16,8 @@ import {
   postUser,
 } from '../../actions/users';
 
-import { colors } from '.././../../../shared/js/constants';
+import { colors } from '.././../../../shared/js/constants/';
+import { dialogTitle } from '.././../../../shared/js/constants/styles';
 
 const style = {
   dialog: {
@@ -25,11 +26,7 @@ const style = {
     justifyContent: 'center',
   },
   title: {
-    color: 'white',
-    backgroundColor: colors.primary.dark,
-    paddingTop: 10,
-    paddingBottom: 10,
-    fontSize: 17,
+    ...dialogTitle,
     marginBottom: 30,
   },
   button: {

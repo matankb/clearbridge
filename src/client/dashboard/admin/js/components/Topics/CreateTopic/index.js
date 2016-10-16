@@ -12,7 +12,7 @@ import stages from './stages';
 import Actions from './actions';
 
 import '../../../../css/create-topic.scss';
-import { colors } from '../../../../../shared/js/constants/';
+import { dialogTitle } from '../../../../../shared/js/constants/styles';
 
 const style = {
   label: {
@@ -20,13 +20,6 @@ const style = {
   },
   dialog: {
     width: '60%',
-  },
-  title: {
-    color: 'white',
-    backgroundColor: colors.primary.dark,
-    paddingTop: 10,
-    paddingBottom: 10,
-    fontSize: 17,
   },
   buttonWrap: {
     textAlign: 'right',
@@ -44,7 +37,7 @@ let CreateTopic = props => {
       modal
       title="Create Topic"
       contentStyle={ style.dialog }
-      titleStyle={ style.title }
+      titleStyle={ dialogTitle }
       autoScrollBodyContent
       className="create-topic"
     >
