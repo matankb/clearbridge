@@ -18,8 +18,16 @@ const style = {
   dialog: {
     width: '40%',
   },
-  title: {
-
+  label: {
+    marginLeft: 20,
+  },
+  typePicker: {
+    width: '75%',
+    marginBottom: 20,
+  },
+  comment: {
+    marginLeft: 20,
+    width: '90%',
   },
 };
 
@@ -48,16 +56,21 @@ const FeedbackDialog = props => {
       contentStyle={ style.dialog }
       titleStyle={ dialogTitle }
     >
+      <br />
+      <span style={ style.label }>Select Type:</span>
       <TypePicker
         onChange={ handleTypeChange }
         value={ props.type }
+        style={ style.typePicker }
       />
       <br />
       <TextField
+        multiLine
         rows={ 4 }
         placeholder={ placeholders[type] }
         onChange={ handleCommentChange }
         value={ comment }
+        style={ style.comment }
       />
       <br />
       { buttons }
