@@ -1,34 +1,44 @@
+// polyfills!
+import 'babel-polyfill';
+
+// react core
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+
+// redux + middleware
 import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
+
+// material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import App from './App';
+// my stuff
+import theme from '../../shared/js/constants/theme';
+import Routes from './routes.js';
 import rootReducer from './reducers';
 
-injectTapEventPlugin();
-
-const store = createStore(
+// setup store with middleware
+let store = createStore(
   rootReducer,
   applyMiddleware(thunkMiddleware)
 );
 
+/* RENDER */
+
+injectTapEventPlugin(); // neccesary for material-ui
+
 ReactDOM.render(
-  <AppContainer><App store={ store } /></AppContainer>,
+
+  <Provider store={ store }>
+    <MuiThemeProvider
+      muiTheme={ theme }
+    >
+      <Routes />
+    </MuiThemeProvider>
+  </Provider>,
+
   document.getElementById('root')
+
 );
-
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    let NextApp = require('./App').default;
-    ReactDOM.render(
-      <AppContainer><NextApp store={ store } /></AppContainer>,
-      document.getElementById('root')
-    );
-  });
-}
-window.store = store;
-
-import './actions';
