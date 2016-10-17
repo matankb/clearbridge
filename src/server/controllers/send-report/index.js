@@ -32,9 +32,8 @@ function renderEmailBody({ type, data, navigator }) {
 }
 
 module.exports = function sendReport(req, res) {
-  let opts = req.body.data || {};
+  let opts = Object.assign({}, defaultOpts); // copy opts
   let emailBody = renderEmailBody(req.body);
-  Object.assign(opts, defaultOpts);
   opts.html = emailBody;
   sender.sendMail(opts, handleSent.bind(null, res));
 };
