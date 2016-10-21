@@ -21,8 +21,7 @@
     "node-sass": "^3.7.0",
     "react-hot-loader": "^3.0.0-alpha.9",
     "sass-loader": "^3.2.0",
-    "style-loader": "^0.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "style-loader": "^0.13.1"
   },
   "dependencies": {
     "babel-core": "^6.7.7",
@@ -50,6 +49,7 @@
     "mongoose-schema-extend": "^0.2.0",
     "node-sass": "^3.7.0",
     "nodemailer": "^2.6.4",
+    "object-values": "^1.0.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
     "react": "^15.0.1",
@@ -70,6 +70,7 @@
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
   }
 }
