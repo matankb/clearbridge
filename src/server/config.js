@@ -39,4 +39,5 @@ const general = {
   },
 };
 
+// export different configuation object depending on env
 module.exports = assign(general, isProduction ? prod : dev);
