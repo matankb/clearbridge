@@ -1,8 +1,7 @@
 export const REQUEST_TOPIC = 'REQUEST_TOPIC';
 export const RECEIVE_TOPIC = 'RECEIVE_TOPIC';
-export const REQUEST_TOPIC_LIST = 'REQUEST_TOPIC_LIST';
-export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 export const FETCH_TOPIC_LIST = 'FETCH_TOPIC_LIST';
+export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST'
 export const FETCH_TOPIC = 'FETCH_TOPIC';
 export const SELECT_TOPIC = 'SELECT_TOPIC';
 export const TOGGLE_TOPIC_PAGE = 'TOGGLE_TOPIC_PAGE';
@@ -23,12 +22,6 @@ export function receiveTopic(topic) {
   };
 }
 
-export function requestTopicList() {
-  return {
-    type: REQUEST_TOPIC_LIST,
-  };
-}
-
 export function receiveTopicList(topics) {
   return {
     type: RECEIVE_TOPIC_LIST,
@@ -37,17 +30,10 @@ export function receiveTopicList(topics) {
 }
 
 export function fetchTopicList() {
-
-  return function(dispatch) {
-
-    dispatch(requestTopicList());
-
-    fetch('/api/user/topics/', { credentials: 'same-origin' })
-      .then(res => res.json())
-      .then(topics => dispatch(receiveTopicList(topics)));
-
+  console.log('action');
+  return {
+    type: FETCH_TOPIC_LIST,
   };
-
 }
 
 export function fetchTopic(id) {

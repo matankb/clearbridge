@@ -5,6 +5,7 @@ import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
 import Topics from './components/Topics';
 import Home from './components/Home';
+import Editor from './components/Editor';
 
 import { sidebarItems } from './constants';
 
@@ -24,6 +25,7 @@ const Routes = ({ history }) => {
       <Route path="/dashboard/" component={ LayoutWrapper } >
         <IndexRoute component={ Topics } />
         <Route path="/dashboard/users/" component={ Users } />
+        <Route path="/dashboard/editor" component={ Editor } />
       </Route>
     </Router>
   );
