@@ -12,14 +12,16 @@ const opts = {
   publicPath: config.output.publicPath,
 };
 
-// generate middleware
-const compiledDevMiddleware = webpackDevMiddleware(compiler, opts);
-const copiledHotMiddleware = webpackHotMiddleware(compiler);
-
 module.exports = function(app) {
   if (!isProduction) {
+
+    // generate middleware
+    const compiledDevMiddleware = webpackDevMiddleware(compiler, opts);
+    const copiledHotMiddleware = webpackHotMiddleware(compiler);
+
     // apply middleware
     app.use(compiledDevMiddleware);
     app.use(copiledHotMiddleware);
+
   }
 };
