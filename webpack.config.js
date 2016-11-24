@@ -39,7 +39,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false, // disable warnings
-      },
+      }
     }),
   ],
   resolve: {
