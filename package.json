@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/server",
     "build": "webpack",
-    "build-dev": "webpack --config webpack.config.dev.js"
+    "build-dev": "webpack --config webpack.config.dev.js",
+    "dev": "webpack-dashboard -- node src/server"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
+    "@djyde/react-quill": "^0.1.2",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -38,6 +40,7 @@
     "classnames": "^2.2.4",
     "css-loader": "^0.23.1",
     "deep-assign": "^2.0.0",
+    "draft-js": "^0.9.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "fetch-reject": "^1.2.4",
@@ -55,9 +58,11 @@
     "react-color": "^2.2.2",
     "react-dom": "^15.0.1",
     "react-hot-loader": "^3.0.0-alpha.9",
+    "react-quill": "^0.4.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "react-router-redux": "^4.0.5",
+    "react-rte-material": "^0.12.5",
     "react-tap-event-plugin": "^1.0.0",
     "react-toolbox": "^1.0.1",
     "redux": "^3.5.2",

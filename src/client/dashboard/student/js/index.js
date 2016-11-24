@@ -8,7 +8,9 @@ import ReactDOM from 'react-dom';
 // redux + middleware
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+
 import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 // material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -18,12 +20,18 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import theme from '../../shared/js/constants/theme';
 import Routes from './routes.js';
 import rootReducer from './reducers';
+import rootSaga from './sagas';
 
 // setup store with middleware
+const sagaMiddleware = createSagaMiddleware();
+
 let store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware)
+  applyMiddleware(thunkMiddleware),
+  applyMiddleware(sagaMiddleware)
 );
+
+sagaMiddleware.run(rootSaga);
 
 /* RENDER */
 

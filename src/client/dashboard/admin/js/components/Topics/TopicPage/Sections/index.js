@@ -1,76 +1,41 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import AddSection from './AddSection';
-import Section from './Section';
+import ReactQuill from '@djyde/react-quill';
+import FlatButton from 'material-ui/FlatButton';
 
-import {
-  postSection,
-  setEditingSection,
-  patchSection,
-} from '../../../../actions/topics/';
+// import stylesheet
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
 
-let Sections = props => {
-  return (
-    <div className="sections">
-
-      <AddSection
-        handleAddClick={ props.handleAddSectionClick }
-      />
-
-      {
-        props.sections.map((section, index) => {
-          let isEditing = props.editingId === section._id;
-          return (
-            <Section
-              name={ section.name }
-              content={ section.content }
-              isEditing={ isEditing }
-              handleSectionClick={ props.handleSectionClick(section._id, isEditing) }
-              handleCancel={ props.handleCancel }
-              // returned fn will be invoked by Section with data
-              handleSave={ props.handleSave(section._id) }
-              key={ index }
-            />
-          );
-        })
-      }
-
-    </div>
-  );
+const options = {
+  theme: 'snow',
+  modules: {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline'],
+    ],
+  },
 };
 
-function getTopicById(_id, topics) {
-  return topics.filter(topic => topic._id === _id)[0] || {};
-}
-
-function mapStateToProps(state) {
-  let topic = getTopicById(state.topics.topicList.selected, state.topics.topicList.topics);
-  return {
-    sections: topic.sections,
-    editingId: state.topics.topicPage.sections.editing,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    handleAddSectionClick: () => dispatch(postSection(true)),
-    handleSectionClick: (_id, editing) => () => {
-      if (!editing) {
-        dispatch(setEditingSection(_id));
-      }
-    },
-    handleCancel: () => dispatch(setEditingSection('')),
-    handleSave: _id => data => {
-      dispatch(patchSection(data, _id, true));
-      dispatch(setEditingSection(''));
-    },
-  };
-}
-
-Sections = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sections);
+const Sections = () => (
+  <div style={{
+    color: 'black',
+    fontSize: '1.5em',
+  }}>
+    <ReactQuill
+      options={options}
+    />
+    <FlatButton
+      label="Save"
+      style={{
+        marginLeft: 720,
+      }}
+      primary
+      onTouchTap={ () => this.props.handleSave(this.state.editingData) }
+      key={ 0 }
+    />
+  </div>
+);
 
 export default Sections;
