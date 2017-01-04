@@ -11,7 +11,7 @@ const prod = {
     IP: process.env.NODE_IP,
   },
   google: {
-    CALLBACK_URL: 'https://bridge-jcdsboston.rhcloud.com/auth/callback/',
+    CALLBACK_URL: 'http://bridge.jcdsboston.org/auth/callback/',
   },
 };
 
