@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+
+import { colors } from '../../../shared/js/constants/';
 
 import { toggleTopicPage } from '../actions';
 
@@ -14,7 +17,7 @@ function style(props) {
     styles.backgroundColor = props.color;
     styles.boxShadow = 'none';
   } else {
-    styles.backgroundColor = '#4285f4';
+    styles.backgroundColor = colors.primary.dark;
     styles.boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
   }
   return styles;
