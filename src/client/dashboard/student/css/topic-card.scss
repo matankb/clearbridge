@@ -1,42 +1,33 @@
-$namePadding: 3.7%;
-
 .topic {
+
+  position: relative;
   display: inline-block;
   text-align: center;
   margin: 10px;
   height: 100%;
   width: 100%;
 
+  cursor: pointer;
   .image {
     height: 80%;
     vertical-align: top;
   }
 
   .name {
-    padding-top: $namePadding;
-    padding-bottom: $namePadding;
-    color: white;
-    font-weight: 300;
-    background: rgba(0, 0, 0, 0.4);
-  }
-}
-/* IF PART OF GRID */
-.grid-tile-large .topic .name {
+
+    position: absolute;
+    bottom: 0; /* attach to bottom of topic card */
     padding-top: 10px;
     padding-bottom: 10px;
-    margin-top: 22px;
-}
-.grid-tile-wide .topic .name {
-    margin-top: -13px;
+    width: 100%;
+
     z-index: 1;
-    position: relative;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.grid-tile-small .topic .name {
-  margin-top: -13px;
-  position: relative;
-  z-index: 1;
-  padding-top: 10px;
-  padding-bottom: 10px;;
+    box-sizing: border-box;
+
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    font-weight: 300;
+
+  }
+
 }
