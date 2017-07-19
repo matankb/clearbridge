@@ -26,14 +26,12 @@ function handleSent(res, error, info) {
   res.status(200).end();
 }
 
-// render template with data
-function renderEmailBody({ type, data, navigator }) {
+function getTemplateOptions({ type, data, navigator }) {
   return templates[type](data, navigator);
 }
 
 module.exports = function sendReport(req, res) {
-  let opts = Object.assign({}, defaultOpts); // copy opts
-  let emailBody = renderEmailBody(req.body);
-  opts.html = emailBody;
+  let templateOpts = getTemplateOptions(req.body);
+  let opts = Object.assign({}, defaultOpts, templateOpts); // copy opts
   sender.sendMail(opts, handleSent.bind(null, res));
 };

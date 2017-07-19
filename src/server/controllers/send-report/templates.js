@@ -1,4 +1,12 @@
 module.exports = {
-  0: data => data.comment,
-  1: (data, navigator) => `${data.comment} <br /><br /><b>Data:</b> ${JSON.stringify(navigator)}`,
+  // general comment
+  0: data => ({
+    subject: 'Bridge Report [Comment]',
+    html: data.comment }
+  ),
+  // bug report
+  1: (data, navigator) => ({
+    subject: 'Bridge Report [Bug]',
+    html: `${data.comment} <br /><br /><b>Data:</b> ${JSON.stringify(navigator)}`,
+  }),
 };
