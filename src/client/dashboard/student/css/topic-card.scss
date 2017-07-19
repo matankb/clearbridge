@@ -21,19 +21,19 @@ $namePadding: 3.7%;
   }
 }
 /* IF PART OF GRID */
-.grid-tile-large > .topic .name {
+.grid-tile-large .topic .name {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: 22px;
 }
-.grid-tile-wide > .topic .name {
+.grid-tile-wide .topic .name {
     margin-top: -13px;
     z-index: 1;
     position: relative;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.grid-tile-small > .topic .name {
+.grid-tile-small .topic .name {
   margin-top: -13px;
   position: relative;
   z-index: 1;
