@@ -11,6 +11,7 @@ const topicSchema = new Schema({
     name: String,
     content: String,
   }],
+  content: '',
   students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
 });

@@ -4,7 +4,7 @@ import Dialog from 'material-ui/Dialog';
 
 import DialogTitle from './DialogTitle';
 import BasicInfo from './BasicInfo/';
-import Sections from './Sections';
+import Content from './Content';
 import Students from './Students';
 import { colors } from '../../../../../shared/js/constants';
 import '../../../../css/topic-page.scss';
@@ -24,7 +24,7 @@ const style = {
 
 const TopicPage = props => {
   const tabs = [
-    { name: 'Sections', component: <Sections /> },
+    { name: 'Content', component: <Content /> },
     { name: 'Students', component: <Students /> },
   ];
   return (
