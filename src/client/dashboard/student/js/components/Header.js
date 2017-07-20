@@ -66,15 +66,15 @@ function getTopicById(_id, topics) {
 
 function getHeaderColor(state) {
   let color;
-  if (state.topicPageOpen) {
-    color = getTopicById(state.selectedTopic, state.topics).color;
+  if (state.topics.topicPageOpen) {
+    color = getTopicById(state.topics.selectedTopic, state.topics.topics).color;
   }
   return color;
 }
 
 function mapStateToProps(state) {
   return {
-    open: state.topicPageOpen,
+    open: state.topics.topicPageOpen,
     color: getHeaderColor(state),
   };
 }

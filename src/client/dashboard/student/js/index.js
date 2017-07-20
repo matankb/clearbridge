@@ -1,5 +1,6 @@
 // polyfills!
 import 'babel-polyfill';
+import 'whatwg-fetch';
 
 // react core
 import React from 'react';
