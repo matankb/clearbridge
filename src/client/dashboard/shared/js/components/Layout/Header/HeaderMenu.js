@@ -10,13 +10,12 @@ import LogoutIcon from 'material-ui/svg-icons/action/exit-to-app';
 import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
 import AboutIcon from 'material-ui/svg-icons/action/info';
 
-import About from '../../About';
-
 import { openFeedback } from '../../../../../shared/js/reducers/feedback/open';
+import { openAbout } from '../../../../../shared/js/reducers/about';
 
 const iconElement = <IconButton><MoreVertIcon color="white" /></IconButton>;
 
-const HeaderMenu = ({ handleFeedbackClick }) => (
+const HeaderMenu = ({ handleFeedbackClick, handleAboutClick }) => (
   <IconMenu
     iconButtonElement={ iconElement }
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -32,12 +31,11 @@ const HeaderMenu = ({ handleFeedbackClick }) => (
       leftIcon={ <FeedbackIcon /> }
       onTouchTap={ handleFeedbackClick }
     />
-    <About>
-      <MenuItem
-        primaryText="About"
-        leftIcon={ <AboutIcon /> }
-      />
-    </About>
+    <MenuItem
+      primaryText="About"
+      leftIcon={ <AboutIcon /> }
+      onTouchTap={ handleAboutClick }
+    />
   </IconMenu>
 );
 
@@ -45,5 +43,6 @@ export default connect(
   () => ({}),
   dispatch => ({
     handleFeedbackClick: () => dispatch(openFeedback()),
+    handleAboutClick: () => dispatch(openAbout()),
   })
 )(HeaderMenu);

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from './Header';
 import Feedback from '../../../shared/js/components/Feedback';
+import About from '../../../shared/js/components/About';
 
 import '../../css/layout.css';
 
@@ -10,6 +11,7 @@ const Layout = props => {
     <div className="layout">
       <Header />
       <Feedback />
+      <About />
       { props.children }
     </div>
   );

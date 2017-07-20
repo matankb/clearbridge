@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -6,48 +7,22 @@ import FlatButton from 'material-ui/FlatButton';
 import AboutText from './AboutText';
 
 import { dialogTitle as dialogTitleStyle } from '../../constants/styles';
+import { closeAbout } from '../../reducers/about';
 
-class About extends React.Component {
+const About = props => (
+    <Dialog
+      open={ props.open }
+      title="About"
+      titleStyle={ dialogTitleStyle }
+      modal={ false }
+      onRequestClose={ props.handleClose }
+      actions={ [<FlatButton label="close" primary onTouchTap={ props.handleClose } />] }
+    >
+      <AboutText />
+    </Dialog>
+);
 
-  constructor(props) {
-    super(props);
-    this.state = { open: false };
-  }
-
-  open() {
-    this.setState({ open: true });
-  }
-  close() {
-    this.setState({ open: false });
-  }
-
-  render() {
-
-    const actionButtons = [
-      <FlatButton label="close" primary onTouchTap={ this.close.bind(this) } />,
-    ];
-
-    return (
-      <div className="about">
-        <span
-          onClick={ this.open.bind(this) }
-        >
-          { this.props.children }
-        </span>
-        <Dialog
-          open={ this.state.open }
-          title="About"
-          titleStyle={ dialogTitleStyle }
-          modal={ false }
-          onRequestClose={ this.close.bind(this) }
-          actions={ actionButtons }
-        >
-          <AboutText />
-        </Dialog>
-      </div>
-    );
-  }
-
-}
-
-export default About;
+export default connect(
+  state => ({ open: state.about.open }),
+  dispatch => ({ handleClose: () => dispatch(closeAbout()) })
+)(About);
