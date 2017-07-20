@@ -23,7 +23,8 @@ const Routes = ({ history }) => {
   return (
     <Router history={ history }>
       <Route path="/dashboard/" component={ LayoutWrapper } >
-        <IndexRoute component={ Topics } />
+        <IndexRoute component={ Home } />
+        <Route path="/dashboard/topics/" component={ Topics } />
         <Route path="/dashboard/users/" component={ Users } />
         <Route path="/dashboard/editor" component={ Editor } />
       </Route>
