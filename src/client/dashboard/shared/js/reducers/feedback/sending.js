@@ -40,10 +40,9 @@ export default feedback;
 
 // ACTION CREATORS
 
-export function sendFeedback(data) {
+export function sendFeedback() {
   return {
     type: SEND_FEEDBACK,
-    data,
   };
 }
 

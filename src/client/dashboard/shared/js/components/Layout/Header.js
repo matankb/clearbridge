@@ -1,7 +1,10 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 
-import Feedback from './Feedback';
+import IconButton from 'material-ui/IconButton';
+import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
+
+import { FeedbackButton } from '../Feedback';
 
 import { colors } from '../../constants';
 
@@ -20,12 +23,22 @@ const styles = {
 };
 
 let Header = props => {
+
+  const feedbackButton = (
+    <FeedbackButton button={
+        <IconButton title="Feedback">
+          <FeedbackIcon color="white" />
+        </IconButton>
+      }
+    />
+  );
+
   return (
     <AppBar
       style={ styles.header }
       title="JCDS Bridge"
       onLeftIconButtonTouchTap={ props.handleIconClick }
-      iconElementRight={ <Feedback /> }
+      iconElementRight={ feedbackButton }
     />
   );
 };
