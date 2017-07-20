@@ -8,6 +8,9 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import LogoutIcon from 'material-ui/svg-icons/action/exit-to-app';
 import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
+import AboutIcon from 'material-ui/svg-icons/action/info';
+
+import About from '../../About';
 
 import { openFeedback } from '../../../../../shared/js/reducers/feedback/open';
 
@@ -19,16 +22,22 @@ const HeaderMenu = ({ handleFeedbackClick }) => (
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
   >
-  <MenuItem
-    primaryText="Logout"
-    leftIcon={ <LogoutIcon /> }
-    onTouchTap={ () => { location.href = '/logout'; } }
-  />
-  <MenuItem
-    primaryText="Feedback"
-    leftIcon={ <FeedbackIcon /> }
-    onTouchTap={ handleFeedbackClick }
-  />
+    <MenuItem
+      primaryText="Logout"
+      leftIcon={ <LogoutIcon /> }
+      onTouchTap={ () => { location.href = '/logout'; } }
+    />
+    <MenuItem
+      primaryText="Feedback"
+      leftIcon={ <FeedbackIcon /> }
+      onTouchTap={ handleFeedbackClick }
+    />
+    <About>
+      <MenuItem
+        primaryText="About"
+        leftIcon={ <AboutIcon /> }
+      />
+    </About>
   </IconMenu>
 );
 
