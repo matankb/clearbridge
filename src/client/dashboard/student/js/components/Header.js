@@ -5,6 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
+import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
 import { colors } from '../../../shared/js/constants/';
 
 import { toggleTopicPage } from '../actions';
@@ -54,6 +55,7 @@ let Header = props => {
       style={ style(props) }
       title="JCDS Bridge"
       iconElementLeft={ icon(props) }
+      iconElementRight={ <HeaderMenu /> }
     />
   );
 };
