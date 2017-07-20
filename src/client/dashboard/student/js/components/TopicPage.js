@@ -50,9 +50,9 @@ function getTopicById(_id, topics) {
 }
 
 function mapStateToProps(state) {
-  let topic = getTopicById(state.selectedTopic, state.topics);
+  let topic = getTopicById(state.topics.selectedTopic, state.topics.topics);
   return {
-    open: state.topicPageOpen,
+    open: state.topics.topicPageOpen,
     color: topic.color,
     name: topic.name,
     image: topic.image,

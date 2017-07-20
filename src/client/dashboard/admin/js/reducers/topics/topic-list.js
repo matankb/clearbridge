@@ -42,38 +42,6 @@ function topicList(state = defaultState, action) {
           action.topic,
         ],
       };
-    case RECEIVE_SECTION_CREATION:
-
-      return {
-        ...state,
-        topics: state.topics.map(topic => {
-          if (topic._id === getTopicId(state, action)) {
-            return { ...topic, sections: [...topic.sections, action.section] };
-          } else {
-            return topic;
-          }
-        }),
-      };
-    case RECEIVE_SECTION_UPDATING:
-      return {
-        ...state,
-        topics: state.topics.map(topic => {
-          if (topic._id === getTopicId(state, action)) {
-            return {
-              ...topic,
-              sections: topic.sections.map(section => {
-                if (section._id === action.sectionId) {
-                  return action.data; // full section obj. is passed to reducer
-                } else {
-                  return section;
-                }
-              }),
-            };
-          } else {
-            return topic;
-          }
-        }),
-      };
     default:
       return state;
   }

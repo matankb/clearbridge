@@ -37,7 +37,7 @@ function shouldFetchTopic(_id, topics) {
 
 function mapStateToProps(state, ownProps) {
   return {
-    shouldFetchTopic: shouldFetchTopic(ownProps._id, state.topics),
+    shouldFetchTopic: shouldFetchTopic(ownProps._id, state.topics.topics),
   };
 }
 

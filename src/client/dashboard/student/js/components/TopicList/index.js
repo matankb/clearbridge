@@ -34,8 +34,8 @@ class TopicList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.isFetchingTopicList,
-    topics: state.topics,
+    isFetching: state.topics.isFetchingTopicList,
+    topics: state.topics.topics,
   };
 }
 
