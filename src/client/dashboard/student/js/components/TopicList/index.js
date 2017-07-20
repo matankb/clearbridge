@@ -4,6 +4,7 @@ import { fetchTopicList } from '../../actions';
 
 import GridLayout from './GridLayout';
 import TopicCard from '../TopicCard';
+import TopicSuggest from '../TopicSuggest';
 
 class TopicList extends React.Component {
 
@@ -23,6 +24,9 @@ class TopicList extends React.Component {
         />
       );
     });
+
+    topicCards.push(<TopicSuggest />);
+
     return (
       <div className="topic-list">
         <GridLayout items={ topicCards } />
