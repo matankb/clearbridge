@@ -4,7 +4,7 @@ import Header from './Header/';
 import Sidebar from './Sidebar';
 import Feedback from '../Feedback';
 
-import '../../../css/layout.css';
+import '../../../css/layout.less';
 
 const styles = {
   main(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../css/grid.css';
+import '../../css/grid.less';
 
 const Grid = ({ children }) => <div className="grid">{ children }</div>;
 const GridTileSmall = ({ children }) => <div className="grid-tile-small">{ children }</div>;

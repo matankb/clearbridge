@@ -11,7 +11,7 @@ import {
 import stages from './stages';
 import Actions from './actions';
 
-import '../../../../css/create-topic.scss';
+import '../../../../css/create-topic.less';
 import { dialogTitle } from '../../../../../shared/js/constants/styles';
 
 const style = {

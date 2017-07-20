@@ -14,7 +14,7 @@ import {
   setTopicPageTab,
 } from '../../actions/topics/';
 
-import '../../../css/topics.scss';
+import '../../../css/topics.less';
 import colors from '../../../../shared/js/constants/colors';
 
 const style = {

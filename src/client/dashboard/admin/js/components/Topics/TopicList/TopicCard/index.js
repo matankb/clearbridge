@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TopicMenu from '../../TopicMenu';
 
 import { colors } from '../../../../../../shared/js/constants';
-import '../../../../../css/topic-card.scss';
+import '../../../../../css/topic-card.less';
 
 const style = {
   paper: {
