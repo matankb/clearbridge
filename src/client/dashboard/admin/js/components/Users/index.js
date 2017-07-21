@@ -9,7 +9,7 @@ import FilterBar from './FilterBar';
 import ActionBar from './ActionBar';
 import CreateUser from './CreateUser';
 
-import '../../../css/users.scss';
+import '../../../css/users.less';
 import { colors } from '../../../../shared/js/constants/';
 
 const style = {

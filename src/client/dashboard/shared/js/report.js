@@ -4,6 +4,7 @@ import fetch from 'fetch-reject';
 export const SUGGESTION = 0;
 export const PROBLEM = 1;
 export const ERROR = 2;
+export const TOPIC = 3;
 
 // returns serializable navigator object
 function getNavigator() {

@@ -1,4 +1,5 @@
-$grayColor: #504944;
+@gray-color: #504944;
+@page-transition-duration: 300ms;
 
 body {
   margin: 0;
@@ -6,22 +7,22 @@ body {
 }
 
 .page {
+
   z-index: 2;
-  transition: top 300ms;
+  transition: top @page-transition-duration;
   width: 100%;
   height: 100%;
   position: absolute;
   background-color: #f0f1f2;
+  top: 100%;
+
+  /* transitions don't work if display is changed,
+  thus we have to use this  to hide it when closed instead */
+  left: -100%;
 
   &.open {
     top: 64px;
     left: 0;
-  }
-  &:not(.open) {
-    top: 100%;
-    /* transitions don't work if display is changed,
-    thus we have to use this  to hide it when closed instead */
-    left: -100%;
   }
 
 }
@@ -94,7 +95,7 @@ nav {
       transition: background 500ms;
       text-transform: capitalize;;
       cursor: pointer;
-      color: $grayColor;
+      color: @gray-color;
       &:hover {
        background: #ebebeb;
       }
@@ -116,7 +117,7 @@ main {
      text-transform: capitalize;
   }
   p {
-    color: $grayColor;
+    color: @gray-color;
     font-weight: 300;
     line-height: 1.7;
     font-size: 16px;

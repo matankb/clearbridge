@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import '../../css/topic-page.scss';
+import '../../css/topic-page.less';
 
 let TopicPage = props => {
   return (

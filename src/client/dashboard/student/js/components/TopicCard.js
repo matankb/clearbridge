@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectTopic, toggleTopicPage, fetchTopic } from '../actions';
 
-import '../../css/topic-card.scss';
+import '../../css/topic-card.less';
 
 class TopicCard extends React.Component {
   handleClick() {

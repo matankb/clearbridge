@@ -6,7 +6,7 @@ import Grid, {
   GridTileLarge as LargeTile,
 } from '../../../../shared/js/components/Grid';
 
-import '../../../../shared/css/grid.css';
+import '../../../../shared/css/grid.less';
 
 const GridLayout = ({ items }) => {
   return (
