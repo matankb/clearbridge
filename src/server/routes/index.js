@@ -1,6 +1,5 @@
 const requireAll = require('require-all');
 const flat = require('flat');
-const objectValues = require('object-values');
 
 const opts = {
   dirname: __dirname,
@@ -11,7 +10,7 @@ const opts = {
 let routes = requireAll(opts);
 delete routes.index;
 routes = flat(routes);
-routes = objectValues(routes);
+routes = Object.values(routes);
 
 module.exports = function (app) {
   // initialize each route
