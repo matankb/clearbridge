@@ -17,6 +17,7 @@ const About = props => (
       modal={ false }
       onRequestClose={ props.handleClose }
       actions={ [<FlatButton label="close" primary onTouchTap={ props.handleClose } />] }
+      autoScrollBodyContent
     >
       <AboutText />
     </Dialog>
