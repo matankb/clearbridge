@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('mongoose-schema-extend');
+
 const Schema = mongoose.Schema;
-const extend = require('mongoose-schema-extend'); // eslint-disable-line no-unused-vars
 
 const userSchema = new Schema({
   email: String,
