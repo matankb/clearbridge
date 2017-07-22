@@ -1,6 +1,7 @@
 const express = require('express');
 
 const loginProtected = require('../middleware/login-protected');
+const appendTrailingSlash = require('../middleware/append-trailing-slash');
 
 function handleSubRoutes(app, names) {
 
@@ -18,17 +19,19 @@ function handleSubRoutes(app, names) {
     next();
   });
 }
-function protectLogin(app, name, level) {
-  app.use(`/${name}`, loginProtected([level]));
+
+function applyMiddleware(app, name, securityLevel) {
+  app.use(`/${name}/`, loginProtected([securityLevel]));
+  app.use(`/${name}`, appendTrailingSlash); // let react router be happy and not sad
 }
 
 module.exports = function(app) {
 
   handleSubRoutes(app, ['student', 'teacher', 'admin']);
 
-  protectLogin(app, 'student', 0);
-  protectLogin(app, 'teacher', 1);
-  protectLogin(app, 'admin', 2);
+  applyMiddleware(app, 'student', 0);
+  applyMiddleware(app, 'teacher', 1);
+  applyMiddleware(app, 'admin', 2);
 
   if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static('build/'));
