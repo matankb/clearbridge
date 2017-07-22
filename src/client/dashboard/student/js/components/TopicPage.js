@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import '../../css/topic-page.less';
 
-let TopicPage = props => {
+const TopicPage = props => {
   return (
     <div className={ props.open ? 'page open' : 'page'}>
       <div className="header" style={{ backgroundColor: String(props.color) }}>
         <div className="left">
-          <img src={ props.image } />
+          <img src={ props.image } alt={ props.name } />
         </div>
         <div className="right">
           <h1 className="title">{ props.name }</h1>
@@ -19,18 +19,18 @@ let TopicPage = props => {
         </div>
       </div>
       <nav>
-      <span>Sections</span>
-      <ul>
-        {
-          props.sections.map(section => <li>{ section.name }</li>)
+        <span>Sections</span>
+        <ul>
+          {
+          props.sections.map(section => <li key={ section._id }>{ section.name }</li>)
         }
-      </ul>
-    </nav>
-    <main>
-      {
+        </ul>
+      </nav>
+      <main>
+        {
         props.sections.map(section => {
           return (
-            <section>
+            <section key={ section._id }>
               <h1>{ section.name }</h1>
               <p>{ section.content }</p>
               <hr />
@@ -38,7 +38,7 @@ let TopicPage = props => {
           );
         })
       }
-    </main>
+      </main>
     </div>
 
   );
@@ -61,6 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-TopicPage = connect(mapStateToProps)(TopicPage);
-
-export default TopicPage;
+export default connect(mapStateToProps)(TopicPage);
