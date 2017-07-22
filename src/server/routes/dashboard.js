@@ -1,39 +1,40 @@
 const express = require('express');
 const loginProtected = require('../middleware/login-protected');
 
-function handleDashboardRoute(req, res, next) {
+function redirect(req, res) {
 
-  if (req.url.indexOf('/dashboard/build/') === -1) { // ensure that route is not a link to build
-
-    switch (req.user.type) { // send different dashboard based on user type
-      case 0:
-        res.sendFile('dashboard/student/index.html', { root: './src/client' });
-        break;
-      case 1:
-        res.sendFile('dashboard/teacher/index.html', { root: './src/client' });
-        break;
-      case 2:
-        res.sendFile('dashboard/admin/index.html', { root: './src/client' });
-        break;
-      default:
-        res.redirect('/'); // TODO: flash message with 'invalid user' or something
-        break;
-    }
-
-  } else { // route IS link to build
-    next(); // continue middleware train - next stop, express.static
+  switch (req.user.type) { // send different dashboard based on user type
+    case 0:
+      res.redirect('/student/');
+      break;
+    case 1:
+      res.redirect('/teacher/');
+      break;
+    case 2:
+      res.redirect('/admin/');
+      break;
+    default:
+      res.redirect('/'); // TODO: flash message with 'invalid user' or something
+      break;
   }
 
 }
 
+function protectLogin(app, name, level) {
+  app.use(`/${name}`, loginProtected([level]));
+  app.use(`/${name}/*`, loginProtected([level]));
+}
+
 module.exports = function(app) {
 
-  // two routes because /dashboard/* doesnt handle /dashboard/
-  app.get('/dashboard/*', loginProtected, handleDashboardRoute);
-  app.get('/dashboard', loginProtected, handleDashboardRoute);
+  app.get('/auth/success', loginProtected(), redirect);
+
+  protectLogin(app, 'admin', 2);
+  protectLogin(app, 'teacher', 1);
+  protectLogin(app, 'student', 0);
 
   if (process.env.NODE_ENV === 'production') {
-    app.use('/dashboard/build/', express.static('src/client/dashboard/build/'));
-  } // else continue middleware trains - next stop, webpack-dev-server
+    app.use('/', express.static('build/'));
+  } // else continue middleware train - next stop, webpack-dev-server
 
 };
