@@ -9,7 +9,6 @@ const defaultState = {
 // REDUCER
 
 export default function open(state = defaultState, action) {
-  console.log(action);
   switch (action.type) {
     case OPEN_ABOUT:
       return { ...state, open: true };
