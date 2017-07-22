@@ -16,7 +16,6 @@
   "author": "Matan Kotler-Berkowitz",
   "license": "ISC",
   "devDependencies": {
-    "//": "keep eslint at 3.x - airbnb config doesn't support higher",
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
@@ -65,7 +64,7 @@
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.2",
-    "redux-saga": "^0.15.4",
+    "redux-saga": "^0.15.5",
     "redux-thunk": "^2.2.0",
     "require-all": "^2.2.0",
     "session": "^0.1.0",
