@@ -49,16 +49,16 @@ const Sidebar = props => {
               return (
                 <Link
                   key={ index }
-                  to={ `/dashboard${item.url}` }
+                  to={item.url }
                   style={ style.link }
                 >
                   <MenuItem
                     key={ index }
                     leftIcon={ item.icon }
                     style={
-                      `/dashboard${item.url}` === props.location.pathname ?
-                      style.listItemSelected :
-                      {}
+                      item.url === props.location.pathname ?
+                                  style.listItemSelected :
+                                  {}
                     }
                     onTouchTap={ props.onItemClick }
                     onClick={ props.onItemClick }

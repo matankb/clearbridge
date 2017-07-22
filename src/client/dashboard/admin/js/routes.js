@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router-dom';
+import { Router, Route, IndexRoute } from 'react-router';
 
 import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
@@ -14,22 +14,21 @@ const LayoutWrapper = props => {
     <Layout
       sidebarItems={ sidebarItems }
       location={ props.location }
-      children={ props.children }
-    />
+    >
+      { props.children }
+    </Layout>
   );
 };
 
-const Routes = ({ history }) => {
-  return (
-    <Router history={ history }>
-      <Route path="/dashboard/" component={ LayoutWrapper } >
-        <IndexRoute component={ Home } />
-        <Route path="/dashboard/topics/" component={ Topics } />
-        <Route path="/dashboard/users/" component={ Users } />
-        <Route path="/dashboard/editor" component={ Editor } />
-      </Route>
-    </Router>
-  );
-};
+const Routes = ({ history }) => (
+  <Router history={ history }>
+    <Route path="/admin/" component={ LayoutWrapper } >
+      <IndexRoute component={ Home } />
+      <Route path="/admin/topics/" component={ Topics } />
+      <Route path="/admin/users/" component={ Users } />
+      <Route path="/admin/editor" component={ Editor } />
+    </Route>
+  </Router>
+);
 
 export default Routes;

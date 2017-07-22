@@ -5,9 +5,9 @@ import SubjectIcon from 'material-ui/svg-icons/action/subject';
 import PersonIcon from 'material-ui/svg-icons/social/person';
 
 const sidebarItems = [
-  { name: 'Home', url: '/', icon: <HomeIcon /> },
-  { name: 'Topics', url: '/topics/', icon: <SubjectIcon /> },
-  { name: 'Users', url: '/users/', icon: <PersonIcon /> },
+  { name: 'Home', url: '/admin/', icon: <HomeIcon /> },
+  { name: 'Topics', url: '/admin/topics/', icon: <SubjectIcon /> },
+  { name: 'Users', url: '/admin/users/', icon: <PersonIcon /> },
 ];
 
 export default sidebarItems;
