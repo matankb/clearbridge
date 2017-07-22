@@ -1,6 +1,28 @@
 const express = require('express');
 const passport = require('passport');
 
+const loginProtected = require('../middleware/login-protected');
+
+function redirectAfterAuth(req, res) {
+
+  switch (req.user.type) { // send different dashboard based on user type
+    case 0:
+      res.redirect('/student/');
+      break;
+    case 1:
+      res.redirect('/teacher/');
+      break;
+    case 2:
+      res.redirect('/admin/');
+      break;
+    default:
+      res.redirect('/'); // TODO: flash message with 'invalid user' or something
+      break;
+  }
+
+}
+
+
 module.exports = function(app) {
 
   app.use('/', express.static('src/client/home'));
@@ -10,6 +32,8 @@ module.exports = function(app) {
     successRedirect: '/auth/success/',
     failureRedirect: '/',
   }));
+
+  app.get('/auth/success', loginProtected(), redirectAfterAuth);
 
   app.get('/logout/', (req, res) => {
     req.logout();

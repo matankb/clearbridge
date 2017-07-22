@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router-dom';
 
 import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
@@ -16,7 +16,7 @@ const LayoutWrapper = props => {
       location={ props.location }
       children={ props.children }
     />
- );
+  );
 };
 
 const Routes = ({ history }) => {

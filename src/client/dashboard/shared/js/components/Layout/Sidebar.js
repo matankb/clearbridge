@@ -41,7 +41,7 @@ const Sidebar = props => {
       open={ props.open }
       onRequestChange={ props.onRequestChange }
     >
-        {
+      {
           props.items.map((item, index) => {
             if (item === null) {
               return <Divider key={ index } style={ style.divider } />;

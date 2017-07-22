@@ -1,37 +1,34 @@
 const express = require('express');
+
 const loginProtected = require('../middleware/login-protected');
 
-function redirect(req, res) {
+function handleSubRoutes(app, names) {
 
-  switch (req.user.type) { // send different dashboard based on user type
-    case 0:
-      res.redirect('/student/');
-      break;
-    case 1:
-      res.redirect('/teacher/');
-      break;
-    case 2:
-      res.redirect('/admin/');
-      break;
-    default:
-      res.redirect('/'); // TODO: flash message with 'invalid user' or something
-      break;
-  }
+  const paths = names.map(name => `/${name}`);
 
+  app.use((req, res, next) => {
+    for (const path of paths) {
+      if (req.url.startsWith(path)) {
+        req.url = path;
+        req.path = path;
+        break;
+      }
+    }
+
+    next();
+  });
 }
-
 function protectLogin(app, name, level) {
   app.use(`/${name}`, loginProtected([level]));
-  app.use(`/${name}/*`, loginProtected([level]));
 }
 
 module.exports = function(app) {
 
-  app.get('/auth/success', loginProtected(), redirect);
+  handleSubRoutes(app, ['student', 'teacher', 'admin']);
 
-  protectLogin(app, 'admin', 2);
-  protectLogin(app, 'teacher', 1);
   protectLogin(app, 'student', 0);
+  protectLogin(app, 'teacher', 1);
+  protectLogin(app, 'admin', 2);
 
   if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static('build/'));
