@@ -4,7 +4,7 @@ const loginProtected = require('../middleware/login-protected');
 
 function handleSubRoutes(app, names) {
 
-  const paths = names.map(name => `/${name}`);
+  const paths = names.map(name => `/${name}/`);
 
   app.use((req, res, next) => {
     for (const path of paths) {
