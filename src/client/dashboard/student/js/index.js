@@ -19,7 +19,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // my stuff
 import theme from '../../shared/js/constants/theme';
-import Routes from './routes.js';
+import Routes from './routes';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
@@ -29,7 +29,7 @@ const sagaMiddleware = createSagaMiddleware();
 let store = createStore(
   rootReducer,
   applyMiddleware(thunkMiddleware),
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(sagaMiddleware),
 );
 
 sagaMiddleware.run(rootSaga);
@@ -48,6 +48,6 @@ ReactDOM.render(
     </MuiThemeProvider>
   </Provider>,
 
-  document.getElementById('root')
+  document.getElementById('root'),
 
 );
