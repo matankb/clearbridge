@@ -10,7 +10,7 @@ config.output.path = '/';
 config.output.publicPath = '/';
 
 for (let name of Object.keys(config.entry)) {
-  config.entry[name].unshift('webpack-hot-middleware/client');
+  config.entry[name].unshift('webpack-hot-middleware/client', 'react-hot-loader/patch');
 }
 
 config.plugins.push(
