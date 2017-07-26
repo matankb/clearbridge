@@ -5,9 +5,7 @@
   "main": "src/server",
   "scripts": {
     "start": "node src/server",
-    "build": "webpack --config config/webpack/prod.config.js",
-    "build-dev": "webpack --config config/webpack/dev.config.js",
-    "dev": "webpack-dashboard -- node src/server"
+    "build": "webpack --config config/webpack/prod.config.js"
   },
   "repository": {
     "type": "git",
