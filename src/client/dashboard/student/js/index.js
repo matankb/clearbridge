@@ -6,20 +6,25 @@ import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// react-router
+import { BrowserRouter } from 'react-router-dom';
+
 // redux + middleware
+import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
 import thunkMiddleware from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 // material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // hot loading
 import { AppContainer } from 'react-hot-loader';
 
 // my stuff
-import App from './App';
+import Layout from './components/Layout';
 import theme from '../../shared/js/constants/theme';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
@@ -39,20 +44,25 @@ sagaMiddleware.run(rootSaga);
 
 injectTapEventPlugin(); // neccesary for material-ui
 
-function render(Component) {
+function render() {
   ReactDOM.render(
     <AppContainer>
-      <Component
-        store={ store }
-        theme={ theme }
-      />
+      <Provider store={ store }>
+        <MuiThemeProvider
+          muiTheme={ theme }
+        >
+          <BrowserRouter>
+            <Layout />
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </Provider>
     </AppContainer>,
     document.getElementById('root'),
   );
 }
 
-render(App);
+render();
 
 if (module.hot) {
-  module.hot.accept('./App', () => { render(App); });
+  module.hot.accept('./components/Layout', render);
 }

@@ -54,7 +54,7 @@ let Header = props => {
   return (
     <AppBar
       style={ style(props) }
-      title="JCDS Bridge12"
+      title="JCDS Bridge"
       iconElementLeft={ icon(props) }
       iconElementRight={ <HeaderMenu /> }
     />
