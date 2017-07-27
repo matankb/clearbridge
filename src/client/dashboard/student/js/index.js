@@ -54,5 +54,5 @@ function render(Component) {
 render(App);
 
 if (module.hot) {
-  module.hot.accept(() => { render(App); });
+  module.hot.accept('./App', () => { render(App); });
 }

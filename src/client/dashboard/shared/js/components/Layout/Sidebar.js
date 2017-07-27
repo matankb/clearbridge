@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import { Link } from 'react-router';
 
 const style = {
   list: {
@@ -74,4 +75,4 @@ const Sidebar = props => {
   );
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);
