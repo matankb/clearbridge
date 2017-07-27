@@ -40,7 +40,12 @@ module.exports = {
       {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
-          use: ['css-loader', 'less-loader'],
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true,
+            },
+          }, 'less-loader'],
           fallback: 'style-loader',
         }),
       },
