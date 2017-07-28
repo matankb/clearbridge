@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { selectTopic, toggleTopicPage, fetchTopic } from '../actions';
+import { selectTopic, toggleTopicPage, requestTopic } from '../actions';
 
 import '../../css/topic-card.less';
 
@@ -48,14 +48,14 @@ function mapDispatchToProps(dispatch, ownProps) {
       dispatch(toggleTopicPage());
     },
     fetchTopic: () => {
-      dispatch(fetchTopic(ownProps._id));
+      dispatch(requestTopic(ownProps._id));
     },
   };
 }
 
 TopicCard = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TopicCard);
 
 export default TopicCard;

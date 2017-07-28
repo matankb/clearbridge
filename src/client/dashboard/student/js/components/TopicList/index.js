@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchTopicList } from '../../actions';
+import { requestTopicList } from '../../actions';
 
 import GridLayout from './GridLayout';
 import TopicCard from '../TopicCard';
@@ -8,7 +8,7 @@ import TopicSuggest from '../TopicSuggest';
 
 class TopicList extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTopics(); // load topic list into redux store
   }
 
@@ -46,14 +46,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchTopics: () => {
-      dispatch(fetchTopicList());
+      dispatch(requestTopicList());
     },
   };
 }
 
 TopicList = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TopicList);
 
 export default TopicList;

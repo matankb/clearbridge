@@ -13,7 +13,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
-import thunkMiddleware from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 // material-ui
@@ -34,7 +33,6 @@ const sagaMiddleware = createSagaMiddleware();
 
 let store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware),
   applyMiddleware(sagaMiddleware),
 );
 

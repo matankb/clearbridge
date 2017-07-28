@@ -1,15 +1,14 @@
 export const REQUEST_TOPIC = 'REQUEST_TOPIC';
 export const RECEIVE_TOPIC = 'RECEIVE_TOPIC';
-export const FETCH_TOPIC_LIST = 'FETCH_TOPIC_LIST';
-export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST'
-export const FETCH_TOPIC = 'FETCH_TOPIC';
+export const REQUEST_TOPIC_LIST = 'REQUEST_TOPIC_LIST';
+export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 export const SELECT_TOPIC = 'SELECT_TOPIC';
 export const TOGGLE_TOPIC_PAGE = 'TOGGLE_TOPIC_PAGE';
 
-export function requestTopic(_id) {
+export function requestTopic(id) {
   return {
     type: REQUEST_TOPIC,
-    id: _id,
+    id,
   };
 }
 
@@ -29,28 +28,10 @@ export function receiveTopicList(topics) {
   };
 }
 
-export function fetchTopicList() {
-  return function(dispatch) {
-
-    fetch(`/api/user/topics`, { credentials: 'same-origin' })
-      .then(res => res.json())
-      .then(topics => dispatch(receiveTopicList(topics)));
-
+export function requestTopicList() {
+  return {
+    type: REQUEST_TOPIC_LIST,
   };
-}
-
-export function fetchTopic(id) {
-
-  return function(dispatch) {
-
-    dispatch(requestTopic(id));
-
-    fetch(`/api/topics/${id}`, { credentials: 'same-origin' })
-      .then(res => res.json())
-      .then(topic => dispatch(receiveTopic(topic)));
-
-  };
-
 }
 
 export function selectTopic(id) {
@@ -64,7 +45,3 @@ export function toggleTopicPage() {
     type: TOGGLE_TOPIC_PAGE,
   };
 }
-
-window.selectTopic = selectTopic;
-window.fetchTopicList = fetchTopicList;
-window.toggleTopicPage = toggleTopicPage;
