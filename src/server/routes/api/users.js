@@ -25,7 +25,9 @@ module.exports = function(app) {
 
   app.get('/api/user/:resource/', ensureAuthenticated(), (req, res) => {
     // similar to above, but for linked resources
-    res.redirect(`/api/users/${req.user._id}/${req.params.resource}/`);
+    const urlObj = url.parse(req.originalUrl);
+    urlObj.pathname = `/api/users/${req.user._id}/${req.params.resource}/`; // preserve all other parts of url
+    res.redirect(url.format(urlObj));
   });
 
   app.get('/api/users/:id/', ensureAuthenticated([1, 2]), (req, res) => {
