@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { selectTopic, openTopicPage, requestTopic } from '../actions';
+import { selectTopic, openTopicPage } from '../actions';
 
 import Tile from './Tile';
 
@@ -18,7 +18,6 @@ const TopicCard = props => (
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     handleClick: () => {
-      dispatch(requestTopic(ownProps.id));
       dispatch(selectTopic(ownProps.id));
       dispatch(openTopicPage());
     },

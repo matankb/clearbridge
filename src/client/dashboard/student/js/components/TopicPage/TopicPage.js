@@ -8,26 +8,40 @@ import TopicPageContent from './TopicPageContent';
 
 import '../../../css/topic-page.less';
 
-const TopicPage = props => {
+class TopicPage extends React.Component {
 
-  const { data } = props.topic;
+  componentDidMount() {
+    this.loadTopic();
+  }
+  componentDidUpdate() {
+    this.loadTopic();
+  }
 
-  return (
-    <div className="page">
-      <TopicPageHeader
-        name={ data.name }
-        blurb={ data.blurb }
-        color={ data.color }
-        image={ data.image }
-      />
-      <LoadableContent isLoading={ props.topic.isFetching }>
-        <TopicPageNav sections={ data.sections } />
-        <TopicPageContent sections={ data.sections } />
-      </LoadableContent>
-    </div>
+  loadTopic() {
+    this.props.load(this.props.topic.id);
+  }
 
-  );
-};
+  render() {
+
+    const { data } = this.props.topic;
+
+    return (
+      <div className="page">
+        <TopicPageHeader
+          name={ data.name }
+          blurb={ data.blurb }
+          color={ data.color }
+          image={ data.image }
+        />
+        <LoadableContent isLoading={ this.props.topic.isFetching }>
+          <TopicPageNav sections={ data.sections } />
+          <TopicPageContent sections={ data.sections } />
+        </LoadableContent>
+      </div>
+    );
+  }
+
+}
 
 
 export default TopicPage;

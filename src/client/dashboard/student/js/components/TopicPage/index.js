@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import TopicPage from './TopicPage';
+import { requestTopic } from '../../actions';
 
 const TopicPageWrap = props => {
 
-  let renderedChild = props.open ? <TopicPage topic={ props.topic } key={ 0 } /> : null;
+  let renderedChild = props.open ?
+    <TopicPage topic={ props.topic } load={ props.load } key={ 0 } />
+    : null;
 
   return (
     <CSSTransitionGroup
@@ -34,6 +37,13 @@ function mapStateToProps(state) {
   };
 }
 
+function matchDispatchToProps(dispatch) {
+  return {
+    load: id => dispatch(requestTopic(id)),
+  };
+}
+
 export default connect(
   mapStateToProps,
+  matchDispatchToProps,
 )(TopicPageWrap);
