@@ -6,18 +6,6 @@ const { handleErrors, handleNotFound } = require('../../helpers/db');
 const Topic = require('../../models/Topic');
 const User = require('../../models/User');
 
-function extractShortTopic(topics) {
-  return topics.map(topic => {
-    // empty array with length of sections
-    let sections = [];
-    sections.length = topic.sections.length;
-    return {
-      name: topic.name, color: topic.color, image: topic.image, id: topic.id,
-      sections, creator: topic.creator,
-    };
-  });
-}
-
 module.exports = function(app) {
 
   app.get('/api/topics/', ensureAuthenticated(), (req, res) => {
@@ -161,7 +149,7 @@ module.exports = function(app) {
                       .catch(handleErrors(res));
                   }
                 });
-            }
+            },
             )
             .catch(handleErrors(res));
         }
