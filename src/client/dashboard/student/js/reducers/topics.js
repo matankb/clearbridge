@@ -3,8 +3,10 @@ import {
   RECEIVE_TOPIC_LIST,
   FETCH_TOPIC,
   RECEIVE_TOPIC,
+
   SELECT_TOPIC,
-  TOGGLE_TOPIC_PAGE,
+  OPEN_TOPIC_PAGE,
+  CLOSE_TOPIC_PAGE,
 } from '../actions/';
 
 const defaultState = {
@@ -38,7 +40,15 @@ function topics(state = defaultState, action) {
         ...state,
         isFetchingTopicList: false,
         topics: action.topics.map(topic => ({
-          ...topic,
+          data: {
+            name: topic.name,
+            color: topic.color,
+            image: topic.image,
+            sections: [],
+            blurb: '',
+          },
+          error: null,
+          id: topic._id,
           isFetching: false,
           hasContent: false,
         })),
@@ -57,8 +67,11 @@ function topics(state = defaultState, action) {
           ...topic,
           isFetching: false,
           hasContent: true,
-          blurb: action.blurb,
-          sections: action.sections,
+          data: {
+            ...topic.data,
+            blurb: action.blurb,
+            sections: action.sections,
+          },
         })),
       };
 
@@ -68,10 +81,15 @@ function topics(state = defaultState, action) {
         selectedTopic: action.id,
       };
 
-    case TOGGLE_TOPIC_PAGE:
+    case OPEN_TOPIC_PAGE:
       return {
         ...state,
-        topicPageOpen: !state.topicPageOpen,
+        topicPageOpen: true,
+      };
+    case CLOSE_TOPIC_PAGE:
+      return {
+        ...state,
+        topicPageOpen: false,
       };
 
     default:

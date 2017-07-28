@@ -17,10 +17,10 @@ class TopicList extends React.Component {
     const topicCards = this.props.topics.map(topic => {
       return (
         <TopicCard
-          name={ topic.name }
-          image={ topic.image }
-          color={ topic.color }
-          id={ topic._id }
+          name={ topic.data.name }
+          image={ topic.data.image }
+          color={ topic.data.color }
+          id={ topic.id }
         />
       );
     });
