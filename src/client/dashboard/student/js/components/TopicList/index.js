@@ -5,6 +5,7 @@ import { requestTopicList } from '../../actions';
 import GridLayout from './GridLayout';
 import TopicCard from '../TopicCard';
 import TopicSuggest from '../TopicSuggest';
+import LoadableContent from '../../../../shared/js/components/LoadableContent';
 
 class TopicList extends React.Component {
 
@@ -14,22 +15,22 @@ class TopicList extends React.Component {
 
   render() {
 
-    const topicCards = this.props.topics.map(topic => {
-      return (
-        <TopicCard
-          name={ topic.data.name }
-          image={ topic.data.image }
-          color={ topic.data.color }
-          id={ topic.id }
-        />
-      );
-    });
+    const topicCards = this.props.topics.map(topic => (
+      <TopicCard
+        name={ topic.data.name }
+        image={ topic.data.image }
+        color={ topic.data.color }
+        id={ topic.id }
+      />
+    ));
 
     topicCards.push(<TopicSuggest />);
 
     return (
       <div className="topic-list">
-        <GridLayout items={ topicCards } />
+        <LoadableContent isLoading={ this.props.isFetching }>
+          <GridLayout items={ topicCards } />
+        </LoadableContent>
       </div>
     );
 
@@ -51,9 +52,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-TopicList = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(TopicList);
-
-export default TopicList;
