@@ -18,7 +18,7 @@ const defaultState = {
 
 function changeTopic(topicList, id, reducer) {
   return topicList.map(topic => {
-    if (topic._id === id) {
+    if (topic.id === id) {
       return reducer(topic);
     } else {
       return topic;

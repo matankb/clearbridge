@@ -14,7 +14,7 @@ import {
 import { fetchJson } from '../../../shared/js/utils';
 
 // selectors
-const getTopic = id => state => state.topics.topics.find(t => t._id === id);
+const getTopic = id => state => state.topics.topics.find(t => t.id === id);
 
 // sagas
 function* onFetchTopicList() {
