@@ -8,7 +8,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
 import { colors } from '../../../shared/js/constants/';
 
-import { toggleTopicPage } from '../actions';
+import { closeTopicPage } from '../actions';
 
 function style(props) {
   let styles = {
@@ -61,14 +61,14 @@ let Header = props => {
   );
 };
 
-function getTopicById(_id, topics) {
-  return topics.filter(topic => topic._id === _id)[0] || '';
+function getTopicById(id, topics) {
+  return topics.find(topic => topic.id === id) || '';
 }
 
 function getHeaderColor(state) {
   let color;
   if (state.topics.topicPageOpen) {
-    color = getTopicById(state.topics.selectedTopic, state.topics.topics).color;
+    color = getTopicById(state.topics.selectedTopic, state.topics.topics).data.color;
   }
   return color;
 }
@@ -82,7 +82,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onCloseClick: () => dispatch(toggleTopicPage()),
+    onCloseClick: () => dispatch(closeTopicPage()),
   };
 }
 

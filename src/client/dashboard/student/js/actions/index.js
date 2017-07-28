@@ -6,7 +6,8 @@ export const REQUEST_TOPIC_LIST = 'REQUEST_TOPIC_LIST';
 export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 
 export const SELECT_TOPIC = 'SELECT_TOPIC';
-export const TOGGLE_TOPIC_PAGE = 'TOGGLE_TOPIC_PAGE';
+export const OPEN_TOPIC_PAGE = 'OPEN_TOPIC_PAGE';
+export const CLOSE_TOPIC_PAGE = 'CLOSE_TOPIC_PAGE';
 
 export function requestTopic(id) {
   return {
@@ -50,8 +51,14 @@ export function selectTopic(id) {
     id,
   };
 }
-export function toggleTopicPage() {
+export function openTopicPage() {
   return {
-    type: TOGGLE_TOPIC_PAGE,
+    type: OPEN_TOPIC_PAGE,
   };
 }
+export function closeTopicPage() {
+  return {
+    type: CLOSE_TOPIC_PAGE,
+  };
+}
+
