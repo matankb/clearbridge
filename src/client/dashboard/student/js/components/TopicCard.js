@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { selectTopic, toggleTopicPage, requestTopic } from '../actions';
+import { selectTopic, openTopicPage, requestTopic } from '../actions';
 
 import '../../css/topic-card.less';
 
@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     handleClick: () => {
       dispatch(requestTopic(ownProps.id));
       dispatch(selectTopic(ownProps.id));
-      dispatch(toggleTopicPage());
+      dispatch(openTopicPage());
     },
   };
 }
