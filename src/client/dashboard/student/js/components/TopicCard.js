@@ -21,9 +21,9 @@ const TopicCard = props => (
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     handleClick: () => {
+      dispatch(requestTopic(ownProps.id));
       dispatch(selectTopic(ownProps.id));
       dispatch(toggleTopicPage());
-      dispatch(requestTopic(ownProps.id));
     },
   };
 }

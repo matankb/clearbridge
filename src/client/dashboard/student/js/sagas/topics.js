@@ -18,7 +18,7 @@ const getTopic = id => state => state.topics.topics.find(t => t._id === id);
 
 // sagas
 function* onFetchTopicList() {
-  const topicList = yield fetchJson('/api/user/topics/');
+  const topicList = yield fetchJson('/api/user/topics/?short=true');
   yield put(receiveTopicList(topicList));
 }
 

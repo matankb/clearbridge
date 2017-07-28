@@ -14,6 +14,16 @@ const defaultState = {
   topics: [],
 };
 
+function changeTopic(topicList, id, reducer) {
+  return topicList.map(topic => {
+    if (topic._id === id) {
+      return reducer(topic);
+    } else {
+      return topic;
+    }
+  });
+}
+
 function topics(state = defaultState, action) {
   switch (action.type) {
 
@@ -27,43 +37,29 @@ function topics(state = defaultState, action) {
       return {
         ...state,
         isFetchingTopicList: false,
-        topics: action.topics.map(topic => {
-          return {
-            ...topic,
-            isFetching: false,
-            hasContent: false,
-          };
-        }),
+        topics: action.topics.map(topic => ({
+          ...topic,
+          isFetching: false,
+          hasContent: false,
+        })),
       };
 
     case FETCH_TOPIC:
       return {
         ...state,
-        topics: state.topics.map(topic => {
-          if (topic.id === action.id) {
-            return { ...topic, isFetching: true };
-          } else {
-            return topic;
-          }
-        }),
+        topics: changeTopic(state.topics, action.id, topic => ({ ...topic, isFetching: true })),
       };
 
     case RECEIVE_TOPIC:
       return {
         ...state,
-        topics: state.topics.map(topic => {
-          if (topic.id === action.id) {
-            return {
-              ...topic,
-              isFetching: false,
-              hasContent: true,
-              blurb: action.blurb,
-              sections: action.sections,
-            };
-          } else {
-            return topic;
-          }
-        }),
+        topics: changeTopic(state.topics, action.id, topic => ({
+          ...topic,
+          isFetching: false,
+          hasContent: true,
+          blurb: action.blurb,
+          sections: action.sections,
+        })),
       };
 
     case SELECT_TOPIC:
