@@ -19,6 +19,7 @@ config.plugins.push(
   new CleanPlugin([config.output.path], {
     root: path.resolve(__dirname, '../../'),
   }),
+  new webpack.optimize.ModuleConcatenationPlugin(),
 );
 
 module.exports = config;
