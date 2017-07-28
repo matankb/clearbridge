@@ -1,5 +1,7 @@
 import React from 'react';
 
+import LoadableContent from '../../../../shared/js/components/LoadableContent';
+
 import TopicPageHeader from './TopicPageHeader';
 import TopicPageNav from './TopicPageNav';
 import TopicPageContent from './TopicPageContent';
@@ -18,8 +20,10 @@ const TopicPage = props => {
         color={ data.color }
         image={ data.image }
       />
-      <TopicPageNav sections={ data.sections } />
-      <TopicPageContent sections={ data.sections } />
+      <LoadableContent isLoading={ props.topic.isFetching }>
+        <TopicPageNav sections={ data.sections } />
+        <TopicPageContent sections={ data.sections } />
+      </LoadableContent>
     </div>
 
   );
