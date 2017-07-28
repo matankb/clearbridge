@@ -1,7 +1,7 @@
 import {
   REQUEST_TOPIC_LIST,
   RECEIVE_TOPIC_LIST,
-  REQUEST_TOPIC,
+  FETCH_TOPIC,
   RECEIVE_TOPIC,
   SELECT_TOPIC,
   TOGGLE_TOPIC_PAGE,
@@ -31,12 +31,12 @@ function topics(state = defaultState, action) {
           return {
             ...topic,
             isFetching: false,
-            hasFull: false,
+            hasContent: false,
           };
         }),
       };
 
-    case REQUEST_TOPIC:
+    case FETCH_TOPIC:
       return {
         ...state,
         topics: state.topics.map(topic => {
@@ -56,7 +56,7 @@ function topics(state = defaultState, action) {
             return {
               ...topic,
               isFetching: false,
-              hasFull: true,
+              hasContent: true,
               blurb: action.blurb,
               sections: action.sections,
             };

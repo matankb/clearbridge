@@ -20,7 +20,7 @@ class TopicList extends React.Component {
           name={ topic.name }
           image={ topic.image }
           color={ topic.color }
-          _id={ topic._id }
+          id={ topic._id }
         />
       );
     });
