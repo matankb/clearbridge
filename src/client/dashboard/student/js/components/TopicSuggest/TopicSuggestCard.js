@@ -1,4 +1,5 @@
 import React from 'react';
+import Tile from '../Tile';
 
 const style = {
   topic: {
@@ -11,10 +12,10 @@ const style = {
 };
 
 const TopicSuggestCard = ({ onClick }) => (
-  <div className="topic" style={ style.topic } onClick={ onClick }>
-    <img src="https://goo.gl/enkb9a" className="image" />
+  <Tile className="topic" style={ style.topic } onClick={ onClick }>
+    <img src="https://goo.gl/enkb9a" className="image" alt="" />
     <div className="name" style={ style.name }>Suggest Topic</div>
-  </div>
+  </Tile>
 );
 
 export default TopicSuggestCard;

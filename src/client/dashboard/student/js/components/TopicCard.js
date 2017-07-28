@@ -3,19 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectTopic, openTopicPage, requestTopic } from '../actions';
 
-import '../../css/topic-card.less';
+import Tile from './Tile';
 
 const TopicCard = props => (
-  <div
-    className="topic"
-    style={{ backgroundColor: props.color }}
+  <Tile
     onClick={ props.handleClick }
-    role="button"
-    tabIndex={ 0 }
+    style={{ backgroundColor: props.color }}
   >
     <img src={ props.image } className="image" alt={ props.name } />
     <div className="name">{ props.name }</div>
-  </div>
+  </Tile>
 );
 
 function mapDispatchToProps(dispatch, ownProps) {
