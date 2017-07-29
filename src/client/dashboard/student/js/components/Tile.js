@@ -3,15 +3,13 @@ import React from 'react';
 import '../../css/tile.less';
 
 const Tile = ({ children, onClick, style }) => (
-  <div
+  <button
     className="tile"
     style={ style }
     onClick={ onClick }
-    role="button"
-    tabIndex={ 0 }
   >
     { children }
-  </div>
+  </button>
 );
 
 export default Tile;
