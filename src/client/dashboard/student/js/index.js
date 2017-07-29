@@ -64,3 +64,5 @@ render();
 if (module.hot) {
   module.hot.accept('./components/Layout', render);
 }
+
+window.store = store;

@@ -5,6 +5,9 @@ export const FETCH_TOPIC = 'FETCH_TOPIC';
 export const REQUEST_TOPIC_LIST = 'REQUEST_TOPIC_LIST';
 export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 
+export const FETCH_TOPIC_LIST_ERROR = 'FETCH_TOPIC_LIST_ERROR';
+export const FETCH_TOPIC_ERROR = 'FETCH_TOPIC_ERROR';
+
 export const SELECT_TOPIC = 'SELECT_TOPIC';
 export const OPEN_TOPIC_PAGE = 'OPEN_TOPIC_PAGE';
 export const CLOSE_TOPIC_PAGE = 'CLOSE_TOPIC_PAGE';
@@ -42,6 +45,20 @@ export function receiveTopicList(topics) {
 export function requestTopicList() {
   return {
     type: REQUEST_TOPIC_LIST,
+  };
+}
+
+export function fetchTopicListError(error) {
+  return {
+    type: FETCH_TOPIC_LIST_ERROR,
+    error,
+  };
+}
+export function fetchTopicError(id, error) {
+  return {
+    type: FETCH_TOPIC_ERROR,
+    id,
+    error,
   };
 }
 

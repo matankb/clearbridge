@@ -28,7 +28,11 @@ class TopicList extends React.Component {
 
     return (
       <div className="topic-list">
-        <LoadableContent isLoading={ this.props.isFetching }>
+        <LoadableContent
+          isLoading={ this.props.isFetching }
+          error={ this.props.error }
+          retry={ this.props.fetchTopics }
+        >
           <GridLayout items={ topicCards } />
         </LoadableContent>
       </div>
@@ -40,6 +44,7 @@ class TopicList extends React.Component {
 function mapStateToProps(state) {
   return {
     isFetching: state.topics.isFetchingTopicList,
+    error: state.topics.topicListError,
     topics: state.topics.topics,
   };
 }

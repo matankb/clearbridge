@@ -9,17 +9,23 @@ import {
   receiveTopicList,
   receiveTopic,
   fetchTopic,
+  fetchTopicListError,
+  fetchTopicError,
 } from '../actions';
 
-import { fetchJson } from '../../../shared/js/utils';
+import { fetchJson, formatError } from '../../../shared/js/utils';
 
 // selectors
 const getTopic = id => state => state.topics.topics.find(t => t.id === id);
 
 // sagas
 function* onFetchTopicList() {
-  const topicList = yield fetchJson('/api/user/topics/?short=true');
-  yield put(receiveTopicList(topicList));
+  try {
+    const topicList = yield fetchJson('/api/user/topics/?short=true');
+    yield put(receiveTopicList(topicList));
+  } catch (e) {
+    yield put(fetchTopicListError(formatError(e)));
+  }
 }
 
 function* onRequestTopic(action) {
@@ -31,8 +37,12 @@ function* onRequestTopic(action) {
 }
 
 function* onFetchTopic(action) {
-  const topic = yield fetchJson(`/api/topics/${action.id}`);
-  yield put(receiveTopic(topic));
+  try {
+    const topic = yield fetchJson(`/api/topics/${action.id}`);
+    yield put(receiveTopic(topic));
+  } catch (e) {
+    yield put(fetchTopicError(formatError(action.id, e)));
+  }
 }
 
 export default function* watchTopics() {

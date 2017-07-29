@@ -4,6 +4,9 @@ import {
   FETCH_TOPIC,
   RECEIVE_TOPIC,
 
+  FETCH_TOPIC_LIST_ERROR,
+  FETCH_TOPIC_ERROR,
+
   SELECT_TOPIC,
   OPEN_TOPIC_PAGE,
   CLOSE_TOPIC_PAGE,
@@ -12,6 +15,7 @@ import {
 const defaultState = {
   selectedTopic: null,
   isFetchingTopicList: false,
+  topicListError: null,
   topicPageOpen: false,
   topics: [],
 };
@@ -39,6 +43,7 @@ function topics(state = defaultState, action) {
       return {
         ...state,
         isFetchingTopicList: false,
+        topicListError: null,
         topics: action.topics.map(topic => ({
           data: {
             name: topic.name,
@@ -66,12 +71,29 @@ function topics(state = defaultState, action) {
         topics: changeTopic(state.topics, action.id, topic => ({
           ...topic,
           isFetching: false,
+          error: null,
           hasContent: true,
           data: {
             ...topic.data,
             blurb: action.blurb,
             sections: action.sections,
           },
+        })),
+      };
+
+    case FETCH_TOPIC_LIST_ERROR:
+      return {
+        ...state,
+        isFetchingTopicList: false,
+        topicListError: action.error,
+      };
+    case FETCH_TOPIC_ERROR:
+      return {
+        ...state,
+        topics: changeTopic(state.topics, action.id, topic => ({
+          ...topic,
+          isFetching: false,
+          error: action.error,
         })),
       };
 
