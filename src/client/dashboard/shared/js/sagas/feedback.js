@@ -13,7 +13,7 @@ function* feedback() {
     let response = yield call(sendReport, data.type, data);
     yield put(feedbackSent(response.status));
   } catch (e) {
-    yield put(feedbackSentError(e));
+    yield put(feedbackSentError());
   }
 }
 
