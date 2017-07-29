@@ -11,5 +11,5 @@ const FeedbackButton = ({ handleOpen, button }) => (
 
 export default connect(
   () => ({}),
-  dispatch => ({ handleOpen: () => dispatch(openFeedback()) })
+  dispatch => ({ handleOpen: () => dispatch(openFeedback()) }),
 )(FeedbackButton);
