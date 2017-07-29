@@ -9,88 +9,79 @@ import Grid, {
 import '../../../../shared/css/grid.less';
 
 const GridLayout = ({ items }) => {
+
+  const children = [];
+
+  for (let i = 0; i < items.length / 16; i++) {
+    const batch = 16 * i;
+    children.push(
+      items[batch + 0] &&
+        <LargeTile key={ batch + 0 }>{ items[batch + 0] }</LargeTile>,
+
+      items[batch + 1] &&
+        <LargeTile key={ batch + 1 }>
+          <WideTile>
+            <SmallTile>{ items[batch + 1] }</SmallTile>
+            <SmallTile>{ items[batch + 2] }</SmallTile>
+          </WideTile>
+          <WideTile>{ items[batch + 3] }</WideTile>
+        </LargeTile>,
+
+      items[batch + 4] &&
+        <LargeTile key={ batch + 4 }>
+          <WideTile>
+            { items[batch + 4] }
+          </WideTile>
+          <WideTile>
+            <SmallTile>{ items[batch + 5] }</SmallTile>
+            <SmallTile>{ items[batch + 6] }</SmallTile>
+          </WideTile>
+        </LargeTile>,
+
+      items[batch + 7] &&
+        <LargeTile key={ batch + 7 }>
+          <WideTile>
+            <SmallTile>{ items[batch + 7] }</SmallTile>
+            <SmallTile>{ items[batch + 8] }</SmallTile>
+          </WideTile>
+          <WideTile>
+            <SmallTile>{ items[batch + 9] }</SmallTile>
+            <SmallTile>{ items[batch + 10] }</SmallTile>
+          </WideTile>
+        </LargeTile>,
+
+      items[batch + 11] &&
+        <LargeTile key={ batch + 11 }>
+          <WideTile>
+            <SmallTile>{ items[batch + 11] }</SmallTile>
+            <SmallTile>{ items[batch + 12]}</SmallTile>
+          </WideTile>
+          <WideTile>
+            { items[batch + 13] }
+          </WideTile>
+        </LargeTile>,
+
+      items[batch + 14] &&
+        <LargeTile key={ batch + 14 }>
+          { items[batch + 14] }
+        </LargeTile>,
+
+      items[batch + 15] &&
+        <LargeTile key={ batch + 15 }>
+          <WideTile>{ items[batch + 15] }</WideTile>
+          <WideTile>{ items[batch + 16] }</WideTile>
+        </LargeTile>,
+
+      items[batch + 16] &&
+        <LargeTile key={ batch + 16 }>
+          { items[batch + 16] }
+        </LargeTile>,
+    );
+  }
+
   return (
     <Grid>
-      {
-        items[0] ?
-          <LargeTile>
-            { items[0] }
-          </LargeTile> :
-        null
-      }
-      {
-        items[1] ?
-          <LargeTile>
-            <WideTile>
-              <SmallTile>{ items[1] }</SmallTile>
-              <SmallTile>{ items[2] }</SmallTile>
-            </WideTile>
-            <WideTile>{ items[3] }</WideTile>
-          </LargeTile> :
-        null
-      }
-      {
-        items[4] ?
-          <LargeTile>
-            <WideTile>
-              { items[4] }
-            </WideTile>
-            <WideTile>
-              <SmallTile>{ items[5] }</SmallTile>
-              <SmallTile>{ items[6] }</SmallTile>
-            </WideTile>
-          </LargeTile> :
-        null
-      }
-      {
-        items[7] ?
-          <LargeTile>
-            <WideTile>
-              <SmallTile>{ items[7] }</SmallTile>
-              <SmallTile>{ items[8] }</SmallTile>
-            </WideTile>
-            <WideTile>
-              <SmallTile>{ items[9] }</SmallTile>
-              <SmallTile>{ items[10] }</SmallTile>
-            </WideTile>
-          </LargeTile> :
-        null
-      }
-      {
-        items[11] ?
-          <LargeTile>
-            <WideTile>
-              <SmallTile>{ items[11] }</SmallTile>
-              <SmallTile>{ items[12]}</SmallTile>
-            </WideTile>
-            <WideTile>
-              { items[13] }
-            </WideTile>
-          </LargeTile> :
-        null
-      }
-      {
-        items[14] ?
-          <LargeTile>
-            { items[14] }
-          </LargeTile> :
-        null
-      }
-      {
-        items[15] ?
-          <LargeTile>
-            <WideTile>{ items[15] }</WideTile>
-            <WideTile>{ items[16] }</WideTile>
-          </LargeTile> :
-        null
-      }
-      {
-        items[16] ?
-          <LargeTile>
-            { items[16] }
-          </LargeTile> :
-        null
-      }
+      { children }
     </Grid>
   );
 };
