@@ -37,6 +37,7 @@ function topics(state = defaultState, action) {
       return {
         ...state,
         isFetchingTopicList: true,
+        topicListError: null,
       };
 
     case RECEIVE_TOPIC_LIST:
@@ -62,7 +63,11 @@ function topics(state = defaultState, action) {
     case FETCH_TOPIC:
       return {
         ...state,
-        topics: changeTopic(state.topics, action.id, topic => ({ ...topic, isFetching: true })),
+        topics: changeTopic(state.topics, action.id, topic => ({
+          ...topic,
+          error: null,
+          isFetching: true,
+        })),
       };
 
     case RECEIVE_TOPIC:
@@ -90,11 +95,13 @@ function topics(state = defaultState, action) {
     case FETCH_TOPIC_ERROR:
       return {
         ...state,
-        topics: changeTopic(state.topics, action.id, topic => ({
-          ...topic,
-          isFetching: false,
-          error: action.error,
-        })),
+        topics: changeTopic(state.topics, action.id, topic => {
+          return {
+            ...topic,
+            isFetching: false,
+            error: action.error,
+          };
+        }),
       };
 
     case SELECT_TOPIC:

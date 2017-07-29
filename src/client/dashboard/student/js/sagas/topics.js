@@ -1,5 +1,4 @@
 import { takeEvery, put, select } from 'redux-saga/effects';
-import fetch from 'fetch-reject';
 
 import {
   REQUEST_TOPIC_LIST,
@@ -41,7 +40,7 @@ function* onFetchTopic(action) {
     const topic = yield fetchJson(`/api/topics/${action.id}`);
     yield put(receiveTopic(topic));
   } catch (e) {
-    yield put(fetchTopicError(formatError(action.id, e)));
+    yield put(fetchTopicError(action.id, formatError(e)));
   }
 }
 

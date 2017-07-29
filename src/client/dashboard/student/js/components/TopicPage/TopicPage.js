@@ -13,11 +13,13 @@ class TopicPage extends React.Component {
   componentDidMount() {
     this.loadTopic();
   }
-  componentDidUpdate() {
-    this.loadTopic();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.topic.id !== this.props.topic.id) {
+      this.loadTopic();
+    }
   }
 
-  loadTopic() {
+  loadTopic = () => {
     this.props.load(this.props.topic.id);
   }
 
@@ -33,7 +35,11 @@ class TopicPage extends React.Component {
           color={ data.color }
           image={ data.image }
         />
-        <LoadableContent isLoading={ this.props.topic.isFetching }>
+        <LoadableContent
+          isLoading={ this.props.topic.isFetching }
+          error={ this.props.topic.error }
+          retry={ this.loadTopic }
+        >
           <TopicPageNav sections={ data.sections } />
           <TopicPageContent sections={ data.sections } />
         </LoadableContent>
@@ -42,6 +48,5 @@ class TopicPage extends React.Component {
   }
 
 }
-
 
 export default TopicPage;
