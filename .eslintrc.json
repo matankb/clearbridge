@@ -43,6 +43,7 @@
       "react/jsx-closing-bracket-location": 1,
       "react/jsx-no-bind": 0,
       "react/jsx-curly-spacing": 0,
-      "react/jsx-filename-extension": 0
+      "react/jsx-filename-extension": 0,
+      "no-nested-ternary": 0
     }
 }
