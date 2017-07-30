@@ -72,6 +72,7 @@ const FeedbackDialog = props => {
         onChange={ handleCommentChange }
         value={ comment }
         style={ style.comment }
+        name="comment"
       />
       <br />
       { buttons }
