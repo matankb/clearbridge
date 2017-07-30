@@ -7,10 +7,6 @@ const TopicPageHeader = ({ name, blurb, color, image }) => (
     </div>
     <div className="right">
       <h1 className="title">{ name }</h1>
-      <p className="subtitle">OVERVIEW</p>
-      <p className="blurb">
-        { blurb }
-      </p>
     </div>
   </div>
 );
