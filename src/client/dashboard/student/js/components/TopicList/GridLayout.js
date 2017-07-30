@@ -8,12 +8,14 @@ import Grid, {
 
 import '../../../../shared/css/grid.less';
 
+const BATCH_SIZE = 17;
+
 const GridLayout = ({ items }) => {
 
   const children = [];
 
-  for (let i = 0; i < items.length / 16; i++) {
-    const batch = 16 * i;
+  for (let i = 0; i < items.length / BATCH_SIZE; i++) {
+    const batch = BATCH_SIZE * i;
     children.push(
       items[batch + 0] &&
         <LargeTile key={ batch + 0 }>{ items[batch + 0] }</LargeTile>,
