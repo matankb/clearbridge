@@ -7,7 +7,6 @@ const TopicPageContent = ({ sections }) => (
         <section key={ section._id }>
           <h1>{ section.name }</h1>
           <p>{ section.content }</p>
-          <hr />
         </section>
       ))
     }

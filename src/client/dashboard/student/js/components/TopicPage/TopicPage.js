@@ -3,7 +3,6 @@ import React from 'react';
 import LoadableContent from '../../../../shared/js/components/LoadableContent';
 
 import TopicPageHeader from './TopicPageHeader';
-import TopicPageNav from './TopicPageNav';
 import TopicPageContent from './TopicPageContent';
 
 import '../../../css/topic-page.less';
@@ -40,7 +39,6 @@ class TopicPage extends React.Component {
           error={ this.props.topic.error }
           retry={ this.loadTopic }
         >
-          <TopicPageNav sections={ data.sections } />
           <TopicPageContent sections={ data.sections } />
         </LoadableContent>
       </div>
