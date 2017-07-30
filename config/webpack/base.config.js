@@ -49,6 +49,15 @@ module.exports = {
           fallback: 'style-loader',
         }),
       },
+      {
+        test: /\.png$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'assets/[hash].[ext]',
+          },
+        }],
+      },
     ],
   },
   plugins: [
