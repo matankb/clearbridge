@@ -27,6 +27,7 @@ import Layout from './components/Layout';
 import theme from '../../shared/js/constants/theme';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
+import '../../shared/js/onerror';
 
 // setup store with middleware
 const sagaMiddleware = createSagaMiddleware();
