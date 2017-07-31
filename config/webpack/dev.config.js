@@ -7,7 +7,6 @@ config.devtool = 'inline-eval-source-map';
 
 config.output.filename = 'js/[name].min.js';
 config.output.path = '/';
-config.output.publicPath = '/';
 
 for (let name of Object.keys(config.entry)) {
   config.entry[name].unshift('webpack-hot-middleware/client', 'react-hot-loader/patch');

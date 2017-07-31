@@ -25,7 +25,9 @@ module.exports = {
     teacher: createEntry('teacher/js/index.js'),
     student: createEntry('student/js/index.js'),
   },
-  output: {},
+  output: {
+    publicPath: '/',
+  },
   module: {
     rules: [
       {
