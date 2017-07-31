@@ -7,6 +7,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
 import { colors } from '../../../shared/js/constants/';
+import { getTextColor } from '../../../shared/js/utils';
 
 import { closeTopicPage } from '../actions';
 
@@ -38,7 +39,7 @@ function icon (props) {
         style={ iconStyle }
         onClick={ props.onCloseClick }
       >
-        <NavigationClose />
+        <NavigationClose color={ getTextColor(props.color) } />
       </IconButton>
     );
   } else {
@@ -51,12 +52,13 @@ function icon (props) {
   }
 }
 let Header = props => {
+  const textColor = getTextColor(props.color);
   return (
     <AppBar
       style={ style(props) }
-      title="JCDS Bridge"
+      title={ <span style={{ color: textColor }}>JCDS Bridge</span> }
       iconElementLeft={ icon(props) }
-      iconElementRight={ <HeaderMenu /> }
+      iconElementRight={ <HeaderMenu iconColor={ textColor } /> }
     />
   );
 };

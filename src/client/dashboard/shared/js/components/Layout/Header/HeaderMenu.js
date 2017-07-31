@@ -13,36 +13,40 @@ import AboutIcon from 'material-ui/svg-icons/action/info';
 import { openFeedback } from '../../../../../shared/js/reducers/feedback/open';
 import { openAbout } from '../../../../../shared/js/reducers/about';
 
-const iconElement = <IconButton><MoreVertIcon color="white" /></IconButton>;
 
-const HeaderMenu = ({ handleFeedbackClick, handleAboutClick }) => (
-  <IconMenu
-    iconButtonElement={ iconElement }
-    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-  >
-    <MenuItem
-      primaryText="Logout"
-      leftIcon={ <LogoutIcon /> }
-      onTouchTap={ () => { location.href = '/logout'; } }
-    />
-    <MenuItem
-      primaryText="Feedback"
-      leftIcon={ <FeedbackIcon /> }
-      onTouchTap={ handleFeedbackClick }
-    />
-    <MenuItem
-      primaryText="About"
-      leftIcon={ <AboutIcon /> }
-      onTouchTap={ handleAboutClick }
-    />
-  </IconMenu>
-);
+const HeaderMenu = ({ iconColor, handleFeedbackClick, handleAboutClick }) => {
+
+  const iconElement = <IconButton><MoreVertIcon color={ iconColor } /></IconButton>;
+
+  return (
+    <IconMenu
+      iconButtonElement={ iconElement }
+      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+      targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+    >
+      <MenuItem
+        primaryText="Logout"
+        leftIcon={ <LogoutIcon /> }
+        onTouchTap={ () => { location.href = '/logout'; } }
+      />
+      <MenuItem
+        primaryText="Feedback"
+        leftIcon={ <FeedbackIcon /> }
+        onTouchTap={ handleFeedbackClick }
+      />
+      <MenuItem
+        primaryText="About"
+        leftIcon={ <AboutIcon /> }
+        onTouchTap={ handleAboutClick }
+      />
+    </IconMenu>
+  );
+};
 
 export default connect(
   () => ({}),
   dispatch => ({
     handleFeedbackClick: () => dispatch(openFeedback()),
     handleAboutClick: () => dispatch(openAbout()),
-  })
+  }),
 )(HeaderMenu);
