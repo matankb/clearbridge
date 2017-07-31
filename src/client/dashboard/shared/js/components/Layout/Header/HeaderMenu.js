@@ -11,6 +11,7 @@ import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
 import AboutIcon from 'material-ui/svg-icons/action/info';
 
 import { openFeedback } from '../../../../../shared/js/reducers/feedback/open';
+import { resetFeedback } from '../../../../../shared/js/reducers/feedback/reset';
 import { openAbout } from '../../../../../shared/js/reducers/about';
 
 
@@ -46,7 +47,10 @@ const HeaderMenu = ({ iconColor, handleFeedbackClick, handleAboutClick }) => {
 export default connect(
   () => ({}),
   dispatch => ({
-    handleFeedbackClick: () => dispatch(openFeedback()),
+    handleFeedbackClick: () => {
+      dispatch(resetFeedback());
+      dispatch(openFeedback());
+    },
     handleAboutClick: () => dispatch(openAbout()),
   }),
 )(HeaderMenu);
