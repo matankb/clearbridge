@@ -15,7 +15,7 @@ config.plugins.push(
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production'),
   }),
-  new BabiliPlugin(),
+  // new BabiliPlugin(), // this crashes on server. disabled until we can figure out why.
   new CleanPlugin([config.output.path], {
     root: path.resolve(__dirname, '../../'),
   }),
