@@ -69,27 +69,29 @@ body {
     box-sizing: border-box;
     padding: 0 50px;
     background-color: @background;
-    
-    section {
-      margin-top: 30px;
-    }
-    section:last-child {
-      margin-bottom: 30px;
+    margin-top: 30px;
+
+    color: @gray-color;
+    width: 80%;
+    margin: auto;
+    line-height: 2;
+    font-size: 17px;
+      
+    h1 {
+      font-size: 28px;
     }
 
-    h1 {
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 30px;
       text-align: center;
       font-weight: 400;
-      font-size: 26px;
       text-transform: capitalize;
-    }
-    p {
-      color: @gray-color;
-      width: 80%;
-      margin: auto;
-      line-height: 2;
-      font-size: 17px;
+      color: black;
     }
 
+    &> *:last-child {
+      margin-bottom: 30px;
+    }
   }
 }

@@ -39,7 +39,7 @@ class TopicPage extends React.Component {
           error={ this.props.topic.error }
           retry={ this.loadTopic }
         >
-          <TopicPageContent sections={ data.sections } />
+          <TopicPageContent content={ data.content } />
         </LoadableContent>
       </div>
     );

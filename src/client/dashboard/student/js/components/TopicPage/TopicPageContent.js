@@ -1,16 +1,8 @@
 import React from 'react';
 
-const TopicPageContent = ({ sections }) => (
-  <main>
-    {
-      sections.map(section => (
-        <section key={ section._id }>
-          <h1>{ section.name }</h1>
-          <p>{ section.content }</p>
-        </section>
-      ))
-    }
-  </main>
+const TopicPageContent = ({ content }) => (
+  // Content is sanitized on server, so this is safe.
+  <main dangerouslySetInnerHTML={{ __html: content }} /> // eslint-disable-line react/no-danger
 );
 
 export default TopicPageContent;

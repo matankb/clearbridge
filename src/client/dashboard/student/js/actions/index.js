@@ -31,7 +31,7 @@ export function receiveTopic(topic) {
     type: RECEIVE_TOPIC,
     id: topic._id,
     blurb: topic.blurb,
-    sections: topic.sections,
+    content: topic.content,
   };
 }
 

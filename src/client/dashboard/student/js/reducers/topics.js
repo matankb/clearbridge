@@ -50,8 +50,8 @@ function topics(state = defaultState, action) {
             name: topic.name,
             color: topic.color,
             image: topic.image,
-            sections: [],
             blurb: '',
+            content: '',
           },
           error: null,
           id: topic._id,
@@ -81,7 +81,7 @@ function topics(state = defaultState, action) {
           data: {
             ...topic.data,
             blurb: action.blurb,
-            sections: action.sections,
+            content: action.content,
           },
         })),
       };
