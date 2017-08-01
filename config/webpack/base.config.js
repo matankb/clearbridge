@@ -3,7 +3,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
-const ENTRY_DIR = path.resolve(__dirname, '../../src/client/dashboard/');
+const ENTRY_DIR = path.resolve(__dirname, '../../src/client/');
 
 function createEntry(name) {
   return ['babel-polyfill', 'whatwg-fetch', path.resolve(ENTRY_DIR, name)];
