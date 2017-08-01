@@ -1,34 +1,35 @@
 import React from 'react';
 
-import ReactQuill from '@djyde/react-quill';
-import FlatButton from 'material-ui/FlatButton';
+import ReactQuill from 'react-quill';
 
 // import stylesheet
-import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
+import 'react-quill/dist/quill.snow.css';
 
-const options = {
-  theme: 'snow',
+const editor = {
   modules: {
     toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline'],
+      [{ header: '1' }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ list: 'ordered' }, { list: 'bullet' },
+      { indent: '-1' }, { indent: '+1' }],
+      ['link', 'image'],
+      ['clean'],
     ],
   },
 };
 
-const Sections = ({ onChange }) => (
+const Content = ({ onChange }) => (
   <div style={{
     color: 'black',
     fontSize: '1.5em',
-  }}>
+  }}
+  >
     <ReactQuill
-      options={options}
       onChange={ onChange }
+      modules={ editor.modules }
     />
 
   </div>
 );
 
-export default Sections;
+export default Content;

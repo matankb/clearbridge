@@ -6,14 +6,13 @@ import Editor from './Editor';
 class Content extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { content: '' }
+    this.state = { content: '' };
   }
   setContent(content) {
-    console.log(content);
     this.setState({ content });
   }
   save() {
-    fetch(`/api/topics/${this.props._id}/`, {
+    fetch(`/api/topics/${this.props.id}/`, {
       method: 'PATCH',
       credentials: 'same-origin',
       headers: {
@@ -22,15 +21,15 @@ class Content extends React.Component {
       },
       body: JSON.stringify({
         data: {
-          content: this.state.content
-        }
-      })
-    })
+          content: this.state.content,
+        },
+      }),
+    });
   }
   render() {
     return (
       <div>
-        <Editor onChange={ this.setContent.bind(this) }/>
+        <Editor onChange={ this.setContent.bind(this) } />
         <FlatButton
           label="Save"
           style={{
@@ -41,7 +40,7 @@ class Content extends React.Component {
           key={ 0 }
         />
       </div>
-    )
+    );
   }
 }
 

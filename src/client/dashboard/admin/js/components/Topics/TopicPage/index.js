@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Dialog from 'material-ui/Dialog';
 
@@ -24,7 +25,7 @@ const style = {
 
 const TopicPage = props => {
   const tabs = [
-    { name: 'Content', component: <Content /> },
+    { name: 'Content', component: <Content id={ props.id} /> },
     { name: 'Students', component: <Students /> },
   ];
   return (
@@ -46,7 +47,7 @@ const TopicPage = props => {
                 className={ props.tab === index ? 'current' : '' }
                 onClick={ props.handleTabClick(index) }
               >
-                  { tab.name }
+                { tab.name }
               </span>
             );
           })
@@ -68,4 +69,8 @@ const TopicPage = props => {
   );
 };
 
-export default TopicPage;
+export default connect(
+  state => ({
+    id: state.topics.topicList.selected,
+  }),
+)(TopicPage);
