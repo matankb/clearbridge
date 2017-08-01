@@ -46,7 +46,7 @@ main {
   transition: background-color 300ms;
 }
 
-.btn-link:hover {
+.btn-link:hover, .btn-link:focus {
   background-color: #889569;
 }
 
