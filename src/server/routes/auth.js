@@ -25,8 +25,6 @@ function redirectAfterAuth(req, res) {
 
 module.exports = function(app) {
 
-  app.use('/', express.static('src/client/home'));
-
   app.get('/auth/', passport.authenticate('google', { scope: ['profile', 'email'] }));
   app.get('/auth/callback/', passport.authenticate('google', {
     successRedirect: '/auth/success/',
