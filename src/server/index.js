@@ -21,7 +21,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '5mb' }));
 
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
