@@ -25,7 +25,7 @@ const style = {
 
 const TopicPage = props => {
   const tabs = [
-    { name: 'Content', component: <Content id={ props.id} /> },
+    { name: 'Content', component: <Content topic={ props.topic } /> },
     { name: 'Students', component: <Students /> },
   ];
   return (
@@ -69,8 +69,10 @@ const TopicPage = props => {
   );
 };
 
+const findTopicById = (id, topicList) => topicList.find(t => t._id === id);
+
 export default connect(
   state => ({
-    id: state.topics.topicList.selected,
+    topic: findTopicById(state.topics.topicList.selected, state.topics.topicList.topics),
   }),
 )(TopicPage);

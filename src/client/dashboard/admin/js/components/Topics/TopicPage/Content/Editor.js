@@ -9,16 +9,15 @@ const editor = {
   modules: {
     toolbar: [
       [{ header: '1' }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ list: 'ordered' }, { list: 'bullet' },
-      { indent: '-1' }, { indent: '+1' }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
       ['link', 'image'],
       ['clean'],
     ],
   },
 };
 
-const Content = ({ onChange }) => (
+const Content = ({ content, onChange }) => (
   <div style={{
     color: 'black',
     fontSize: '1.5em',
@@ -27,6 +26,7 @@ const Content = ({ onChange }) => (
     <ReactQuill
       onChange={ onChange }
       modules={ editor.modules }
+      value={ content }
     />
 
   </div>

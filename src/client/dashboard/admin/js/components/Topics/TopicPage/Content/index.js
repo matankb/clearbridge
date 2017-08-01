@@ -6,13 +6,13 @@ import Editor from './Editor';
 class Content extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { content: '' };
+    this.state = { content: this.props.topic.content };
   }
   setContent(content) {
     this.setState({ content });
   }
   save() {
-    fetch(`/api/topics/${this.props.id}/`, {
+    fetch(`/api/topics/${this.props.topic._id}/`, {
       method: 'PATCH',
       credentials: 'same-origin',
       headers: {
@@ -29,7 +29,10 @@ class Content extends React.Component {
   render() {
     return (
       <div>
-        <Editor onChange={ this.setContent.bind(this) } />
+        <Editor
+          content={ this.state.content }
+          onChange={ this.setContent.bind(this) }
+        />
         <FlatButton
           label="Save"
           style={{
