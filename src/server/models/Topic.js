@@ -19,11 +19,6 @@ const topicSchema = new Schema({
   color: String, // hex code
   image: String, // path to image
   blurb: String,
-  sections: [{
-    _id: Schema.Types.ObjectId,
-    name: String,
-    content: String,
-  }],
   content: { type: String, set: sanitizeContent },
   students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
