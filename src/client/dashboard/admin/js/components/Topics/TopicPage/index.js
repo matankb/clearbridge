@@ -7,7 +7,7 @@ import BasicInfo from './BasicInfo/';
 import Content from './Content';
 import Students from './Students';
 import { colors } from '../../../../../shared/js/constants';
-import '../../../../css/topic-page.scss';
+import '../../../../css/topic-page.less';
 
 const style = {
   dialog: {

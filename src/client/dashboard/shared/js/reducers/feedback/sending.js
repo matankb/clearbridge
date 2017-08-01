@@ -53,9 +53,8 @@ export function feedbackSent(status) {
   };
 }
 
-export function feedbackSentError(error) {
+export function feedbackSentError() {
   return {
     type: FEEDBACK_SENT_ERROR,
-    error,
   };
 }

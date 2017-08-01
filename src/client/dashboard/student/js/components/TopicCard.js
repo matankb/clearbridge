@@ -1,61 +1,30 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { selectTopic, toggleTopicPage, fetchTopic } from '../actions';
+import { selectTopic, openTopicPage } from '../actions';
 
-import '../../css/topic-card.scss';
+import Tile from './Tile';
 
-class TopicCard extends React.Component {
-  handleClick() {
-    if (this.props.shouldFetchTopic) {
-      this.props.fetchTopic(this.props.id);
-    }
-    this.props.openTopicPage();
-  }
-  render() {
-    return (
-      <div
-        className="topic"
-        style={{ backgroundColor: this.props.color }}
-        onClick={ this.handleClick.bind(this) }
-      >
-        <img src={ this.props.image } alt="" className="image" />
-        <div className="name">{ this.props.name }</div>
-      </div>
-    );
-  }
-}
-
-function getTopicById(_id, topics) {
-  return topics.filter(topic => topic._id === _id)[0] || '';
-}
-
-function shouldFetchTopic(_id, topics) {
-  let topic = getTopicById(_id, topics);
-  return !topic.hasFull || !topic.isFetching;
-}
-
-function mapStateToProps(state, ownProps) {
-  return {
-    shouldFetchTopic: shouldFetchTopic(ownProps._id, state.topics.topics),
-  };
-}
+const TopicCard = props => (
+  <Tile
+    onClick={ props.handleClick }
+    style={{ backgroundColor: props.color }}
+  >
+    <img src={ props.image } className="image" alt={ props.name } />
+    <div className="name">{ props.name }</div>
+  </Tile>
+);
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    openTopicPage: () => {
-      dispatch(selectTopic(ownProps._id));
-      dispatch(toggleTopicPage());
-    },
-    fetchTopic: () => {
-      dispatch(fetchTopic(ownProps._id));
+    handleClick: () => {
+      dispatch(selectTopic(ownProps.id));
+      dispatch(openTopicPage());
     },
   };
 }
 
-TopicCard = connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default connect(
+  () => ({}),
+  mapDispatchToProps,
 )(TopicCard);
-
-export default TopicCard;

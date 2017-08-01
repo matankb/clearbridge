@@ -1,35 +1,21 @@
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 
 import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
 import Topics from './components/Topics';
 import Home from './components/Home';
-import Editor from './components/Editor';
 
 import { sidebarItems } from './constants';
 
-const LayoutWrapper = props => {
-  return (
-    <Layout
-      sidebarItems={ sidebarItems }
-      location={ props.location }
-      children={ props.children }
-    />
- );
-};
-
-const Routes = ({ history }) => {
-  return (
-    <Router history={ history }>
-      <Route path="/dashboard/" component={ LayoutWrapper } >
-        <IndexRoute component={ Home } />
-        <Route path="/dashboard/topics/" component={ Topics } />
-        <Route path="/dashboard/users/" component={ Users } />
-        <Route path="/dashboard/editor" component={ Editor } />
-      </Route>
-    </Router>
-  );
-};
+const Routes = () => (
+  <Layout sidebarItems={ sidebarItems } >
+    <Switch>
+      <Route path="/admin/" exact component={ Home } />
+      <Route path="/admin/topics/" component={ Topics } />
+      <Route path="/admin/users/" component={ Users } />
+    </Switch>
+  </Layout>
+);
 
 export default Routes;

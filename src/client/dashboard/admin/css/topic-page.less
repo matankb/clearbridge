@@ -18,7 +18,7 @@
 
   nav {
     text-align: center;
-    border-bottom: 1px solid $lightGray;
+    border-bottom: 1px solid @lightGray;
     line-height: 0.1em;
     padding-top: 20px;
     margin-bottom: 20px;
@@ -26,11 +26,11 @@
     clear: both;
     width: 90%;
     span {
-      background: $background; // get rid of line when passing through text
+      background: @background; // get rid of line when passing through text
       cursor: pointer;
       &:first-child { padding: 0 30px; margin: 0 10px 0 0; }
       &:last-child { padding: 0 30px; margin: 0 0 0 10px; }
-      &.current { font-weight: 500; color: $primaryDark }
+      &.current { font-weight: 500; color: @primaryDark }
     }
   }
 
@@ -73,7 +73,7 @@
       margin: 20px 0 25px 2px;
     }
     .group-marker {
-      color: $primaryLight;
+      color: @primaryLight;
       font-weight: 500;
     }
   }

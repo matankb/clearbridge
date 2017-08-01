@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import isEqual from 'lodash.isequal';
 import { Table,
   TableBody,
@@ -43,7 +43,7 @@ class UserList extends React.Component {
                 return (
                   <TableRow key={ user._id }>
                     <TableRowColumn>
-                      <Link to={ `/dashboard/users/${user._id}` } style={ style.link }>
+                      <Link to={ `/admin/users/${user._id}` } style={ style.link }>
                         { user.name }
                       </Link>
                     </TableRowColumn>

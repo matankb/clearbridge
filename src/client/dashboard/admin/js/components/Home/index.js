@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../css/home.scss';
+import '../../../css/home.less';
 
 import Topics from '../Topics';
 

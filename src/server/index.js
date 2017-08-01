@@ -8,12 +8,18 @@ const routes = require('./routes');
 const auth = require('./auth');
 
 mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
-mongoose.connect(config.db.URL);
+mongoose.connect(config.db.URL, {
+  useMongoClient: true,
+});
 
 let app = express();
 
 // enable POST parsing and session storage
-app.use(session({ secret: config.session.SECRET }));
+app.use(session({
+  secret: config.session.SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

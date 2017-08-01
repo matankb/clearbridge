@@ -5,13 +5,14 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
 import TypePicker from './TypePicker';
-import { SUGGESTION, PROBLEM } from '../../../report';
+import { SUGGESTION, PROBLEM, TOPIC } from '../../../report';
 
 import { dialogTitle } from '../../../constants/styles';
 
 const placeholders = {
   [SUGGESTION]: 'Share your ideas',
   [PROBLEM]: 'Describe your issue',
+  [TOPIC]: 'Suggest a topic',
 };
 
 const style = {
@@ -71,6 +72,7 @@ const FeedbackDialog = props => {
         onChange={ handleCommentChange }
         value={ comment }
         style={ style.comment }
+        name="comment"
       />
       <br />
       { buttons }

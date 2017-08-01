@@ -1,0 +1,23 @@
+@import './_vars.less';
+
+@scrollbar-width: 10px;
+@scrollbar-button-height: 5px;
+
+::-webkit-scrollbar {
+  width: @scrollbar-width;
+  height: @scrollbar-width;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: @background;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    background-clip: padding-box;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    min-height: 28px;
+    padding: 100px 0 0;
+}

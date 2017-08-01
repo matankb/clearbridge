@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import { Link } from 'react-router';
 
 const style = {
   list: {
@@ -41,7 +42,7 @@ const Sidebar = props => {
       open={ props.open }
       onRequestChange={ props.onRequestChange }
     >
-        {
+      {
           props.items.map((item, index) => {
             if (item === null) {
               return <Divider key={ index } style={ style.divider } />;
@@ -49,16 +50,16 @@ const Sidebar = props => {
               return (
                 <Link
                   key={ index }
-                  to={ `/dashboard${item.url}` }
+                  to={item.url }
                   style={ style.link }
                 >
                   <MenuItem
                     key={ index }
                     leftIcon={ item.icon }
                     style={
-                      `/dashboard${item.url}` === props.location.pathname ?
-                      style.listItemSelected :
-                      {}
+                      item.url === props.location.pathname ?
+                                  style.listItemSelected :
+                                  {}
                     }
                     onTouchTap={ props.onItemClick }
                     onClick={ props.onItemClick }
@@ -74,4 +75,4 @@ const Sidebar = props => {
   );
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);

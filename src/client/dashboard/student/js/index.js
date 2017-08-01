@@ -6,30 +6,40 @@ import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// redux + middleware
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+// react-router
+import { BrowserRouter } from 'react-router-dom';
 
-import thunkMiddleware from 'redux-thunk';
+// redux + middleware
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+
 import createSagaMiddleware from 'redux-saga';
 
 // material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+// hot loading
+import { AppContainer } from 'react-hot-loader';
+
 // my stuff
+import Layout from './components/Layout';
 import theme from '../../shared/js/constants/theme';
-import Routes from './routes.js';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
+import '../../shared/js/onerror';
 
 // setup store with middleware
 const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware),
-  applyMiddleware(sagaMiddleware)
+  composeEnhancers(
+    applyMiddleware(
+      sagaMiddleware,
+    ),
+  ),
 );
 
 sagaMiddleware.run(rootSaga);
@@ -38,16 +48,27 @@ sagaMiddleware.run(rootSaga);
 
 injectTapEventPlugin(); // neccesary for material-ui
 
-ReactDOM.render(
+function render() {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={ store }>
+        <MuiThemeProvider
+          muiTheme={ theme }
+        >
+          <BrowserRouter>
+            <Layout />
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </Provider>
+    </AppContainer>,
+    document.getElementById('root'),
+  );
+}
 
-  <Provider store={ store }>
-    <MuiThemeProvider
-      muiTheme={ theme }
-    >
-      <Routes />
-    </MuiThemeProvider>
-  </Provider>,
+render();
 
-  document.getElementById('root')
+if (module.hot) {
+  module.hot.accept('./components/Layout', render);
+}
 
-);
+window.store = store;

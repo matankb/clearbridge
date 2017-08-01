@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const url = require('url');
 
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
 const User = require('../../models/User');
@@ -25,7 +26,9 @@ module.exports = function(app) {
 
   app.get('/api/user/:resource/', ensureAuthenticated(), (req, res) => {
     // similar to above, but for linked resources
-    res.redirect(`/api/users/${req.user._id}/${req.params.resource}/`);
+    const urlObj = url.parse(req.originalUrl);
+    urlObj.pathname = `/api/users/${req.user._id}/${req.params.resource}/`; // preserve all other parts of url
+    res.redirect(url.format(urlObj));
   });
 
   app.get('/api/users/:id/', ensureAuthenticated([1, 2]), (req, res) => {
@@ -94,12 +97,25 @@ module.exports = function(app) {
 
   /* LINKED RESOURCES */
 
+  function extractShortTopics(topics) {
+    return topics.map(topic => {
+    // empty array with length of sections
+      return {
+        name: topic.name,
+        color: topic.color,
+        image: topic.image,
+        _id: topic._id,
+      };
+    });
+  }
+
   app.get('/api/users/:id/topics/', ensureAuthenticated(), (req, res) => {
     // population won't work with just User, and only Students will have topics field
     User.Student.findById(req.params.id)
       .populate('topics')
       .then(user => {
-        res.json(user.topics);
+        const topics = req.query.short ? extractShortTopics(user.topics) : user.topics;
+        res.json(topics);
       })
       .catch(handleErrors(res));
   });

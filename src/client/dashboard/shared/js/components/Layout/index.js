@@ -4,7 +4,7 @@ import Header from './Header/';
 import Sidebar from './Sidebar';
 import Feedback from '../Feedback';
 
-import '../../../css/layout.css';
+import '../../../css/layout.less';
 
 const styles = {
   main(props) {
@@ -42,7 +42,6 @@ class Layout extends React.Component {
         <Sidebar
           items={ this.props.sidebarItems }
           open={ this.state.sidebar.open }
-          location={ this.props.location }
           onItemClick={ this.closeSidebar.bind(this) }
           onRequestChange={ this.closeSidebar.bind(this) }
         />

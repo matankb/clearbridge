@@ -1,31 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchTopicList } from '../../actions';
+import { requestTopicList } from '../../actions';
 
 import GridLayout from './GridLayout';
 import TopicCard from '../TopicCard';
+import TopicSuggest from '../TopicSuggest';
+import LoadableContent from '../../../../shared/js/components/LoadableContent';
 
 class TopicList extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTopics(); // load topic list into redux store
   }
 
   render() {
 
-    const topicCards = this.props.topics.map(topic => {
-      return (
-        <TopicCard
-          name={ topic.name }
-          image={ topic.image }
-          color={ topic.color }
-          _id={ topic._id }
-        />
-      );
-    });
+    const topicCards = this.props.topics.map(topic => (
+      <TopicCard
+        name={ topic.data.name }
+        image={ topic.data.image }
+        color={ topic.data.color }
+        id={ topic.id }
+      />
+    ));
+
+    topicCards.push(<TopicSuggest />);
+
     return (
       <div className="topic-list">
-        <GridLayout items={ topicCards } />
+        <LoadableContent
+          isLoading={ this.props.isFetching }
+          error={ this.props.error }
+          retry={ this.props.fetchTopics }
+        >
+          <GridLayout items={ topicCards } />
+        </LoadableContent>
       </div>
     );
 
@@ -35,6 +44,7 @@ class TopicList extends React.Component {
 function mapStateToProps(state) {
   return {
     isFetching: state.topics.isFetchingTopicList,
+    error: state.topics.topicListError,
     topics: state.topics.topics,
   };
 }
@@ -42,14 +52,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchTopics: () => {
-      dispatch(fetchTopicList());
+      dispatch(requestTopicList());
     },
   };
 }
 
-TopicList = connect(
+export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TopicList);
-
-export default TopicList;
