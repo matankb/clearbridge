@@ -20,7 +20,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/topics/:id/', ensureAuthenticated(), (req, res) => {
-    Topic.findById(req.params.id).exec()
+    Topic.findById(req.params.id).select('blurb content').exec()
       .then(topic => {
         if (topic) {
           return res.json(topic);
