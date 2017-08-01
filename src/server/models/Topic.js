@@ -4,7 +4,10 @@ const sanitizeHtml = require('sanitize-html');
 const Schema = mongoose.Schema;
 
 const sanitizeOptions = {
-  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'img']),
+  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'h1', 'img', 'u', 's'],
+  allowedSchemesByTag: {
+    img: ['data'],
+  },
 };
 
 function sanitizeContent(content) {
