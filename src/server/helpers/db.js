@@ -7,7 +7,7 @@ function handleErrors(res) {
               .status(500)
               .json(err);
     } else {
-      return;
+      
     }
   };
 }

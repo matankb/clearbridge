@@ -20,7 +20,7 @@ const getTopic = id => state => state.topics.topics.find(t => t.id === id);
 // sagas
 function* onFetchTopicList() {
   try {
-    const topicList = yield fetchJson('/api/user/topics/?short=true');
+    const topicList = yield fetchJson('/api/user/topics/?select=name color image');
     yield put(receiveTopicList(topicList));
   } catch (e) {
     yield put(fetchTopicListError(formatError(e)));
@@ -37,7 +37,7 @@ function* onRequestTopic(action) {
 
 function* onFetchTopic(action) {
   try {
-    const topic = yield fetchJson(`/api/topics/${action.id}`);
+    const topic = yield fetchJson(`/api/topics/${action.id}/?select=blurb content`);
     yield put(receiveTopic(topic));
   } catch (e) {
     yield put(fetchTopicError(action.id, formatError(e)));

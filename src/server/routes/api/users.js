@@ -97,26 +97,17 @@ module.exports = function(app) {
 
   /* LINKED RESOURCES */
 
-  function extractShortTopics(topics) {
-    return topics.map(topic => {
-    // empty array with length of sections
-      return {
-        name: topic.name,
-        color: topic.color,
-        image: topic.image,
-        _id: topic._id,
-      };
-    });
-  }
-
   app.get('/api/users/:id/topics/', ensureAuthenticated(), (req, res) => {
     // population won't work with just User, and only Students will have topics field
-    User.Student.findById(req.params.id)
-      .populate('topics')
-      .then(user => {
-        const topics = req.query.short ? extractShortTopics(user.topics) : user.topics;
-        res.json(topics);
-      })
+    const query = User.Student.findById(req.params.id);
+    if (req.query.select) {
+      query.populate('topics', req.query.select);
+    } else {
+      query.populate('topics');
+    }
+    query.exec().then(user => {
+      res.json(user.topics);
+    })
       .catch(handleErrors(res));
   });
 

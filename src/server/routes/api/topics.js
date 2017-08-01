@@ -9,18 +9,21 @@ const User = require('../../models/User');
 module.exports = function(app) {
 
   app.get('/api/topics/', ensureAuthenticated(), (req, res) => {
-    Topic.find().exec()
-      .then((users, err) => {
-        if (err) {
-          res.status(500).json(err);
-        } else {
-          res.json(users);
-        }
-      });
+    const query = Topic.find();
+    if (req.query.select) { query.select(req.query.select); }
+    query.exec().then((users, err) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.json(users);
+      }
+    });
   });
 
   app.get('/api/topics/:id/', ensureAuthenticated(), (req, res) => {
-    Topic.findById(req.params.id).select('blurb content').exec()
+    const query = Topic.findById(req.params.id);
+    if (req.query.select) { query.select(req.query.select); }
+    query.exec()
       .then(topic => {
         if (topic) {
           return res.json(topic);

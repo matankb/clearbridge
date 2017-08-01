@@ -65,7 +65,7 @@ export function receiveTopics(topics) {
 export function fetchTopics() {
   return function(dispatch) {
     dispatch(requestTopics());
-    fetch('/api/topics/?short=true', { credentials: 'same-origin' })
+    fetch('/api/topics/', { credentials: 'same-origin' })
     .then(data => data.json())
     .then(topics => {
       dispatch(receiveTopics(topics));
