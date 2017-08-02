@@ -1,17 +1,17 @@
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
+const wrapAsync = require('../../helpers/wrap-async');
 
 const topicController = require('../../controllers/topics');
 
 module.exports = function(router) {
 
-  router.get('/topics/', ensureAuthenticated(), topicController.getTopics);
-  router.post('/topics/', ensureAuthenticated([1, 2]), topicController.createTopic);
+  router.get('/topics/', ensureAuthenticated(), wrapAsync(topicController.getTopics));
+  router.post('/topics/', ensureAuthenticated([1, 2]), wrapAsync(topicController.createTopic));
 
-  router.get('/topics/:id/', ensureAuthenticated(), topicController.getTopic);
-  router.patch('/topics/:id/', ensureAuthenticated([1, 2]), topicController.updateTopic);
-  router.delete('/topics/:id/', ensureAuthenticated([1, 2]), topicController.deleteTopic);
+  router.get('/topics/:id/', ensureAuthenticated(), wrapAsync(topicController.getTopic));
+  router.patch('/topics/:id/', ensureAuthenticated([1, 2]), wrapAsync(topicController.updateTopic));
+  router.delete('/topics/:id/', ensureAuthenticated([1, 2]), wrapAsync(topicController.deleteTopic));
 
-  router.get('/topics/:id/students/', ensureAuthenticated([1, 2]), topicController.getStudents);
-  router.post('/topics/:id/students/', ensureAuthenticated([1, 2]), topicController.addStudent);
+  router.get('/topics/:id/students/', ensureAuthenticated([1, 2]), wrapAsync(topicController.getStudents));
 
 };

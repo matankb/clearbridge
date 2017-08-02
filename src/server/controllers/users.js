@@ -2,17 +2,10 @@ const mongoose = require('mongoose');
 const url = require('url');
 
 const User = require('../models/User');
-const { handleErrors, handleNotFound } = require('../helpers/db');
+const Topic = require('../models/Topic');
 
-exports.getUsers = (req, res) => {
-  User.find().exec()
-    .then((users, err) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.json(users);
-      }
-    });
+exports.getUsers = async (req, res) => {
+  res.json(await User.find().exec());
 };
 
 exports.redirectUser = (req, res) => {
@@ -27,19 +20,16 @@ exports.redirectUserResource = (req, res) => {
   res.redirect(url.format(urlObj));
 };
 
-exports.getUser = (req, res) => {
-  User.findById(req.params.id).exec()
-    .then(user => {
-      if (user) {
-        return res.json(user);
-      } else {
-        return handleNotFound(res);
-      }
-    })
-    .catch(handleErrors(res));
+exports.getUser = async (req, res, next) => {
+  const user = await User.findById(req.params.id).exec();
+  if (user) {
+    res.json(user);
+  } else {
+    next();
+  }
 };
 
-exports.createUser = (req, res) => {
+exports.createUser = async (req, res) => {
   let newUser;
   switch (req.body.type) {
     case 0:
@@ -56,44 +46,33 @@ exports.createUser = (req, res) => {
   }
   newUser.name = req.body.data.name;
   newUser.email = req.body.data.email;
-  newUser.save()
-    .then(createdUser => {
-      res.json(createdUser);
-    })
-    .catch(handleErrors(res));
+  res.json(await newUser.save());
 };
 
-exports.updateUser = (req, res) => {
-  User.findById(req.params.id).exec()
-    .then(user => {
-      if (!user) {
-        return handleNotFound(res);
-      } else {
-        // merge existing model with new data
-        user.type = req.body.type || user.type;
-        Object.assign(user, req.body.data);
-        user.save()
-          .then(updatedUser => res.json(updatedUser))
-          .catch(handleErrors(res));
-      }
-    });
+exports.updateUser = async (req, res, next) => {
+  const user = await User.findById(req.params.id).exec();
+  if (!user) {
+    next();
+  } else {
+    // merge existing model with new data
+    user.type = req.body.type || user.type;
+    Object.assign(user, req.body.data);
+    res.json(await user.save());
+  }
 };
 
-exports.deleteUser = (req, res) => {
-  User.findByIdAndRemove(req.params.id).exec()
-    .then(removedUser => {
-      if (!removedUser) { // user did not exist
-        return handleNotFound(res);
-      } else {
-        res.status(204).json({});
-      }
-    })
-    .catch(handleErrors(res));
+exports.deleteUser = async (req, res, next) => {
+  const removedUser = await User.findByIdAndRemove(req.params.id).exec();
+  if (!removedUser) { // user did not exist
+    next();
+  } else {
+    res.status(204).json({});
+  }
 };
 
 /* LINKED RESOURCES */
 
-exports.getTopics = (req, res) => {
+exports.getTopics = async (req, res) => {
   // population won't work with just User, and only Students will have topics field
   const query = User.Student.findById(req.params.id);
   if (req.query.select) {
@@ -101,22 +80,24 @@ exports.getTopics = (req, res) => {
   } else {
     query.populate('topics');
   }
-  query.exec().then(user => {
-    res.json(user.topics);
-  })
-    .catch(handleErrors(res));
+  // res.json(await query.exec());
+  const { topics } = await query.exec();
+  res.json(topics);
 };
 
-exports.assignTopic = (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      if (user.topics.indexOf(req.body._id) > -1) {
-        return res.status(409).json({ message: 'Topic already assigned' }); // 409 conflict
-      }
-      user.topics.push(mongoose.Types.ObjectId(req.body._id)); // eslint-disable-line new-cap
-      user.save()
-        .then(res.status(201).send(mongoose.Types.ObjectId(req.body._id))) // eslint-disable-line new-cap, max-len
-        .catch(handleErrors(res));
-    })
-    .catch(handleErrors(res));
+exports.assignTopic = async (req, res) => {
+  const user = await User.findById(req.params.id);
+  const topic = await Topic.findById(req.body._id);
+
+  const userId = user._id;
+  const topicId = mongoose.Types.ObjectId(req.body._id);
+
+  if (user.topics.find(id => id.equals(topicId))) {
+    res.status(409).json({ message: 'Topic already assigned' }); // 409 conflict
+  }
+
+  user.topics.push(topicId);
+  topic.students.push(userId);
+  await topic.save();
+  res.status(201).json(await user.save()); // 201 created
 };
