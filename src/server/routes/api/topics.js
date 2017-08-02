@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
-const { handleErrors, handleNotFound } = require('../../helpers/db');
 
 const topicController = require('../../controllers/topics');
 

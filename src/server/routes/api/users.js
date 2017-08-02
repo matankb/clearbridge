@@ -1,6 +1,3 @@
-const mongoose = require('mongoose');
-const url = require('url');
-
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
 
 const userController = require('../../controllers/users');

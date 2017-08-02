@@ -1,11 +1,7 @@
-const mongoose = require('mongoose');
-
 const { handleErrors, handleNotFound } = require('../helpers/db');
 
 const Topic = require('../models/Topic');
 const User = require('../models/User');
-
-const app = {};
 
 exports.getTopics = (req, res) => {
   const query = Topic.find();
