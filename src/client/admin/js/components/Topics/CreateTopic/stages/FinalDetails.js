@@ -19,20 +19,20 @@ const style = {
 let First = props => {
   return (
     <div className="first-stage stage">
-    <p>Create the tile</p>
-    <p>This is what students will see on their dashboard</p>
-    <div style={ style.buttonWrap} >
-      <FlatButton
-        label="Cancel"
-        style={ style.button }
-      />
-      <RaisedButton
-        label="Next"
-        primary
-        style={ style.button }
-        onTouchTap={ props.handleNextStage }
-      />
-    </div>
+      <p>Create the tile</p>
+      <p>This is what students will see on their dashboard</p>
+      <div style={ style.buttonWrap} >
+        <FlatButton
+          label="Cancel"
+          style={ style.button }
+        />
+        <RaisedButton
+          label="Next"
+          primary
+          style={ style.button }
+          onTouchTap={ props.handleNextStage }
+        />
+      </div>
     </div>
   );
 };
@@ -49,7 +49,7 @@ function mapDispatchToProps(dispatch) {
 
 First = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(First);
 
 export default First;

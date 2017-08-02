@@ -3,18 +3,12 @@ import {
   RECEIVE_TOPICS,
   SELECT_TOPIC,
   RECEIVE_TOPIC_CREATION,
-  RECEIVE_SECTION_CREATION,
-  RECEIVE_SECTION_UPDATING,
 } from '../../actions/topics/';
 
 const defaultState = {
   topics: [],
   selected: null,
 };
-
-function getTopicId(state, action) {
-  return action.onCurrentTopic ? state.selected : action.topicId;
-}
 
 function topicList(state = defaultState, action) {
   switch (action.type) {

@@ -70,7 +70,7 @@ function mapDispatchToProps(dispatch) {
 
 CreateTile = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CreateTile);
 
 export default CreateTile;

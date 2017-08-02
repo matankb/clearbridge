@@ -16,7 +16,8 @@ exports.redirectUser = (req, res) => {
 exports.redirectUserResource = (req, res) => {
   // similar to above, but for linked resources
   const urlObj = url.parse(req.originalUrl);
-  urlObj.pathname = `/api/users/${req.user._id}/${req.params.resource}/`; // preserve all other parts of url
+  // preserve all other parts of url
+  urlObj.pathname = `/api/users/${req.user._id}/${req.params.resource}/`;
   res.redirect(url.format(urlObj));
 };
 

@@ -5,6 +5,7 @@ import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import TopicMenu from '../../TopicMenu';
 
 import { colors } from '../../../../../../shared/js/constants';
+
 const style = {
   title: {
     color: 'white',

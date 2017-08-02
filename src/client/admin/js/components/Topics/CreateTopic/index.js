@@ -29,7 +29,7 @@ const style = {
   },
 };
 
-let CreateTopic = props => {
+const CreateTopic = props => {
 
   return (
     <Dialog

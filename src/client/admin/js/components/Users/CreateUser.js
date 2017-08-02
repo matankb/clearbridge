@@ -73,49 +73,49 @@ let CreateUser = props => {
 
   return (
 
-      <Dialog
-        open={props.open }
-        modal
-        title="New User"
-        contentStyle={ style.dialog }
-        titleStyle={ style.title }
-        actions={ actions }
+    <Dialog
+      open={props.open }
+      modal
+      title="New User"
+      contentStyle={ style.dialog }
+      titleStyle={ style.title }
+      actions={ actions }
+    >
+      <TextField
+        style={ style.input.name }
+        hintText="First Name"
+        value={ props.firstName }
+        onChange={ props.handleFirstNameChange }
+      />
+      <TextField
+        style={ style.input.name }
+        hintText="Last Name"
+        value={ props.lastName }
+        onChange={ props.handleLastNameChange }
+      />
+      <DropDownMenu
+        style={ style.input.type }
+        value={ props.type }
+        autowidth={ false }
+        onChange={ props.handleTypeChange}
       >
-        <TextField
-          style={ style.input.name }
-          hintText="First Name"
-          value={ props.firstName }
-          onChange={ props.handleFirstNameChange }
-        />
-        <TextField
-          style={ style.input.name }
-          hintText="Last Name"
-          value={ props.lastName }
-          onChange={ props.handleLastNameChange }
-        />
-        <DropDownMenu
-          style={ style.input.type }
-          value={ props.type }
-          autowidth={ false }
-          onChange={ props.handleTypeChange}
-        >
-          <MenuItem primaryText="Student" value={ 0 } />
-          <MenuItem primaryText="Teacher" value={ 1 } />
-          <MenuItem primaryText="Admin" value={ 2 } />
-        </DropDownMenu>
-        <TextField
-          style={ style.input.email }
-          hintText="Email"
-          value={ props.email }
-          onChange={ props.handleEmailChange }
-        />
-        <span
-          style={{ color: 'rgba(0, 0, 0, 0.870588)' }}
-        >
-          { props.emailExtension }
-        </span>
-        <br />
-        {
+        <MenuItem primaryText="Student" value={ 0 } />
+        <MenuItem primaryText="Teacher" value={ 1 } />
+        <MenuItem primaryText="Admin" value={ 2 } />
+      </DropDownMenu>
+      <TextField
+        style={ style.input.email }
+        hintText="Email"
+        value={ props.email }
+        onChange={ props.handleEmailChange }
+      />
+      <span
+        style={{ color: 'rgba(0, 0, 0, 0.870588)' }}
+      >
+        { props.emailExtension }
+      </span>
+      <br />
+      {
           props.moreOptionsShown ?
           (
             <div className="more-options">
@@ -170,8 +170,9 @@ function mapDispatchToProps(dispatch) {
     handleEmailChange: e => {
       dispatch(setCreationData({
         email: e.target.value,
-      }
-    ));},
+      },
+    ));
+    },
     handleGradeChange: (e, index) => dispatch(setCreationData({
       grade: index + 5, // index 0 is 5th, 1 is 6th, etc.1
     })),
@@ -190,7 +191,7 @@ function mapDispatchToProps(dispatch) {
 
 CreateUser = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CreateUser);
 
 export default CreateUser;

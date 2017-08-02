@@ -6,7 +6,7 @@ import {
   REQUEST_USER_REMOVAL,
   RECEIVE_USER_REMOVAL,
   RECEIVE_USER_CREATION,
-} from '../../actions/users.js';
+} from '../../actions/users';
 
 import { RECEIVE_STUDENT_ASSIGNMENT } from '../../actions/topics/';
 

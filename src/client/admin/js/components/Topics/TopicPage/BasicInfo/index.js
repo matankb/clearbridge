@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 }
 
 BasicInfo = connect(
-  mapStateToProps
+  mapStateToProps,
 )(BasicInfo);
 
 export default BasicInfo;

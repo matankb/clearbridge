@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 const ensureAuthenticated = require('../../middleware/ensure-authenticated');
 const wrapAsync = require('../../helpers/wrap-async');
 

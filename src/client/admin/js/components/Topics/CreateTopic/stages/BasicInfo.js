@@ -57,7 +57,7 @@ function mapDispatchToProps(dispatch) {
 
 First = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(First);
 
 export default First;

@@ -30,7 +30,7 @@ function mapDispatchToProps(dispatch) {
 
 const VisibileUserList = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UserList);
 
 export default VisibileUserList;

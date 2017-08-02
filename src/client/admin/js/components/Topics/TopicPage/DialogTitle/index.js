@@ -6,7 +6,7 @@ import {
 } from '../../../../actions/topics';
 
 function mapStateToProps() {
-  return {}
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
 
 const Actions = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Buttons);
 
 export default Actions;

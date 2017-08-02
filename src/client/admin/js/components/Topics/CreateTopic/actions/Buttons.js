@@ -20,13 +20,13 @@ const Actions = props => {
         style={ style.button }
         onTouchTap={ props.handleCancel }
       />
-    { !props.final &&
-        <RaisedButton
-          label="Next"
-          primary
-          style={ style.button }
-          onTouchTap={ props.handleNextStage }
-        />
+      { !props.final &&
+      <RaisedButton
+        label="Next"
+        primary
+        style={ style.button }
+        onTouchTap={ props.handleNextStage }
+      />
       }
       { props.final &&
         <RaisedButton

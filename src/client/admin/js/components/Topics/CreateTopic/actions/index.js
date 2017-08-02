@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch) {
 
 const actions = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Buttons);
 
 export default actions;

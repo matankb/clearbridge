@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const groupSchema = new Schema({
@@ -12,7 +13,7 @@ const groupSchema = new Schema({
 
 groupSchema.methods.addNewUsers = function(users) {
   this.students.push(
-    ...users.filter(this.filter)
+    ...users.filter(this.filter),
   );
   // TODO: setup error handling
   this.save();

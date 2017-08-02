@@ -86,7 +86,7 @@ function mapDispatchToProps(dispatch) {
 
 Topics = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Topics);
 
 export default Topics;

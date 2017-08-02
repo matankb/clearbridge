@@ -23,13 +23,13 @@ const styles = {
   },
 };
 
-let Header = props => {
+const Header = props => {
 
   const feedbackButton = (
     <FeedbackButton button={
-        <IconButton title="Feedback">
-          <FeedbackIcon color="white" />
-        </IconButton>
+      <IconButton title="Feedback">
+        <FeedbackIcon color="white" />
+      </IconButton>
       }
     />
   );

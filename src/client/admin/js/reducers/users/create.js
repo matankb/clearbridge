@@ -6,7 +6,7 @@ import {
   RESET_CREATION_DATA,
   REQUEST_USER_CREATION,
   RECEIVE_USER_CREATION,
-} from '../../actions/users.js';
+} from '../../actions/users';
 
 const defaultState = {
   isCreating: false,

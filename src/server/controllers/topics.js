@@ -1,7 +1,4 @@
-const { handleErrors, handleNotFound } = require('../helpers/db');
-
 const Topic = require('../models/Topic');
-const User = require('../models/User');
 
 exports.getTopics = async (req, res) => {
   const query = Topic.find();

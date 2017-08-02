@@ -76,7 +76,7 @@ function mapDispatchToProps(dispatch) {
 
 Students = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Students);
 
 export default Students;

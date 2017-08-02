@@ -63,7 +63,7 @@ function mapDispatchToProps(dispatch) {
 
 AddUsers = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AddUsers);
 
 export default AddUsers;

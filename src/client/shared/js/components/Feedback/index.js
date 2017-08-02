@@ -11,7 +11,7 @@ import { closeFeedback } from '../../reducers/feedback/open';
 const Feedback = ({
    open, data, sendingStatus,
    handleCommentChange, handleTypeChange,
-   handleOpen, handleClose, send,
+   handleClose, send,
 }) => (
   <div className="feedback">
     <FeedbackDialog

@@ -37,7 +37,7 @@ function mapDispatchToProps(dispatch) {
 
 ActionBar = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ActionBar);
 
 export default ActionBar;

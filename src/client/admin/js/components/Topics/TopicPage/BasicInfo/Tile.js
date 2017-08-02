@@ -26,7 +26,7 @@ function mapStateToProps(state) {
 }
 
 Tile = connect(
-  mapStateToProps
+  mapStateToProps,
 )(Tile);
 
 export default Tile;

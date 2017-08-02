@@ -60,9 +60,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-Users = connect(
+export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Users);
-
-export default Users;

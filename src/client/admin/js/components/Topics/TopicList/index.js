@@ -14,7 +14,7 @@ const TopicList = props => {
               blurb={ topic.blurb }
               image={ topic.image }
               color={ topic.color }
-              handleTopicClick= {
+              handleTopicClick={
                 () => {
                   props.setSelectedTopic(topic._id)();
                   props.toggleTopicPage();

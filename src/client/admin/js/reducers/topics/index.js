@@ -4,7 +4,7 @@ import create from './create';
 import topicList from './topic-list';
 import topicPage from './topic-page';
 
-let topicReducer = combineReducers({
+const topicReducer = combineReducers({
   create,
   topicList,
   topicPage,

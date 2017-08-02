@@ -1,7 +1,7 @@
 import React from 'react';
 import tinycolor from 'tinycolor2';
 
-const TopicPageHeader = ({ name, blurb, color, image }) => {
+const TopicPageHeader = ({ name, color, image }) => {
 
   const textColor = tinycolor(color).isLight() ? 'black' : 'white';
 

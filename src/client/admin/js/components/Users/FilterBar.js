@@ -27,7 +27,7 @@ const style = {
   },
 };
 
-let FilterBar = props => {
+const FilterBar = props => {
   return (
     <Tabs
       style={ style.tabs(props) }
@@ -60,9 +60,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-FilterBar = connect(
+export default connect(
   () => { return {}; },
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FilterBar);
-
-export default FilterBar;
