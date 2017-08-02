@@ -2,6 +2,9 @@
  * whearas ensure-authenticated ends request if not authenticated
  * This module to be used in protected routes that will be accessed by user, such as dashboard
 */
+const path = require('path');
+
+const { getTypeName } = require('../helpers/user');
 
 function loginProtected(types) {
   if ((types || []).length === 0) {
@@ -18,7 +21,9 @@ function loginProtected(types) {
         if (types.indexOf(req.user.type) > -1) {
           next();
         } else {
-          res.redirect('/');
+          res.render(path.resolve(__dirname, '../../../public/errors/403.ejs'), {
+            allowedTypes: getTypeName(types),
+          });
         }
       } else {
         res.redirect('/');
