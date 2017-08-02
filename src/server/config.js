@@ -13,6 +13,9 @@ const prod = {
   google: {
     CALLBACK_URL: 'http://bridge.jcdsboston.org/auth/callback/',
   },
+  feedback: {
+    suggestEmail: 'gavie@jcdsboston.org',
+  },
 };
 
 const dev = {
@@ -26,6 +29,9 @@ const dev = {
   google: {
     CALLBACK_URL: 'http://127.0.0.1:8080/auth/callback/',
   },
+  feedback: {
+    suggestEmail: '205matan+bridgetopicsuggest@gmail.com',
+  },
 };
 
 // will be applied to both dev and prod
@@ -36,6 +42,9 @@ const general = {
   },
   session: {
     SECRET: 'Reflectbridge1',
+  },
+  feedback: {
+    primaryEmail: '205matan+bridgefeedback@gmail.com',
   },
 };
 

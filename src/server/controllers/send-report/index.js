@@ -1,10 +1,11 @@
 const mailer = require('nodemailer');
 
+const config = require('../../config');
 const templates = require('./templates');
 
 const defaultOpts = {
   from: '"Bridge" <bridge@jcdsboston.org>',
-  to: '205matan+bridgefeedback@gmail.com',
+  to: config.feedback.primaryEmail,
   subject: 'Bridge Report',
   body: '',
 };

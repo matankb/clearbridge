@@ -1,3 +1,5 @@
+const config = require('../../config');
+
 module.exports = {
   // general comment
   0: data => ({
@@ -18,6 +20,7 @@ module.exports = {
   // topic suggestion
   3: (data) => ({
     subject: 'Bridge Report [Topic Suggestion]',
+    to: config.feedback.suggestEmail,
     html: data.comment,
   }),
 };
