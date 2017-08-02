@@ -5,7 +5,9 @@
   "main": "src/server",
   "scripts": {
     "start": "node src/server",
-    "build": "webpack --config config/webpack/prod.config.js"
+    "build": "webpack --config config/webpack/prod.config.js",
+    "lint": "eslint src/**/*.js",
+    "fix": "eslint src/**/*.js --fix"
   },
   "repository": {
     "type": "git",
