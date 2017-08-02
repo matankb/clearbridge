@@ -1,23 +1,13 @@
-const requireAll = require('require-all');
-const flat = require('flat');
-
+const authRoute = require('./auth');
+const dashboardRoute = require('./dashboard');
+const publicRoute = require('./public');
 const webpackRoute = require('./webpack');
-
-const opts = {
-  dirname: __dirname,
-  recursive: true,
-};
-
-// { {} } -> {} -> []
-let routes = requireAll(opts);
-delete routes.index;
-delete routes.webpack; // required manually
-routes = flat(routes);
-routes = Object.values(routes);
+const apiRoute = require('./api');
 
 module.exports = function (app) {
-  // initialize each route
-  routes.forEach(route => route(app));
-  // this must be initialized last
-  webpackRoute(app);
+  authRoute(app);
+  dashboardRoute(app);
+  publicRoute(app);
+  webpackRoute(app); // webpack must be after dashboard
+  apiRoute(app);
 };

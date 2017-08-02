@@ -2,19 +2,19 @@ const ensureAuthenticated = require('../../middleware/ensure-authenticated');
 
 const userController = require('../../controllers/users');
 
-module.exports = function(app) {
+module.exports = function(router) {
 
-  app.get('/api/users/', ensureAuthenticated([1, 2]), userController.getUsers);
-  app.post('/api/users/', ensureAuthenticated.admin, userController.createUser);
+  router.get('/users/', ensureAuthenticated([1, 2]), userController.getUsers);
+  router.post('/users/', ensureAuthenticated.admin, userController.createUser);
 
-  app.patch('/api/users/:id/', ensureAuthenticated.admin, userController.updateUser);
-  app.get('/api/users/:id/', ensureAuthenticated([1, 2]), userController.getUser);
-  app.delete('/api/users/:id/', ensureAuthenticated.admin, userController.deleteUser);
+  router.patch('/users/:id/', ensureAuthenticated.admin, userController.updateUser);
+  router.get('/users/:id/', ensureAuthenticated([1, 2]), userController.getUser);
+  router.delete('/users/:id/', ensureAuthenticated.admin, userController.deleteUser);
 
-  app.get('/api/users/:id/topics/', ensureAuthenticated(), userController.getTopics);
-  app.post('/api/users/:id/topics/', ensureAuthenticated(), userController.assignTopic);
+  router.get('/users/:id/topics/', ensureAuthenticated(), userController.getTopics);
+  router.post('/users/:id/topics/', ensureAuthenticated(), userController.assignTopic);
 
-  app.get('/api/user/', ensureAuthenticated(), userController.redirectUser);
-  app.get('/api/user/:resource/', ensureAuthenticated(), userController.redirectUserResource);
+  router.get('/user/', ensureAuthenticated(), userController.redirectUser);
+  router.get('/user/:resource/', ensureAuthenticated(), userController.redirectUserResource);
 
 };
