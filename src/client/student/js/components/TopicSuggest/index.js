@@ -5,7 +5,8 @@ import TopicSuggestCard from './TopicSuggestCard';
 
 import { setType as setFeedbackType } from '../../../../shared/js/reducers/feedback/data';
 import { openFeedback } from '../../../../shared/js/reducers/feedback/open';
-import { TOPIC } from '../../../../shared/js/report.js';
+import { resetFeedback } from '../../../../shared/js/reducers/feedback/reset';
+import { TOPIC } from '../../../../shared/js/report';
 
 class TopicSuggest extends React.Component {
   render() {
@@ -22,8 +23,9 @@ export default connect(
   () => ({}),
   dispatch => ({
     handleCardClick: () => {
+      dispatch(resetFeedback());
       dispatch(setFeedbackType(TOPIC));
       dispatch(openFeedback());
     },
-  })
+  }),
 )(TopicSuggest);
