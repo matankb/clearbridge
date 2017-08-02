@@ -136,7 +136,7 @@ export function assignStudent(studentId, onCurrentTopic, topicId) {
 
     dispatch(requestStudentAssignment());
 
-    fetch(`/api/topics/${topic}/students/`, {
+    fetch(`/api/users/${studentId}/topics/`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
@@ -144,7 +144,7 @@ export function assignStudent(studentId, onCurrentTopic, topicId) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        _id: studentId,
+        _id: topic,
       }),
     })
       // TODO: do something with data from backend
