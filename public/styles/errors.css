@@ -1,0 +1,49 @@
+html {
+  background: #f4f4f4;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: rgb(113, 113, 113);
+  text-align: center;
+}
+
+.icon {
+  width: 200px;
+  height: 200px;
+  margin-top: 35px;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.title {
+  font-weight: normal;
+  text-align: center;
+}
+.message {
+  font-size: 19px;
+}
+.button-link {
+  text-decoration: none;  
+  text-transform: uppercase;
+  text-align: center;
+  display: inline;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  font-size: inherit;
+  font-weight: inherit;
+  height: 36px;
+  color: rgb(0, 150, 136);
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  border-radius: 2px;
+  padding: 10px 16px;
+  letter-spacing: 0px;
+  font-weight: 500;
+}
+.button-link:active, .button-link:focus {
+  background: #d3d7d7;
+}

@@ -39,6 +39,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
     "deep-assign": "^2.0.0",
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
     "express-session": "^1.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
