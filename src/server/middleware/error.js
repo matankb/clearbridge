@@ -6,6 +6,7 @@ function handleNotFound(req, res) {
 
 // all four arguments must be accepted for express to recognize it as internal error handler
 function internalServerError(err, req, res, next) { // eslint-disable-line no-unused-vars
+  console.log(`Error on route ${req.url}: `, err); // eslint-disable-line no-console
   res.status(500).render(path.resolve(__dirname, '../../../public/errors/500.ejs'));
 }
 
