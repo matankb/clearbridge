@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+/* eslint-disable no-console */
+
+const program = require('commander');
+const mongoose = require('mongoose');
+
+const User = require('../src/server/models/User');
+
+const { question, wrapAsync } = require('./utils');
+
+mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
+mongoose.connect('mongodb://127.0.0.1/bridge', {
+  useMongoClient: true,
+});
+
+async function listUsers() {
+  const users = await User.find().exec();
+  for (const user of users) {
+    console.log(`[${user.id}][${user._type}] ${user.name} <${user.email}>`);
+  }
+}
+
+async function createUser() {
+  const type = await question('Type', ['s', 't', 'a']);
+  let user;
+  switch (type) {
+    case 's': user = new User.Student(); break;
+    case 't': user = new User.Teacher(); break;
+    case 'a': user = new User.Admin(); break;
+    default: break;
+  }
+  user.name = await question('Name');
+  user.email = await question('Email');
+  const { _id } = await user.save();
+  console.log(`Successfully created new user ${_id}`);
+}
+
+async function modifyUser(id, key, value) {
+  const user = await User.findById(id).exec();
+  user[key] = value;
+  await user.save();
+  console.log(`User ${id} modified`);
+}
+
+program
+  .version('1.0.0')
+  .command('create')
+  .action(wrapAsync(createUser));
+program
+  .command('ls')
+  .action(wrapAsync(listUsers));
+program
+  .command('modify <id> <key> <value>')
+  .action(wrapAsync(modifyUser));
+
+program.parse(process.argv);

@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+/* eslint-disable no-console */
+
+const program = require('commander');
+const mongoose = require('mongoose');
+
+const Analytic = require('../src/server/models/Analytic');
+require('../src/server/models/User'); // schema is used to populate
+
+const { question, wrapAsync } = require('./utils');
+
+mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
+mongoose.connect('mongodb://127.0.0.1/bridge', {
+  useMongoClient: true,
+});
+
+async function getAnalytics() {
+  const analytics = await Analytic.find().populate('user').exec();
+  if (!analytics.length) {
+    console.log('No analytics');
+    return;
+  }
+  for (const analytic of analytics) {
+    console.log(`[${analytic.timestamp}] ${analytic.user.name} accessed ${analytic.path}`);
+  }
+}
+
+async function clearAnalytics() {
+  if (await question('Clear all saved analytics?', ['y', 'n']) === 'n') return;
+
+  await Analytic.remove({}).exec();
+  console.log('Cleared Analytics');
+}
+
+program
+  .version('1.0.0')
+  .command('get')
+  .description('Get analytics')
+  .action(wrapAsync(getAnalytics));
+program
+  .command('clear')
+  .description('Clear all saved analytics')
+  .action(wrapAsync(clearAnalytics));
+
+program.parse(process.argv);

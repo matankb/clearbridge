@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+/* eslint-disable no-console */
+
+const program = require('commander');
+const mongoose = require('mongoose');
+
+const Topic = require('../src/server/models/Topic');
+const User = require('../src/server/models/User');
+
+const { wrapAsync } = require('./utils');
+
+mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
+mongoose.connect('mongodb://127.0.0.1/bridge', {
+  useMongoClient: true,
+});
+
+async function listTopics() {
+  const topics = await Topic.find().exec();
+  for (const topic of topics) {
+    console.log(`[${topic.id}] ${topic.name}`);
+  }
+}
+
+async function modifyTopic(id, key, value) {
+  const topic = await Topic.findById(id).exec();
+  topic[key] = value;
+  await topic.save();
+  console.log(`Topic ${id} modified`);
+}
+
+async function unassignTopic(topicId, userId) {
+  const topic = await Topic.findById(topicId).exec();
+  const user = await User.findById(userId).exec();
+
+  if (!topic.students.find(id => id.equals(user.id))) {
+    console.log(`Topic not assigned to user ${user.id}`);
+    return;
+  }
+
+  topic.students.splice(topic.students.indexOf(user.id), 1);
+  user.topics.splice(user.topics.indexOf(topic.id), 1);
+
+  await topic.save();
+  await user.save();
+
+  console.log(`Unassigned topic ${topic.id} from user ${user.id}`);
+
+}
+
+program
+  .version('1.0.0')
+  .command('modify <id> <key> <value>')
+  .action(wrapAsync(modifyTopic));
+program
+  .command('ls')
+  .action(wrapAsync(listTopics));
+program
+  .command('unassign <topic> <user>')
+  .action(wrapAsync(unassignTopic));
+
+program.parse(process.argv);
