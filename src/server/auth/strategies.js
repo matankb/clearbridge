@@ -16,7 +16,7 @@ function findUserByGoogle(token, refreshToken, profile, done) {
       if (user) {
         done(null, user);
       } else {
-        done('User Not Found');
+        done(null, null);
       }
     })
     .catch(err => done(err));

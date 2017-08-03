@@ -1,3 +1,4 @@
+const path = require('path');
 const passport = require('passport');
 
 const loginProtected = require('../middleware/login-protected');
@@ -27,10 +28,13 @@ module.exports = function(app) {
   app.get('/auth/', passport.authenticate('google', { scope: ['profile', 'email'] }));
   app.get('/auth/callback/', passport.authenticate('google', {
     successRedirect: '/auth/success/',
-    failureRedirect: '/',
+    failureRedirect: '/auth/fail/',
   }));
 
   app.get('/auth/success', loginProtected(), redirectAfterAuth);
+  app.get('/auth/fail/', (req, res) => {
+    res.render(path.resolve(__dirname, '../../../public/errors/auth-fail.ejs'));
+  });
 
   app.get('/logout/', (req, res) => {
     req.logout();
