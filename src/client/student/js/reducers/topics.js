@@ -1,3 +1,5 @@
+import assign from 'deep-assign';
+
 import {
   REQUEST_TOPIC_LIST,
   RECEIVE_TOPIC_LIST,
@@ -29,6 +31,18 @@ function changeTopic(topicList, id, reducer) {
     }
   });
 }
+function mergeTopics(oldTopicList, newTopicList) {
+  const ret = [...oldTopicList];
+  for (const topic of newTopicList) {
+    const existingTopic = ret.find(t => t.id === topic.id);
+    if (existingTopic) {
+      assign(existingTopic, topic);
+    } else {
+      ret.push(topic);
+    }
+  }
+  return ret;
+}
 
 function topics(state = defaultState, action) {
   switch (action.type) {
@@ -45,7 +59,7 @@ function topics(state = defaultState, action) {
         ...state,
         isFetchingTopicList: false,
         topicListError: null,
-        topics: action.topics.map(topic => ({
+        topics: mergeTopics(state.topics, action.topics.map(topic => ({
           data: {
             name: topic.name,
             color: topic.color,
@@ -57,7 +71,7 @@ function topics(state = defaultState, action) {
           id: topic._id,
           isFetching: false,
           hasContent: false,
-        })),
+        }))),
       };
 
     case FETCH_TOPIC:
