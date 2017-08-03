@@ -12,8 +12,8 @@ class TopicPage extends React.Component {
   componentDidMount() {
     this.loadTopic();
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.topic.id !== this.props.topic.id) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.topic.id !== this.props.topic.id) {
       this.loadTopic();
     }
   }
