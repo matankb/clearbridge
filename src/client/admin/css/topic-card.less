@@ -13,12 +13,14 @@
   }
 
   img {
-    width: 80%;
+    max-width: 100%;
+    height: 80%;
   }
 
   main {
     float: right;
     width: 80%;
+    height: 100%;
     position: relative;
     .content {
       padding: 40px;
@@ -33,11 +35,14 @@
     .blurb {
       font-weight: 300;
       color: @gray;
+      display: none; // until we stop rendering
     }
     .action {
       color: @accent;
       border-top: 1px solid @lightGray;
-      margin-top: 7px; /* push to bottom */
+      position: absolute;
+      bottom: 0;
+      width: 100%;
     }
     .menu {
       position: absolute;
