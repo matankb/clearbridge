@@ -2,6 +2,7 @@ const express = require('express');
 
 const loginProtected = require('../middleware/login-protected');
 const appendTrailingSlash = require('../middleware/append-trailing-slash');
+const trackRequests = require('../middleware/track-requests');
 
 function handleSubRoutes(app, names) {
 
@@ -21,7 +22,7 @@ function handleSubRoutes(app, names) {
 }
 
 function applyMiddleware(app, name, securityLevel) {
-  app.use(`/${name}/`, loginProtected([securityLevel]));
+  app.use(`/${name}/`, loginProtected([securityLevel]), trackRequests);
   app.use(`/${name}`, appendTrailingSlash); // let react router be happy and not sad
 }
 
