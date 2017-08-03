@@ -1,1 +1,1 @@
-export { sidebarItems } from './sidebar-items';
+export { default as sidebarItems } from './sidebar-items';
