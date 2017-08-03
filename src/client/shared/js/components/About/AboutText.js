@@ -4,7 +4,7 @@ import '../../../css/about.less';
 const AboutText = () => (
   <div className="about">
     <h3>Created by
-      <a target="_blank" href="http://matankb.github.io/">Matan Kotler-Berkowitz</a>
+      <a target="_blank" href="http://matankb.github.io/"> Matan Kotler-Berkowitz</a>
     </h3>
     <h4>Special Thanks</h4>
     <div>
