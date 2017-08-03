@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import IconArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
 import { colors } from '../../../shared/js/constants/';
@@ -45,7 +45,7 @@ function icon (props) {
         style={ style.icon }
         onClick={ props.onCloseClick }
       >
-        <NavigationClose color={ getTextColor(props.color) } />
+        <IconArrowBack color={ getTextColor(props.color) } />
       </IconButton>
     );
   } else {
