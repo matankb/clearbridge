@@ -29,16 +29,17 @@ function calculateEmail(user, type) {
   const firstName = user.firstName.replace(/\s+/g, '');
 
   // account for hyphenated/two-name last names
+  const lastName = user.lastName.trim();
   let lastNames;
-  if (user.lastName.includes('-')) {
-    lastNames = user.lastName.split('-');
-  } else if (user.lastName.trim().includes(' ')) {
-    lastNames = user.lastName.trim().split(' ');
+  if (lastName.includes('-')) {
+    lastNames = lastName.split('-');
+  } else if (lastName.includes(' ')) {
+    lastNames = lastName.split(' ');
   } else {
-    lastNames = [user.lastName];
+    lastNames = [lastName];
   }
 
-  let initials = lastNames.map(lastName => lastName[0]);
+  let initials = lastNames.map(name => name[0]);
   initials = initials.join();
   initials = initials.replace(/,/g, '');
 
