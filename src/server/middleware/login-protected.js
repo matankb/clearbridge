@@ -12,7 +12,7 @@ function loginProtected(types) {
       if (req.user) {
         next();
       } else {
-        res.redirect('/');
+        res.redirect('/auth/');
       }
     };
   } else {
@@ -26,7 +26,7 @@ function loginProtected(types) {
           });
         }
       } else {
-        res.redirect('/');
+        res.redirect('/auth/');
       }
     };
   }
