@@ -2,6 +2,7 @@ const path = require('path');
 const passport = require('passport');
 
 const loginProtected = require('../middleware/login-protected');
+const trackRequests = require('../middleware/track-requests');
 
 function redirectAfterAuth(req, res) {
 
@@ -36,7 +37,7 @@ module.exports = function(app) {
     res.render(path.resolve(__dirname, '../../../public/errors/auth-fail.ejs'));
   });
 
-  app.get('/logout/', (req, res) => {
+  app.get('/logout/', trackRequests, (req, res) => {
     req.logout();
     res.redirect('/');
   });
