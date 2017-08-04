@@ -7,6 +7,8 @@ import TopicCard from '../TopicCard';
 import TopicSuggest from '../TopicSuggest';
 import LoadableContent from '../../../../shared/js/components/LoadableContent';
 
+import '../../../css/topic-list.less';
+
 class TopicList extends React.Component {
 
   componentDidMount() {

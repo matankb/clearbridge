@@ -14,6 +14,7 @@ import { closeTopicPage } from '../actions';
 function style(props) {
   let styles = {
     fontSize: '10px',
+    flex: '0 0 auto',
   };
   if (props.open) {
     styles.backgroundColor = props.color;
