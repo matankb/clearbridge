@@ -22,7 +22,8 @@ async function getAnalytics() {
     return;
   }
   for (const analytic of analytics) {
-    console.log(`[${analytic.timestamp}] ${analytic.user.name} accessed ${analytic.path}`);
+    const name = analytic.user ? analytic.user.name : '<unauthenticated>';
+    console.log(`[${analytic.timestamp}] ${name} accessed ${analytic.path}`);
   }
 }
 
