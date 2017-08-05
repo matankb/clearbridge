@@ -18,7 +18,7 @@ module.exports = {
   // error report (auto-generated)
   2: (data, navigator) => ({
     subject: 'Bridge Report [Error]',
-    html: `There was a client-side error: ${escapeHtml(data.comment)}
+    html: `There was a client-side error: ${escapeHtml(data.error)}
            <br /><b>Browser Data:</b> ${JSON.stringify(navigator)}`,
   }),
   // topic suggestion
