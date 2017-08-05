@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import IconArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
+import { SearchBar } from './Search';
 import { colors } from '../../../shared/js/constants/';
 import { getTextColor } from '../../../shared/js/utils';
 
@@ -65,7 +66,12 @@ const Header = props => {
       style={ style(props) }
       title={ <span style={{ color: textColor }}>JCDS Bridge</span> }
       iconElementLeft={ icon(props) }
-      iconElementRight={ <HeaderMenu iconColor={ textColor } /> }
+      iconElementRight={
+        <div>
+          <SearchBar color={ textColor } />
+          <HeaderMenu iconColor={ textColor } />
+        </div>
+      }
     />
   );
 };
