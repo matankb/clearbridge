@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const topicRoutes = require('./topics');
+const searchRoutes = require('./search');
 const userRoutes = require('./users');
 const reportRoutes = require('./report');
 
@@ -14,9 +15,9 @@ module.exports = function(app) {
   router.use(trackRequests);
 
   topicRoutes(router);
+  searchRoutes(router);
   userRoutes(router);
   reportRoutes(router);
-
 
   router.use(notFound);
   router.use(internalError); // must be last
