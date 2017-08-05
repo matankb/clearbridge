@@ -1,11 +1,25 @@
 /* eslint-disable no-console */
 
 const readline = require('mz/readline');
+const mongoose = require('mongoose');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+const config = require('../src/server/config');
+
+let rl;
+
+exports.configureReadline = () => {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+};
+
+exports.connectToMongo = () => {
+  mongoose.Promise = global.Promise;
+  mongoose.connect(config.db.URL, {
+    useMongoClient: true,
+  });
+};
 
 exports.question = async (prompt, allowedInput = []) => {
   if (allowedInput.length) {

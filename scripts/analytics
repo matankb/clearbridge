@@ -3,17 +3,14 @@
 /* eslint-disable no-console */
 
 const program = require('commander');
-const mongoose = require('mongoose');
 
 const Analytic = require('../src/server/models/Analytic');
 require('../src/server/models/User'); // schema is used to populate
 
-const { question, wrapAsync } = require('./utils');
+const { question, wrapAsync, connectToMongo, configureReadline } = require('./utils');
 
-mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
-mongoose.connect('mongodb://127.0.0.1/bridge', {
-  useMongoClient: true,
-});
+connectToMongo();
+configureReadline();
 
 async function getAnalytics() {
   const analytics = await Analytic.find().populate('user').exec();

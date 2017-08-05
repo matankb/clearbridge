@@ -3,16 +3,13 @@
 /* eslint-disable no-console */
 
 const program = require('commander');
-const mongoose = require('mongoose');
 
 const User = require('../src/server/models/User');
 
-const { question, wrapAsync } = require('./utils');
+const { question, wrapAsync, connectToMongo, configureReadline } = require('./utils');
 
-mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
-mongoose.connect('mongodb://127.0.0.1/bridge', {
-  useMongoClient: true,
-});
+connectToMongo();
+configureReadline();
 
 async function listUsers() {
   const users = await User.find().exec();
