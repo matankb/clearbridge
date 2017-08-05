@@ -1,8 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import classnames from 'classnames';
 
 import IconButton from 'material-ui/IconButton';
 import IconSearch from 'material-ui/svg-icons/action/search';
+
+import { requestSearch, openSearch } from '../../reducers/search';
 
 import '../../../css/search.less';
 
@@ -24,12 +28,15 @@ class SearchBar extends React.Component {
 
   close = () => {
     this.setState({ open: false, query: '' });
+    this.blurTextField();
   }
 
   toggleOpen = () => {
     this.setState(state => {
       if (!state.open) {
         this.focusTextField();
+      } else {
+        this.blurTextField();
       }
       return { open: !state.open, query: '' };
     });
@@ -37,6 +44,22 @@ class SearchBar extends React.Component {
 
   focusTextField() {
     setTimeout(() => this.textfield.focus(), 0); // textfield can't be focused in same tick
+  }
+  blurTextField() {
+    setTimeout(() => this.textfield.blur(), 0);
+  }
+
+  handleKeyDown = e => {
+    switch (e.key) {
+      case 'Enter':
+        this.props.search(this.state.query);
+        // falls through to close after searching
+      case 'Escape':
+        this.close();
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
@@ -55,6 +78,7 @@ class SearchBar extends React.Component {
           value={ this.state.query }
           onChange={ this.setQuery }
           onBlur={ this.close }
+          onKeyDown={ this.handleKeyDown }
 
           style={{ color: this.props.color }}
 
@@ -64,4 +88,16 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+function mapDispatchToProps(dispatch) {
+  return {
+    search: query => {
+      dispatch(requestSearch(query));
+      dispatch(openSearch());
+    },
+  };
+}
+
+export default connect(
+  () => ({}),
+  mapDispatchToProps,
+)(SearchBar);
