@@ -15,11 +15,31 @@ config.plugins.push(
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production'),
   }),
-  // new BabiliPlugin(), // this crashes on server. disabled until we can figure out why.
   new CleanPlugin([config.output.path], {
     root: path.resolve(__dirname, '../../'),
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
+  new BabiliPlugin({
+    booleans: false,
+    builtIns: false,
+    consecutiveAdds: false,
+    deadcode: false,
+    evaluate: false,
+    flipComparisons: false,
+    guards: false,
+    infinity: false,
+    memberExpressions: false,
+    mergeVars: false,
+    numericLiterals: false,
+    propertyLiterals: false,
+    regexpConstructors: false,
+    removeUndefined: false,
+    replace: false,
+    simplify: false,
+    simplifyComparisons: false,
+    typeConstructors: false,
+    undefinedToVoid: false,
+  }), // leave only mangle on to allow it to build on server
 );
 
 module.exports = config;
