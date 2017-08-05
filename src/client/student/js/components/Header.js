@@ -11,18 +11,19 @@ import { colors } from '../../../shared/js/constants/';
 import { getTextColor } from '../../../shared/js/utils';
 
 import { closeTopicPage } from '../actions';
+import { closeSearch } from '../reducers/search';
+
+const SEARCH_COLOR = '#6b6b6b';
 
 function style(props) {
   let styles = {
     fontSize: '10px',
     flex: '0 0 auto',
+    backgroundColor: props.color,
+    boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
   };
-  if (props.open) {
-    styles.backgroundColor = props.color;
-    styles.boxShadow = 'none';
-  } else {
-    styles.backgroundColor = colors.primary.dark;
-    styles.boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
+  if (props.topicOpen && !props.searchOpen) {
+    styles.boxShadow = '';
   }
   return styles;
 }
@@ -41,11 +42,18 @@ function icon (props) {
       height: 24,
     },
   };
-  if (props.open) {
+  if (props.topicOpen || props.searchOpen) {
     return (
       <IconButton
         style={ style.icon }
-        onClick={ props.onCloseClick }
+        onClick={ () => {
+          if (props.searchOpen) { // prioritize search over topic page
+            props.onCloseSearch();
+          } else if (props.topicOpen) {
+            props.onCloseTopic();
+          }
+
+        }}
       >
         <IconArrowBack color={ getTextColor(props.color) } />
       </IconButton>
@@ -81,23 +89,27 @@ function getTopicById(id, topics) {
 }
 
 function getHeaderColor(state) {
-  let color;
-  if (state.topics.topicPageOpen) {
-    color = getTopicById(state.topics.selectedTopic, state.topics.topics).data.color;
+  if (state.search.open) {
+    return SEARCH_COLOR;
   }
-  return color;
+  if (state.topics.topicPageOpen) {
+    return getTopicById(state.topics.selectedTopic, state.topics.topics).data.color;
+  }
+  return colors.primary.dark;
 }
 
 function mapStateToProps(state) {
   return {
-    open: state.topics.topicPageOpen,
+    topicOpen: state.topics.topicPageOpen,
+    searchOpen: state.search.open,
     color: getHeaderColor(state),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onCloseClick: () => dispatch(closeTopicPage()),
+    onCloseTopic: () => dispatch(closeTopicPage()),
+    onCloseSearch: () => dispatch(closeSearch()),
   };
 }
 

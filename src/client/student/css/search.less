@@ -1,6 +1,11 @@
+@import '../../shared/css/_vars.less';
+
 @search-bar-width: 256px;
 @search-bar-transition-time: 200ms;
 @search-bar-transition-easing: cubic-bezier(0.23, 1, 0.32, 1);
+
+@search-page-transition-time: 300ms;
+@search-page-transition-easing: cubic-bezier(0.23, 1, 0.32, 1);
 
 .search-bar-wrap {
   display: inline-block;
@@ -24,4 +29,32 @@
     padding: 7px;
   }
   
+}
+
+.search-page {
+
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  
+  background: @background;
+  
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(1.2);
+
+  transition: opacity @search-page-transition-time @search-page-transition-easing,
+              transform @search-page-transition-time @search-page-transition-easing,
+              visibility 0s;
+  transition-delay: 0s, 0s, @search-page-transition-time;
+
+  &.search-page-open {
+    visibility: visible;
+    transition-delay: 0s, 0s, 0s;
+    opacity: 1;
+    transform: scale(1);
+  }
+
 }
