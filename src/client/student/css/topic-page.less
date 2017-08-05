@@ -2,6 +2,7 @@
 
 @gray-color: #504944;
 @page-transition-duration: 300ms;
+@page-transition-easing: cubic-bezier(0.23, 1, 0.32, 1);
 
 body {
   margin: 0;
@@ -16,17 +17,17 @@ body {
   position: absolute;
   z-index: 2;
   background: @background;
-  transition: transform @page-transition-duration;
+  transition: transform @page-transition-duration @page-transition-easing;
   overflow: auto;
 
   &.topic-page-enter {
-    transform: translateY(200%);
+    transform: translateY(100%);
   }
   &.topic-page-enter-active {
     transform: translateY(0);
   }
   &.topic-page-leave-active {
-    transform: translateY(200%);
+    transform: translateY(100%);
   }
 
   .header {
