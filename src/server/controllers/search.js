@@ -3,7 +3,7 @@ const sanitizeHtml = require('sanitize-html');
 const { Student } = require('../models/User');
 require('../models/Topic');
 
-const WORD_SPLIT = /\W+/g;
+const WORD_SPLIT = /[^\w']+/g;
 const ELLIPSIS_CHAR = String.fromCharCode(0x2026);
 
 function stripHtml(topic) {
