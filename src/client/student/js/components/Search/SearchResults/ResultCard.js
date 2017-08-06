@@ -11,18 +11,22 @@ const style = {
     height: 150,
     maxWidth: '80%',
     width: 680,
+    cursor: 'pointer',
   },
 };
 
 const ResultCard = ({ name, image, color, onClick }) => (
   <div className="search-result-card">
-    <Paper style={ style.paper }>
+    <Paper style={ style.paper } onTouchTap={ onClick }>
+
       <div className="image-wrap" style={{ background: color }}>
         <img src={ image } alt={ name } />
       </div>
+
       <div className="name">
         { name }
       </div>
+
     </Paper>
   </div>
 );

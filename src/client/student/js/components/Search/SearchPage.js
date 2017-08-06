@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-import SearchResults from './SearchResults/';
+import SearchResults from './SearchResults';
 import LoadableContent from '../../../../shared/js/components/LoadableContent';
-import { requestSearch } from '../../reducers/search';
+import { requestSearch, closeSearch } from '../../reducers/search';
+import { selectTopic, openTopicPage } from '../../actions';
 import { findTopicById } from '../../utils';
 
 class SearchPage extends React.Component {
@@ -24,7 +25,11 @@ class SearchPage extends React.Component {
           error={ this.props.error }
           retry={ this.props.requestSearch }
         >
-          <SearchResults results={ this.props.results } query={ this.props.query } />
+          <SearchResults
+            results={ this.props.results }
+            query={ this.props.query }
+            handleResultClick={ this.props.handleResultClick }
+          />
         </LoadableContent>
       </div>
     );
@@ -49,6 +54,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     requestSearch: () => dispatch(requestSearch()),
+    handleResultClick: id => {
+      dispatch(closeSearch());
+      dispatch(selectTopic(id));
+      dispatch(openTopicPage());
+    },
   };
 }
 

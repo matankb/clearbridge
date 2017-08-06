@@ -3,7 +3,7 @@ import React from 'react';
 import ResultCard from './ResultCard';
 import NoResults from './NoResults';
 
-const SearchResults = ({ results, query }) => {
+const SearchResults = ({ results, query, handleResultClick }) => {
 
   const searchCards = results.map(({ id, data }) => (
     <ResultCard
@@ -11,6 +11,7 @@ const SearchResults = ({ results, query }) => {
       name={ data.name }
       image={ data.image }
       color={ data.color }
+      onClick={ () => handleResultClick(id) }
     />
   ));
 
