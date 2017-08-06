@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import IconButton from 'material-ui/IconButton';
 import IconSearch from 'material-ui/svg-icons/action/search';
 
-import { requestSearch, openSearch } from '../../reducers/search';
+import { setQuery, openSearch } from '../../reducers/search';
 
 import '../../../css/search.less';
 
@@ -91,7 +91,7 @@ class SearchBar extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     search: query => {
-      dispatch(requestSearch(query));
+      dispatch(setQuery(query));
       dispatch(openSearch());
     },
   };

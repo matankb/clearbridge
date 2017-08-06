@@ -1,3 +1,5 @@
+export const SET_QUERY = 'SEARCH/SET_QUERY';
+
 export const REQUEST_SEARCH = 'SEARCH/REQUEST_SEARCH';
 export const RECIEVE_SEARCH = 'SEARCH/RECIEVE_SEARCH';
 
@@ -16,8 +18,10 @@ const defaultState = {
 
 export default function search(state = defaultState, action) {
   switch (action.type) {
+    case SET_QUERY:
+      return { ...state, query: action.query };
     case REQUEST_SEARCH:
-      return { ...state, isFetching: true, error: null, query: action.query, results: [] };
+      return { ...state, isFetching: true, error: null, results: [] };
     case RECIEVE_SEARCH:
       return { ...state, isFetching: false, error: null, results: action.results };
     case REQUEST_SEARCH_ERROR:
@@ -31,10 +35,16 @@ export default function search(state = defaultState, action) {
   }
 }
 
-export function requestSearch(query) {
+export function setQuery(query) {
+  return {
+    type: SET_QUERY,
+    query,
+  };
+}
+
+export function requestSearch() {
   return {
     type: REQUEST_SEARCH,
-    query,
   };
 }
 export function recieveSearch(results) {
