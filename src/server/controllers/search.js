@@ -11,6 +11,8 @@ function stripHtml(topic) {
   });
 }
 
+function getWeightedScore(name, content) {
+  return ((name * 2) + content);
 }
 
 function getMatch(queryParts, words) {
@@ -44,19 +46,36 @@ async function doSearch(query, userId) {
                       .toLowerCase()
                       .split(WORD_SPLIT)
                       .filter(Boolean); // remove empty strings
-
   const searchResults =
     topics
-      .map(topic => ({
-        id: topic.id,
-        contentMatch: getMatch(queryParts, stripHtml(topic).split(WORD_SPLIT)),
-        nameMatch: getMatch(queryParts, topic.name.split(WORD_SPLIT)),
-      }))
+      .map(topic => {
+        const nameParts = topic.name.split(WORD_SPLIT);
+        const contentParts = stripHtml(topic).split(WORD_SPLIT);
+        return {
+          id: topic.id,
+          nameParts,
+          contentParts,
+          nameMatch: getMatch(queryParts, nameParts),
+          contentMatch: getMatch(queryParts, contentParts),
+        };
+      })
       .filter(topic => topic.nameMatch.score || topic.contentMatch.score >= 0.5)
-      .sort((a, b) => (
-        Math.sign(((b.nameMatch.score * 2) + b.contentMatch.score) - ((a.nameMatch.score * 2) + a.contentMatch.score))
-      ));
-
+      .sort((a, b) => {
+        const scoreDiff =
+          getWeightedScore(b.nameMatch.score, b.contentMatch.score)
+          - getWeightedScore(a.nameMatch.score, a.contentMatch.score);
+        if (!scoreDiff) {
+          return getWeightedScore(
+                   b.nameMatch.matches.length / b.nameParts.length,
+                   b.contentMatch.matches.length / b.contentParts.length,
+                 )
+                 - getWeightedScore(
+                   a.nameMatch.matches.length / a.nameParts.length,
+                   a.contentMatch.matches.length / a.nameParts.length,
+                 );
+        }
+        return scoreDiff;
+      });
   return searchResults;
 }
 
