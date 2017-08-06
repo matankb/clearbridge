@@ -52,7 +52,9 @@ class SearchBar extends React.Component {
   handleKeyDown = e => {
     switch (e.key) {
       case 'Enter':
-        this.props.search(this.state.query);
+        const query = this.state.query.trim();
+        if (!query) return;
+        this.props.search(query);
         // falls through to close after searching
       case 'Escape':
         this.close();
