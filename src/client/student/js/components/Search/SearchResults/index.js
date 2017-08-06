@@ -5,9 +5,10 @@ import NoResults from './NoResults';
 
 const SearchResults = ({ results, query, handleResultClick }) => {
 
-  const searchCards = results.map(({ id, data }) => (
+  const searchCards = results.map(({ id, data, parts }) => (
     <ResultCard
       key={ id }
+      snippet={ parts }
       name={ data.name }
       image={ data.image }
       color={ data.color }
