@@ -32,7 +32,11 @@ function getMatch(queryParts, words) {
 async function doSearch(query, userId) {
 
   const { topics } = await Student.findById(userId).populate('topics').exec();
-  const queryParts = query.trim().toLowerCase().split(WORD_SPLIT);
+  const queryParts = query
+                      .trim()
+                      .toLowerCase()
+                      .split(WORD_SPLIT)
+                      .filter(Boolean); // remove empty strings
 
   const searchResults =
     topics
