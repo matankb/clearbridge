@@ -59,7 +59,7 @@ async function doSearch(query, userId) {
           contentMatch: getMatch(queryParts, contentParts),
         };
       })
-      .filter(topic => topic.nameMatch.score || topic.contentMatch.score >= 0.5)
+      .filter(topic => topic.nameMatch.score || topic.contentMatch.score > 0.5)
       .sort((a, b) => {
         const scoreDiff =
           getWeightedScore(b.nameMatch.score, b.contentMatch.score)
