@@ -3,7 +3,7 @@ const sanitizeHtml = require('sanitize-html');
 const { Student } = require('../models/User');
 require('../models/Topic');
 
-const WORD_SPLIT = /[\s,.?!!@#$%^&*()/\\]+/g;
+const WORD_SPLIT = /\W+/g;
 
 function stripHtml(topic) {
   return sanitizeHtml(topic.content, {
