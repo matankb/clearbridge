@@ -38,7 +38,7 @@ class SearchPage extends React.Component {
 }
 
 function populateResults(results, topicList) {
-  return results.map(id => findTopicById(topicList, id));
+  return results.map(result => ({ ...result, ...findTopicById(topicList, result.id) }));
 }
 
 function mapStateToProps(state) {
