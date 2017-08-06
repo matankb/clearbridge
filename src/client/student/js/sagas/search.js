@@ -15,7 +15,7 @@ const selectQuery = state => state.search.query;
 function* onRequestSearch() {
   try {
     const query = yield select(selectQuery);
-    const searchResults = yield fetchJson(`/api/search/?q=${query}`);
+    const searchResults = yield fetchJson(`/api/search/?q=${encodeURIComponent(query)}`);
     yield put(recieveSearch(searchResults));
   } catch (e) {
     yield put(requestSearchError(formatError(e)));
