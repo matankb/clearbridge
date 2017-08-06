@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
+import SearchResults from './SearchResults/';
 import LoadableContent from '../../../../shared/js/components/LoadableContent';
 import { requestSearch } from '../../reducers/search';
+import { findTopicById } from '../../utils';
 
 class SearchPage extends React.Component {
 
@@ -14,6 +16,7 @@ class SearchPage extends React.Component {
   }
 
   render() {
+
     return (
       <div className={ classnames('search-page', this.props.open && 'search-page-open') }>
         <LoadableContent
@@ -21,17 +24,22 @@ class SearchPage extends React.Component {
           error={ this.props.error }
           retry={ this.props.requestSearch }
         >
-          { this.props.results }
+          <SearchResults results={ this.props.results } query={ this.props.query } />
         </LoadableContent>
       </div>
     );
+
   }
+}
+
+function populateResults(results, topicList) {
+  return results.map(id => findTopicById(topicList, id));
 }
 
 function mapStateToProps(state) {
   return {
     query: state.search.query,
-    results: state.search.results,
+    results: populateResults(state.search.results, state.topics.topics),
     open: state.search.open,
     isFetching: state.search.isFetching,
     error: state.search.error,
