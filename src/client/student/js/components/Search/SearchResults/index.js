@@ -15,8 +15,8 @@ const SearchResults = ({ results, query }) => {
   ));
 
   return (
-    <div>
-      Search results for { query }
+    <div className="search-results">
+      <h1>Search results for &quot;{ query }&quot;</h1>
       { searchCards.length ? searchCards : <NoResults />}
     </div>
   );
