@@ -97,12 +97,14 @@ async function doSearch(query, userId) {
                       .toLowerCase()
                       .split(WORD_SPLIT)
                       .filter(Boolean); // remove empty strings
+
   const searchResults =
     topics
       .map(topic => {
         const nameParts = topic.name.split(WORD_SPLIT);
         const content = stripHtml(topic);
         const contentParts = content.split(WORD_SPLIT);
+
         return {
           id: topic.id,
           content,
@@ -111,23 +113,27 @@ async function doSearch(query, userId) {
           nameMatch: getMatch(queryParts, nameParts),
           contentMatch: getMatch(queryParts, contentParts),
         };
+
       })
       .filter(result => result.nameMatch.score || result.contentMatch.score > 0.5)
       .sort((a, b) => {
-        const scoreDiff =
-          getWeightedScore(b.nameMatch.score, b.contentMatch.score)
-          - getWeightedScore(a.nameMatch.score, a.contentMatch.score);
-        if (!scoreDiff) {
-          return getWeightedScore(
-                   b.nameMatch.matches.length / b.nameParts.length,
-                   b.contentMatch.matches.length / b.contentParts.length,
-                 )
-                 - getWeightedScore(
-                   a.nameMatch.matches.length / a.nameParts.length,
-                   a.contentMatch.matches.length / a.nameParts.length,
-                 );
-        }
-        return scoreDiff;
+
+        const aScore = getWeightedScore(a.nameMatch.score, a.contentMatch.score);
+        const bScore = getWeightedScore(b.nameMatch.score, b.contentMatch.score);
+        const scoreDiff = bScore - aScore;
+
+        if (scoreDiff) return scoreDiff;
+
+        const aMatches = getWeightedScore(
+          a.nameMatch.matches.length / a.nameParts.length,
+          a.contentMatch.matches.length / a.contentParts.length,
+        );
+        const bMatches = getWeightedScore(
+          b.nameMatch.matches.length / b.nameParts.length,
+          b.contentMatch.matches.length / b.contentParts.length,
+        );
+        return bMatches - aMatches;
+
       })
       .map(result => {
 
