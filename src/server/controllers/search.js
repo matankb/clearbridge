@@ -11,22 +11,29 @@ function stripHtml(topic) {
   });
 }
 
-function fuzzySearch(word, queryParts) {
-  return queryParts.some(queryPart => word.toLowerCase().includes(queryPart));
 }
+
 function getMatch(queryParts, words) {
-  let matchCount = 0;
   const matches = [];
+  const matchedQueries = new Set();
+
   for (const word of words) {
-    if (fuzzySearch(word, queryParts)) {
-      matchCount++;
+    const queryMatches = queryParts.filter(queryPart => word.toLowerCase().includes(queryPart));
+
+    for (const match of queryMatches) {
+      matchedQueries.add(match);
+    }
+
+    if (queryMatches.length) {
       matches.push(word);
     }
   }
+
   return {
-    score: matchCount / queryParts.length,
+    score: matchedQueries.size / queryParts.length,
     matches,
   };
+
 }
 
 async function doSearch(query, userId) {
