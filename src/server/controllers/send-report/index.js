@@ -32,12 +32,12 @@ function handleSent(res, next, error, info) {
   }
 }
 
-function getTemplateOptions({ type, data, navigator }) {
-  return templates[type](data, navigator);
+function getTemplateOptions({ type, data, navigator }, user) {
+  return templates[type](data, navigator, user);
 }
 
 module.exports = function sendReport(req, res, next) {
-  let templateOpts = getTemplateOptions(req.body);
+  let templateOpts = getTemplateOptions(req.body, req.user);
   let opts = Object.assign({}, defaultOpts, templateOpts); // copy opts
   sender.sendMail(opts, handleSent.bind(null, res, next));
 };
