@@ -7,9 +7,18 @@ const WORD_SPLIT = /[^\w']+/g;
 const ELLIPSIS_CHAR = String.fromCharCode(0x2026);
 
 function stripHtml(topic) {
-  return sanitizeHtml(topic.content, {
-    allowedTags: [],
-  });
+  // append space after LIs and block elements
+  return sanitizeHtml(
+    sanitizeHtml(
+      sanitizeHtml(topic.content, {
+        allowedTags: ['h1', 'li', 'p'],
+      }),
+      {
+        allowedTags: [],
+        textFilter: text => `${text} `,
+      },
+    ),
+  );
 }
 
 function split(string, sep) {
