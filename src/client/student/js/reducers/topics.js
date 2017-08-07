@@ -1,5 +1,3 @@
-import assign from 'deep-assign';
-
 import {
   REQUEST_TOPIC_LIST,
   RECEIVE_TOPIC_LIST,
