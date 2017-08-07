@@ -1,6 +1,10 @@
 .topic-list {
   overflow: auto;
   height: 100%;
+  width: 100%;
+  // fixes safari
+  position: absolute; 
+  top: 0;
 }
 @media (max-width: 669px) {
   .topic-list {

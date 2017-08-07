@@ -20,14 +20,20 @@
     bottom: 7px;
     width: 0;
     font-size: 16px;
+    visibility: hidden;
 
-    transition: width @search-bar-transition-time @search-bar-transition-easing;
+    transition: width @search-bar-transition-time @search-bar-transition-easing,
+                visibility 0ms;
+
+    transition-delay: 0ms, @search-bar-transition-time;
 
     background: rgba(0, 0, 0, 0.087);
     border-radius: 3px;
   }
   .search-bar-open {
     width: @search-bar-width;
+    visibility: visible;
+    transition-delay: 0ms, 0ms;
     padding: 7px;
   }
   
