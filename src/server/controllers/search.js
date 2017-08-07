@@ -21,6 +21,7 @@ function stripHtml(topic) {
   );
 }
 
+// returns index of each piece, as well as its' content
 function split(string, sep) {
   const output = [];
   let prevLastIndex = 0;
@@ -43,33 +44,64 @@ function split(string, sep) {
   return output;
 }
 
-// position describes position of that background within content.
-// -1 means first, 0 means somewhere in the middle, 1 means last
-function formatBackgroundString(string, position) {
+function formatBackgroundString(string, isBeginning) {
 
   const words = split(string, WORD_SPLIT);
 
-  if (position === -1) { // beginning of string
+  if (isBeginning) {
 
     if (words.length <= 5) return string; // nothing to do, content too short
     return ELLIPSIS_CHAR + string.slice(words[words.length - 5].index);
 
-  } else if (position === 0) { // middle of string
+  } else { // middle of string
 
     if (words.length <= 10) return string;
     const beginning = string.slice(0, words[4].index + words[4].str.length);
     const end = string.slice(words[words.length - 5].index);
     return `${beginning} ${ELLIPSIS_CHAR} ${end}`;
 
-  } else if (position === 1) { // end of string
-
-    if (words.length <= 5) return string; // nothing to do, content too short
-    return string.slice(0, words[4].index + words[4].str.length) + ELLIPSIS_CHAR;
-
   }
 
 }
 
+function formatEndString(string, matches) {
+
+  let words = split(string, WORD_SPLIT);
+
+  if (words.length > 5) {
+    string = string.slice(0, words[4].index + words[4].str.length) + ELLIPSIS_CHAR;
+    words = words.slice(0, 5);
+  }
+
+  let index = 0;
+  let strIndex = 0;
+  const output = [];
+
+  for (const match of matches) {
+    const matchIndex = words.slice(index).findIndex(word => word.str === match) + index;
+    if (matchIndex - index === -1) {
+      break;
+    }
+    output.push({
+      type: 'background',
+      content: string.slice(strIndex, words[matchIndex].index),
+    });
+    output.push({
+      type: 'match',
+      content: match,
+    });
+    index = matchIndex + 1;
+    strIndex = words[matchIndex].index + match.length;
+  }
+
+  output.push({
+    type: 'background',
+    content: string.slice(strIndex),
+  });
+
+  return output;
+
+}
 
 function getWeightedScore(name, content) {
   return ((name * 2) + content);
@@ -146,8 +178,9 @@ async function doSearch(query, userId) {
       })
       .map(result => {
 
+        const SNIPPET_COUNT = 2;
         const parts = [];
-        const matchCount = Math.min(result.contentMatch.matches.length, 2);
+        const matchCount = Math.min(result.contentMatch.matches.length, SNIPPET_COUNT);
         let index = 0;
 
         for (let i = 0; i < matchCount; i++) {
@@ -159,7 +192,7 @@ async function doSearch(query, userId) {
             type: 'background',
             content: formatBackgroundString(
               result.content.slice(index, matchIndex),
-              i === 0 ? -1 : 0,
+              i === 0,
             ),
           });
 
@@ -168,10 +201,12 @@ async function doSearch(query, userId) {
 
         }
 
-        parts.push({
-          type: 'background',
-          content: formatBackgroundString(result.content.slice(index), 1),
-        });
+        parts.push(
+          ...formatEndString(
+            result.content.slice(index),
+            result.contentMatch.matches.slice(SNIPPET_COUNT),
+          ),
+        );
 
         return { id: result.id, parts };
       });
