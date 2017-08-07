@@ -1,7 +1,7 @@
 @import './_vars.less';
 
 @scrollbar-width: 10px;
-@scrollbar-button-height: 5px;
+@scrollbar-button-size: 2px;
 
 ::-webkit-scrollbar {
   width: @scrollbar-width;
@@ -20,4 +20,8 @@
     border-left: 1px solid transparent;
     min-height: 28px;
     padding: 100px 0 0;
+}
+::-webkit-scrollbar-button {
+  height: @scrollbar-button-size;
+  width: @scrollbar-button-size;
 }
