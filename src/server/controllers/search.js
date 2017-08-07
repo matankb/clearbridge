@@ -3,10 +3,17 @@ const sanitizeHtml = require('sanitize-html');
 const { Student } = require('../models/User');
 require('../models/Topic');
 
+// CONSTANTS
+
+const SNIPPET_LENGTH = 4;
+
 const WORD_SPLIT = /[^\w']+/g;
 const ELLIPSIS_CHAR = String.fromCharCode(0x2026);
 
+// HELPER FUNCTIONS
+
 function stripHtml(topic) {
+  // remove all tags, leave text as-is
   // append space after LIs and block elements
   return sanitizeHtml(
     sanitizeHtml(
@@ -27,16 +34,19 @@ function split(string, sep) {
   let prevLastIndex = 0;
   let match;
   while (match = sep.exec(string)) { // eslint-disable-line no-cond-assign
+    // a match was found
     if (sep.lastIndex > prevLastIndex) {
       output.push({
         index: prevLastIndex,
         str: string.slice(prevLastIndex, match.index),
       });
     } else {
+      // no match, try next char
       sep.lastIndex++;
     }
     prevLastIndex = sep.lastIndex;
   }
+  // add rest of string
   output.push({
     index: prevLastIndex,
     str: string.slice(prevLastIndex),
@@ -50,38 +60,50 @@ function formatBackgroundString(string, isBeginning) {
 
   if (isBeginning) {
 
-    if (words.length <= 5) return string; // nothing to do, content too short
-    return ELLIPSIS_CHAR + string.slice(words[words.length - 5].index);
+    if (words.length <= SNIPPET_LENGTH + 1) return string; // nothing to do, content too short
+    return ELLIPSIS_CHAR + string.slice(words[words.length - SNIPPET_LENGTH - 1].index);
 
   } else { // middle of string
 
-    if (words.length <= 10) return string;
-    const beginning = string.slice(0, words[4].index + words[4].str.length);
-    const end = string.slice(words[words.length - 5].index);
+    if (words.length <= (2 * SNIPPET_LENGTH) + 2) return string;
+
+    const beginning = string.slice(
+      0,
+      words[SNIPPET_LENGTH].index + words[SNIPPET_LENGTH].str.length,
+    ); // first SNIPPET_LENGTH words
+    const end = string.slice(words[words.length - SNIPPET_LENGTH - 1].index); // last SNIPPET_LENGTH words
+
     return `${beginning} ${ELLIPSIS_CHAR} ${end}`;
 
   }
 
 }
 
+// mark any remaining search results in last background snippet
 function formatEndString(string, matches) {
 
   let words = split(string, WORD_SPLIT);
 
-  if (words.length > 5) {
-    string = string.slice(0, words[4].index + words[4].str.length) + ELLIPSIS_CHAR;
-    words = words.slice(0, 5);
+  // make sure only SNIPPET_LENGTH words are taken
+  if (words.length > SNIPPET_LENGTH + 1) {
+    string = string.slice(
+      0,
+      words[SNIPPET_LENGTH].index + words[SNIPPET_LENGTH].str.length,
+    ) + ELLIPSIS_CHAR;
+    words = words.slice(0, SNIPPET_LENGTH + 1);
   }
 
   let index = 0;
   let strIndex = 0;
   const output = [];
 
+  // search for match in remaining words
   for (const match of matches) {
     const matchIndex = words.slice(index).findIndex(word => word.str === match) + index;
-    if (matchIndex - index === -1) {
+    if (matchIndex - index === -1) { // the original index was -1, so no more matches
       break;
     }
+
     output.push({
       type: 'background',
       content: string.slice(strIndex, words[matchIndex].index),
@@ -90,10 +112,12 @@ function formatEndString(string, matches) {
       type: 'match',
       content: match,
     });
+
     index = matchIndex + 1;
     strIndex = words[matchIndex].index + match.length;
   }
 
+  // add last unmatched snippets
   output.push({
     type: 'background',
     content: string.slice(strIndex),
@@ -178,10 +202,12 @@ async function doSearch(query, userId) {
       })
       .map(result => {
 
+        /* add match snippets */
+
         const SNIPPET_COUNT = 2;
         const parts = [];
         const matchCount = Math.min(result.contentMatch.matches.length, SNIPPET_COUNT);
-        let index = 0;
+        let index = 0; // index in string of end of prev match
 
         for (let i = 0; i < matchCount; i++) {
 
@@ -201,6 +227,7 @@ async function doSearch(query, userId) {
 
         }
 
+        // highlight remaining matches
         parts.push(
           ...formatEndString(
             result.content.slice(index),
@@ -212,9 +239,10 @@ async function doSearch(query, userId) {
       });
 
   return searchResults;
+
 }
 
+// CONTROLLER
 exports.search = async (req, res) => {
-  const searchResults = await doSearch(req.query.q, req.user.id);
-  res.json(searchResults);
+  res.json(await doSearch(req.query.q, req.user.id));
 };
