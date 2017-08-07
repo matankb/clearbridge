@@ -77,6 +77,8 @@ class SearchBar extends React.Component {
           ref={ input => { this.textfield = input; } }
           name="search"
 
+          tabIndex={ -1 }
+
           value={ this.state.query }
           onChange={ this.setQuery }
           onBlur={ this.close }
