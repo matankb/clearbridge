@@ -6,6 +6,20 @@ import TopicPageHeader from './TopicPageHeader';
 import TopicPageContent from './TopicPageContent';
 
 import '../../../css/topic-page.less';
+import colors from '../../constants/colors';
+import emptyTopicImage from '../../../assets/empty-topic.png';
+
+const defaultTopic = {
+  data: {
+    name: '',
+    color: colors.notLoadedTopic,
+    image: emptyTopicImage,
+    blurb: '',
+    content: '',
+  },
+  isFetching: false,
+  error: null,
+};
 
 class TopicPage extends React.Component {
 
@@ -19,12 +33,15 @@ class TopicPage extends React.Component {
   }
 
   loadTopic = () => {
-    this.props.load(this.props.topic.id);
+    if (this.props.topicListLoaded) {
+      this.props.load(this.props.topic.id);
+    }
   }
 
   render() {
 
-    const { data } = this.props.topic;
+    const topic = this.props.topic || defaultTopic;
+    const { data } = topic;
 
     return (
       <div className="page">
@@ -35,8 +52,8 @@ class TopicPage extends React.Component {
           image={ data.image }
         />
         <LoadableContent
-          isLoading={ this.props.topic.isFetching }
-          error={ this.props.topic.error }
+          isLoading={ topic.isFetching }
+          error={ topic.error }
           retry={ this.loadTopic }
         >
           <TopicPageContent content={ data.content } />

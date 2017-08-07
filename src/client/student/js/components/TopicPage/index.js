@@ -8,7 +8,12 @@ import { requestTopic } from '../../actions';
 const TopicPageWrap = props => {
 
   let renderedChild = props.open ?
-    <TopicPage topic={ props.topic } load={ props.load } key={ 0 } />
+    (<TopicPage
+      topic={ props.topic }
+      load={ props.load }
+      topicListLoaded={ props.topicListLoaded }
+      key={ 0 }
+    />)
     : null;
 
   return (
@@ -34,6 +39,7 @@ function mapStateToProps(state) {
   return {
     open: state.topics.topicPageOpen,
     topic,
+    topicListLoaded: !state.topics.isFetching,
   };
 }
 
