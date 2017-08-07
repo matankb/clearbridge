@@ -14,7 +14,7 @@ import {
 
 const defaultState = {
   selectedTopic: null,
-  isFetchingTopicList: false,
+  isFetchingTopicList: true,
   topicListError: null,
   topicPageOpen: false,
   topics: [],

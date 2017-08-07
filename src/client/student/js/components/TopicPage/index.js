@@ -1,20 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import TopicPage from './TopicPage';
-import { requestTopic } from '../../actions';
 
 const TopicPageWrap = props => {
-
-  let renderedChild = props.open ?
-    (<TopicPage
-      topic={ props.topic }
-      load={ props.load }
-      topicListLoaded={ props.topicListLoaded }
-      key={ 0 }
-    />)
-    : null;
 
   return (
     <CSSTransitionGroup
@@ -24,32 +14,16 @@ const TopicPageWrap = props => {
       transitionLeaveTimeout={ 300 }
       component="div"
     >
-      { renderedChild }
+      <Route
+        path="/student/topic/:id/"
+        location={ props.location }
+        key={ props.location.key }
+        component={ TopicPage }
+      />
     </CSSTransitionGroup>
   );
 
 };
 
-function getTopicById(id, topics) {
-  return topics.find(topic => topic.id === id);
-}
 
-function mapStateToProps(state) {
-  let topic = getTopicById(state.topics.selectedTopic, state.topics.topics);
-  return {
-    open: state.topics.topicPageOpen,
-    topic,
-    topicListLoaded: !state.topics.isFetching,
-  };
-}
-
-function matchDispatchToProps(dispatch) {
-  return {
-    load: id => dispatch(requestTopic(id)),
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  matchDispatchToProps,
-)(TopicPageWrap);
+export default withRouter(TopicPageWrap);
