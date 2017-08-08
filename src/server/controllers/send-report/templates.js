@@ -1,7 +1,12 @@
 const config = require('../../config');
 
 function escapeHtml(html) {
-  return html.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
+  return html
+    .replace(/&/g, '&amp;')
+    .replace(/>/g, '&gt;')
+    .replace(/</g, '&lt;')
+    .replace(/'/g, '&apos;')
+    .replace(/"/g, '&quot;');
 }
 
 module.exports = {
