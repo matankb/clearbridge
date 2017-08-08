@@ -40,7 +40,8 @@ const ResultCard = ({ id, name, image, color, snippet }) => (
           <div className="snippet">
             {
             snippet.map((part, index) => (
-              <span className={ part.type } key={ index }>{ part.content }</span>
+              // using index as key is ok because the parts never move around in array
+              <span className={ part.type } key={ index }>{ part.content }</span> // eslint-disable-line
             ))
           }
           </div>
