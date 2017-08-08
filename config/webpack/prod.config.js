@@ -4,7 +4,6 @@ const path = require('path');
 const config = require('./base.config');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BabiliPlugin = require('babili-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 
 config.output.filename = 'js/[name].[chunkhash].min.js';
@@ -19,7 +18,6 @@ config.plugins.push(
     root: path.resolve(__dirname, '../../'),
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-  new BabiliPlugin(),
 );
 
 module.exports = config;
