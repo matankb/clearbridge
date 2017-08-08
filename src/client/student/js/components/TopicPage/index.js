@@ -4,25 +4,23 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import TopicPage from './TopicPage';
 
-const TopicPageWrap = props => {
+const TopicPageWrap = props => (
 
-  return (
-    <CSSTransitionGroup
-      transitionName="topic-page"
-      transitionEnterTimeout={ 300 }
-      transitionLeaveTimeout={ 300 }
-      component="div"
-    >
-      <Route
-        path="/student/topic/:id/"
-        location={ props.location }
-        key={ props.location.key }
-        component={ TopicPage }
-      />
-    </CSSTransitionGroup>
-  );
+  <CSSTransitionGroup
+    transitionName="topic-page"
+    transitionEnterTimeout={ 300 }
+    transitionLeaveTimeout={ 300 }
+    component="div"
+  >
+    <Route
+      path="/student/topic/:id/"
+      location={ props.location }
+      key={ props.location.key }
+      component={ TopicPage }
+    />
+  </CSSTransitionGroup>
 
-};
+);
 
 
 export default withRouter(TopicPageWrap);
