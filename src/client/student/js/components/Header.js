@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -7,73 +8,84 @@ import IconArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
 import { SearchBar } from './Search';
-import { colors } from '../../../shared/js/constants/';
+
+import colors from '../../../shared/js/constants/colors';
+import studentColors from '../constants/colors';
 import { getTextColor } from '../../../shared/js/utils';
 
-import { closeTopicPage } from '../actions';
-import { closeSearch } from '../reducers/search';
-
-const SEARCH_COLOR = '#6b6b6b';
-
-function style(props) {
-  let styles = {
+function getAppBarStyle(props) {
+  return {
     fontSize: '10px',
     flex: '0 0 auto',
     backgroundColor: props.color,
-    boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
+    boxShadow: props.hasBoxShadow ?
+      'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px' :
+      '',
   };
-  if (props.topicOpen && !props.searchOpen) {
-    styles.boxShadow = '';
-  }
-  return styles;
 }
 
-function icon (props) {
-  const style = {
-    icon: {
-      marginLeft: 10,
-      width: 70,
-      height: 70,
-      paddingTop: 13,
-      marginTop: -14,
-    },
-    svg: {
-      width: 24,
-      height: 24,
-    },
-  };
-  if (props.topicOpen || props.searchOpen) {
-    return (
-      <IconButton
-        style={ style.icon }
-        onClick={ () => {
-          if (props.searchOpen) { // prioritize search over topic page
-            props.onCloseSearch();
-          } else if (props.topicOpen) {
-            props.onCloseTopic();
-          }
+const buttonStyle = {
+  icon: {
+    marginLeft: 10,
+    width: 70,
+    height: 70,
+    paddingTop: 13,
+    marginTop: -14,
+  },
+  svg: {
+    width: 24,
+    height: 24,
+  },
+};
 
-        }}
-      >
-        <IconArrowBack color={ getTextColor(props.color) } />
-      </IconButton>
-    );
-  } else {
-    return (<IconButton style={ style.icon }><svg style={ style.svg } viewBox="0 0 24 24">
+
+const BackButton = ({ onClick, color }) => (
+  <IconButton
+    style={ buttonStyle.icon }
+    onClick={ onClick }
+  >
+    <IconArrowBack color={ color } />
+  </IconButton>
+);
+
+const BridgeIcon = ({ color }) => (
+  <IconButton style={ buttonStyle.icon }>
+    <svg style={ buttonStyle.svg } viewBox="0 0 24 24">
       <path
-        fill="#ffffff"
+        fill={ color }
         d="M7,14V10.91C6.28,10.58 5.61,10.18 5,9.71V14H7M5,18H3V16H1V14H3V7H5V8.43C6.8,10 9.27,11 12,11C14.73,11 17.2,10 19,8.43V7H21V14H23V16H21V18H19V16H5V18M17,10.91V14H19V9.71C18.39,10.18 17.72,10.58 17,10.91M16,14V11.32C15.36,11.55 14.69,11.72 14,11.84V14H16M13,14V11.96L12,12L11,11.96V14H13M10,14V11.84C9.31,11.72 8.64,11.55 8,11.32V14H10Z"
       />
-    </svg></IconButton>);
+    </svg>
+  </IconButton>
+);
+
+const LeftIcon = ({ color, pathname, onGoBack }) => {
+  if (pathname !== '/student/') {
+    return <BackButton color={ color } onClick={ onGoBack } />;
+  } else {
+    return <BridgeIcon color={ color } />;
   }
-}
+};
+
 const Header = props => {
   const textColor = getTextColor(props.color);
   return (
     <AppBar
-      style={ style(props) }
+      style={ getAppBarStyle(props) }
       title={ <span style={{ color: textColor }}>JCDS Bridge</span> }
-      iconElementLeft={ icon(props) }
+      iconElementLeft={
+        <LeftIcon
+          color={ textColor }
+          pathname={ props.location.pathname }
+          onGoBack={ () => {
+            if (!props.location.state || !props.location.state.inApp) {
+              props.history.replace('/student/');
+            } else {
+              props.history.goBack();
+            }
+          }}
+        />
+      }
       iconElementRight={
         <div>
           <SearchBar color={ textColor } />
@@ -84,36 +96,41 @@ const Header = props => {
   );
 };
 
+
 function getTopicById(id, topics) {
-  return topics.find(topic => topic.id === id) || '';
+  return topics.find(topic => topic.id === id);
 }
 
-function getHeaderColor(state) {
-  if (state.search.open) {
-    return SEARCH_COLOR;
-  }
-  if (state.topics.topicPageOpen) {
-    return getTopicById(state.topics.selectedTopic, state.topics.topics).data.color;
+function getHeaderColor(location, state) {
+
+  const topicMatch = location.pathname.match(/^\/student\/topic\/([^/]+)/);
+
+  if (topicMatch) {
+
+    const topic = getTopicById(topicMatch[1], state.topics.topics);
+
+    if (!topic) return studentColors.notLoadedTopic;
+    return topic.data.color;
+
+  } else if (location.pathname.startsWith('/student/search')) {
+
+    return studentColors.searchColor;
+
   }
   return colors.primary.dark;
 }
+function shouldHaveBoxShadow(location) {
+  return !location.pathname.startsWith('/student/topic/');
+}
 
-function mapStateToProps(state) {
+
+function mapStateToProps(state, { location }) {
   return {
-    topicOpen: state.topics.topicPageOpen,
-    searchOpen: state.search.open,
-    color: getHeaderColor(state),
+    color: getHeaderColor(location, state),
+    hasBoxShadow: shouldHaveBoxShadow(location),
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onCloseTopic: () => dispatch(closeTopicPage()),
-    onCloseSearch: () => dispatch(closeSearch()),
-  };
-}
-
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(Header);
+)(Header));
