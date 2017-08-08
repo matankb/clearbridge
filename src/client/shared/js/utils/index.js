@@ -30,3 +30,11 @@ export function parseQuery(query) {
   }
   return ret;
 }
+
+export function goBack(location, history, defaultPath) {
+  if (!location.state || !location.state.inApp) {
+    history.replace(defaultPath);
+  } else {
+    history.goBack();
+  }
+}

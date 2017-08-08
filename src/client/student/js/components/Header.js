@@ -11,7 +11,7 @@ import { SearchBar } from './Search';
 
 import colors from '../../../shared/js/constants/colors';
 import studentColors from '../constants/colors';
-import { getTextColor } from '../../../shared/js/utils';
+import { getTextColor, goBack } from '../../../shared/js/utils';
 
 function getAppBarStyle(props) {
   return {
@@ -77,13 +77,7 @@ const Header = props => {
         <LeftIcon
           color={ textColor }
           pathname={ props.location.pathname }
-          onGoBack={ () => {
-            if (!props.location.state || !props.location.state.inApp) {
-              props.history.replace('/student/');
-            } else {
-              props.history.goBack();
-            }
-          }}
+          onGoBack={ () => goBack(props.location, props.history, '/student/')}
         />
       }
       iconElementRight={
