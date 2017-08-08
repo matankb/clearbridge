@@ -5,7 +5,7 @@ import '../../css/tile.less';
 
 const TopicCard = props => (
   <AppLink
-    to={ `/student/topic/${props.id}` }
+    to={ `/student/topic/${props.id}/` }
     className="tile"
     style={{ backgroundColor: props.color }}
   >
