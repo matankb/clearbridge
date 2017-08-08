@@ -7,31 +7,26 @@ const path = require('path');
 const { getTypeName } = require('../helpers/user');
 const { getFullUrl } = require('../helpers/url');
 
-function loginProtected(types) {
-  if ((types || []).length === 0) {
-    return function(req, res, next) { // this function will only check for user
-      if (req.user) {
+function loginProtected(types = [0, 1, 2]) {
+
+  return function(req, res, next) {
+
+    const returnUrl = encodeURIComponent(getFullUrl(req));
+
+    if (req.user) {
+      if (types.indexOf(req.user.type) > -1) {
         next();
       } else {
-        res.redirect('/auth/');
+        res.render(path.resolve(__dirname, '../../../public/errors/403.ejs'), {
+          allowedTypes: getTypeName(types),
+          returnTo: returnUrl,
+        });
       }
-    };
-  } else {
-    return function(req, res, next) {
-      if (req.user) {
-        if (types.indexOf(req.user.type) > -1) {
-          next();
-        } else {
-          res.render(path.resolve(__dirname, '../../../public/errors/403.ejs'), {
-            allowedTypes: getTypeName(types),
-            returnTo: encodeURIComponent(getFullUrl(req)),
-          });
-        }
-      } else {
-        res.redirect('/auth/');
-      }
-    };
-  }
+    } else {
+      res.redirect(`/auth/?returnTo=${returnUrl}`);
+    }
+
+  };
 
 }
 
