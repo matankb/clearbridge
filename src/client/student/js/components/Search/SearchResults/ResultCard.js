@@ -39,8 +39,8 @@ const ResultCard = ({ id, name, image, color, snippet }) => (
           </div>
           <div className="snippet">
             {
-            snippet.map(part => (
-              <span className={ part.type } key={ part.type + part.content }>{ part.content }</span>
+            snippet.map((part, index) => (
+              <span className={ part.type } key={ index }>{ part.content }</span>
             ))
           }
           </div>

@@ -42,9 +42,10 @@ export function setQuery(query) {
   };
 }
 
-export function requestSearch() {
+export function requestSearch(query) {
   return {
     type: REQUEST_SEARCH,
+    query,
   };
 }
 export function recieveSearch(results) {

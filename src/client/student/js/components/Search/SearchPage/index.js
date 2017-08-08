@@ -15,7 +15,7 @@ const SearchPageWrap = props => (
     <Route
       path="/student/search/"
       location={ props.location }
-      key={ props.location.key }
+      key={ props.location.pathname }
       component={ SearchPage }
     />
   </CSSTransitionGroup>

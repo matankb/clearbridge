@@ -3,7 +3,7 @@ import React from 'react';
 import ResultCard from './ResultCard';
 import NoResults from './NoResults';
 
-const SearchResults = ({ results, handleResultClick }) => {
+const SearchResults = ({ results }) => {
 
   const searchCards = results.map(({ id, data, parts }) => (
     <ResultCard

@@ -7,49 +7,42 @@ import LoadableContent from '../../../../../shared/js/components/LoadableContent
 
 import requiresTopicList from '../../../hocs/requires-topic-list';
 
+import { requestSearch } from '../../../reducers/search';
 import { findTopicById } from '../../../utils';
-import { fetchJson, formatError, parseQuery } from '../../../../../shared/js/utils';
+import { parseQuery } from '../../../../../shared/js/utils';
 
-function populateResults(results, topicList) {
-  return results.map(result => ({ ...result, ...findTopicById(topicList, result.id) }));
+function getQueryFor(props) {
+  return parseQuery(props.location.search).q;
 }
 
 class SearchPage extends React.Component {
 
-  state = {
-    results: [],
-    isFetching: false,
-    error: null,
-  }
-
   componentDidMount() {
-    this.requestSearch();
+    this.props.requestSearch(this.getQuery());
   }
 
-  requestSearch = async () => {
-    this.setState({ isFetching: true, error: null });
-    try {
-      const query = parseQuery(this.props.location.search).q;
-      const searchResults = await fetchJson(`/api/search/?q=${query}`);
-      this.setState({ isFetching: false, results: searchResults });
-    } catch (e) {
-      this.setState({ isFetching: false, error: formatError(e) });
+  componentDidUpdate(prevProps) {
+    if (getQueryFor(prevProps) !== this.getQuery()) {
+      this.props.requestSearch(this.getQuery());
     }
+  }
+
+  getQuery() {
+    return getQueryFor(this.props);
   }
 
   render() {
 
-
     return (
       <div className={ classnames('search-page', this.props.open && 'search-page-open') }>
-        <h1>Search results for &quot;{ parseQuery(this.props.location.search).q }&quot;</h1>
+        <h1>Search results for &quot;{ this.getQuery() }&quot;</h1>
         <LoadableContent
-          isLoading={ !this.props.topicListLoaded || this.state.isFetching }
-          error={ this.state.error }
-          retry={ this.requestSearch }
+          isLoading={ !this.props.topicListLoaded || this.props.isFetching }
+          error={ this.props.error }
+          retry={ this.props.requestSearch }
         >
           <SearchResults
-            results={ populateResults(this.state.results, this.props.topicList) }
+            results={ this.props.results }
           />
         </LoadableContent>
       </div>
@@ -58,12 +51,22 @@ class SearchPage extends React.Component {
   }
 }
 
+function populateResults(results, topicList) {
+  return results.map(result => ({ ...result, ...findTopicById(topicList, result.id) }));
+}
 
 function mapStateToProps(state) {
   return {
-    topicList: state.topics.topics,
+    results: populateResults(state.search.results, state.topics.topics),
+    isFetching: state.search.isFetching,
+    error: state.search.error,
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    requestSearch: query => dispatch(requestSearch(query)),
+  };
+}
 
-export default requiresTopicList(connect(mapStateToProps)(SearchPage));
+export default requiresTopicList(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
