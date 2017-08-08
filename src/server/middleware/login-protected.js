@@ -5,6 +5,7 @@
 const path = require('path');
 
 const { getTypeName } = require('../helpers/user');
+const { getFullUrl } = require('../helpers/url');
 
 function loginProtected(types) {
   if ((types || []).length === 0) {
@@ -23,6 +24,7 @@ function loginProtected(types) {
         } else {
           res.render(path.resolve(__dirname, '../../../public/errors/403.ejs'), {
             allowedTypes: getTypeName(types),
+            returnTo: encodeURIComponent(getFullUrl(req)),
           });
         }
       } else {

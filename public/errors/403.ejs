@@ -18,9 +18,9 @@
 
     <img src="/assets/error.svg" class="icon" alt="error"></img>
     <h1 class="title">Permission Denied</h1>
-    <p class="message">Sorry, you have to be a <%= allowedTypes%> to view this page.</p>
+    <p class="message">Sorry, you have to be a <%= allowedTypes %> to view this page.</p>
 
-    <a class="button-link" href="/auth">Log In</a>
+    <a class="button-link" href="/auth/?returnTo=<%= returnTo %>">Log In</a>
 
   </body>
 
