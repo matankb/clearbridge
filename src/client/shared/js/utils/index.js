@@ -26,7 +26,7 @@ export function parseQuery(query) {
   for (const part of queryParts) {
     if (!part) continue; // eslint-disable-line no-continue
     const [key, val] = part.split('=');
-    ret[key] = val;
+    ret[key] = decodeURIComponent(val);
   }
   return ret;
 }
