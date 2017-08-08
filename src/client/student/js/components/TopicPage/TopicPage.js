@@ -19,7 +19,7 @@ const defaultTopic = {
   data: {
     name: '',
     color: colors.notLoadedTopic,
-    image: emptyTopicImage,
+    image: '',
     blurb: '',
     content: '',
   },
