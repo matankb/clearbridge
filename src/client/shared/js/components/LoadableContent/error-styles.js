@@ -10,9 +10,14 @@ export default {
     marginBottom: 10,
     color: '#a2a2a2',
   },
-  message: {
+  title: {
     marginBottom: 7,
     marginTop: 0,
+    color: '#717171',
+    fontWeight: 'normal',
+  },
+  message: {
+    margin: 0,
     color: '#717171',
   },
 };

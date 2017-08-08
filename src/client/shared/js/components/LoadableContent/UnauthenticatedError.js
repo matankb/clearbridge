@@ -8,7 +8,7 @@ import style from './error-styles';
 const UnauthenticatedError = () => (
   <div style={ style.wrapper }>
     <IconErrorOutline style={ style.icon } /><br />
-    <p style={ style.message }>You are not logged in.</p>
+    <h3 style={ style.title }>You are not logged in.</h3>
     <FlatButton
       label="Log In"
       primary

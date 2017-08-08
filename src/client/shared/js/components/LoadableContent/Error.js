@@ -2,6 +2,7 @@ import React from 'react';
 
 import OfflineError from './OfflineError';
 import UnauthenticatedError from './UnauthenticatedError';
+import NotFoundError from './NotFoundError';
 import GenericError from './GenericError';
 
 const Error = ({ error, attempts, retry }) => (
@@ -12,6 +13,8 @@ const Error = ({ error, attempts, retry }) => (
     /> :
   error.status === 403 ?
     <UnauthenticatedError /> :
+  error.status === 404 ?
+    <NotFoundError /> :
     <GenericError retry={ retry } />
 );
 

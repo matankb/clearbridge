@@ -1,6 +1,4 @@
-import color from '../../../shared/js/constants/colors';
-
 export default {
-  notLoadedTopic: color.lightGray,
+  notLoadedTopic: '#dbdbdb',
   searchColor: '#6b6b6b',
 };

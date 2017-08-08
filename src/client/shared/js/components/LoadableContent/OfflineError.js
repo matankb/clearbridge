@@ -38,7 +38,7 @@ class OfflineError extends React.Component {
     return (
       <div style={ style.wrapper } >
         <IconCloudOff style={ style.icon } /> <br />
-        <p style={ style.message } >
+        <p style={ style.title } >
           Not connected. Retrying in { this.state.time } seconds.
         </p>
         <FlatButton

@@ -8,7 +8,7 @@ import style from './error-styles';
 const GenericError = ({ retry }) => (
   <div style={ style.wrapper }>
     <IconErrorOutline style={ style.icon } /><br />
-    <p style={ style.message }>There was an error</p>
+    <h3 style={ style.title }>There was an error</h3>
     <FlatButton
       label="Try Again"
       primary
