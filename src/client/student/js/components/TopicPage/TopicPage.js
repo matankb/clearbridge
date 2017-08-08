@@ -6,6 +6,8 @@ import LoadableContent from '../../../../shared/js/components/LoadableContent';
 import TopicPageHeader from './TopicPageHeader';
 import TopicPageContent from './TopicPageContent';
 
+import requiresTopicList from '../../hocs/requires-topic-list';
+
 import { requestTopic } from '../../actions';
 
 import colors from '../../constants/colors';
@@ -29,7 +31,7 @@ class TopicPage extends React.Component {
     this.loadTopic();
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.topic !== this.props.topic) {
+    if (!prevProps.topic && this.props.topic) {
       this.loadTopic();
     }
   }
@@ -78,7 +80,6 @@ function mapStateToProps(state, { match: { params } }) {
   let topic = getTopicById(params.id, state.topics.topics);
   return {
     topic,
-    topicListLoaded: !state.topics.isFetchingTopicList,
   };
 }
 
@@ -88,7 +89,7 @@ function matchDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
+export default requiresTopicList(connect(
   mapStateToProps,
   matchDispatchToProps,
-)(TopicPage);
+)(TopicPage));
