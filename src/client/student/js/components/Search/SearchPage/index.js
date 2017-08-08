@@ -2,25 +2,24 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import TopicPage from './TopicPage';
+import SearchPage from './SearchPage';
 
-const TopicPageWrap = props => (
+const SearchPageWrap = props => (
 
   <CSSTransitionGroup
-    transitionName="topic-page"
+    transitionName="search-page"
     transitionEnterTimeout={ 300 }
     transitionLeaveTimeout={ 300 }
     component="div"
   >
     <Route
-      path="/student/topic/:id/"
+      path="/student/search/"
       location={ props.location }
-      key={ props.location.key }
-      component={ TopicPage }
+      key={ props.location.pathname }
+      component={ SearchPage }
     />
   </CSSTransitionGroup>
 
 );
 
-
-export default withRouter(TopicPageWrap);
+export default withRouter(SearchPageWrap);

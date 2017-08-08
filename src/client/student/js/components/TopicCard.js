@@ -1,30 +1,17 @@
 import React from 'react';
+import AppLink from '../../../shared/js/components/AppLink';
 
-import { connect } from 'react-redux';
-import { selectTopic, openTopicPage } from '../actions';
-
-import Tile from './Tile';
+import '../../css/tile.less';
 
 const TopicCard = props => (
-  <Tile
-    onClick={ props.handleClick }
+  <AppLink
+    to={ `/student/topic/${props.id}` }
+    className="tile"
     style={{ backgroundColor: props.color }}
   >
     <img src={ props.image } className="image" alt={ props.name } />
     <div className="name">{ props.name }</div>
-  </Tile>
+  </AppLink>
 );
 
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    handleClick: () => {
-      dispatch(selectTopic(ownProps.id));
-      dispatch(openTopicPage());
-    },
-  };
-}
-
-export default connect(
-  () => ({}),
-  mapDispatchToProps,
-)(TopicCard);
+export default TopicCard;

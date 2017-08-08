@@ -8,10 +8,6 @@ export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 export const FETCH_TOPIC_LIST_ERROR = 'FETCH_TOPIC_LIST_ERROR';
 export const FETCH_TOPIC_ERROR = 'FETCH_TOPIC_ERROR';
 
-export const SELECT_TOPIC = 'SELECT_TOPIC';
-export const OPEN_TOPIC_PAGE = 'OPEN_TOPIC_PAGE';
-export const CLOSE_TOPIC_PAGE = 'CLOSE_TOPIC_PAGE';
-
 export function requestTopic(id) {
   return {
     type: REQUEST_TOPIC,
@@ -61,21 +57,3 @@ export function fetchTopicError(id, error) {
     error,
   };
 }
-
-export function selectTopic(id) {
-  return {
-    type: SELECT_TOPIC,
-    id,
-  };
-}
-export function openTopicPage() {
-  return {
-    type: OPEN_TOPIC_PAGE,
-  };
-}
-export function closeTopicPage() {
-  return {
-    type: CLOSE_TOPIC_PAGE,
-  };
-}
-

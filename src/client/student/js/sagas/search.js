@@ -10,12 +10,9 @@ import {
 
 import { fetchJson, formatError } from '../../../shared/js/utils';
 
-const selectQuery = state => state.search.query;
-
-function* onRequestSearch() {
+function* onRequestSearch({ query }) {
   try {
-    const query = yield select(selectQuery);
-    const searchResults = yield fetchJson(`/api/search/?q=${encodeURIComponent(query)}`);
+    const searchResults = yield fetchJson(`/api/search/?q=${query}`);
     yield put(recieveSearch(searchResults));
   } catch (e) {
     yield put(requestSearchError(formatError(e)));

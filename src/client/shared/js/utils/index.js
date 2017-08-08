@@ -19,3 +19,14 @@ export function formatError(error) {
 export function getTextColor(backgroundColor) {
   return tinycolor(backgroundColor).isLight() ? 'black' : 'white';
 }
+
+export function parseQuery(query) {
+  const queryParts = query.slice(1).split('&');
+  const ret = {};
+  for (const part of queryParts) {
+    if (!part) continue; // eslint-disable-line no-continue
+    const [key, val] = part.split('=');
+    ret[key] = val;
+  }
+  return ret;
+}
