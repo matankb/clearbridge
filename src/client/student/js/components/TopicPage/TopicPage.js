@@ -13,7 +13,6 @@ import { requestTopic } from '../../actions';
 import colors from '../../constants/colors';
 
 import '../../../css/topic-page.less';
-import emptyTopicImage from '../../../assets/empty-topic.png';
 
 const defaultTopic = {
   data: {
