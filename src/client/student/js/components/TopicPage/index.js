@@ -8,7 +8,6 @@ const TopicPageWrap = props => {
 
   return (
     <CSSTransitionGroup
-      className="topic-page"
       transitionName="topic-page"
       transitionEnterTimeout={ 300 }
       transitionLeaveTimeout={ 300 }

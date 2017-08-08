@@ -52,7 +52,7 @@ class TopicPage extends React.Component {
       null;
 
     return (
-      <div className="page">
+      <div className="topic-page">
         <TopicPageHeader
           name={ data.name }
           blurb={ data.blurb }
