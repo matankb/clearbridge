@@ -36,7 +36,7 @@ class TopicPage extends React.Component {
 
   loadTopic = () => {
     if (this.props.topicListLoaded) {
-      this.props.load(this.props.id);
+      this.props.load(this.props.topic.id);
     }
   }
 
@@ -75,11 +75,9 @@ function getTopicById(id, topics) {
 }
 
 function mapStateToProps(state, { match: { params } }) {
-  console.log(state);
   let topic = getTopicById(params.id, state.topics.topics);
   return {
     topic,
-    id: params.id,
     topicListLoaded: !state.topics.isFetchingTopicList,
   };
 }
