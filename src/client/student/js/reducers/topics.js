@@ -6,17 +6,12 @@ import {
 
   FETCH_TOPIC_LIST_ERROR,
   FETCH_TOPIC_ERROR,
-
-  SELECT_TOPIC,
-  OPEN_TOPIC_PAGE,
-  CLOSE_TOPIC_PAGE,
 } from '../actions/';
 
 const defaultState = {
   selectedTopic: null,
   isFetchingTopicList: true,
   topicListError: null,
-  topicPageOpen: false,
   topics: [],
 };
 
@@ -102,23 +97,6 @@ function topics(state = defaultState, action) {
             error: action.error,
           };
         }),
-      };
-
-    case SELECT_TOPIC:
-      return {
-        ...state,
-        selectedTopic: action.id,
-      };
-
-    case OPEN_TOPIC_PAGE:
-      return {
-        ...state,
-        topicPageOpen: true,
-      };
-    case CLOSE_TOPIC_PAGE:
-      return {
-        ...state,
-        topicPageOpen: false,
       };
 
     default:
