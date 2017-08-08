@@ -48,22 +48,19 @@
   z-index: 3;
   
   background: @background;
-  
-  visibility: hidden;
-  opacity: 0;
-  transform: scale(1.2);
+
 
   transition: opacity @search-page-transition-time @search-page-transition-easing,
-              transform @search-page-transition-time @search-page-transition-easing,
-              visibility 0s;
-  transition-delay: 0s, 0s, @search-page-transition-time;
+              transform @search-page-transition-time @search-page-transition-easing;
 
   overflow: auto;
   text-align: center;
 
-  &.search-page-open {
-    visibility: visible;
-    transition-delay: 0s, 0s, 0s;
+  &.search-page-enter, &.search-page-leave-active {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  &.search-page-enter-active {
     opacity: 1;
     transform: scale(1);
   }
@@ -71,9 +68,10 @@
   .search-results {
     margin: 50px 0;
     color: @darkGray;
-    h1 {
-      font-weight: 300;
-    }
+  }
+
+  h1 {
+    font-weight: 300;
   }
 
   .search-result-card {

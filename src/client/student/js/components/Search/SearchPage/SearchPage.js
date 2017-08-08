@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-import SearchResults from './SearchResults';
-import LoadableContent from '../../../../shared/js/components/LoadableContent';
-import { requestSearch, closeSearch } from '../../reducers/search';
-import { selectTopic, openTopicPage } from '../../actions';
-import { findTopicById } from '../../utils';
+import SearchResults from './../SearchResults';
+import LoadableContent from '../../../../../shared/js/components/LoadableContent';
+import { requestSearch, closeSearch } from '../../../reducers/search';
+import { findTopicById } from '../../../utils';
 
 class SearchPage extends React.Component {
 
@@ -20,6 +19,7 @@ class SearchPage extends React.Component {
 
     return (
       <div className={ classnames('search-page', this.props.open && 'search-page-open') }>
+        <h1>Search results for &quot;{ this.props.query }&quot;</h1>
         <LoadableContent
           isLoading={ this.props.isFetching }
           error={ this.props.error }
@@ -27,7 +27,6 @@ class SearchPage extends React.Component {
         >
           <SearchResults
             results={ this.props.results }
-            query={ this.props.query }
             handleResultClick={ this.props.handleResultClick }
           />
         </LoadableContent>
@@ -56,8 +55,6 @@ function mapDispatchToProps(dispatch) {
     requestSearch: () => dispatch(requestSearch()),
     handleResultClick: id => {
       dispatch(closeSearch());
-      dispatch(selectTopic(id));
-      dispatch(openTopicPage());
     },
   };
 }

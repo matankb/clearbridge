@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import classnames from 'classnames';
 
@@ -54,7 +55,7 @@ class SearchBar extends React.Component {
       case 'Enter':
         const query = this.state.query.trim();
         if (!query) return;
-        this.props.search(query);
+        this.search(query);
         // falls through to close after searching
       case 'Escape':
         this.close();
@@ -62,6 +63,10 @@ class SearchBar extends React.Component {
       default:
         break;
     }
+  }
+
+  search(query) {
+    this.props.history.push(`/student/search/?q=${query}`, { inApp: true });
   }
 
   render() {
@@ -92,16 +97,4 @@ class SearchBar extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    search: query => {
-      dispatch(setQuery(query));
-      dispatch(openSearch());
-    },
-  };
-}
-
-export default connect(
-  () => ({}),
-  mapDispatchToProps,
-)(SearchBar);
+export default withRouter(SearchBar);
