@@ -6,7 +6,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const ENTRY_DIR = path.resolve(__dirname, '../../src/client/');
 
 function createEntry(name) {
-  return ['babel-polyfill', 'whatwg-fetch', path.resolve(ENTRY_DIR, name)];
+  return ['whatwg-fetch', path.resolve(ENTRY_DIR, name)];
 }
 
 function createHtmlPlugin(name) {

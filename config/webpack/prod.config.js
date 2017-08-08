@@ -19,6 +19,7 @@ config.plugins.push(
     root: path.resolve(__dirname, '../../'),
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
+  new BabiliPlugin(),
 );
 
 module.exports = config;
