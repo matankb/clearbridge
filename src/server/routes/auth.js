@@ -23,12 +23,19 @@ function redirectAfterAuth(req, res) {
 
 }
 
+function saveReturnTo(req, res, next) {
+  const returnTo = req.query.returnTo;
+  if (returnTo) {
+    req.session.returnTo = returnTo;
+  }
+  next();
+}
 
 module.exports = function(app) {
 
-  app.get('/auth/', passport.authenticate('google', { scope: ['profile', 'email'] }));
+  app.get('/auth/', saveReturnTo, passport.authenticate('google', { scope: ['profile', 'email'] }));
   app.get('/auth/callback/', passport.authenticate('google', {
-    successRedirect: '/auth/success/',
+    successReturnToOrRedirect: '/auth/success/',
     failureRedirect: '/auth/fail/',
   }));
 
