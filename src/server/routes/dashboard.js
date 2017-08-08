@@ -3,32 +3,16 @@ const express = require('express');
 const loginProtected = require('../middleware/login-protected');
 const appendTrailingSlash = require('../middleware/append-trailing-slash');
 const trackRequests = require('../middleware/track-requests');
-
-function handleSubRoutes(app, names) {
-
-  const paths = names.map(name => `/${name}/`);
-
-  app.use((req, res, next) => {
-    for (const path of paths) {
-      if (req.url.startsWith(path)) {
-        req.url = path;
-        req.path = path;
-        break;
-      }
-    }
-
-    next();
-  });
-}
+const ignoreSubRoutes = require('../middleware/ignore-subroutes');
 
 function applyMiddleware(app, name, securityLevel) {
-  app.use(`/${name}/`, loginProtected([securityLevel]), trackRequests);
+  const route = `/${name}/`;
+  app.use(route, loginProtected([securityLevel]), trackRequests);
   app.use(`/${name}`, appendTrailingSlash); // let react router be happy and not sad
+  app.use(route, ignoreSubRoutes);
 }
 
 module.exports = function(app) {
-
-  handleSubRoutes(app, ['student', 'teacher', 'admin']);
 
   applyMiddleware(app, 'student', 0);
   applyMiddleware(app, 'teacher', 1);
