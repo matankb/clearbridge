@@ -1,42 +1,54 @@
 import React from 'react';
-
 import Paper from 'material-ui/Paper';
 
+import AppLink from '../../../../../shared/js/components/AppLink';
+
 const style = {
+  appLink: {
+    display: 'block',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    textDecoration: 'none',
+    maxWidth: '80%',
+    width: 700,
+  },
   paper: {
     display: 'flex',
     marginTop: 30,
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    marginLeft: 0,
+    marginRight: 0,
     height: 180,
-    maxWidth: '80%',
-    width: 700,
+    width: '100%',
     cursor: 'pointer',
   },
 };
 
-const ResultCard = ({ name, image, color, snippet, onClick }) => (
+const ResultCard = ({ id, name, image, color, snippet }) => (
   <div className="search-result-card">
-    <Paper style={ style.paper } onTouchTap={ onClick }>
+    <AppLink to={`/student/topic/${id}/`} style={ style.appLink }>
 
-      <div className="image-wrap" style={{ background: color }}>
-        <img src={ image } alt={ name } />
-      </div>
-      <div className="details-wrap">
+      <Paper style={ style.paper }>
 
-        <div className="name">
-          { name }
+        <div className="image-wrap" style={{ background: color }}>
+          <img src={ image } alt={ name } />
         </div>
-        <div className="snippet">
-          {
+        <div className="details-wrap">
+
+          <div className="name">
+            { name }
+          </div>
+          <div className="snippet">
+            {
             snippet.map(part => (
               <span className={ part.type } key={ part.type + part.content }>{ part.content }</span>
             ))
           }
-        </div>
+          </div>
 
-      </div>
-    </Paper>
+        </div>
+      </Paper>
+
+    </AppLink>
   </div>
 );
 

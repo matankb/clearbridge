@@ -8,11 +8,11 @@ const SearchResults = ({ results, handleResultClick }) => {
   const searchCards = results.map(({ id, data, parts }) => (
     <ResultCard
       key={ id }
+      id={ id }
       snippet={ parts }
       name={ data.name }
       image={ data.image }
       color={ data.color }
-      onClick={ () => handleResultClick(id) }
     />
   ));
 

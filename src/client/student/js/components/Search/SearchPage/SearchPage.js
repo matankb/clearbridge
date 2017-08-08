@@ -50,7 +50,6 @@ class SearchPage extends React.Component {
         >
           <SearchResults
             results={ populateResults(this.state.results, this.props.topicList) }
-            handleResultClick={ this.props.handleResultClick }
           />
         </LoadableContent>
       </div>
