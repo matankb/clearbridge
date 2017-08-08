@@ -30,7 +30,7 @@ const ResultCard = ({ name, image, color, snippet, onClick }) => (
         <div className="snippet">
           {
             snippet.map(part => (
-              <span className={ part.type }>{ part.content }</span>
+              <span className={ part.type } key={ part.type + part.content }>{ part.content }</span>
             ))
           }
         </div>
