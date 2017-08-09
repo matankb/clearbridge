@@ -9,6 +9,5 @@ module.exports = (req, res, next) => {
   }
   a.path = req.originalUrl;
   a.timestamp = new Date().toUTCString();
-  a.save();
   next();
 };

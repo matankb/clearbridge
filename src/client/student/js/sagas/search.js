@@ -1,9 +1,8 @@
-import { takeEvery, select, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 
 import {
   REQUEST_SEARCH,
 
-  requestSearch,
   recieveSearch,
   requestSearchError,
 } from '../reducers/search';
