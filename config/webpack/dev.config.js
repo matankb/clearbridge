@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = require('./base.config');
 
-config.devtool = 'inline-eval-source-map';
+config.devtool = 'source-map';
 
 config.output.filename = 'js/[name].min.js';
 config.output.path = '/';
