@@ -37,6 +37,6 @@ function showBanner() {
   /* eslint-enable no-console */
 }
 
-if (process.env.NODE_ENV === 'producion') {
+if (process.env.NODE_ENV === 'production') {
   showBanner();
 }
