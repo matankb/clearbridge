@@ -29,7 +29,7 @@ const defaultTopic = {
 class TopicPage extends React.Component {
 
   static propTypes = {
-    topic: AppPropTypes.topic.isRequired,
+    topic: AppPropTypes.topic,
     topicListLoaded: PropTypes.bool.isRequired,
     load: PropTypes.func.isRequired,
   }
