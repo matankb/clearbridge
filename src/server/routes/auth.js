@@ -17,8 +17,7 @@ function redirectAfterAuth(req, res) {
       res.redirect('/admin/');
       break;
     default:
-      res.redirect('/'); // TODO: flash message with 'invalid user' or something
-      break;
+      throw new Error('Invalid user type');
   }
 
 }
