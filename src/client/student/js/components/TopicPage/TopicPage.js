@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import LoadableContent from '../../../../shared/js/components/LoadableContent';
@@ -10,6 +11,7 @@ import requiresTopicList from '../../hocs/requires-topic-list';
 
 import { requestTopic } from '../../actions';
 
+import AppPropTypes from '../../../../shared/js/constants/prop-types';
 import colors from '../../constants/colors';
 
 import '../../../css/topic-page.less';
@@ -25,6 +27,16 @@ const defaultTopic = {
 };
 
 class TopicPage extends React.Component {
+
+  static propTypes = {
+    topic: AppPropTypes.topic.isRequired,
+    topicListLoaded: PropTypes.bool.isRequired,
+    load: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    topic: null,
+  }
 
   componentDidMount() {
     this.loadTopic();

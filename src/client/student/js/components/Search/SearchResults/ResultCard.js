@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Paper from 'material-ui/Paper';
 
 import AppLink from '../../../../../shared/js/components/AppLink';
@@ -52,5 +54,20 @@ const ResultCard = ({ id, name, image, color, snippet }) => (
     </AppLink>
   </div>
 );
+
+ResultCard.propTypes = {
+
+  id: PropTypes.string.isRequired,
+
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+
+  snippet: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string,
+    content: PropTypes.string,
+  })).isRequired,
+
+};
 
 export default ResultCard;

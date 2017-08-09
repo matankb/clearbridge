@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Grid, {
   GridTileSmall as SmallTile,
@@ -86,6 +87,10 @@ const GridLayout = ({ items }) => {
       { children }
     </Grid>
   );
+};
+
+GridLayout.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default GridLayout;

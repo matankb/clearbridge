@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { withRouter } from 'react-router-dom';
 
 import classnames from 'classnames';
@@ -7,11 +8,14 @@ import classnames from 'classnames';
 import IconButton from 'material-ui/IconButton';
 import IconSearch from 'material-ui/svg-icons/action/search';
 
-import { setQuery, openSearch } from '../../reducers/search';
-
 import '../../../css/search.less';
 
 class SearchBar extends React.Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    color: PropTypes.string.isRequired,
+  }
 
   state = {
     open: false,

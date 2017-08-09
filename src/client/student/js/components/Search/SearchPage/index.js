@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, withRouter } from 'react-router-dom';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
@@ -21,5 +22,9 @@ const SearchPageWrap = props => (
   </CSSTransitionGroup>
 
 );
+
+SearchPageWrap.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 
 export default withRouter(SearchPageWrap);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import lightbulbImage from '../../../assets/lightbulb.png';
 
@@ -18,5 +19,9 @@ const TopicSuggestCard = ({ onClick }) => (
     <div className="name" style={ style.name }>Suggest Topic</div>
   </button>
 );
+
+TopicSuggestCard.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default TopicSuggestCard;

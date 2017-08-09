@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
 import SearchResults from './../SearchResults';
 import LoadableContent from '../../../../../shared/js/components/LoadableContent';
 
+import AppPropTypes from '../../../../../shared/js/constants/prop-types';
 import requiresTopicList from '../../../hocs/requires-topic-list';
 
 import { requestSearch } from '../../../reducers/search';
@@ -16,6 +19,18 @@ function getQueryFor(props) {
 }
 
 class SearchPage extends React.Component {
+
+  static propTypes = {
+    results: PropTypes.array.isRequired,
+    requestSearch: PropTypes.func.isRequired,
+    topicListLoaded: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    error: AppPropTypes.error,
+  }
+
+  static defaultProps = {
+    error: null,
+  }
 
   componentDidMount() {
     this.props.requestSearch(this.getQuery());
@@ -34,7 +49,7 @@ class SearchPage extends React.Component {
   render() {
 
     return (
-      <div className={ classnames('search-page', this.props.open && 'search-page-open') }>
+      <div className="search-page">
         <h1>Search results for &quot;{ this.getQuery() }&quot;</h1>
         <LoadableContent
           isLoading={ !this.props.topicListLoaded || this.props.isFetching }

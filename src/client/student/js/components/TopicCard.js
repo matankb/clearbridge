@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import AppLink from '../../../shared/js/components/AppLink';
 
 import '../../css/tile.less';
@@ -13,5 +15,12 @@ const TopicCard = props => (
     <div className="name">{ props.name }</div>
   </AppLink>
 );
+
+TopicCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};
 
 export default TopicCard;

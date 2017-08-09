@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, withRouter } from 'react-router-dom';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import TopicPage from './TopicPage';
 
-const TopicPageWrap = props => (
+const TopicPageWrap = ({ location }) => (
 
   <CSSTransitionGroup
     transitionName="topic-page"
@@ -14,13 +15,16 @@ const TopicPageWrap = props => (
   >
     <Route
       path="/student/topic/:id/"
-      location={ props.location }
-      key={ props.location.key }
+      location={ location }
+      key={ location.key }
       component={ TopicPage }
     />
   </CSSTransitionGroup>
 
 );
 
+TopicPageWrap.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 
 export default withRouter(TopicPageWrap);

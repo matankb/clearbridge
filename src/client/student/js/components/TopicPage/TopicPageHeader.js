@@ -1,9 +1,11 @@
 import React from 'react';
-import tinycolor from 'tinycolor2';
+import PropTypes from 'prop-types';
+
+import { getTextColor } from '../../../../shared/js/utils';
 
 const TopicPageHeader = ({ name, color, image }) => {
 
-  const textColor = tinycolor(color).isLight() ? 'black' : 'white';
+  const textColor = getTextColor(color);
 
   return (
     <div className="header" style={{ backgroundColor: color }}>
@@ -16,6 +18,12 @@ const TopicPageHeader = ({ name, color, image }) => {
     </div>
   );
 
+};
+
+TopicPageHeader.propTypes = {
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default TopicPageHeader;

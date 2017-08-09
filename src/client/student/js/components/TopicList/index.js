@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { requestTopicList } from '../../actions';
+
+import AppPropTypes from '../../../../shared/js/constants/prop-types';
 
 import GridLayout from './GridLayout';
 import TopicCard from '../TopicCard';
@@ -11,6 +14,17 @@ import '../../../css/topic-list.less';
 
 class TopicList extends React.Component {
 
+  static propTypes = {
+    topics: PropTypes.arrayOf(AppPropTypes.topic).isRequired,
+    fetchTopics: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    error: AppPropTypes.error,
+  }
+
+  static defaultProps = {
+    error: null,
+  }
+
   componentDidMount() {
     this.props.fetchTopics(); // load topic list into redux store
   }
@@ -19,10 +33,10 @@ class TopicList extends React.Component {
 
     const topicCards = this.props.topics.map(topic => (
       <TopicCard
+        id={ topic.id }
         name={ topic.data.name }
         image={ topic.data.image }
         color={ topic.data.color }
-        id={ topic.id }
       />
     ));
 

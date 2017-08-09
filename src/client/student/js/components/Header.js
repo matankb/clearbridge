@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -48,6 +49,11 @@ const BackButton = ({ onClick, color }) => (
   </IconButton>
 );
 
+BackButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+};
+
 const BridgeIcon = ({ color }) => (
   <IconButton style={ buttonStyle.icon }>
     <svg style={ buttonStyle.svg } viewBox="0 0 24 24">
@@ -59,12 +65,22 @@ const BridgeIcon = ({ color }) => (
   </IconButton>
 );
 
+BridgeIcon.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
 const LeftIcon = ({ color, pathname, onGoBack }) => {
   if (pathname !== '/student/') {
     return <BackButton color={ color } onClick={ onGoBack } />;
   } else {
     return <BridgeIcon color={ color } />;
   }
+};
+
+LeftIcon.propTypes = {
+  color: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired,
+  onGoBack: PropTypes.func.isRequired,
 };
 
 const Header = props => {
@@ -90,6 +106,14 @@ const Header = props => {
   );
 };
 
+Header.propTypes = {
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+
+  color: PropTypes.string.isRequired,
+  // use in getAppBarStyles, but eslint can't detect
+  hasBoxShadow: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
+};
 
 function getTopicById(id, topics) {
   return topics.find(topic => topic.id === id);
