@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -88,7 +88,9 @@ const Header = props => {
   return (
     <AppBar
       style={ getAppBarStyle(props) }
-      title={ <span style={{ color: textColor }}>JCDS Bridge</span> }
+      title={
+        <Link to="/student/" style={{ color: textColor, textDecoration: 'none' }}>JCDS Bridge</Link>
+      }
       iconElementLeft={
         <LeftIcon
           color={ textColor }
