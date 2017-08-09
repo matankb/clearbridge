@@ -48,7 +48,7 @@ class TopicPage extends React.Component {
   }
 
   loadTopic = () => {
-    if (this.props.topicListLoaded) {
+    if (this.props.topicListLoaded && this.props.topic) {
       this.props.load(this.props.topic.id);
     }
   }
