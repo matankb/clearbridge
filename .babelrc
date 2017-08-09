@@ -10,5 +10,12 @@
     "transform-class-properties",
     "transform-runtime",
     "react-hot-loader/babel"
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
+    }
+  }
 }
