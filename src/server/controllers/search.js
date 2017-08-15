@@ -1,4 +1,5 @@
 const sanitizeHtml = require('sanitize-html');
+const fuzzy = require('fuzzyjs');
 
 const { Student } = require('../models/User');
 require('../models/Topic');
@@ -131,24 +132,41 @@ function getWeightedScore(name, content) {
   return ((name * 2) + content);
 }
 
+function testMatch(query, word) {
+  return fuzzy.match(query, word, { caseSensitive: false }).score;
+}
+
 function getMatches(queryParts, words) {
   const matches = [];
-  const matchedQueries = new Set();
+  const queryMatches = new Map();
+
+  for (const query of queryParts) {
+    queryMatches.set(query, []);  // all matches are initially empty
+  }
 
   for (const word of words) {
-    const queryMatches = queryParts.filter(queryPart => word.toLowerCase().includes(queryPart));
+    const wordMatches =
+      queryParts
+        .map(query => ({
+          query,
+          score: testMatch(query, word),
+        }));
 
-    for (const match of queryMatches) {
-      matchedQueries.add(match);
-    }
-
-    if (queryMatches.length) {
-      matches.push(word);
+    for (const { query, score } of wordMatches) {
+      queryMatches.get(query).push(score);  // record per-query scores
     }
   }
 
+  // Average scores for every query individually, and then average the averages.
+  let totalQueryMatches = 0;
+
+  for (const [, scores] of queryMatches) {
+    const avgScore = scores.reduce((a, b) => a + b) / scores.length;
+    totalQueryMatches += avgScore;
+  }
+
   return {
-    score: matchedQueries.size / queryParts.length,
+    score: totalQueryMatches / queryParts.length,
     matches,
   };
 
