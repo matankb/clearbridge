@@ -60,7 +60,7 @@ function formatBackgroundString(string, isBeginning) {
 
   if (isBeginning) {
 
-    if (words.length <= SNIPPET_LENGTH + 1) return string; // nothing to do, content too short
+    if (words.length <= SNIPPET_LENGTH) return string; // nothing to do, content too short
     return ELLIPSIS_CHAR + string.slice(words[words.length - SNIPPET_LENGTH - 1].index);
 
   } else { // middle of string
