@@ -150,7 +150,12 @@ function getMatches(queryParts, words) {
         .map(query => ({
           query,
           score: testMatch(query, word),
-        }));
+        }))
+        .filter(match => match.score > 0.1);
+
+    if (wordMatches.length) {
+      matches.push(word);
+    }
 
     for (const { query, score } of wordMatches) {
       queryMatches.get(query).push(score);  // record per-query scores
