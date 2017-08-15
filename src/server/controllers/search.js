@@ -85,7 +85,7 @@ function formatEndString(string, matches) {
   let words = split(string, WORD_SPLIT);
 
   // make sure only SNIPPET_LENGTH words are taken
-  if (words.length > SNIPPET_LENGTH + 1) {
+  if (words.length > SNIPPET_LENGTH) {
     string = string.slice(
       0,
       words[SNIPPET_LENGTH].index + words[SNIPPET_LENGTH].str.length,
