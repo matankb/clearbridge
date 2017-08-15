@@ -65,7 +65,7 @@ function formatBackgroundString(string, isBeginning) {
 
   } else { // middle of string
 
-    if (words.length <= (2 * SNIPPET_LENGTH) + 2) return string;
+    if (words.length <= 2 * SNIPPET_LENGTH) return string;
 
     const beginning = string.slice(
       0,
