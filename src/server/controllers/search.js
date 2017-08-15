@@ -131,7 +131,7 @@ function getWeightedScore(name, content) {
   return ((name * 2) + content);
 }
 
-function getMatch(queryParts, words) {
+function getMatches(queryParts, words) {
   const matches = [];
   const matchedQueries = new Set();
 
@@ -175,8 +175,8 @@ async function doSearch(query, userId) {
           content,
           nameParts,
           contentParts,
-          nameMatch: getMatch(queryParts, nameParts),
-          contentMatch: getMatch(queryParts, contentParts),
+          nameMatch: getMatches(queryParts, nameParts),
+          contentMatch: getMatches(queryParts, contentParts),
         };
 
       })
