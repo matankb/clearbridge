@@ -133,7 +133,11 @@ function getWeightedScore(name, content) {
 }
 
 function testMatch(query, word) {
-  return fuzzy.match(query, word, { caseSensitive: false }).score;
+  if (!word.includes(query)) {
+    return 0;
+  }
+
+  return query.length / word.length;
 }
 
 function getMatches(queryParts, words) {
