@@ -155,7 +155,7 @@ function getMatches(queryParts, words) {
           query,
           score: testMatch(query, word),
         }))
-        .filter(match => match.score > 0.1);
+        .filter(match => match.score > 0);
 
     if (wordMatches.length) {
       matches.push(word);
@@ -207,7 +207,7 @@ async function doSearch(query, userId) {
         };
 
       })
-      .filter(result => result.nameMatch.score || result.contentMatch.score > 0.5)
+      .filter(result => result.nameMatch.score || result.contentMatch.score > 0.3)
       .sort((a, b) => {
 
         const aScore = getWeightedScore(a.nameMatch.score, a.contentMatch.score);
