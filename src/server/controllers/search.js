@@ -166,7 +166,7 @@ function getMatches(queryParts, words) {
   let totalQueryMatches = 0;
 
   for (const [, scores] of queryMatches) {
-    const avgScore = scores.reduce((a, b) => a + b) / scores.length;
+    const avgScore = (scores.reduce((a, b) => a + b, 0) / scores.length) || 0;
     totalQueryMatches += avgScore;
   }
 
