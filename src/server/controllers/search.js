@@ -133,7 +133,7 @@ function getWeightedScore(name, content) {
 }
 
 function testMatch(query, word) {
-  if (!word.includes(query)) {
+  if (!word.toLowerCase().includes(query)) {
     return 0;
   }
 
