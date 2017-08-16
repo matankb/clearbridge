@@ -1,5 +1,4 @@
 const sanitizeHtml = require('sanitize-html');
-const fuzzy = require('fuzzyjs');
 
 const { Student } = require('../models/User');
 require('../models/Topic');
