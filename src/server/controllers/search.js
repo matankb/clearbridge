@@ -197,13 +197,16 @@ async function doSearch(query, userId) {
         const content = stripHtml(topic);
         const contentParts = content.split(WORD_SPLIT);
 
+        const nameMatch = getMatches(queryParts, nameParts);
+        const contentMatch = getMatches(queryParts, contentParts);
+
         return {
           id: topic.id,
           content,
           nameParts,
           contentParts,
-          nameMatch: getMatches(queryParts, nameParts),
-          contentMatch: getMatches(queryParts, contentParts),
+          nameMatch,
+          contentMatch,
         };
 
       })
