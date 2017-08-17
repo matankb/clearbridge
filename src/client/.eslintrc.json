@@ -9,9 +9,7 @@
   "env": {
     "browser": true
   },
-  "parser": "babel-eslint",
   "rules": {
-    "jsx-a11y/href-no-hash": 0,
     "react/jsx-closing-bracket-location": 1,
     "react/jsx-no-bind": 0,
     "react/jsx-curly-spacing": 0,
