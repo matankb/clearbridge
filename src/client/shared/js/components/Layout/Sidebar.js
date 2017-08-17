@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link, withRouter } from 'react-router-dom';
 
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+
+import SidebarItemsPropType from './sidebar-items-prop-type';
 
 const style = {
   list: {
@@ -73,6 +77,12 @@ const Sidebar = props => {
         }
     </Drawer>
   );
+};
+
+Sidebar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  items: SidebarItemsPropType.isRequired,
+  onRequestChange: PropTypes.func.isRequired,
 };
 
 export default withRouter(Sidebar);

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import AppBar from 'material-ui/AppBar';
 
 import IconButton from 'material-ui/IconButton';
@@ -43,6 +45,10 @@ const Header = props => {
       iconElementRight={ feedbackButton }
     />
   );
+};
+
+Header.propTypes = {
+  handleIconClick: PropTypes.func.isRequired,
 };
 
 export default Header;

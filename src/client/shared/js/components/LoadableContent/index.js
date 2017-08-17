@@ -1,9 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import AppPropTypes from '~/shared/js/constants/prop-types';
 
 import Throbber from './Throbber';
 import Error from './Error';
 
 class LoadableContent extends React.Component {
+
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    error: AppPropTypes.error,
+    retry: PropTypes.func.isRequired,
+
+    children: PropTypes.node.isRequired,
+  }
+
+  static defaultProps = {
+    error: null,
+  }
 
   state = {
     attempts: 0,

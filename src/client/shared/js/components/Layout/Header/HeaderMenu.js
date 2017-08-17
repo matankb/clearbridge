@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 
 import IconMenu from 'material-ui/IconMenu';
@@ -42,6 +44,12 @@ const HeaderMenu = ({ iconColor, handleFeedbackClick, handleAboutClick }) => {
       />
     </IconMenu>
   );
+};
+
+HeaderMenu.propTypes = {
+  iconColor: PropTypes.string.isRequired,
+  handleFeedbackClick: PropTypes.func.isRequired,
+  handleAboutClick: PropTypes.func.isRequired,
 };
 
 export default connect(

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -33,9 +34,9 @@ const style = {
   },
 };
 
-const FeedbackDialog = props => {
-
-  let { close, send, openState, handleTypeChange, handleCommentChange, type, comment } = props;
+const FeedbackDialog = ({
+  close, send, openState, handleTypeChange, handleCommentChange, type, comment,
+}) => {
 
   const buttons = [
     <FlatButton
@@ -62,7 +63,7 @@ const FeedbackDialog = props => {
       <span style={ style.label }>Select Type:</span>
       <TypePicker
         onChange={ handleTypeChange }
-        value={ props.type }
+        value={ type }
         style={ style.typePicker }
       />
       <br />
@@ -79,6 +80,19 @@ const FeedbackDialog = props => {
       { buttons }
     </Dialog>
   );
+};
+
+FeedbackDialog.propTypes = {
+  openState: PropTypes.bool.isRequired,
+
+  type: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+
+  handleTypeChange: PropTypes.func.isRequired,
+  handleCommentChange: PropTypes.func.isRequired,
+
+  close: PropTypes.func.isRequired,
+  send: PropTypes.func.isRequired,
 };
 
 export default FeedbackDialog;

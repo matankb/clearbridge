@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -19,5 +20,11 @@ const TypePicker = ({ onChange, value, style }) => (
     <MenuItem value={ TOPIC } primaryText="Topic Idea" />
   </DropDownMenu>
 );
+
+TypePicker.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  style: PropTypes.object.isRequired,
+};
 
 export default TypePicker;
