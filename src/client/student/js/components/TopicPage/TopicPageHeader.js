@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { getTextColor } from '../../../../shared/js/utils';
+import { getTextColor } from '~/shared/js/utils';
 
 const TopicPageHeader = ({ name, color, image }) => {
 

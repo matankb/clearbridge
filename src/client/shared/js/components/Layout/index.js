@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import '~/shared/css/layout.less';
+
+import SidebarItemsPropType from './sidebar-items-prop-type';
 
 import Header from './Header/';
 import Sidebar from './Sidebar';
 import Feedback from '../Feedback';
-
-import '../../../css/layout.less';
 
 const styles = {
   main(props) {
@@ -23,6 +26,12 @@ const styles = {
 };
 
 class Layout extends React.Component {
+
+  static propTypes = {
+    sidebarItems: SidebarItemsPropType.isRequired,
+    children: PropTypes.node.isRequired,
+  }
+
   constructor() {
     super();
     this.state = {

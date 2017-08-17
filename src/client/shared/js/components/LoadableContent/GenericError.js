@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import FlatButton from 'material-ui/FlatButton';
 import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
@@ -17,5 +18,9 @@ const GenericError = ({ retry }) => (
     />
   </div>
 );
+
+GenericError.propTypes = {
+  retry: PropTypes.func.isRequired,
+};
 
 export default GenericError;

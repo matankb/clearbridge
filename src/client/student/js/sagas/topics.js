@@ -1,5 +1,8 @@
 import { takeEvery, put, select } from 'redux-saga/effects';
 
+import { getTopicById } from '~/shared/js/utils';
+import { fetchJson, formatError } from '~/shared/js/utils/fetch';
+
 import {
   REQUEST_TOPIC_LIST,
   REQUEST_TOPIC,
@@ -12,8 +15,6 @@ import {
   fetchTopicError,
 } from '../actions';
 
-import { fetchJson, formatError } from '../../../shared/js/utils/fetch';
-import { getTopicById } from '../../../shared/js/utils';
 
 // selectors
 const getTopic = id => state => getTopicById(state.topics.topics, id);

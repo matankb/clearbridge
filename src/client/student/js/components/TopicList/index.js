@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { requestTopicList } from '../../actions';
+import { requestTopicList } from '~/student/js/actions';
 
-import AppPropTypes from '../../../../shared/js/constants/prop-types';
+import AppPropTypes from '~/shared/js/constants/prop-types';
+
+import TopicCard from '~/student/js/components/TopicCard';
+import TopicSuggest from '~/student/js/components/TopicSuggest';
+import LoadableContent from '~/shared/js/components/LoadableContent';
+
+import '~/student/css/topic-list.less';
 
 import GridLayout from './GridLayout';
-import TopicCard from '../TopicCard';
-import TopicSuggest from '../TopicSuggest';
-import LoadableContent from '../../../../shared/js/components/LoadableContent';
-
-import '../../../css/topic-list.less';
 
 class TopicList extends React.Component {
 

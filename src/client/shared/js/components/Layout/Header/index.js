@@ -1,13 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import AppBar from 'material-ui/AppBar';
 
 import IconButton from 'material-ui/IconButton';
 import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
 
-import { FeedbackButton } from '../../Feedback';
+import { colors } from '~/shared/js/constants';
+import { FeedbackButton } from '~/shared/js/components/Feedback';
+
 import HeaderMenu from './HeaderMenu';
 
-import { colors } from '../../../constants';
 
 const styles = {
   header: {
@@ -42,6 +45,10 @@ const Header = props => {
       iconElementRight={ feedbackButton }
     />
   );
+};
+
+Header.propTypes = {
+  handleIconClick: PropTypes.func.isRequired,
 };
 
 export default Header;

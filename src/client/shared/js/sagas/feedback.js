@@ -1,8 +1,13 @@
 import { takeEvery } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 
-import { SEND_FEEDBACK, feedbackSent, feedbackSentError } from '../reducers/feedback/sending';
-import sendReport from '../report';
+import {
+  SEND_FEEDBACK,
+  feedbackSent,
+  feedbackSentError,
+} from '~/shared/js/reducers/feedback/sending';
+
+import sendReport from '~/shared/js/report';
 
 const getData = state => state.feedback.data;
 

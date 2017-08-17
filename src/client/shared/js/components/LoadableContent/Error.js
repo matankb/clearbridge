@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import AppPropTypes from '~/shared/js/constants/prop-types';
 
 import OfflineError from './OfflineError';
 import UnauthenticatedError from './UnauthenticatedError';
@@ -17,5 +20,11 @@ const Error = ({ error, attempts, retry }) => (
     <NotFoundError /> :
     <GenericError retry={ retry } />
 );
+
+Error.propTypes = {
+  error: AppPropTypes.error.isRequired,
+  attempts: PropTypes.number.isRequired,
+  retry: PropTypes.func.isRequired,
+};
 
 export default Error;

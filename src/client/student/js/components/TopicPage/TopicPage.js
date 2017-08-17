@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import LoadableContent from '../../../../shared/js/components/LoadableContent';
+import LoadableContent from '~/shared/js/components/LoadableContent';
+import requiresTopicList from '~/student/js/hocs/requires-topic-list';
+
+import { requestTopic } from '~/student/js/actions';
+
+import AppPropTypes from '~/shared/js/constants/prop-types';
+import colors from '~/student/js/constants/colors';
+
+import { getTopicById } from '~/shared/js/utils';
+
+import '~/student/css/topic-page.less';
 
 import TopicPageHeader from './TopicPageHeader';
-import TopicPageMain from './TopicPageMain';
+import TopicPageContent from './TopicPageContent';
 
-import requiresTopicList from '../../hocs/requires-topic-list';
-
-import { requestTopic } from '../../actions';
-
-import AppPropTypes from '../../../../shared/js/constants/prop-types';
-import colors from '../../constants/colors';
-
-import { getTopicById } from '../../../../shared/js/utils';
-
-import '../../../css/topic-page.less';
 
 const defaultTopic = {
   data: {
