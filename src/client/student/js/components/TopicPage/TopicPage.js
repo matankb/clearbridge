@@ -15,7 +15,7 @@ import { getTopicById } from '~/shared/js/utils';
 import '~/student/css/topic-page.less';
 
 import TopicPageHeader from './TopicPageHeader';
-import TopicPageContent from './TopicPageContent';
+import TopicPageMain from './TopicPageMain';
 
 
 const defaultTopic = {
