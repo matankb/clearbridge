@@ -26,6 +26,10 @@ const defaultTopic = {
   },
 };
 
+function getId(topic) {
+  return topic ? topic.id : null;
+}
+
 class TopicPage extends React.Component {
 
   static propTypes = {
@@ -42,13 +46,13 @@ class TopicPage extends React.Component {
     this.loadTopic();
   }
   componentDidUpdate(prevProps) {
-    if (!prevProps.topic && this.props.topic) {
+    if (getId(prevProps.topic) !== getId(this.props.topic)) {
       this.loadTopic();
     }
   }
 
   loadTopic = () => {
-    if (this.props.topicListLoaded && this.props.topic) {
+    if (this.props.topic) {
       this.props.load(this.props.topic.id);
     }
   }
