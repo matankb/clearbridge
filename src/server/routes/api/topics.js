@@ -15,5 +15,6 @@ module.exports = function(router) {
   router.delete('/topics/:id/', ensureAuthenticated([1, 2]), wrapAsync(topicController.deleteTopic));
 
   router.get('/topics/:id/students/', ensureAuthenticated([1, 2]), wrapAsync(topicController.getStudents));
+  router.get('/topics/:id/asks/', ensureAuthenticated(), wrapAsync(topicController.getAsks));
 
 };
