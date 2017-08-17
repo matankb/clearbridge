@@ -4,7 +4,6 @@ export const RECIEVE_SEARCH = 'SEARCH/RECIEVE_SEARCH';
 export const REQUEST_SEARCH_ERROR = 'SEARCH/REQUEST_SEARCH_ERROR';
 
 const defaultState = {
-  query: '',
   results: [],
   isFetching: false,
   error: null,
