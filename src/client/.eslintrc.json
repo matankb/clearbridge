@@ -1,4 +1,11 @@
 {
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "config/webpack/base.config.js"
+      }
+    }
+  },
   "env": {
     "browser": true
   },
