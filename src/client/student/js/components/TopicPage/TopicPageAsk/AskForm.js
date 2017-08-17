@@ -23,27 +23,45 @@ const style = {
   },
 };
 
-const AskForm = ({ name }) => (
-  <Paper style={ style.paperWrap }>
-    <TextField
-      name="question"
-      floatingLabelText={ `Ask a question about ${name}...` }
-      floatingLabelStyle={ style.textFieldLabel }
-      style={ style.textField }
-      autoComplete="off"
-    />
-    <FlatButton
-      label="Ask"
-      onTouchTap={ this.send }
-      style={ style.askButton }
-      primary
-    />
-  </Paper>
-);
+class AskForm extends React.Component {
 
-AskForm.propTypes = {
-  name: PropTypes.string.isRequired,
-};
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    sendAsk: PropTypes.func.isRequired,
+  }
 
+  state = {
+    question: '',
+  }
+
+  handleQuestionChange = e => this.setState({ question: e.target.value });
+
+  render() {
+    return (
+      <Paper style={ style.paperWrap }>
+
+        <TextField
+          name="question"
+          onChange={ this.handleQuestionChange }
+
+          style={ style.textField }
+          autoComplete="off"
+
+          floatingLabelText={ `Ask a question about ${this.props.name}...` }
+          floatingLabelStyle={ style.textFieldLabel }
+        />
+
+        <FlatButton
+          label="Ask"
+
+          style={ style.askButton }
+          primary
+        />
+
+      </Paper>
+    );
+  }
+
+}
 
 export default AskForm;
