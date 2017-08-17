@@ -11,7 +11,6 @@ import '~/student/css/ask.less';
 import AskForm from './AskForm';
 import AskList from './AskList';
 
-
 const TopicPageAsk = ({ name, asks }) => (
   <div className="ask">
     <AskForm name={ name} />
