@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { addAsk } from '~/student/js/actions';
+
 import AppPropTypes from '~/shared/js/constants/prop-types';
 import withFetchAction from '~/shared/js/hocs/fetch-actions';
 import { getTopicById } from '~/shared/js/utils';
@@ -29,7 +31,7 @@ class TopicPageAsk extends React.Component {
     this.props.fetchAction('/api/asks/', {
       method: 'POST',
       body: JSON.stringify({ data }),
-    }, messages);
+    }, messages, ask => this.props.addAsk(this.props.id, ask));
 
   }
 
@@ -47,7 +49,9 @@ TopicPageAsk.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   asks: PropTypes.arrayOf(AppPropTypes.ask).isRequired,
+
   fetchAction: PropTypes.func.isRequired,
+  addAsk: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -58,4 +62,10 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default withFetchAction(connect(mapStateToProps)(TopicPageAsk));
+function mapDispatchToProps(dispatch) {
+  return {
+    addAsk: (topicId, ask) => dispatch(addAsk(topicId, ask)),
+  };
+}
+
+export default withFetchAction(connect(mapStateToProps, mapDispatchToProps)(TopicPageAsk));

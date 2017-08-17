@@ -3,6 +3,7 @@ import {
   RECEIVE_TOPIC_LIST,
   FETCH_TOPIC,
   RECEIVE_TOPIC,
+  ADD_ASK,
 
   FETCH_TOPIC_LIST_ERROR,
   FETCH_TOPIC_ERROR,
@@ -78,6 +79,18 @@ function topics(state = defaultState, action) {
             blurb: action.blurb,
             content: action.content,
             asks: action.asks,
+          },
+        })),
+      };
+
+    case ADD_ASK:
+      return {
+        ...state,
+        topics: changeTopic(state.topics, action.topicId, topic => ({
+          ...topic,
+          data: {
+            ...topic.data,
+            asks: [...topic.data.asks, action.ask],
           },
         })),
       };
