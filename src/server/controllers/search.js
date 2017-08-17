@@ -131,24 +131,50 @@ function getWeightedScore(name, content) {
   return ((name * 2) + content);
 }
 
-function getMatch(queryParts, words) {
+function testMatch(query, word) {
+  if (!word.toLowerCase().includes(query)) {
+    return 0;
+  }
+
+  return query.length / word.length;
+}
+
+function getMatches(queryParts, words) {
   const matches = [];
-  const matchedQueries = new Set();
+  const queryMatches = new Map();
+
+  for (const query of queryParts) {
+    queryMatches.set(query, []);  // all matches are initially empty
+  }
 
   for (const word of words) {
-    const queryMatches = queryParts.filter(queryPart => word.toLowerCase().includes(queryPart));
+    const wordMatches =
+      queryParts
+        .map(query => ({
+          query,
+          score: testMatch(query, word),
+        }))
+        .filter(match => match.score > 0);
 
-    for (const match of queryMatches) {
-      matchedQueries.add(match);
+    if (wordMatches.length) {
+      matches.push(word);
     }
 
-    if (queryMatches.length) {
-      matches.push(word);
+    for (const { query, score } of wordMatches) {
+      queryMatches.get(query).push(score);  // record per-query scores
     }
   }
 
+  // Average scores for every query individually, and then average the averages.
+  let totalQueryMatches = 0;
+
+  for (const [, scores] of queryMatches) {
+    const avgScore = (scores.reduce((a, b) => a + b, 0) / scores.length) || 0;
+    totalQueryMatches += avgScore;
+  }
+
   return {
-    score: matchedQueries.size / queryParts.length,
+    score: totalQueryMatches / queryParts.length,
     matches,
   };
 
@@ -170,17 +196,20 @@ async function doSearch(query, userId) {
         const content = stripHtml(topic);
         const contentParts = content.split(WORD_SPLIT);
 
+        const nameMatch = getMatches(queryParts, nameParts);
+        const contentMatch = getMatches(queryParts, contentParts);
+
         return {
           id: topic.id,
           content,
           nameParts,
           contentParts,
-          nameMatch: getMatch(queryParts, nameParts),
-          contentMatch: getMatch(queryParts, contentParts),
+          nameMatch,
+          contentMatch,
         };
 
       })
-      .filter(result => result.nameMatch.score || result.contentMatch.score > 0.5)
+      .filter(result => result.nameMatch.score || result.contentMatch.score > 0.3)
       .sort((a, b) => {
 
         const aScore = getWeightedScore(a.nameMatch.score, a.contentMatch.score);
