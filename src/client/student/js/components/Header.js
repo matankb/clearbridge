@@ -113,7 +113,7 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 
   color: PropTypes.string.isRequired,
-  // use in getAppBarStyles, but eslint can't detect
+  // used in getAppBarStyles, but eslint can't detect
   hasBoxShadow: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
 };
 
