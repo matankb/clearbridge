@@ -35,6 +35,7 @@ class AskForm extends React.Component {
   }
 
   handleQuestionChange = e => this.setState({ question: e.target.value });
+  handleAskClick = () => this.props.sendAsk(this.state.question);
 
   render() {
     return (
@@ -53,6 +54,7 @@ class AskForm extends React.Component {
 
         <FlatButton
           label="Ask"
+          onTouchTap={ this.handleAskClick }
 
           style={ style.askButton }
           primary

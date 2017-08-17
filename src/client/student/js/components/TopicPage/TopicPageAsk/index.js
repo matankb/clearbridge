@@ -11,16 +11,43 @@ import '~/student/css/ask.less';
 import AskForm from './AskForm';
 import AskList from './AskList';
 
-const TopicPageAsk = ({ name, asks }) => (
-  <div className="ask">
-    <AskForm name={ name} />
-    <AskList asks={ asks } />
-  </div>
-);
+class TopicPageAsk extends React.Component {
+
+  sendAsk = question => {
+
+    const data = {
+      question,
+      topic: this.props.id,
+    };
+
+    const messages = {
+      fetchingMessage: 'Sending question...',
+      fetchedMessage: 'Question sent!',
+      errorMessage: 'Error sending question. Please try again.',
+    };
+
+    this.props.fetchAction('/api/asks/', {
+      method: 'POST',
+      body: JSON.stringify({ data }),
+    }, messages);
+
+  }
+
+  render() {
+    return (
+      <div className="ask">
+        <AskForm name={ this.props.name} sendAsk={ this.sendAsk } />
+        <AskList asks={ this.props.asks } />
+      </div>
+    );
+  }
+}
 
 TopicPageAsk.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   asks: PropTypes.arrayOf(AppPropTypes.ask).isRequired,
+  fetchAction: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
