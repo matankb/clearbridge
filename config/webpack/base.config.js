@@ -28,6 +28,11 @@ module.exports = {
   output: {
     publicPath: '/',
   },
+  resolve: {
+    alias: {
+      '~': ENTRY_DIR,
+    },
+  },
   module: {
     rules: [
       {
