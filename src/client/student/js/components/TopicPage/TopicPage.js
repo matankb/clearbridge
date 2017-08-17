@@ -67,7 +67,6 @@ class TopicPage extends React.Component {
     const topic = this.props.topic || defaultTopic;
     const { data } = topic;
     const error = !this.props.topic && this.props.topicListLoaded ? notFoundError : topic.error;
-
     return (
       <div className="topic-page">
         <TopicPageHeader
@@ -81,12 +80,7 @@ class TopicPage extends React.Component {
           error={ error }
           retry={ this.loadTopic }
         >
-          <TopicPageMain
-            name={ data.name }
-            content={ data.content }
-            asks={ data.asks }
-            color={ data.color }
-          />
+          <TopicPageMain id={ topic.id } content={ data.content } color={ data.color } />
         </LoadableContent>
       </div>
     );
