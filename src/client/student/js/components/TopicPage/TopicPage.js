@@ -25,6 +25,7 @@ const defaultTopic = {
     image: '',
     blurb: '',
     content: '',
+    asks: [],
   },
 };
 
