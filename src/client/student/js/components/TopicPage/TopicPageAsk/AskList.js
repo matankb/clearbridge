@@ -5,7 +5,7 @@ const AskList = ({ asks }) => (
   <div className="ask-list">
     {
       asks.map(ask => (
-        <div className="ask-item" key={ ask.id }>
+        <div className="ask-item" key={ ask._id }>
           <h3 className="question">{ ask.question }</h3>
           <div className="answer">{ ask.answer }</div>
         </div>
