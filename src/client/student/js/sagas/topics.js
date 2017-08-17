@@ -13,9 +13,10 @@ import {
 } from '../actions';
 
 import { fetchJson, formatError } from '../../../shared/js/utils/fetch';
+import { getTopicById } from '../../../shared/js/utils';
 
 // selectors
-const getTopic = id => state => state.topics.topics.find(t => t.id === id);
+const getTopic = id => state => getTopicById(state.topics.topics, id);
 
 // sagas
 function* onFetchTopicList() {

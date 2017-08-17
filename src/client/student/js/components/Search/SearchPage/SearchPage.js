@@ -10,7 +10,7 @@ import AppPropTypes from '../../../../../shared/js/constants/prop-types';
 import requiresTopicList from '../../../hocs/requires-topic-list';
 
 import { requestSearch } from '../../../reducers/search';
-import { findTopicById } from '../../../utils';
+import { getTopicById } from '../../../../../shared/js/utils';
 
 function getQueryFor(props) {
   return new URLSearchParams(props.location.search).get('q');
@@ -65,7 +65,7 @@ class SearchPage extends React.Component {
 }
 
 function populateResults(results, topicList) {
-  return results.map(result => ({ ...result, ...findTopicById(topicList, result.id) }));
+  return results.map(result => ({ ...result, ...getTopicById(topicList, result.id) }));
 }
 
 function mapStateToProps(state) {

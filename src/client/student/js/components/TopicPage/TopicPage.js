@@ -14,6 +14,8 @@ import { requestTopic } from '../../actions';
 import AppPropTypes from '../../../../shared/js/constants/prop-types';
 import colors from '../../constants/colors';
 
+import { getTopicById } from '../../../../shared/js/utils';
+
 import '../../../css/topic-page.less';
 
 const defaultTopic = {
@@ -86,12 +88,8 @@ class TopicPage extends React.Component {
 
 }
 
-function getTopicById(id, topics) {
-  return topics.find(topic => topic.id === id);
-}
-
 function mapStateToProps(state, { match: { params } }) {
-  let topic = getTopicById(params.id, state.topics.topics);
+  let topic = getTopicById(state.topics.topics, params.id);
   return {
     topic,
   };

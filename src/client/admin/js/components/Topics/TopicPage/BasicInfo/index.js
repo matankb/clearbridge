@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Tile from './Tile';
 import Info from './Info';
 
+import { getTopicById } from '../../../../../../shared/js/utils';
+
 let BasicInfo = props => {
   return (
     <div className="top">
@@ -20,12 +22,8 @@ let BasicInfo = props => {
   );
 };
 
-function getTopicById(_id, topics) {
-  return topics.filter(t => t._id === _id)[0] || {};
-}
-
 function mapStateToProps(state) {
-  let topic = getTopicById(state.topics.topicList.selected, state.topics.topicList.topics);
+  let topic = getTopicById(state.topics.topicList.topics, state.topics.topicList.selected) || {};
   return {
     name: topic.name,
     blurb: topic.blurb,
