@@ -42,7 +42,7 @@ class TopicPage extends React.Component {
     this.loadTopic();
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.topic !== this.props.topic) {
+    if (!prevProps.topic && this.props.topic) {
       this.loadTopic();
     }
   }
