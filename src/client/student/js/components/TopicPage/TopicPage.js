@@ -14,6 +14,8 @@ import { requestTopic } from '../../actions';
 import AppPropTypes from '../../../../shared/js/constants/prop-types';
 import colors from '../../constants/colors';
 
+import { getTopicById } from '../../../../shared/js/utils';
+
 import '../../../css/topic-page.less';
 
 const defaultTopic = {
@@ -25,6 +27,12 @@ const defaultTopic = {
     content: '',
   },
 };
+
+const notFoundError = { status: 404, offline: false };
+
+function getId(topic) {
+  return topic ? topic.id : null;
+}
 
 class TopicPage extends React.Component {
 
@@ -42,13 +50,13 @@ class TopicPage extends React.Component {
     this.loadTopic();
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.topic !== this.props.topic) {
+    if (getId(prevProps.topic) !== getId(this.props.topic)) {
       this.loadTopic();
     }
   }
 
   loadTopic = () => {
-    if (this.props.topicListLoaded && this.props.topic) {
+    if (this.props.topic) {
       this.props.load(this.props.topic.id);
     }
   }
@@ -57,10 +65,7 @@ class TopicPage extends React.Component {
 
     const topic = this.props.topic || defaultTopic;
     const { data } = topic;
-    const notFoundError =
-      !this.props.topic && this.props.topicListLoaded ?
-      { status: 404, offline: false } :
-      null;
+    const error = !this.props.topic && this.props.topicListLoaded ? notFoundError : topic.error;
 
     return (
       <div className="topic-page">
@@ -72,7 +77,7 @@ class TopicPage extends React.Component {
         />
         <LoadableContent
           isLoading={ !this.props.topicListLoaded || topic.isFetching }
-          error={ topic.error || notFoundError }
+          error={ error }
           retry={ this.loadTopic }
         >
           <TopicPageContent content={ data.content } />
@@ -83,12 +88,8 @@ class TopicPage extends React.Component {
 
 }
 
-function getTopicById(id, topics) {
-  return topics.find(topic => topic.id === id);
-}
-
 function mapStateToProps(state, { match: { params } }) {
-  let topic = getTopicById(params.id, state.topics.topics);
+  let topic = getTopicById(state.topics.topics, params.id);
   return {
     topic,
   };

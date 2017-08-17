@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 
 import SearchResults from './../SearchResults';
 import LoadableContent from '../../../../../shared/js/components/LoadableContent';
@@ -11,11 +10,10 @@ import AppPropTypes from '../../../../../shared/js/constants/prop-types';
 import requiresTopicList from '../../../hocs/requires-topic-list';
 
 import { requestSearch } from '../../../reducers/search';
-import { findTopicById } from '../../../utils';
-import { parseQuery } from '../../../../../shared/js/utils';
+import { getTopicById } from '../../../../../shared/js/utils';
 
 function getQueryFor(props) {
-  return parseQuery(props.location.search).q;
+  return new URLSearchParams(props.location.search).get('q');
 }
 
 class SearchPage extends React.Component {
@@ -67,7 +65,7 @@ class SearchPage extends React.Component {
 }
 
 function populateResults(results, topicList) {
-  return results.map(result => ({ ...result, ...findTopicById(topicList, result.id) }));
+  return results.map(result => ({ ...result, ...getTopicById(topicList, result.id) }));
 }
 
 function mapStateToProps(state) {

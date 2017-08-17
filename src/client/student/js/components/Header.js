@@ -12,7 +12,7 @@ import { SearchBar } from './Search';
 
 import colors from '../../../shared/js/constants/colors';
 import studentColors from '../constants/colors';
-import { getTextColor, goBack } from '../../../shared/js/utils';
+import { getTextColor, goBack, getTopicById } from '../../../shared/js/utils';
 
 function getAppBarStyle(props) {
   return {
@@ -113,13 +113,9 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 
   color: PropTypes.string.isRequired,
-  // use in getAppBarStyles, but eslint can't detect
+  // used in getAppBarStyles, but eslint can't detect
   hasBoxShadow: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
 };
-
-function getTopicById(id, topics) {
-  return topics.find(topic => topic.id === id);
-}
 
 function getHeaderColor(location, state) {
 
@@ -127,7 +123,7 @@ function getHeaderColor(location, state) {
 
   if (topicMatch) {
 
-    const topic = getTopicById(topicMatch[1], state.topics.topics);
+    const topic = getTopicById(state.topics.topics, topicMatch[1]);
 
     if (!topic) return studentColors.notLoadedTopic;
     return topic.data.color;

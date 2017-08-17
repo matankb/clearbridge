@@ -7,7 +7,7 @@ import {
   requestSearchError,
 } from '../reducers/search';
 
-import { fetchJson, formatError } from '../../../shared/js/utils';
+import { fetchJson, formatError } from '../../../shared/js/utils/fetch';
 
 function* onRequestSearch({ query }) {
   try {

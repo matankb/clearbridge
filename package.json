@@ -81,6 +81,7 @@
     "session": "^0.1.0",
     "style-loader": "^0.18.2",
     "tinycolor2": "^1.4.1",
+    "url-polyfill": "^1.0.7",
     "webpack": "^3.3.0",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-middleware": "^1.11.0",
