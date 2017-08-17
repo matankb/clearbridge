@@ -9,7 +9,6 @@ import {
 } from '../actions/';
 
 const defaultState = {
-  selectedTopic: null,
   isFetchingTopicList: true,
   topicListError: null,
   topics: [],
