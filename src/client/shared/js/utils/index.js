@@ -14,3 +14,8 @@ export function goBack(location, history, defaultPath) {
     history.goBack();
   }
 }
+
+export function getTopicById(topicList, id) {
+  return topicList.find(topic => topic.id === id);
+}
+
