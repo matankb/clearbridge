@@ -10,9 +10,7 @@ import '../../../../css/ask.less';
 const TopicPageAsk = ({ name, asks }) => (
   <div className="ask">
     <AskForm name={ name} />
-    <AskList
-      asks={ asks }
-    />
+    <AskList asks={ asks } />
   </div>
 );
 
