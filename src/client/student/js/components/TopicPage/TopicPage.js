@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import LoadableContent from '../../../../shared/js/components/LoadableContent';
 
 import TopicPageHeader from './TopicPageHeader';
-import TopicPageContent from './TopicPageContent';
+import TopicPageMain from './TopicPageMain';
 
 import requiresTopicList from '../../hocs/requires-topic-list';
 
@@ -80,7 +80,11 @@ class TopicPage extends React.Component {
           error={ error }
           retry={ this.loadTopic }
         >
-          <TopicPageContent content={ data.content } />
+          <TopicPageMain
+            name={ data.name }
+            content={ data.content }
+            color={ data.color }
+          />
         </LoadableContent>
       </div>
     );
