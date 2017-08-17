@@ -1,7 +1,3 @@
-// polyfills!
-import 'babel-polyfill';
-import 'whatwg-fetch';
-
 // react core
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -23,13 +19,14 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { AppContainer } from 'react-hot-loader';
 
 // my stuff
+import theme from '~/shared/js/constants/theme';
+import '~/shared/js/app-banner';
+import '~/shared/js/onerror';
+
 import Layout from './components/Layout';
-import theme from '../../shared/js/constants/theme';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
-import '../../shared/js/app-banner';
-import '../../shared/js/onerror';
 
 // setup store with middleware
 const sagaMiddleware = createSagaMiddleware();

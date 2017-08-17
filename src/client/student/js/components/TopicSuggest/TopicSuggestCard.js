@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import lightbulbImage from '../../../assets/lightbulb.png';
+import lightbulbImage from '~/student/assets/lightbulb.png';
 
 const style = {
   topic: {

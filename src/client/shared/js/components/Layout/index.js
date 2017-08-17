@@ -1,10 +1,10 @@
 import React from 'react';
 
+import '~/shared/css/layout.less';
+
 import Header from './Header/';
 import Sidebar from './Sidebar';
 import Feedback from '../Feedback';
-
-import '../../../css/layout.less';
 
 const styles = {
   main(props) {

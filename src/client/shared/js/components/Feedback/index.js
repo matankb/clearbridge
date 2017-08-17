@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { sendFeedback } from '~/shared/js/reducers/feedback/sending';
+import { setComment, setType } from '~/shared/js/reducers/feedback/data';
+import { closeFeedback } from '~/shared/js/reducers/feedback/open';
+
 import FeedbackDialog from './Dialog';
 import StatusToast from './StatusToast';
 
-import { sendFeedback } from '../../reducers/feedback/sending';
-import { setComment, setType } from '../../reducers/feedback/data';
-import { closeFeedback } from '../../reducers/feedback/open';
 
 const Feedback = ({
    open, data, sendingStatus,

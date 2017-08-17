@@ -3,7 +3,7 @@ import React from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-import { SUGGESTION, PROBLEM, TOPIC } from '../../../report';
+import { SUGGESTION, PROBLEM, TOPIC } from '~/shared/js/report';
 
 const TypePicker = ({ onChange, value, style }) => (
   <DropDownMenu

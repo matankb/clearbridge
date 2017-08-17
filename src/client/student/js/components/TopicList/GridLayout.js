@@ -5,9 +5,7 @@ import Grid, {
   GridTileSmall as SmallTile,
   GridTileWide as WideTile,
   GridTileLarge as LargeTile,
-} from '../../../../shared/js/components/Grid';
-
-import '../../../../shared/css/grid.less';
+} from '~/shared/js/components/Grid';
 
 const BATCH_SIZE = 17;
 

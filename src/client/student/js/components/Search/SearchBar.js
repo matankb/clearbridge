@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import IconButton from 'material-ui/IconButton';
 import IconSearch from 'material-ui/svg-icons/action/search';
 
-import '../../../css/search.less';
+import '~/student/css/search.less';
 
 class SearchBar extends React.Component {
 

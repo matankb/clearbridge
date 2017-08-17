@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Paper from 'material-ui/Paper';
 
-import AppLink from '../../../../../shared/js/components/AppLink';
+import AppLink from '~/shared/js/components/AppLink';
 
 const style = {
   appLink: {
