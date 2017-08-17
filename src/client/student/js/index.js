@@ -21,7 +21,6 @@ import { AppContainer } from 'react-hot-loader';
 // my stuff
 import theme from '~/shared/js/constants/theme';
 import '~/shared/js/app-banner';
-import '~/shared/js/onerror';
 
 import Layout from './components/Layout';
 import rootReducer from './reducers';
