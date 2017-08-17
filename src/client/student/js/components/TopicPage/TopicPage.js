@@ -26,6 +26,8 @@ const defaultTopic = {
   },
 };
 
+const notFoundError = { status: 404, offline: false };
+
 function getId(topic) {
   return topic ? topic.id : null;
 }
@@ -61,10 +63,7 @@ class TopicPage extends React.Component {
 
     const topic = this.props.topic || defaultTopic;
     const { data } = topic;
-    const notFoundError =
-      !this.props.topic && this.props.topicListLoaded ?
-      { status: 404, offline: false } :
-      null;
+    const error = !this.props.topic && this.props.topicListLoaded ? notFoundError : topic.error;
 
     return (
       <div className="topic-page">
@@ -76,7 +75,7 @@ class TopicPage extends React.Component {
         />
         <LoadableContent
           isLoading={ !this.props.topicListLoaded || topic.isFetching }
-          error={ topic.error || notFoundError }
+          error={ error }
           retry={ this.loadTopic }
         >
           <TopicPageContent content={ data.content } />
