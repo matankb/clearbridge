@@ -54,11 +54,10 @@ const Sidebar = props => {
               return (
                 <Link
                   key={ index }
-                  to={item.url }
+                  to={ item.url }
                   style={ style.link }
                 >
                   <MenuItem
-                    key={ index }
                     leftIcon={ item.icon }
                     style={
                       item.url === props.location.pathname ?
