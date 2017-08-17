@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link, withRouter } from 'react-router-dom';
 
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+
+import SidebarItemsPropType from './sidebar-items-prop-type';
 
 const style = {
   list: {
@@ -50,11 +54,10 @@ const Sidebar = props => {
               return (
                 <Link
                   key={ index }
-                  to={item.url }
+                  to={ item.url }
                   style={ style.link }
                 >
                   <MenuItem
-                    key={ index }
                     leftIcon={ item.icon }
                     style={
                       item.url === props.location.pathname ?
@@ -73,6 +76,12 @@ const Sidebar = props => {
         }
     </Drawer>
   );
+};
+
+Sidebar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  items: SidebarItemsPropType.isRequired,
+  onRequestChange: PropTypes.func.isRequired,
 };
 
 export default withRouter(Sidebar);

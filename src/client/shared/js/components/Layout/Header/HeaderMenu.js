@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 
 import IconMenu from 'material-ui/IconMenu';
@@ -10,9 +12,9 @@ import LogoutIcon from 'material-ui/svg-icons/action/exit-to-app';
 import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
 import AboutIcon from 'material-ui/svg-icons/action/info';
 
-import { openFeedback } from '../../../../../shared/js/reducers/feedback/open';
-import { resetFeedback } from '../../../../../shared/js/reducers/feedback/reset';
-import { openAbout } from '../../../../../shared/js/reducers/about';
+import { openFeedback } from '~/shared/js/reducers/feedback/open';
+import { resetFeedback } from '~/shared/js/reducers/feedback/reset';
+import { openAbout } from '~/shared/js/reducers/about';
 
 
 const HeaderMenu = ({ iconColor, handleFeedbackClick, handleAboutClick }) => {
@@ -42,6 +44,12 @@ const HeaderMenu = ({ iconColor, handleFeedbackClick, handleAboutClick }) => {
       />
     </IconMenu>
   );
+};
+
+HeaderMenu.propTypes = {
+  iconColor: PropTypes.string.isRequired,
+  handleFeedbackClick: PropTypes.func.isRequired,
+  handleAboutClick: PropTypes.func.isRequired,
 };
 
 export default connect(

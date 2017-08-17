@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import FlatButton from 'material-ui/FlatButton';
 import IconCloudOff from 'material-ui/svg-icons/file/cloud-off';
@@ -8,6 +9,12 @@ import style from './error-styles';
 const BASE_TIME = 5;
 
 class OfflineError extends React.Component {
+
+  static propTypes = {
+    attempts: PropTypes.number.isRequired,
+    retry: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {

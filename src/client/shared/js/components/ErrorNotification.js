@@ -1,7 +1,7 @@
 import React from 'react';
 import Snackbar from 'material-ui/Snackbar';
 
-import sendReport, { ERROR } from '../report';
+import sendReport, { ERROR } from '~/shared/js/report';
 
 class ErrorNotification extends React.Component {
 

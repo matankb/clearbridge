@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Snackbar from 'material-ui/Snackbar';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -28,19 +29,21 @@ const ErrorToast = () => (
   />
 );
 
-const StatusToast = ({ status, idle }) => {
-  if (!idle) {
-    switch (status) {
-      case 'SENDING':
-        return <SendingToast />;
-      case 'SENT':
-        return <SentToast />;
-      case 'ERROR':
-        return <ErrorToast />;
-      default:
-        return null;
-    }
+const StatusToast = ({ status }) => {
+  switch (status) {
+    case 'SENDING':
+      return <SendingToast />;
+    case 'SENT':
+      return <SentToast />;
+    case 'ERROR':
+      return <ErrorToast />;
+    default:
+      return null;
   }
+};
+
+StatusToast.propTypes = {
+  status: PropTypes.string.isRequired,
 };
 
 export default StatusToast;

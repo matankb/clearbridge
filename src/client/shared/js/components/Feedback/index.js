@@ -1,12 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
+
+import { sendFeedback } from '~/shared/js/reducers/feedback/sending';
+import { setComment, setType } from '~/shared/js/reducers/feedback/data';
+import { closeFeedback } from '~/shared/js/reducers/feedback/open';
 
 import FeedbackDialog from './Dialog';
 import StatusToast from './StatusToast';
 
-import { sendFeedback } from '../../reducers/feedback/sending';
-import { setComment, setType } from '../../reducers/feedback/data';
-import { closeFeedback } from '../../reducers/feedback/open';
 
 const Feedback = ({
    open, data, sendingStatus,
@@ -35,9 +38,20 @@ const Feedback = ({
   </div>
 );
 
+Feedback.propTypes = {
+  open: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
+  sendingStatus: PropTypes.string.isRequired,
+
+  handleCommentChange: PropTypes.func.isRequired,
+  handleTypeChange: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+
+  send: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
-    type: state.feedback.type,
     sendingStatus: state.feedback.sending.status,
     data: state.feedback.data,
     open: state.feedback.open,

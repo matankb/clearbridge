@@ -1,5 +1,5 @@
+import { SUGGESTION } from '~/shared/js/report';
 import { RESET_FEEDBACK } from './reset';
-import { SUGGESTION } from '../../report';
 
 export const SET_TYPE = 'FEEDBACK/SET_TYPE';
 export const SET_COMMENT = 'FEEDBACK/SET_COMMENT';

@@ -6,10 +6,9 @@ import {
 
   FETCH_TOPIC_LIST_ERROR,
   FETCH_TOPIC_ERROR,
-} from '../actions/';
+} from '../actions';
 
 const defaultState = {
-  selectedTopic: null,
   isFetchingTopicList: true,
   topicListError: null,
   topics: [],

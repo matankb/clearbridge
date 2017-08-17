@@ -3,9 +3,7 @@
 */
 
 module.exports = function (req, res, next) {
-  if (req.url !== '/') {
-    req.url = '/';
-    req.path = '/';
-  }
+  req.url = '/';
+  req.path = '/';
   next();
 };

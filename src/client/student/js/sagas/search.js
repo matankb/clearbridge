@@ -1,13 +1,14 @@
 import { takeEvery, put } from 'redux-saga/effects';
 
+import { fetchJson, formatError } from '~/shared/js/utils/fetch';
+
 import {
   REQUEST_SEARCH,
 
   recieveSearch,
   requestSearchError,
-} from '../reducers/search';
+} from '~/student/js/reducers/search';
 
-import { fetchJson, formatError } from '../../../shared/js/utils';
 
 function* onRequestSearch({ query }) {
   try {
