@@ -11,10 +11,9 @@ import requiresTopicList from '../../../hocs/requires-topic-list';
 
 import { requestSearch } from '../../../reducers/search';
 import { findTopicById } from '../../../utils';
-import { parseQuery } from '../../../../../shared/js/utils';
 
 function getQueryFor(props) {
-  return parseQuery(props.location.search).q;
+  return new URLSearchParams(props.location.search).get('q');
 }
 
 class SearchPage extends React.Component {
