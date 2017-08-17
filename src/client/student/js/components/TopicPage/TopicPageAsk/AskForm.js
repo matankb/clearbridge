@@ -34,8 +34,11 @@ class AskForm extends React.Component {
     question: '',
   }
 
+
   handleQuestionChange = e => this.setState({ question: e.target.value });
-  handleAskClick = () => this.props.sendAsk(this.state.question);
+  handleAskClick = () => {
+    this.props.sendAsk(this.state.question); this.setState({ question: '' });
+  }
 
   render() {
     return (
@@ -43,6 +46,7 @@ class AskForm extends React.Component {
 
         <TextField
           name="question"
+          value={ this.state.question }
           onChange={ this.handleQuestionChange }
 
           style={ style.textField }
