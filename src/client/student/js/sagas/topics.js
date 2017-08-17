@@ -12,7 +12,7 @@ import {
   fetchTopicError,
 } from '../actions';
 
-import { fetchJson, formatError } from '../../../shared/js/utils';
+import { fetchJson, formatError } from '../../../shared/js/utils/fetch';
 
 // selectors
 const getTopic = id => state => state.topics.topics.find(t => t.id === id);
