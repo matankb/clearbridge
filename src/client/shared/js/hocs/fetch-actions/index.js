@@ -27,6 +27,7 @@ const fetchActions = Component => {
         this.setState({ fetching: false, fetched: true });
       } catch (e) {
         this.setState({ fetching: false, error: e });
+        throw e; // so it can be handled by global error reporting
       }
     }
 
