@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AppLink from '../../../shared/js/components/AppLink';
+import AppLink from '~/shared/js/components/AppLink';
 
-import '../../css/tile.less';
+import '~/student/css/tile.less';
 
 const TopicCard = props => (
   <AppLink

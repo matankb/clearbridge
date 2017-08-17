@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import TopicSuggestCard from './TopicSuggestCard';
+import { setType as setFeedbackType } from '~/shared/js/reducers/feedback/data';
+import { openFeedback } from '~/shared/js/reducers/feedback/open';
+import { resetFeedback } from '~/shared/js/reducers/feedback/reset';
 
-import { setType as setFeedbackType } from '../../../../shared/js/reducers/feedback/data';
-import { openFeedback } from '../../../../shared/js/reducers/feedback/open';
-import { resetFeedback } from '../../../../shared/js/reducers/feedback/reset';
-import { TOPIC } from '../../../../shared/js/report';
+import { TOPIC } from '~/shared/js/report';
+
+import TopicSuggestCard from './TopicSuggestCard';
 
 const TopicSuggest = ({ handleCardClick }) => (
   <TopicSuggestCard onClick={ handleCardClick } />

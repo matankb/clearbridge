@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import SearchResults from './../SearchResults';
-import LoadableContent from '../../../../../shared/js/components/LoadableContent';
+import LoadableContent from '~/shared/js/components/LoadableContent';
 
-import AppPropTypes from '../../../../../shared/js/constants/prop-types';
-import requiresTopicList from '../../../hocs/requires-topic-list';
+import AppPropTypes from '~/shared/js/constants/prop-types';
+import requiresTopicList from '~/student/js/hocs/requires-topic-list';
 
-import { requestSearch } from '../../../reducers/search';
-import { getTopicById } from '../../../../../shared/js/utils';
+import { requestSearch } from '~/student/js/reducers/search';
+import { getTopicById } from '~/shared/js/utils';
+
+import SearchResults from '../SearchResults';
 
 function getQueryFor(props) {
   return new URLSearchParams(props.location.search).get('q');

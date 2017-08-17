@@ -7,12 +7,15 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
-import HeaderMenu from '../../../shared/js/components/Layout/Header/HeaderMenu';
+import HeaderMenu from '~/shared/js/components/Layout/Header/HeaderMenu';
+
+import colors from '~/shared/js/constants/colors';
+import studentColors from '~/student/js/constants/colors';
+
+import { getTextColor, goBack, getTopicById } from '~/shared/js/utils';
+
 import { SearchBar } from './Search';
 
-import colors from '../../../shared/js/constants/colors';
-import studentColors from '../constants/colors';
-import { getTextColor, goBack, getTopicById } from '../../../shared/js/utils';
 
 function getAppBarStyle(props) {
   return {

@@ -4,10 +4,11 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-import TypePicker from './TypePicker';
-import { SUGGESTION, PROBLEM, TOPIC } from '../../../report';
+import { SUGGESTION, PROBLEM, TOPIC } from '~/shared/js/report';
 
-import { dialogTitle } from '../../../constants/styles';
+import { dialogTitle } from '~/shared/js/constants/styles';
+
+import TypePicker from './TypePicker';
 
 const placeholders = {
   [SUGGESTION]: 'Share your ideas',

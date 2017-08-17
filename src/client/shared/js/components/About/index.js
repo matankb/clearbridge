@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-import AboutText from './AboutText';
+import { dialogTitle as dialogTitleStyle } from '~/shared/js/constants/styles';
+import { closeAbout } from '~/shared/js/reducers/about';
 
-import { dialogTitle as dialogTitleStyle } from '../../constants/styles';
-import { closeAbout } from '../../reducers/about';
+import AboutText from './AboutText';
 
 const About = props => (
   <Dialog
