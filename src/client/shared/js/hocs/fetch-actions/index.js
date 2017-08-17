@@ -53,7 +53,7 @@ const fetchActions = Component => {
   FetchActionProvider.displayName =
     `LoadableActionProvider(${Component.displayName || Component.name})`;
 
-  return ({ ...props }) => <FetchActionProvider {...props } />;
+  return FetchActionProvider;
 
 };
 
