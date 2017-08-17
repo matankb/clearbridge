@@ -39,6 +39,7 @@ function* onRequestTopic(action) {
 function* onFetchTopic(action) {
   try {
     const topic = yield fetchJson(`/api/topics/${action.id}/?select=blurb content`);
+    topic.asks = yield fetchJson(`/api/topics/${action.id}/asks`);
     yield put(receiveTopic(topic));
   } catch (e) {
     yield put(fetchTopicError(action.id, formatError(e)));

@@ -46,6 +46,7 @@ function topics(state = defaultState, action) {
             image: topic.image,
             blurb: '',
             content: '',
+            asks: [],
           },
           error: null,
           id: topic._id,
@@ -76,6 +77,7 @@ function topics(state = defaultState, action) {
             ...topic.data,
             blurb: action.blurb,
             content: action.content,
+            asks: action.asks,
           },
         })),
       };

@@ -13,7 +13,15 @@ const error = PropTypes.shape({
   offline: PropTypes.bool,
 });
 
+const ask = PropTypes.shape({
+  id: PropTypes.string,
+  asker: PropTypes.string,
+  question: PropTypes.string,
+  answer: PropTypes.string,
+});
+
 export default {
   topic,
   error,
+  ask,
 };

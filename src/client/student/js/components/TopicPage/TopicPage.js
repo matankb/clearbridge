@@ -83,6 +83,7 @@ class TopicPage extends React.Component {
           <TopicPageMain
             name={ data.name }
             content={ data.content }
+            asks={ data.asks }
             color={ data.color }
           />
         </LoadableContent>

@@ -28,6 +28,7 @@ export function receiveTopic(topic) {
     id: topic._id,
     blurb: topic.blurb,
     content: topic.content,
+    asks: topic.asks,
   };
 }
 
