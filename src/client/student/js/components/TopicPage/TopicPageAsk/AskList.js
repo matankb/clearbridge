@@ -7,7 +7,11 @@ const AskList = ({ asks }) => (
       asks.map(ask => (
         <div className="ask-item" key={ ask._id }>
           <h3 className="question">{ ask.question }</h3>
-          <div className="answer">{ ask.answer }</div>
+          {
+            ask.answer ?
+              <div className="answer">{ ask.answer }</div> :
+              <div className="no-answer">No answer yet</div>
+          }
         </div>
       ))
     }
