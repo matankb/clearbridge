@@ -16,3 +16,14 @@ exports.createAsk = async (req, res) => {
   await topic.save();
   res.json(await ask.save());
 };
+
+exports.updateAsk = async (req, res, next) => {
+  const ask = await Ask.findById(req.params.id).exec();
+  if (!ask) {
+    next();
+  } else {
+    // merge existing model with new data
+    Object.assign(ask, req.body.data);
+    res.json(await ask.save());
+  }
+};
