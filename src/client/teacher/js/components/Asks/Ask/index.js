@@ -5,10 +5,13 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
+import AskMenu from './AskMenu';
+
 const baseStyle = {
   wrap: {
     margin: '1%',
     display: 'inline-block',
+    position: 'relative',
     padding: 10,
     paddingTop: 15,
     width: '48%',
@@ -62,6 +65,8 @@ class Ask extends React.Component {
         <span style={ style.question }>{ `${this.props.question} `}</span>
 
         <i style={{ color: 'gray', fontSize: 14 }}>- { this.props.topic.name }</i>
+
+        <AskMenu handleDeleteTap={ this.handleDeleteTap } />
 
         <TextField
           type="text"
