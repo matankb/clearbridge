@@ -2,7 +2,7 @@ const Ask = require('../models/Ask');
 const Topic = require('../models/Topic');
 
 exports.getAsks = async (req, res) => {
-  res.json(await Ask.find().exec());
+  res.json(await Ask.find().populate('topic', 'name color').exec());
 };
 
 exports.createAsk = async (req, res) => {
