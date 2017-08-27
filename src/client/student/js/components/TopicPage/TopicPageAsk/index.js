@@ -31,7 +31,8 @@ class TopicPageAsk extends React.Component {
     this.props.fetchAction('/api/asks/', {
       method: 'POST',
       body: JSON.stringify({ data }),
-    }, messages, ask => this.props.addAsk(this.props.id, ask));
+    }, messages)
+      .then(ask => this.props.addAsk(this.props.id, ask));
 
   }
 
