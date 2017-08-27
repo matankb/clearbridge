@@ -6,7 +6,7 @@ import AppPropTypes from '~/shared/js/constants/prop-types';
 import LoadableContent from '~/shared/js/components/LoadableContent';
 import fetchActions from '~/shared/js/hocs/fetch-actions';
 
-import { requestAsks } from '~/teacher/js/reducers/asks';
+import { requestAsks, answerAsk } from '~/teacher/js/reducers/asks';
 import '~/teacher/css/asks.less';
 
 import Ask from './Ask';
@@ -18,6 +18,7 @@ class Asks extends React.Component {
     asks: PropTypes.arrayOf(AppPropTypes.ask).isRequired,
 
     requestAsks: PropTypes.func.isRequired,
+    addAnswer: PropTypes.func.isRequired,
     fetchAction: PropTypes.func.isRequired,
   }
 
@@ -44,7 +45,8 @@ class Asks extends React.Component {
       errorMessage: 'Error sending answer',
     };
 
-    this.props.fetchAction(url, fetchOpts, toastOpts);
+    this.props.fetchAction(url, fetchOpts, toastOpts)
+      .then(() => this.props.addAnswer(id, answer));
 
   }
 
@@ -87,6 +89,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     requestAsks: () => dispatch(requestAsks()),
+    addAnswer: (id, answer) => dispatch(answerAsk(id, answer)),
   };
 }
 

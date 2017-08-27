@@ -5,6 +5,8 @@ export const RECEIVE_ASKS = 'ASKS/RECEIVE_ASKS';
 
 export const REQUEST_ASKS_ERROR = 'ASKS/REQUEST_ASKS_ERROR';
 
+export const ANSWER_ASK = 'ASKS/ANSWER_ASK';
+
 const defaultState = {
   fetch: {
     isFetching: false,
@@ -12,6 +14,16 @@ const defaultState = {
   },
   asks: [],
 };
+
+function modifyAsk(askList, id, reducer) {
+  return askList.map(ask => {
+    if (ask.id === id) {
+      return reducer(ask);
+    } else {
+      return ask;
+    }
+  });
+}
 
 export default function asks(state = defaultState, action) {
   switch (action.type) {
@@ -28,6 +40,15 @@ export default function asks(state = defaultState, action) {
 
     case REQUEST_ASKS_ERROR:
       return { ...state, fetch: { ...state.fetching, isFetching: false, error: action.error } };
+
+    case ANSWER_ASK:
+      return {
+        ...state,
+        asks: modifyAsk(state.asks, action.id, ask => ({
+          ...ask,
+          answer: action.answer,
+        })),
+      };
 
     default:
       return state;
@@ -52,5 +73,13 @@ export function requestAsksError(error) {
   return {
     type: REQUEST_ASKS_ERROR,
     error,
+  };
+}
+
+export function answerAsk(id, answer) {
+  return {
+    type: ANSWER_ASK,
+    id,
+    answer,
   };
 }
