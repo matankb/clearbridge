@@ -8,8 +8,6 @@ import FlatButton from 'material-ui/FlatButton';
 const style = {
   paperWrap: {
     padding: '0px 30px 20px 30px',
-    width: '50%',
-    margin: 'auto',
   },
   textField: {
     width: '75%',
@@ -42,29 +40,31 @@ class AskForm extends React.Component {
 
   render() {
     return (
-      <Paper style={ style.paperWrap }>
+      <div className="ask-form">
+        <Paper style={ style.paperWrap }>
 
-        <TextField
-          name="question"
-          value={ this.state.question }
-          onChange={ this.handleQuestionChange }
+          <TextField
+            name="question"
+            value={ this.state.question }
+            onChange={ this.handleQuestionChange }
 
-          style={ style.textField }
-          autoComplete="off"
+            style={ style.textField }
+            autoComplete="off"
 
-          floatingLabelText={ `Ask a question about ${this.props.name}...` }
-          floatingLabelStyle={ style.textFieldLabel }
-        />
+            floatingLabelText={ `Ask a question about ${this.props.name}...` }
+            floatingLabelStyle={ style.textFieldLabel }
+          />
 
-        <FlatButton
-          label="Ask"
-          onTouchTap={ this.handleAskClick }
+          <FlatButton
+            label="Ask"
+            onTouchTap={ this.handleAskClick }
 
-          style={ style.askButton }
-          primary
-        />
+            style={ style.askButton }
+            primary
+          />
 
-      </Paper>
+        </Paper>
+      </div>
     );
   }
 
