@@ -14,7 +14,7 @@ const fetchActions = Component => {
       error: null,
     }
 
-    fetchAction = async (url, fetchOpts, toastOpts, successCallback = () => {}) => {
+    fetchAction = (url, fetchOpts, toastOpts, successCallback = () => {}) => {
       this.setState({
         fetching: true,
         fetched: false,
@@ -22,13 +22,18 @@ const fetchActions = Component => {
         fetchedMessage: toastOpts.fetchedMessage,
         errorMessage: toastOpts.errorMessage,
       });
-      try {
-        successCallback(await fetchJson(url, fetchOpts));
-        this.setState({ fetching: false, fetched: true });
-      } catch (e) {
-        this.setState({ fetching: false, error: e });
-        throw e; // so it can be handled by global error reporting
-      }
+      return new Promise((resolve, reject) => {
+        fetchJson(url, fetchOpts)
+          .then(data => {
+            this.setState({ fetching: false, fetched: true });
+            resolve(data);
+          })
+          .catch(e => {
+            this.setState({ fetching: false, error: e });
+            reject(e);
+            throw e; // so it can be handled by global error reporting
+          })
+      });
     }
 
     render() {
