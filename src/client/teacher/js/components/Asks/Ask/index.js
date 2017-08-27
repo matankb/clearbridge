@@ -35,6 +35,7 @@ class Ask extends React.Component {
       color: PropTypes.string,
     }).isRequired,
     sendAnswer: PropTypes.func.isRequired,
+    deleteAsk: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -48,6 +49,7 @@ class Ask extends React.Component {
 
   handleAnswerChange = e => this.setState({ answer: e.target.value })
   handleSubmitTap = () => this.props.sendAnswer(this.props.id, this.state.answer);
+  handleDeleteTap = () => this.props.deleteAsk(this.props.id);
 
   render() {
 

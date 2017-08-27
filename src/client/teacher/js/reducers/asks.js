@@ -6,6 +6,7 @@ export const RECEIVE_ASKS = 'ASKS/RECEIVE_ASKS';
 export const REQUEST_ASKS_ERROR = 'ASKS/REQUEST_ASKS_ERROR';
 
 export const ANSWER_ASK = 'ASKS/ANSWER_ASK';
+export const DELETE_ASK = 'ASKS/DELETE_ASK';
 
 const defaultState = {
   fetch: {
@@ -50,6 +51,12 @@ export default function asks(state = defaultState, action) {
         })),
       };
 
+    case DELETE_ASK:
+      return {
+        ...state,
+        asks: state.asks.filter(ask => ask.id !== action.id),
+      };
+
     default:
       return state;
 
@@ -81,5 +88,12 @@ export function answerAsk(id, answer) {
     type: ANSWER_ASK,
     id,
     answer,
+  };
+}
+
+export function deleteAsk(id) {
+  return {
+    type: DELETE_ASK,
+    id,
   };
 }

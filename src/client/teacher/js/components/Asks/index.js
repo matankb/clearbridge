@@ -6,7 +6,7 @@ import AppPropTypes from '~/shared/js/constants/prop-types';
 import LoadableContent from '~/shared/js/components/LoadableContent';
 import fetchActions from '~/shared/js/hocs/fetch-actions';
 
-import { requestAsks, answerAsk } from '~/teacher/js/reducers/asks';
+import { requestAsks, answerAsk, deleteAsk } from '~/teacher/js/reducers/asks';
 import '~/teacher/css/asks.less';
 
 import Ask from './Ask';
@@ -20,6 +20,7 @@ class Asks extends React.Component {
     requestAsks: PropTypes.func.isRequired,
     addAnswer: PropTypes.func.isRequired,
     fetchAction: PropTypes.func.isRequired,
+    deleteAsk: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -50,6 +51,25 @@ class Asks extends React.Component {
 
   }
 
+  deleteAsk = id => {
+
+    const url = `/api/asks/${id}`;
+
+    const fetchOpts = {
+      method: 'DELETE',
+    };
+
+    const toastOpts = {
+      fetchingMessage: 'Deleting ask...',
+      fetchedMessage: 'Ask deleted!',
+      errorMessage: 'Error deleting answer',
+    };
+
+    this.props.fetchAction(url, fetchOpts, toastOpts)
+          .then(() => this.props.deleteAsk(id));
+
+  }
+
   render() {
     return (
       <div className="asks">
@@ -69,6 +89,7 @@ class Asks extends React.Component {
                 answer={ ask.answer }
                 topic={ ask.topic }
                 sendAnswer={ this.sendAnswer }
+                deleteAsk={ this.deleteAsk }
               />
             ))
           }
@@ -90,6 +111,7 @@ function mapDispatchToProps(dispatch) {
   return {
     requestAsks: () => dispatch(requestAsks()),
     addAnswer: (id, answer) => dispatch(answerAsk(id, answer)),
+    deleteAsk: id => dispatch(deleteAsk(id)),
   };
 }
 

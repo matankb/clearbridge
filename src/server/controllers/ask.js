@@ -27,3 +27,12 @@ exports.updateAsk = async (req, res, next) => {
     res.json(await ask.save());
   }
 };
+
+exports.deleteAsk = async (req, res, next) => {
+  const deletedAsk = await Ask.findByIdAndRemove(req.params.id).exec();
+  if (!deletedAsk) { // ask did not exist
+    next();
+  } else {
+    res.json({});
+  }
+};
