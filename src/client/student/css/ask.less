@@ -1,3 +1,5 @@
+@ask-item-transition-time: 200ms;
+
 .ask {
 
   width: 80%;
@@ -18,9 +20,19 @@
     }
     
     .ask-item {
+
       margin-bottom: 20px;
       line-height: 1.7;
     
+      transition: opacity @ask-item-transition-time;
+
+      &.ask-item-enter {
+        opacity: 0;
+      }
+      &.ask-item-enter-active {
+        opacity: 1;
+      }
+
       .question {
         font-weight: 400;
         font-size: 20px;
@@ -43,8 +55,6 @@
   }
 
 }
-
-
 
 @media (max-width: 660px) {
   .ask {
