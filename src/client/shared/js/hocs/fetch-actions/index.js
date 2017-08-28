@@ -14,7 +14,7 @@ const fetchActions = Component => {
       error: null,
     }
 
-    fetchAction = (url, fetchOpts, toastOpts, successCallback = () => {}) => {
+    fetchAction = (url, fetchOpts, toastOpts) => {
       this.setState({
         fetching: true,
         fetched: false,
@@ -32,7 +32,7 @@ const fetchActions = Component => {
             this.setState({ fetching: false, error: e });
             reject(e);
             throw e; // so it can be handled by global error reporting
-          })
+          });
       });
     }
 
