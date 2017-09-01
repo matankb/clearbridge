@@ -4,6 +4,7 @@ const topicRoutes = require('./topics');
 const searchRoutes = require('./search');
 const userRoutes = require('./users');
 const reportRoutes = require('./report');
+const askRoutes = require('./ask');
 
 const { notFound, internalError } = require('../../controllers/api-errors');
 const trackRequests = require('../../middleware/track-requests');
@@ -18,6 +19,7 @@ module.exports = function(app) {
   searchRoutes(router);
   userRoutes(router);
   reportRoutes(router);
+  askRoutes(router);
 
   router.use(notFound);
   router.use(internalError); // must be last

@@ -15,7 +15,7 @@ import { getTopicById } from '~/shared/js/utils';
 import '~/student/css/topic-page.less';
 
 import TopicPageHeader from './TopicPageHeader';
-import TopicPageContent from './TopicPageContent';
+import TopicPageMain from './TopicPageMain';
 
 
 const defaultTopic = {
@@ -25,6 +25,7 @@ const defaultTopic = {
     image: '',
     blurb: '',
     content: '',
+    asks: [],
   },
 };
 
@@ -66,7 +67,6 @@ class TopicPage extends React.Component {
     const topic = this.props.topic || defaultTopic;
     const { data } = topic;
     const error = !this.props.topic && this.props.topicListLoaded ? notFoundError : topic.error;
-
     return (
       <div className="topic-page">
         <TopicPageHeader
@@ -80,7 +80,7 @@ class TopicPage extends React.Component {
           error={ error }
           retry={ this.loadTopic }
         >
-          <TopicPageContent content={ data.content } />
+          <TopicPageMain id={ topic.id } content={ data.content } color={ data.color } />
         </LoadableContent>
       </div>
     );

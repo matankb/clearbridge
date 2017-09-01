@@ -53,3 +53,12 @@ exports.getStudents = async (req, res, next) => {
     res.json(topic.students);
   }
 };
+
+exports.getAsks = async (req, res, next) => {
+  const topic = await Topic.findById(req.params.id).populate('asks').exec();
+  if (!topic) {
+    next();
+  } else {
+    res.json(topic.asks);
+  }
+};

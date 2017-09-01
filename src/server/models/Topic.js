@@ -22,6 +22,7 @@ const topicSchema = new Schema({
   content: { type: String, set: sanitizeContent },
   students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
+  asks: [{ type: Schema.Types.ObjectId, ref: 'Ask' }],
 });
 
 const Topic = mongoose.model('Topic', topicSchema);

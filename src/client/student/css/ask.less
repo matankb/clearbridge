@@ -1,0 +1,84 @@
+@ask-item-transition-time: 200ms;
+
+.ask {
+
+  width: 80%;
+  margin: auto;
+  margin-top: 45px;
+  
+  .ask-form {
+    margin: auto;
+  }
+
+  .ask-list {
+
+    margin-top: 50px;
+
+    h2 {
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .ask-item {
+
+      margin-bottom: 20px;
+      line-height: 1.7;
+    
+      transition: opacity @ask-item-transition-time;
+
+      &.ask-item-enter {
+        opacity: 0;
+      }
+      &.ask-item-enter-active {
+        opacity: 1;
+      }
+
+      .question {
+        font-weight: 400;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .answer {
+        font-weight: 300;
+        color: #060606;
+      }
+
+      .no-answer {
+        font-weight: 300;
+        color: gray;
+        font-style: italic;
+      }
+
+    }
+
+  }
+
+}
+
+@media (max-width: 660px) {
+  .ask {
+    width: 90%;
+    .ask-form {
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .ask .ask-form {
+    width: 90%;
+  }
+}
+
+@media (min-width: 900px) {
+  .ask .ask-form {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .ask .ask-form {
+    width: 50%;
+  }
+}

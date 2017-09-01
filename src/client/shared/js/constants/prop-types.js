@@ -13,7 +13,21 @@ const error = PropTypes.shape({
   offline: PropTypes.bool,
 });
 
+const fetch = PropTypes.shape({
+  isFetching: PropTypes.bool,
+  error,
+});
+
+const ask = PropTypes.shape({
+  id: PropTypes.string,
+  asker: PropTypes.string,
+  question: PropTypes.string,
+  answer: PropTypes.string,
+});
+
 export default {
   topic,
   error,
+  ask,
+  fetch,
 };

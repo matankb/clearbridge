@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+/* eslint-disable no-console */
+
+const program = require('commander');
+
+const Ask = require('../src/server/models/Ask');
+
+const { question, wrapAsync, connectToMongo, configureReadline } = require('./utils');
+
+connectToMongo();
+configureReadline();
+
+async function clearAsks() {
+  if (await question('Clear all saved asks?', ['y', 'n']) === 'n') return;
+
+  await Ask.remove({}).exec();
+  console.log('Cleared asks');
+}
+
+program
+  .version('1.0.0')
+  .command('clear')
+  .description('Clear all saved asks')
+  .action(wrapAsync(clearAsks));
+
+program.parse(process.argv);
