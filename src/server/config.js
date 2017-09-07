@@ -4,14 +4,13 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const prod = {
   db: {
-    URL: process.env.OPENSHIFT_MONGODB_DB_URL,
+    URL: process.env.MONGODB_URI,
   },
   server: {
-    PORT: process.env.NODE_PORT,
-    IP: process.env.NODE_IP,
+    PORT: process.env.PORT,
   },
   google: {
-    CALLBACK_URL: 'http://bridge.jcdsboston.org/auth/callback/',
+    CALLBACK_URL: 'http://www.clearbridge.io/auth/callback/',
   },
   feedback: {
     suggestEmail: 'gavie@jcdsboston.org',

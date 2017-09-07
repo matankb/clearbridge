@@ -30,6 +30,6 @@ auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes
 error(app); // and to error handling
 
-app.listen(config.server.PORT, config.server.IP, () => {
+app.listen(config.server.PORT, () => {
   console.log(`Server started on port ${config.server.PORT}`); // eslint-disable-line no-console
 });
