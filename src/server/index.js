@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const connectMongo = require('connect-mongodb-session');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const config = require('./config');
@@ -19,6 +20,7 @@ let app = express();
 app.set('view engine', 'ejs'); // set rendering engine
 
 // session storage
+app.use(cookieParser(config.session.SECRET));
 app.use(session({
   store: new (connectMongo(session))({
     uri: config.db.URL,

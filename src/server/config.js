@@ -1,7 +1,8 @@
 const assign = require('deep-assign');
 
 const isProduction = process.env.NODE_ENV === 'production';
-
+console.log(`MONGODB_URI: ${process.env.MONGODB_URI}`);
+console.log(`IS PRODUCTION: ${isProduction}`);
 const prod = {
   db: {
     URL: process.env.MONGODB_URI,

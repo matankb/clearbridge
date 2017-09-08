@@ -5,7 +5,11 @@ const serialize = (user, done) => done(null, user.id);
 
 function deserialize(id, done) {
   User.findById(id).exec()
-    .then(user => done(null, user))
+    .then(user => {
+      console.log(`user: ${user}`);
+      console.log(`id: ${id}`);
+      done(null, user);
+    })
     .catch(err => done(err));
 }
 
