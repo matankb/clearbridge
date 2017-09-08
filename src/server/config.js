@@ -6,6 +6,9 @@ const prod = {
   db: {
     URL: process.env.MONGODB_URI,
   },
+  redis: {
+    URL: process.env.REDIS_URL,
+  },
   server: {
     PORT: process.env.PORT,
   },
@@ -20,6 +23,9 @@ const prod = {
 const dev = {
   db: {
     URL: 'mongodb://127.0.0.1/bridge',
+  },
+  redis: {
+    url: '127.0.0.1:6379',
   },
   server: {
     PORT: 8080,

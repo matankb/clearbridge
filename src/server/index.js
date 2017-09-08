@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+
+const redis = require('redis');
+const connectRedis = require('connect-redis');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
@@ -17,12 +20,18 @@ let app = express();
 
 app.set('view engine', 'ejs'); // set rendering engine
 
-// enable POST parsing and session storage
+// session storage
 app.use(session({
+  store: new (connectRedis(session))({
+    client: redis.createClient(config.redis.URL),
+    ttl: 260,
+  }),
   secret: config.session.SECRET,
   resave: false,
   saveUninitialized: true,
 }));
+
+// enable POST parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '5mb' }));
 
