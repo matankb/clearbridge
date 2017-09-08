@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
-const redis = require('redis');
-const connectRedis = require('connect-redis');
+const connectMongo = require('connect-mongodb-session');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
@@ -22,9 +20,8 @@ app.set('view engine', 'ejs'); // set rendering engine
 
 // session storage
 app.use(session({
-  store: new (connectRedis(session))({
-    client: redis.createClient(config.redis.URL),
-    ttl: 260,
+  store: new (connectMongo(session))({
+    uri: config.db.URL,
   }),
   secret: config.session.SECRET,
   resave: false,
