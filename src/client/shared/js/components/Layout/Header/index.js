@@ -40,7 +40,7 @@ const Header = props => {
   return (
     <AppBar
       style={ styles.header }
-      title="JCDS Bridge"
+      title="ClearBridge"
       onLeftIconButtonTouchTap={ props.handleIconClick }
       iconElementRight={ feedbackButton }
     />

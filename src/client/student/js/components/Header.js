@@ -92,7 +92,7 @@ const Header = props => {
     <AppBar
       style={ getAppBarStyle(props) }
       title={
-        <Link to="/student/" style={{ color: textColor, textDecoration: 'none' }}>JCDS Bridge</Link>
+        <Link to="/student/" style={{ color: textColor, textDecoration: 'none' }}>ClearBridge</Link>
       }
       iconElementLeft={
         <LeftIcon

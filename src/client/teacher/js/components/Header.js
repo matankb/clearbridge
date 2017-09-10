@@ -21,7 +21,7 @@ const style = {
 
 const Header = () => (
   <AppBar
-    title="JCDS Bridge"
+    title="ClearBridge"
     style={ style.appbar }
     iconElementLeft={ <IconButton style={ style.icon }><BridgeIcon /></IconButton> }
   />
