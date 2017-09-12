@@ -1,12 +1,19 @@
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const LocalStrategy = require('passport-local');
 
 const User = require('../models/User');
 const config = require('../config');
 
-const opts = {
+const googleOpts = {
   clientID: config.google.CLIENT_ID,
   clientSecret: config.google.CLIENT_SECRET,
   callbackURL: config.google.CALLBACK_URL,
+};
+
+const localOpts = {
+  usernameField: config.localAuth.USERNAME_FIELD,
+  passwordField: config.localAuth.PASSWORD_FIELD,
+  passReqToCallback: true,
 };
 
 function findUserByGoogle(token, refreshToken, profile, done) {
@@ -22,6 +29,22 @@ function findUserByGoogle(token, refreshToken, profile, done) {
     .catch(err => done(err));
 }
 
-const strategy = new GoogleStrategy(opts, findUserByGoogle);
+function findUserByLocal(req, email, password, done) {
+  User.findOne({ email }).exec()
+    .then(user => {
+      if (!user || !user.validPassword(password)) {
+        done(null, null);
+      } else {
+        done(null, user);
+      }
+    })
+    .catch(err => done(err));
+}
 
-module.exports = passport => passport.use(strategy);
+const googleStrategy = new GoogleStrategy(googleOpts, findUserByGoogle);
+const localStrategy = new LocalStrategy(localOpts, findUserByLocal);
+
+module.exports = passport => {
+  passport.use(googleStrategy);
+  passport.use(localStrategy);
+};

@@ -38,6 +38,11 @@ module.exports = function(app) {
     failureRedirect: '/auth/fail/',
   }));
 
+  app.post('/auth/local/', saveReturnTo, passport.authenticate('local', {
+    successReturnToOrRedirect: '/auth/success/',
+    failureRedirect: '/auth/fail/',
+  }));
+
   app.get('/auth/success', loginProtected(), redirectAfterAuth);
   app.get('/auth/fail/', (req, res) => {
     res.render(path.resolve(__dirname, '../../../public/errors/auth-fail.ejs'));

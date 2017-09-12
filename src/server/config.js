@@ -39,6 +39,10 @@ const general = {
     CLIENT_ID: '912811149086-rhb4j88j3p0ns5tp4ijs2g2kql81cfu4.apps.googleusercontent.com',
     CLIENT_SECRET: 'EiYNNkSRbpcne6EImk3AgD27',
   },
+  localAuth: {
+    USERNAME_FIELD: 'email',
+    PASSWORD_FIELD: 'password',
+  },
   session: {
     SECRET: 'Reflectbridge1',
   },
