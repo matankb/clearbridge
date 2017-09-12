@@ -4,6 +4,7 @@ const connectMongo = require('connect-mongodb-session');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const sslRedirect = require('heroku-ssl-redirect');
 
 const config = require('./config');
 const routes = require('./routes');
@@ -33,6 +34,9 @@ app.use(session({
 // enable POST parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '5mb' }));
+
+// ssl redirect
+app.use(sslRedirect());
 
 auth(app); // pass app to auth, which sets up passport
 routes(app); // and to routes

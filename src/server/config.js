@@ -10,7 +10,7 @@ const prod = {
     PORT: process.env.PORT,
   },
   google: {
-    CALLBACK_URL: 'http://www.clearbridge.io/auth/google/callback/',
+    CALLBACK_URL: 'https://www.clearbridge.io/auth/google/callback/',
   },
   feedback: {
     suggestEmail: 'gavie@jcdsboston.org',
