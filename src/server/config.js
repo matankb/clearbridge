@@ -10,7 +10,7 @@ const prod = {
     PORT: process.env.PORT,
   },
   google: {
-    CALLBACK_URL: 'http://www.clearbridge.io/auth/callback/',
+    CALLBACK_URL: 'http://www.clearbridge.io/auth/google/callback/',
   },
   feedback: {
     suggestEmail: 'gavie@jcdsboston.org',
@@ -26,7 +26,7 @@ const dev = {
     IP: '127.0.0.1',
   },
   google: {
-    CALLBACK_URL: 'http://127.0.0.1:8080/auth/callback/',
+    CALLBACK_URL: 'http://127.0.0.1:8080/auth/google/callback/',
   },
   feedback: {
     suggestEmail: '205matan+bridgetopicsuggest@gmail.com',

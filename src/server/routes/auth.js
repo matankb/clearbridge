@@ -32,8 +32,8 @@ function saveReturnTo(req, res, next) {
 
 module.exports = function(app) {
 
-  app.get('/auth/', saveReturnTo, passport.authenticate('google', { scope: ['profile', 'email'] }));
-  app.get('/auth/callback/', passport.authenticate('google', {
+  app.get('/auth/google/', saveReturnTo, passport.authenticate('google', { scope: ['profile', 'email'] }));
+  app.get('/auth/google/callback/', passport.authenticate('google', {
     successReturnToOrRedirect: '/auth/success/',
     failureRedirect: '/auth/fail/',
   }));
