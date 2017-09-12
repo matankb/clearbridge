@@ -19,13 +19,15 @@
     <![if gte IE 10]>
 
     <div class="background"></div> <!--Background image-->
+    <div class="background-overlay"></div> <!--Background overlay-->
     <main>
-      ClearBridge
-      <div class="actions">
-        <a class="btn-link" href="/auth/">
-          Login
-        </a>
-      </div>
+      <form class="login-box" method="POST" action="/auth/local/">
+        <h3>ClearBridge</h3>
+        <input class="login-email" type="email" name="email" placeholder="Email">
+        <input class="login-password" type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login" class="btn-link">
+        <a href="/auth/google/" class="link">Login With Google</a>
+      </form>
       <div class="browser-warning">
         <p>You are using an older browser. Some features of ClearBridge may not work correctly.</p>
         <p>For a better experience, <a href="google.com/chrome">Google Chrome</a> is recommended.</p>
