@@ -12,11 +12,32 @@ const userSchema = new Schema({
 }, { collection: 'users', discriminatorKey: '_type' });
 
 userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return new Promise((resolve, reject) => {
+    bcrypt.genSalt(8, (err, salt) => {
+      if (err) {
+        reject(err);
+      } else {
+        bcrypt.hash(password, salt, null, (res, err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(res);
+          }
+        });
+    });
+  }
 };
 
 userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.localAuth.password);
+  return new Promise((resolove, reject) => {
+    bcrypt.compare(password, this.localAuth.password, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
 };
 
 const studentSchema = userSchema.extend({
