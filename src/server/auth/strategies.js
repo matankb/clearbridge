@@ -29,16 +29,18 @@ function findUserByGoogle(token, refreshToken, profile, done) {
     .catch(err => done(err));
 }
 
-function findUserByLocal(req, email, password, done) {
-  User.findOne({ email }).exec()
-    .then(user => {
-      if (!user || !user.validPassword(password)) {
-        done(null, null);
-      } else {
-        done(null, user);
-      }
-    })
-    .catch(err => done(err));
+async function findUserByLocal(req, email, password, done) {
+  try {
+    const user = await User.findOne({ email }).exec();
+    
+    if (!user || !(await user.validPassword(password)) {
+      done(null, null);
+    } else {
+      done(null, user);
+    }
+  } catch (e) {
+    done(e);
+  }
 }
 
 const googleStrategy = new GoogleStrategy(googleOpts, findUserByGoogle);
