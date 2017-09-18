@@ -46,12 +46,6 @@ const TopicCard = props => {
             <h4 className="name">
               { props.name }
             </h4>
-            <div className="blurb">
-              {
-                // first ~sentence chars of blurb
-                `${props.blurb.substr(0, 160)} ...`
-              }
-            </div>
           </div>
           <div className="action">
             <FlatButton
