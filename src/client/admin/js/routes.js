@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Layout from '../../shared/js/components/Layout';
 import Users from './components/Users';
+import Asks from './components/Asks';
 import Topics from './components/Topics';
 import Home from './components/Home';
 
@@ -13,6 +14,7 @@ const Routes = () => (
     <Switch>
       <Route path="/admin/" exact component={ Home } />
       <Route path="/admin/topics/" component={ Topics } />
+      <Route path="/admin/asks" component={ Asks } />
       <Route path="/admin/users/" component={ Users } />
     </Switch>
   </Layout>

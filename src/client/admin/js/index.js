@@ -18,7 +18,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // my stuff
-import rootSaga from '../../shared/js/sagas/';
+import rootSaga from './sagas/';
 import theme from '../../shared/js/constants/theme';
 import Routes from './routes';
 import rootReducer from './reducers';
