@@ -1,5 +1,0 @@
-#!/bin/bash
-cd app-root/repo
-echo 'Starting Webpack Build'
-npm run build
-echo 'Webpack Built'
