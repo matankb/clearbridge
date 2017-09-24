@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 require('mongoose-schema-extend');
 
 const Schema = mongoose.Schema;
@@ -12,32 +12,11 @@ const userSchema = new Schema({
 }, { collection: 'users', discriminatorKey: '_type' });
 
 userSchema.methods.generateHash = function(password) {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(8, (err, salt) => {
-      if (err) {
-        reject(err);
-      } else {
-        bcrypt.hash(password, salt, null, (res, err) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(res);
-          }
-        });
-    });
-  }
+  return bcrypt.hash(password, 8);  // returns promise
 };
 
 userSchema.methods.validPassword = function(password) {
-  return new Promise((resolove, reject) => {
-    bcrypt.compare(password, this.localAuth.password, (err, res) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    });
-  });
+  return bcrypt.compare(password, this.localAuth.password); // returns promise
 };
 
 const studentSchema = userSchema.extend({
