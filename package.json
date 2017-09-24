@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://56fbf7ab7628e16976000003@bridge-jcdsboston.rhcloud.com/~/git/bridge.git/"
+    "url": "https://bitbucket.org/clearbridge-hq/clearbridge.git"
   },
   "author": "Matan Kotler-Berkowitz",
   "license": "ISC",
