@@ -32,8 +32,8 @@ function findUserByGoogle(token, refreshToken, profile, done) {
 async function findUserByLocal(req, email, password, done) {
   try {
     const user = await User.findOne({ email }).exec();
-    
-    if (!user || !(await user.validPassword(password)) {
+
+    if (!user || !(await user.validPassword(password))) {
       done(null, null);
     } else {
       done(null, user);
