@@ -31,7 +31,6 @@ const fetchActions = Component => {
           .catch(e => {
             this.setState({ fetching: false, error: e });
             reject(e);
-            throw e; // so it can be handled by global error reporting
           });
       });
     }
