@@ -42,6 +42,7 @@ const general = {
   localAuth: {
     USERNAME_FIELD: 'email',
     PASSWORD_FIELD: 'password',
+    FLASH_KEY: 'authLocalMessage',
   },
   session: {
     SECRET: 'Reflectbridge1',

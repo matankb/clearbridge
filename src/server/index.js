@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const connectMongo = require('connect-mongodb-session');
 const session = require('express-session');
+const connectFlash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const sslRedirect = require('heroku-ssl-redirect');
@@ -20,8 +21,9 @@ let app = express();
 
 app.set('view engine', 'ejs'); // set rendering engine
 
-// session storage
+// session and flash storage
 app.use(cookieParser(config.session.SECRET));
+app.use(connectFlash());
 app.use(session({
   store: new (connectMongo(session))({
     uri: config.db.URL,

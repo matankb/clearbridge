@@ -109,3 +109,9 @@ a.link {
   padding: 10px;
   border-radius: 2px;
 }
+
+.auth-local-message {
+  color: #F25151;
+  font-weight: 400;
+  margin-top: 10px;
+}

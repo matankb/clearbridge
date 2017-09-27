@@ -4,6 +4,8 @@ const passport = require('passport');
 const loginProtected = require('../middleware/login-protected');
 const trackRequests = require('../middleware/track-requests');
 
+const config = require('../config');
+
 function redirectAfterAuth(req, res) {
 
   switch (req.user.type) { // send different dashboard based on user type
@@ -32,7 +34,9 @@ function saveReturnTo(req, res, next) {
 
 module.exports = function(app) {
 
-  app.get('/auth/google/', saveReturnTo, passport.authenticate('google', { scope: ['profile', 'email'] }));
+  app.get('/auth/google/', saveReturnTo, passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  }));
   app.get('/auth/google/callback/', passport.authenticate('google', {
     successReturnToOrRedirect: '/auth/success/',
     failureRedirect: '/auth/fail/',
@@ -40,8 +44,15 @@ module.exports = function(app) {
 
   app.post('/auth/local/', saveReturnTo, passport.authenticate('local', {
     successReturnToOrRedirect: '/auth/success/',
-    failureRedirect: '/auth/fail/',
+    failureRedirect: '/',
+    failureFlash: true,
   }));
+
+  app.get('/', (req, res) => {
+    res.render(path.resolve(__dirname, '../../../public/index.ejs'), {
+      authLocalMessage: req.flash(config.localAuth.FLASH_KEY)[0],
+    });
+  });
 
   app.get('/auth/success', loginProtected(), redirectAfterAuth);
   app.get('/auth/fail/', (req, res) => {

@@ -33,8 +33,10 @@ async function findUserByLocal(req, email, password, done) {
   try {
     const user = await User.findOne({ email }).exec();
 
-    if (!user || !(await user.validPassword(password))) {
-      done(null, null);
+    if (!user) {
+      done(null, null, req.flash(config.localAuth.FLASH_KEY, 'Sorry, you don\'t have an account'));
+    } else if (!(await user.validPassword(password))) {
+      done(null, null, req.flash(config.localAuth.FLASH_KEY, 'Wrong Password. Please try again'));
     } else {
       done(null, user);
     }

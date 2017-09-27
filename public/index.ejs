@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:500,400,300,100" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="styles/home.css" media="screen" charset="utf-8">
+    <link href="/assets/favicon.png" rel="icon">
+    
+    <title>ClearBridge</title>
+
+  </head>
+
+  <body>
+
+    <![if gte IE 10]>
+
+    <div class="background"></div> <!--Background image-->
+    <div class="background-overlay"></div> <!--Background overlay-->
+    <main>
+      <form class="login-box" method="POST" action="/auth/local/">
+        <h3>ClearBridge</h3>
+        <input class="login-email" type="email" name="email" placeholder="Email" required>
+        <input class="login-password" type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login" class="btn-link">
+        <div class="auth-local-message"><%= authLocalMessage %></div>
+        <a href="/auth/google/" class="link">Login With Google</a>
+      </form>
+      <div class="browser-warning">
+        <p>You are using an older browser. Some features of ClearBridge may not work correctly.</p>
+        <p>For a better experience, <a href="google.com/chrome">Google Chrome</a> is recommended.</p>
+      </div>
+    </main>
+
+    <![endif]>
+
+
+    <!-- IE CHECKS: -->
+
+    <!--[if lt IE 10]>
+      <style>
+        body {
+          margin-top: 50px;
+          text-align: center;
+        }
+      </style>
+      Sorry, your browser is too old to run ClearBridge.
+      Please try a different browser, such as <a href="google.com/chrome">Google Chrome</a>.
+      You can also use a chromebook.
+    <![endif]-->
+
+    <script>
+      if (navigator.userAgent.indexOf('Trident') > -1)  {
+        document.getElementsByClassName('browser-warning')[0].style.display = 'block';
+      }
+    </script>
+
+  </body>
+
+</html>
