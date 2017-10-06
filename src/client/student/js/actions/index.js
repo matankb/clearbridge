@@ -6,6 +6,7 @@ export const REQUEST_TOPIC_LIST = 'REQUEST_TOPIC_LIST';
 export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 
 export const ADD_ASK = 'ADD_ASK';
+export const DELETE_ASK = 'DELETE_ASK';
 
 export const FETCH_TOPIC_LIST_ERROR = 'FETCH_TOPIC_LIST_ERROR';
 export const FETCH_TOPIC_ERROR = 'FETCH_TOPIC_ERROR';
@@ -52,6 +53,14 @@ export function addAsk(topicId, ask) {
     type: ADD_ASK,
     topicId,
     ask,
+  };
+}
+
+export function deleteAsk(topicId, askId) {
+  return {
+    type: DELETE_ASK,
+    topicId,
+    askId,
   };
 }
 

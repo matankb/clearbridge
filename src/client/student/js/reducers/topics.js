@@ -4,6 +4,7 @@ import {
   FETCH_TOPIC,
   RECEIVE_TOPIC,
   ADD_ASK,
+  DELETE_ASK,
 
   FETCH_TOPIC_LIST_ERROR,
   FETCH_TOPIC_ERROR,
@@ -91,6 +92,18 @@ function topics(state = defaultState, action) {
           data: {
             ...topic.data,
             asks: [...topic.data.asks, action.ask],
+          },
+        })),
+      };
+
+    case DELETE_ASK:
+      return {
+        ...state,
+        topics: changeTopic(state.topics, action.topicId, topic => ({
+          ...topic,
+          data: {
+            ...topic.data,
+            asks: topic.data.asks.filter(ask => ask._id !== action.askId),
           },
         })),
       };
