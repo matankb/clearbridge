@@ -1,3 +1,5 @@
+import { normalizeDatabaseObject } from '~/shared/js/utils/db';
+
 export const REQUEST_USER = 'USER/REQUEST_USER';
 export const RECEIVE_USER = 'USER/RECEIVE/USER';
 export const REQUEST_USER_ERROR = 'USER/REQUEST_USER_ERROR';
@@ -13,10 +15,17 @@ export default function user(state = defaultState, action) {
 
     case REQUEST_USER:
       return { ...state, isFetching: true, error: null };
+
     case RECEIVE_USER:
-      return { ...state, isFetching: false, user: action.user };
+      return {
+        ...state,
+        isFetching: false,
+        user: normalizeDatabaseObject(action.user),
+      };
+
     case REQUEST_USER_ERROR:
       return { ...state, isFetching: false, error: action.error };
+
     default:
       return state;
 
