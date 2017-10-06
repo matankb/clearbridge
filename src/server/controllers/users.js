@@ -4,6 +4,8 @@ const url = require('url');
 const User = require('../models/User');
 const Topic = require('../models/Topic');
 
+const resMessage = require('../helpers/res-message');
+
 exports.getUsers = async (req, res) => {
   res.json(await User.find().exec());
 };
@@ -25,7 +27,7 @@ exports.getUser = async (req, res, next) => {
   const user = await User.findById(req.params.id).exec();
   // forbid students from accessing other users
   if (req.user.type === 0 && req.params.id !== req.user.id) {
-    return res.status(403).json({ message: 'Requires authentication' });
+    resMessage.unauthenticated(res);
   } else if (user) {
     res.json(user);
   } else {

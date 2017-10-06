@@ -4,6 +4,8 @@
 */
 
 // TODO: find better name for module
+const { unauthenticated } = require('../helpers/res-message');
+
 
 function ensureAuthenticated(types = [0, 1, 2]) {
 
@@ -13,7 +15,7 @@ function ensureAuthenticated(types = [0, 1, 2]) {
         return next();
       }
     }
-    res.status(403).json({ message: 'Requires authentication' });
+    unauthenticated(res);
   };
 
 }
