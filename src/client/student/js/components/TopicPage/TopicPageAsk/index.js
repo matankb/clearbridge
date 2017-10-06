@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addAsk } from '~/student/js/actions';
+import { addAsk, deleteAsk } from '~/student/js/actions';
 
 import AppPropTypes from '~/shared/js/constants/prop-types';
 import withFetchAction from '~/shared/js/hocs/fetch-actions';
@@ -36,6 +36,21 @@ class TopicPageAsk extends React.Component {
 
   }
 
+  deleteAsk = askID => {
+
+    const messages = {
+      fetchingMessage: 'Deleting question...',
+      fetchedMessage: 'Question deleted!',
+      errorMessage: 'Error deleting question. Please try again.',
+    };
+
+    this.props.fetchAction(`/api/asks/${askID}`, {
+      method: 'DELETE',
+    }, messages)
+      .then(() => this.props.deleteAsk(this.props.id, askID)); // remove ask from store
+
+  }
+
   render() {
     return (
       <div className="ask">
@@ -53,6 +68,9 @@ TopicPageAsk.propTypes = {
 
   fetchAction: PropTypes.func.isRequired,
   addAsk: PropTypes.func.isRequired,
+  deleteAsk: PropTypes.func.isRequired,
+
+  userID: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
