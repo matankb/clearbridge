@@ -10,6 +10,7 @@ import '~/student/css/layout.less';
 
 import Header from './Header';
 import Home from './Home';
+import User from './User';
 
 
 const Layout = () => (
@@ -21,6 +22,8 @@ const Layout = () => (
     <About />
 
     <ErrorNotification />
+
+    <User />
 
     <Switch>
       <Route path="/student/" component={ Home } />

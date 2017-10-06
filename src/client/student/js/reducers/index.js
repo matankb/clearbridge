@@ -5,5 +5,6 @@ import about from '~/shared/js/reducers/about';
 
 import topics from './topics';
 import search from './search';
+import user from './user';
 
-export default combineReducers({ topics, search, feedback, about });
+export default combineReducers({ topics, search, user, feedback, about });
