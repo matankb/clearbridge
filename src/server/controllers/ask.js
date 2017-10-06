@@ -31,8 +31,10 @@ exports.updateAsk = async (req, res, next) => {
 };
 
 exports.deleteAsk = async (req, res, next) => {
-  // allow asker to delete own asks
-  if (req.user.type === 0 && (await Ask.findById(req.params.id).asker !== req.user.id)) {
+
+  // forbid student who isn't asker from deleting ask
+  const ask = await Ask.findById(req.params.id);
+  if (req.user.type === 0 && !ask.asker.equals(req.user.id)) {
     return unauthenticated(res);
   }
 
@@ -42,4 +44,5 @@ exports.deleteAsk = async (req, res, next) => {
   } else {
     res.json({});
   }
+
 };
