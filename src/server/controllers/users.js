@@ -23,7 +23,10 @@ exports.redirectUserResource = (req, res) => {
 
 exports.getUser = async (req, res, next) => {
   const user = await User.findById(req.params.id).exec();
-  if (user) {
+  // forbid students from accessing other users
+  if (req.user.type === 0 && req.params.id !== req.user.id) {
+    return res.status(403).json({ message: 'Requires authentication' });
+  } else if (user) {
     res.json(user);
   } else {
     next();
