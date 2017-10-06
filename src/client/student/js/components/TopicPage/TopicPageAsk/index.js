@@ -55,7 +55,11 @@ class TopicPageAsk extends React.Component {
     return (
       <div className="ask">
         <AskForm name={ this.props.name} sendAsk={ this.sendAsk } />
-        <AskList asks={ this.props.asks } />
+        <AskList
+          asks={ this.props.asks }
+          userID={ this.props.userID }
+          deleteAsk={ this.deleteAsk }
+        />
       </div>
     );
   }
@@ -77,6 +81,7 @@ function mapStateToProps(state, ownProps) {
   const topic = getTopicById(state.topics.topics, ownProps.id);
   return {
     name: topic.data.name,
+    userID: state.user.user.id,
     asks: topic.data.asks,
   };
 }
@@ -84,6 +89,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     addAsk: (topicId, ask) => dispatch(addAsk(topicId, ask)),
+    deleteAsk: (topicID, askID) => dispatch(deleteAsk(topicID, askID)),
   };
 }
 
