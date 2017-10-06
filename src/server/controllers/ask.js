@@ -1,6 +1,8 @@
 const Ask = require('../models/Ask');
 const Topic = require('../models/Topic');
 
+const { unauthenticated } = require('../helpers/res-message');
+
 exports.getAsks = async (req, res) => {
   res.json(await Ask.find().populate('topic', 'name color').exec());
 };
@@ -29,6 +31,11 @@ exports.updateAsk = async (req, res, next) => {
 };
 
 exports.deleteAsk = async (req, res, next) => {
+  // allow asker to delete own asks
+  if (req.user.type === 0 && (await Ask.findById(req.params.id).asker !== req.user.id)) {
+    return unauthenticated(res);
+  }
+
   const deletedAsk = await Ask.findByIdAndRemove(req.params.id).exec();
   if (!deletedAsk) { // ask did not exist
     next();
