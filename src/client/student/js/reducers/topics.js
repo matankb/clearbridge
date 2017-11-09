@@ -1,3 +1,5 @@
+import { normalizeDatabaseObject } from '~/shared/js/utils/db';
+
 import {
   REQUEST_TOPIC_LIST,
   RECEIVE_TOPIC_LIST,
@@ -79,7 +81,7 @@ function topics(state = defaultState, action) {
             ...topic.data,
             blurb: action.blurb,
             content: action.content,
-            asks: action.asks,
+            asks: action.asks.map(ask => normalizeDatabaseObject(ask)),
           },
         })),
       };
@@ -91,7 +93,7 @@ function topics(state = defaultState, action) {
           ...topic,
           data: {
             ...topic.data,
-            asks: [...topic.data.asks, action.ask],
+            asks: [...topic.data.asks, normalizeDatabaseObject(action.ask)],
           },
         })),
       };

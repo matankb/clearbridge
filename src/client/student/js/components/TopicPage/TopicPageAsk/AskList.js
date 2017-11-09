@@ -42,12 +42,12 @@ const AskList = ({ asks, userID, deleteAsk }) => {
 
   const askElements = asks.map(ask => (
     <AskItem
-      key={ ask._id }
-      id={ ask._id }
+      key={ ask.id }
+      id={ ask.id }
       question={ ask.question }
       answer={ ask.answer }
       showControls={ ask.asker === userID }
-      handleDelete={ () => deleteAsk(ask._id) }
+      handleDelete={ () => deleteAsk(ask.id) }
     />
   ));
 
