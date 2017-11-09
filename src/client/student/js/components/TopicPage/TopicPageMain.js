@@ -8,16 +8,24 @@ import TopicPageAsk from './TopicPageAsk';
 
 import { getTextColor } from '../../../../shared/js/utils';
 
+
 const TopicPageMain = ({ id, color, content }) => {
+
   const style = {
-    background: color,
-    color: getTextColor(color),
+    tab: {
+      background: color,
+      color: getTextColor(color),
+    },
+    inkBar: {
+      background: getTextColor(color),
+      transitionDuration: '200ms', // increase animation speed
+    },
   };
 
   return (
-    <Tabs>
-      <Tab style={ style } label="About"><TopicPageContent content={ content } /></Tab>
-      <Tab style={ style } label="Questions"><TopicPageAsk id={ id } /></Tab>
+    <Tabs inkBarStyle={style.inkBar}>
+      <Tab style={ style.tab } label="About"><TopicPageContent content={ content } /></Tab>
+      <Tab style={ style.tab } label="Questions"><TopicPageAsk id={ id } /></Tab>
     </Tabs>
   );
 
