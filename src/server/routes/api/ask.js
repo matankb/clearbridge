@@ -8,8 +8,7 @@ module.exports = function (router) {
   router.get('/asks/', ensureAuthenticated([1, 2]), wrapAsync(askController.getAsks));
 
   router.post('/asks/', ensureAuthenticated(), wrapAsync(askController.createAsk));
-  router.patch('/asks/:id/', ensureAuthenticated([1, 2]), wrapAsync(askController.updateAsk));
+  router.patch('/asks/:id/', ensureAuthenticated(), wrapAsync(askController.updateAsk));
   router.delete('/asks/:id/', ensureAuthenticated(), wrapAsync(askController.deleteAsk));
-
 
 };

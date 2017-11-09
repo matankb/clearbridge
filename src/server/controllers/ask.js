@@ -24,8 +24,16 @@ exports.updateAsk = async (req, res, next) => {
   if (!ask) {
     next();
   } else {
-    // merge existing model with new data
-    Object.assign(ask, req.body.data);
+    if (req.user.type === 0) {
+      if (!ask.asker.equals(req.user.id)) {
+        return unauthenticated(res); // forbid student who isn't asker from deleting ask
+      } else {
+        ask.question = req.body.data.question; // only allow students to update question
+      }
+    } else {
+      // merge existing model with new data
+      Object.assign(ask, req.body.data);
+    }
     res.json(await ask.save());
   }
 };
