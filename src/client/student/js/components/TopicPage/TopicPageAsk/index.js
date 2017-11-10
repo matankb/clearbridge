@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addAsk, deleteAsk } from '~/student/js/actions';
+import { addAsk, deleteAsk, editAsk } from '~/student/js/actions';
 
 import AppPropTypes from '~/shared/js/constants/prop-types';
 import withFetchAction from '~/shared/js/hocs/fetch-actions';
@@ -51,6 +51,25 @@ class TopicPageAsk extends React.Component {
 
   }
 
+  editAsk = (askID, newQuestion) => {
+    const messages = {
+      fetchingMessage: 'Editing question...',
+      fetchedMessage: 'Question edited!',
+      errorMessage: 'Error editing question. Please try again.',
+    };
+
+    this.props.fetchAction(`/api/asks/${askID}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        data: {
+          question: newQuestion,
+        },
+      }),
+    }, messages)
+      .then(() => this.props.editAsk(this.props.id, askID, newQuestion));
+
+  }
+
   render() {
     return (
       <div className="ask">
@@ -59,6 +78,7 @@ class TopicPageAsk extends React.Component {
           asks={ this.props.asks }
           userID={ this.props.userID }
           deleteAsk={ this.deleteAsk }
+          editAsk={ this.editAsk }
         />
       </div>
     );
@@ -73,6 +93,7 @@ TopicPageAsk.propTypes = {
   fetchAction: PropTypes.func.isRequired,
   addAsk: PropTypes.func.isRequired,
   deleteAsk: PropTypes.func.isRequired,
+  editAsk: PropTypes.func.isRequired,
 
   userID: PropTypes.string.isRequired,
 };
@@ -90,6 +111,7 @@ function mapDispatchToProps(dispatch) {
   return {
     addAsk: (topicId, ask) => dispatch(addAsk(topicId, ask)),
     deleteAsk: (topicID, askID) => dispatch(deleteAsk(topicID, askID)),
+    editAsk: (topicID, askID, newQuestion) => dispatch(editAsk(topicID, askID, newQuestion)),
   };
 }
 
