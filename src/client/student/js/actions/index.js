@@ -7,6 +7,7 @@ export const RECEIVE_TOPIC_LIST = 'RECEIVE_TOPIC_LIST';
 
 export const ADD_ASK = 'ADD_ASK';
 export const DELETE_ASK = 'DELETE_ASK';
+export const EDIT_ASK = 'EDIT_ASK';
 
 export const FETCH_TOPIC_LIST_ERROR = 'FETCH_TOPIC_LIST_ERROR';
 export const FETCH_TOPIC_ERROR = 'FETCH_TOPIC_ERROR';
@@ -61,6 +62,15 @@ export function deleteAsk(topicId, askId) {
     type: DELETE_ASK,
     topicId,
     askId,
+  };
+}
+
+export function editAsk(topicId, askId, newQuestion) {
+  return {
+    type: EDIT_ASK,
+    topicId,
+    askId,
+    newQuestion,
   };
 }
 

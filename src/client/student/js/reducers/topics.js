@@ -5,8 +5,10 @@ import {
   RECEIVE_TOPIC_LIST,
   FETCH_TOPIC,
   RECEIVE_TOPIC,
+
   ADD_ASK,
   DELETE_ASK,
+  EDIT_ASK,
 
   FETCH_TOPIC_LIST_ERROR,
   FETCH_TOPIC_ERROR,
@@ -105,7 +107,21 @@ function topics(state = defaultState, action) {
           ...topic,
           data: {
             ...topic.data,
-            asks: topic.data.asks.filter(ask => ask._id !== action.askId),
+            asks: topic.data.asks.filter(ask => ask.id !== action.askId),
+          },
+        })),
+      };
+
+    case EDIT_ASK:
+      return {
+        ...state,
+        topics: changeTopic(state.topics, action.topicId, topic => ({
+          ...topic,
+          data: {
+            ...topic.data,
+            asks: changeTopic(topic.data.asks, action.askId, ask => {
+              return { ...ask, question: action.newQuestion };
+            }),
           },
         })),
       };
