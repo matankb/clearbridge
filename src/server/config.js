@@ -19,7 +19,7 @@ const prod = {
 
 const dev = {
   db: {
-    URL: 'mongodb://127.0.0.1/bridge',
+    URL: 'mongodb://127.0.0.1/clearbridge',
   },
   server: {
     PORT: 8080,
