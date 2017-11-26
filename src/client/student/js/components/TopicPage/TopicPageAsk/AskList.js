@@ -81,7 +81,11 @@ class AskItem extends React.Component {
         {
           this.props.showControls &&
           <div className="controls">
-            <IconButton onTouchTap={ this.startEditing } disabled={ this.state.isEditing } tooltip="Edit">
+            <IconButton
+              onTouchTap={ this.startEditing }
+              disabled={ this.state.isEditing }
+              tooltip="Edit"
+            >
               <EditIcon color={ colors.gray } />
             </IconButton>
             <IconButton onTouchTap={ this.props.handleDelete } tooltip="Delete">
@@ -115,7 +119,12 @@ AskItem.defaultProps = {
 
 const AskList = ({ asks, userID, deleteAsk, editAsk }) => {
 
-  const askElements = asks.map(ask => (
+  // display answered asks first
+  const orderedAsks = asks.sort((a, b) => {
+    return (a.answer && b.answer) || (!a.answer && !b.answer) ? 0 : a.answer && !b.answer ? -1 : 1;
+  });
+
+  const askElements = orderedAsks.map(ask => (
     <AskItem
       key={ ask.id }
       id={ ask.id }
