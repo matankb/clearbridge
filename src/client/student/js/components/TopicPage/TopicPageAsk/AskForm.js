@@ -19,6 +19,11 @@ const style = {
   askButton: {
     width: '20%',
   },
+  errorText: {
+    // workaround for position: relative div (which material-ui creates) forces button to new line
+    position: 'absolute',
+    bottom: -12,
+  },
 };
 
 class AskForm extends React.Component {
@@ -30,12 +35,18 @@ class AskForm extends React.Component {
 
   state = {
     question: '',
+    validationError: false,
   }
 
 
   handleQuestionChange = e => this.setState({ question: e.target.value });
   handleAskClick = () => {
-    this.props.sendAsk(this.state.question); this.setState({ question: '' });
+    if (this.state.question.trim() !== '') { // ensure question is not empty
+      this.props.sendAsk(this.state.question);
+      this.setState({ question: '', validationError: false });
+    } else {
+      this.setState({ validationError: true });
+    }
   }
 
   render() {
@@ -53,6 +64,8 @@ class AskForm extends React.Component {
 
             floatingLabelText={ `Ask a question about ${this.props.name}...` }
             floatingLabelStyle={ style.textFieldLabel }
+            errorText={ this.state.validationError ? 'Please enter a question' : null }
+            errorStyle={ style.errorText }
           />
 
           <FlatButton
@@ -69,5 +82,4 @@ class AskForm extends React.Component {
   }
 
 }
-
 export default AskForm;

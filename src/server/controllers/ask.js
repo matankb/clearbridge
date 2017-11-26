@@ -8,6 +8,13 @@ exports.getAsks = async (req, res) => {
 };
 
 exports.createAsk = async (req, res) => {
+
+   // ensure that ask is empty - this is validated client-side as well
+  if (req.body.data.question === '') {
+    // middleware will set status to 500 and return this error
+    throw new Error('Ask must contain non-empty question');
+  }
+
   const ask = new Ask();
   const topic = await Topic.findById(req.body.data.topic);
 
