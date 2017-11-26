@@ -52,6 +52,7 @@ class AskItem extends React.Component {
           name="ask-editing"
           value={ this.state.question }
           onChange={ this.handleEditChange }
+          autoFocus
           style={ style.editingField }
         />
         <IconButton
