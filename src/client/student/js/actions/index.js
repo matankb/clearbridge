@@ -65,12 +65,12 @@ export function deleteAsk(topicId, askId) {
   };
 }
 
-export function editAsk(topicId, askId, newQuestion) {
+export function editAsk(topicId, askId, newAsk) {
   return {
     type: EDIT_ASK,
     topicId,
     askId,
-    newQuestion,
+    newAsk,
   };
 }
 

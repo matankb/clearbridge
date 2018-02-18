@@ -22,7 +22,6 @@ class TopicPageAsk extends React.Component {
       private: isPrivate, // private is reserved word in strict mode, can't be used for arg names
       topic: this.props.id,
     };
-
     const messages = {
       fetchingMessage: 'Sending question...',
       fetchedMessage: 'Question sent!',
