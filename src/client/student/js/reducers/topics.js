@@ -120,7 +120,7 @@ function topics(state = defaultState, action) {
           data: {
             ...topic.data,
             asks: changeTopic(topic.data.asks, action.askId, ask => {
-              return { ...ask, question: action.newQuestion };
+              return { ...ask, ...action.newAsk };
             }),
           },
         })),

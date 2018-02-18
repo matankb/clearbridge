@@ -20,7 +20,6 @@ exports.createAsk = async (req, res) => {
 
   ask.asker = req.user.id;
   Object.assign(ask, req.body.data);
-
   topic.asks.push(ask.id);
   await topic.save();
   res.json(await ask.save());
@@ -29,20 +28,23 @@ exports.createAsk = async (req, res) => {
 exports.updateAsk = async (req, res, next) => {
   const ask = await Ask.findById(req.params.id).exec();
   if (!ask) {
-    next();
-  } else {
-    if (req.user.type === 0) {
-      if (!ask.asker.equals(req.user.id)) {
-        return unauthenticated(res); // forbid student who isn't asker from deleting ask
-      } else {
-        ask.question = req.body.data.question; // only allow students to update question
-      }
-    } else {
-      // merge existing model with new data
-      Object.assign(ask, req.body.data);
-    }
-    res.json(await ask.save());
+    return next();
   }
+
+  if (req.user.type === 0) {
+    if (!ask.asker.equals(req.user.id)) {
+      return unauthenticated(res); // forbid student who isn't asker from updating ask
+    } else {
+        // only allow students to update question or privacy
+      ask.question = req.body.data.question;
+      ask.private = req.body.data.private;
+    }
+  } else {
+      // merge existing model with new data
+    Object.assign(ask, req.body.data);
+  }
+
+  res.json(await ask.save());
 };
 
 exports.deleteAsk = async (req, res, next) => {

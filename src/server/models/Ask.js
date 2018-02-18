@@ -5,6 +5,7 @@ const askSchema = mongoose.Schema({
   question: String,
   answer: String,
   topic: { type: mongoose.Schema.Types.ObjectId, ref: 'Topic' },
+  private: Boolean,
 });
 
 const Ask = mongoose.model('Ask', askSchema);

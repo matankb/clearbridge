@@ -15,10 +15,11 @@ import AskList from './AskList';
 
 class TopicPageAsk extends React.Component {
 
-  sendAsk = question => {
+  sendAsk = (question, isPrivate) => {
 
     const data = {
       question,
+      private: isPrivate, // private is reserved word in strict mode, can't be used for arg names
       topic: this.props.id,
     };
 
@@ -51,7 +52,7 @@ class TopicPageAsk extends React.Component {
 
   }
 
-  editAsk = (askID, newQuestion) => {
+  editAsk = (askID, newAsk) => {
     const messages = {
       fetchingMessage: 'Editing question...',
       fetchedMessage: 'Question edited!',
@@ -61,12 +62,10 @@ class TopicPageAsk extends React.Component {
     this.props.fetchAction(`/api/asks/${askID}`, {
       method: 'PATCH',
       body: JSON.stringify({
-        data: {
-          question: newQuestion,
-        },
+        data: newAsk,
       }),
     }, messages)
-      .then(() => this.props.editAsk(this.props.id, askID, newQuestion));
+      .then(() => this.props.editAsk(this.props.id, askID, newAsk));
 
   }
 
@@ -111,7 +110,8 @@ function mapDispatchToProps(dispatch) {
   return {
     addAsk: (topicId, ask) => dispatch(addAsk(topicId, ask)),
     deleteAsk: (topicID, askID) => dispatch(deleteAsk(topicID, askID)),
-    editAsk: (topicID, askID, newQuestion) => dispatch(editAsk(topicID, askID, newQuestion)),
+    // AskList is responsible for compiling newAsk
+    editAsk: (topicID, askID, newAsk) => dispatch(editAsk(topicID, askID, newAsk)),
   };
 }
 

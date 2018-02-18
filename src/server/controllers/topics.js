@@ -55,10 +55,19 @@ exports.getStudents = async (req, res, next) => {
 };
 
 exports.getAsks = async (req, res, next) => {
+
   const topic = await Topic.findById(req.params.id).populate('asks').exec();
   if (!topic) {
-    next();
-  } else {
-    res.json(topic.asks);
+    return next(); // topic doesn't exit
   }
+
+  if (req.user.type === 0) {
+    const filteredAsks = topic.asks.filter(ask => {
+      // ensure ask is either public or is asked by req.user
+      return !ask.private || ask.asker.equals(req.user.id);
+    });
+    return res.json(filteredAsks);
+  }
+
+  res.json(topic.asks);
 };

@@ -5,12 +5,14 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
+import MoreOptions from './MoreOptions';
+
 const style = {
   paperWrap: {
     padding: '0px 30px 20px 30px',
   },
   textField: {
-    width: '75%',
+    width: '65%',
     marginRight: '5%',
   },
   textFieldLabel: {
@@ -35,6 +37,7 @@ class AskForm extends React.Component {
 
   state = {
     question: '',
+    private: false,
     validationError: false,
   }
 
@@ -42,14 +45,32 @@ class AskForm extends React.Component {
   handleQuestionChange = e => this.setState({ question: e.target.value });
   handleAskClick = () => {
     if (this.state.question.trim() !== '') { // ensure question is not empty
-      this.props.sendAsk(this.state.question);
-      this.setState({ question: '', validationError: false });
+      this.props.sendAsk(this.state.question, this.state.private);
+      this.setState({ question: '', validationError: false, private: false });
     } else {
       this.setState({ validationError: true });
     }
   }
 
+  // more options
+  handleMoreOptionsOpen = e => {
+    // prevent click on popover
+    e.preventDefault();
+    // popover uses moreOptionsElem as root
+    this.setState({ showMoreOptions: true });
+  }
+  handleMoreOptionsClose = () => {
+    this.setState({ showMoreOptions: false });
+  }
+  handlePublicClick = () => {
+    this.setState({ private: false });
+  }
+  handlePrivateClick = () => {
+    this.setState({ private: true });
+  }
+
   render() {
+
     return (
       <div className="ask-form">
         <Paper style={ style.paperWrap }>
@@ -70,10 +91,16 @@ class AskForm extends React.Component {
 
           <FlatButton
             label="Ask"
-            onTouchTap={ this.handleAskClick }
+            onClick={ this.handleAskClick }
 
             style={ style.askButton }
             primary
+          />
+
+          <MoreOptions
+            private={ this.state.private }
+            handlePrivateClick={ this.handlePrivateClick }
+            handlePublicClick={ this.handlePublicClick }
           />
 
         </Paper>
