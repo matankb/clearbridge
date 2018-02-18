@@ -64,7 +64,7 @@ const Sidebar = props => {
                                   style.listItemSelected :
                                   {}
                     }
-                    onTouchTap={ props.onItemClick }
+                    onClick={ props.onItemClick }
                     onClick={ props.onItemClick }
                   >
                     { item.name }

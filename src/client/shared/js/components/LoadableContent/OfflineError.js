@@ -50,7 +50,7 @@ class OfflineError extends React.Component {
           label="Try Again"
           primary
           hoverColor="transparent"
-          onTouchTap={ this.props.retry }
+          onClick={ this.props.retry }
         />
       </div>
     );

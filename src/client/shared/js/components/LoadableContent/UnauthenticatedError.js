@@ -13,7 +13,7 @@ const UnauthenticatedError = () => (
       label="Log In"
       primary
       hoverColor="transparent"
-      onTouchTap={ () => { location.href = `/auth/?returnTo=${encodeURIComponent(location.href)}`; } }
+      onClick={ () => { location.href = `/auth/?returnTo=${encodeURIComponent(location.href)}`; } }
     />
   </div>
 );

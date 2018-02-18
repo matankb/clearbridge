@@ -32,7 +32,7 @@ const Buttons = props => {
   return (
     <div style={ style.title } className="hi" >
       <IconButton
-        onTouchTap={ props.handleClose }
+        onClick={ props.handleClose }
         style={ style.icon }
       >
         <ArrowIcon style={ style.icon } color="white" />

@@ -35,7 +35,7 @@ class Topics extends React.Component {
       <div className="topics">
 
         <FloatingActionButton
-          onTouchTap={ this.props.handleFABClick }
+          onClick={ this.props.handleFABClick }
           style={ style.fab }
           backgroundColor={ colors.accent }
         >

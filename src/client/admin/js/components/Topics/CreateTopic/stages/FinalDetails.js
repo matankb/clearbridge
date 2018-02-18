@@ -30,7 +30,7 @@ let First = props => {
           label="Next"
           primary
           style={ style.button }
-          onTouchTap={ props.handleNextStage }
+          onClick={ props.handleNextStage }
         />
       </div>
     </div>

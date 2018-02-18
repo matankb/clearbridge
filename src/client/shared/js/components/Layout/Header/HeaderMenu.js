@@ -30,17 +30,17 @@ const HeaderMenu = ({ iconColor, handleFeedbackClick, handleAboutClick }) => {
       <MenuItem
         primaryText="Logout"
         leftIcon={ <LogoutIcon /> }
-        onTouchTap={ () => { location.href = '/logout'; } }
+        onClick={ () => { location.href = '/logout'; } }
       />
       <MenuItem
         primaryText="Feedback"
         leftIcon={ <FeedbackIcon /> }
-        onTouchTap={ handleFeedbackClick }
+        onClick={ handleFeedbackClick }
       />
       <MenuItem
         primaryText="About"
         leftIcon={ <AboutIcon /> }
-        onTouchTap={ handleAboutClick }
+        onClick={ handleAboutClick }
       />
     </IconMenu>
   );

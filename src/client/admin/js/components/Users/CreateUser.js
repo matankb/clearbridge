@@ -57,17 +57,17 @@ let CreateUser = props => {
     <FlatButton
       label="More Options"
       style={ style.button.moreOptions }
-      onTouchTap={ props.handleMoreOptions }
+      onClick={ props.handleMoreOptions }
     />,
     <FlatButton
       label="Cancel"
       secondary
-      onTouchTap={ props.handleCancel }
+      onClick={ props.handleCancel }
     />,
     <FlatButton
       label="Create"
       primary
-      onTouchTap={ props.handleCreate }
+      onClick={ props.handleCreate }
     />,
   ];
 

@@ -14,7 +14,7 @@ const GenericError = ({ retry }) => (
       label="Try Again"
       primary
       hoverColor="transparent"
-      onTouchTap={ retry }
+      onClick={ retry }
     />
   </div>
 );

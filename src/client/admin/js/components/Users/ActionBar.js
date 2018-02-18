@@ -17,7 +17,7 @@ let ActionBar = props => {
     <div className={ props.shown ? 'action-bar shown' : 'action-bar' } >
       <IconButton
         style={ style.icons }
-        onTouchTap={ props.handleRemove }
+        onClick={ props.handleRemove }
       >
         <DeleteIcon color="#5f6265" hoverColor="black" />
       </IconButton>

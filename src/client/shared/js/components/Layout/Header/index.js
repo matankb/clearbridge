@@ -41,7 +41,7 @@ const Header = props => {
     <AppBar
       style={ styles.header }
       title="ClearBridge"
-      onLeftIconButtonTouchTap={ props.handleIconClick }
+      onLeftIconButtonClick={ props.handleIconClick }
       iconElementRight={ feedbackButton }
     />
   );

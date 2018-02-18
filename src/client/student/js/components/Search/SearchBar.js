@@ -77,7 +77,7 @@ class SearchBar extends React.Component {
     return (
       <div className="search-bar-wrap">
 
-        <IconButton onTouchTap={ this.toggleOpen }>
+        <IconButton onClick={ this.toggleOpen }>
           <IconSearch color={ this.props.color } />
         </IconButton>
 

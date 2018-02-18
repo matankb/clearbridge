@@ -42,13 +42,13 @@ const FeedbackDialog = ({
     <FlatButton
       key={ 0 }
       label="Cancel"
-      onTouchTap={ close }
+      onClick={ close }
     />,
     <FlatButton
       key={ 1 }
       label="Send"
       primary
-      onTouchTap={ send }
+      onClick={ send }
     />,
   ];
 

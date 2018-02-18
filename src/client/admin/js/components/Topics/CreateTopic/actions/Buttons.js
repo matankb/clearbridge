@@ -18,14 +18,14 @@ const Actions = props => {
       <FlatButton
         label="Cancel"
         style={ style.button }
-        onTouchTap={ props.handleCancel }
+        onClick={ props.handleCancel }
       />
       { !props.final &&
       <RaisedButton
         label="Next"
         primary
         style={ style.button }
-        onTouchTap={ props.handleNextStage }
+        onClick={ props.handleNextStage }
       />
       }
       { props.final &&
@@ -33,7 +33,7 @@ const Actions = props => {
           label="Create"
           primary
           style={ style.button }
-          onTouchTap={ props.handleCreate }
+          onClick={ props.handleCreate }
         />
       }
     </div>

@@ -12,10 +12,7 @@ const routes = require('./routes');
 const auth = require('./auth');
 const error = require('./middleware/error');
 
-mongoose.Promise = global.Promise; // use es6 promises in mongoose queries
-mongoose.connect(config.db.URL, {
-  useMongoClient: true,
-});
+mongoose.connect(config.db.URL);
 
 let app = express();
 

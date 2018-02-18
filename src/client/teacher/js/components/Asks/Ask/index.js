@@ -80,7 +80,7 @@ class Ask extends React.Component {
           style={ style.textfield }
         />
 
-        <FlatButton label="Answer" onTouchTap={ this.handleSubmitTap } />
+        <FlatButton label="Answer" onClick={ this.handleSubmitTap } />
 
       </Paper>
     );

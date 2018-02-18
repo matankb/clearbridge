@@ -28,7 +28,7 @@ const AskMenu = ({ handleDeleteTap }) => (
     <MenuItem
       primaryText="Delete"
       leftIcon={ <DeleteIcon /> }
-      onTouchTap={ handleDeleteTap }
+      onClick={ handleDeleteTap }
     />
   </IconMenu>
 );

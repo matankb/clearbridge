@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { openFeedback } from '~/shared/js/reducers/feedback/open';
 
 const FeedbackButton = ({ handleOpen, button }) => (
-  <div onTouchTap={ handleOpen }>
+  <div onClick={ handleOpen }>
     { button }
   </div>
 );

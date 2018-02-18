@@ -39,7 +39,7 @@ class Content extends React.Component {
             marginLeft: 720,
           }}
           primary
-          onTouchTap={ this.save.bind(this) }
+          onClick={ this.save.bind(this) }
           key={ 0 }
         />
       </div>
