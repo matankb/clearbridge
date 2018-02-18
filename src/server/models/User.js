@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 require('mongoose-schema-extend');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
   email: String,
@@ -12,7 +12,13 @@ const userSchema = new Schema({
 }, { collection: 'users', discriminatorKey: '_type' });
 
 userSchema.methods.generateHash = function(password) {
-  return bcrypt.hash(password, 8);  // returns promise
+  return bcrypt.hash(password, 8); // returns promise
+};
+
+userSchema.methods.toJSON = function() {
+  let obj = this.toObject();
+  delete obj.localAuth;
+  return obj;
 };
 
 userSchema.methods.validPassword = function(password) {
