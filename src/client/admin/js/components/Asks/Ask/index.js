@@ -5,6 +5,8 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
+import colors from '~/shared/js/constants/colors';
+
 import AskMenu from './AskMenu';
 
 const baseStyle = {
@@ -21,6 +23,19 @@ const baseStyle = {
     fontSize: '14px',
     display: 'block',
   },
+  question: {
+    float: 'left',
+  },
+  topicName: {
+    color: colors.lightgray,
+    fontSize: 14,
+    float: 'right',
+    marginRight: 40,
+  },
+  askerName: {
+    color: colors.lightgray,
+    fontSize: 14,
+  },
 };
 
 class Ask extends React.Component {
@@ -34,6 +49,7 @@ class Ask extends React.Component {
       name: PropTypes.string,
       color: PropTypes.string,
     }).isRequired,
+    askerName: PropTypes.string.isRequired,
     sendAnswer: PropTypes.func.isRequired,
     deleteAsk: PropTypes.func.isRequired,
   }
@@ -64,9 +80,14 @@ class Ask extends React.Component {
     return (
       <Paper style={ style.wrap}>
 
-        <span style={ style.question }>{ `${this.props.question} `}</span>
+        <span style={ style.question }>
+          &quot;{ this.props.question }&quot; - &nbsp;
+          <span style={ style.askerName }>
+            { this.props.askerName }
+          </span>
+        </span>
+        <span style={ style.topicName }>{ this.props.topic.name }</span>
 
-        <i style={{ color: 'gray', fontSize: 14 }}>- { this.props.topic.name }</i>
 
         <AskMenu handleDeleteTap={ this.handleDeleteTap } />
 
@@ -86,6 +107,6 @@ class Ask extends React.Component {
     );
   }
 
-  }
+}
 
 export default Ask;

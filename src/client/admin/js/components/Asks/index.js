@@ -66,7 +66,7 @@ class Asks extends React.Component {
     };
 
     this.props.fetchAction(url, fetchOpts, toastOpts)
-          .then(() => this.props.deleteAsk(id));
+      .then(() => this.props.deleteAsk(id));
 
   }
 
@@ -88,6 +88,7 @@ class Asks extends React.Component {
                 question={ ask.question }
                 answer={ ask.answer }
                 topic={ ask.topic }
+                askerName={ ask.asker.name }
                 sendAnswer={ this.sendAnswer }
                 deleteAsk={ this.deleteAsk }
               />

@@ -20,7 +20,9 @@ const fetch = PropTypes.shape({
 
 const ask = PropTypes.shape({
   id: PropTypes.string,
-  asker: PropTypes.string,
+  asker: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   question: PropTypes.string,
   answer: PropTypes.string,
 });

@@ -4,12 +4,15 @@ const Topic = require('../models/Topic');
 const { unauthenticated } = require('../helpers/res-message');
 
 exports.getAsks = async (req, res) => {
-  res.json(await Ask.find().populate('topic', 'name color').exec());
+  res.json(await Ask.find()
+    .populate('topic', 'name color')
+    .populate('asker', 'name')
+    .exec());
 };
 
 exports.createAsk = async (req, res) => {
 
-   // ensure that ask is empty - this is validated client-side as well
+  // ensure that ask is empty - this is validated client-side as well
   if (req.body.data.question === '') {
     // middleware will set status to 500 and return this error
     throw new Error('Ask must contain non-empty question');
@@ -35,12 +38,12 @@ exports.updateAsk = async (req, res, next) => {
     if (!ask.asker.equals(req.user.id)) {
       return unauthenticated(res); // forbid student who isn't asker from updating ask
     } else {
-        // only allow students to update question or privacy
+      // only allow students to update question or privacy
       ask.question = req.body.data.question;
       ask.private = req.body.data.private;
     }
   } else {
-      // merge existing model with new data
+    // merge existing model with new data
     Object.assign(ask, req.body.data);
   }
 
