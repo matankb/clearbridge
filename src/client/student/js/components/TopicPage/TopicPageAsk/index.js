@@ -15,11 +15,10 @@ import AskList from './AskList';
 
 class TopicPageAsk extends React.Component {
 
-  sendAsk = (question, isPrivate) => {
+  sendAsk = ask => {
 
     const data = {
-      question,
-      private: isPrivate, // private is reserved word in strict mode, can't be used for arg names
+      ...ask,
       topic: this.props.id,
     };
     const messages = {
@@ -32,7 +31,7 @@ class TopicPageAsk extends React.Component {
       method: 'POST',
       body: JSON.stringify({ data }),
     }, messages)
-      .then(ask => this.props.addAsk(this.props.id, ask));
+      .then(newAsk => this.props.addAsk(this.props.id, newAsk));
 
   }
 

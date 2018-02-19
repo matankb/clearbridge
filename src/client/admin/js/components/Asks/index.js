@@ -71,6 +71,8 @@ class Asks extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.props.asks);
     return (
       <div className="asks">
         <h1 className="title">Asks</h1>

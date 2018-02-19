@@ -4,10 +4,26 @@ const Topic = require('../models/Topic');
 const { unauthenticated } = require('../helpers/res-message');
 
 exports.getAsks = async (req, res) => {
-  res.json(await Ask.find()
+  const asks = await Ask.find()
     .populate('topic', 'name color')
     .populate('asker', 'name')
-    .exec());
+    .lean() // plain array of objects, to allow .map
+    .exec()
+    .map(ask => { // remove name from unnamed asks
+      if (!ask.named) {
+        return {
+          ...ask,
+          asker: {
+            ...ask.asker,
+            name: null, // client will interpret as unnanmed
+          },
+        };
+      }
+      return ask;
+    });
+
+  res.json(asks);
+
 };
 
 exports.createAsk = async (req, res) => {
@@ -38,9 +54,10 @@ exports.updateAsk = async (req, res, next) => {
     if (!ask.asker.equals(req.user.id)) {
       return unauthenticated(res); // forbid student who isn't asker from updating ask
     } else {
-      // only allow students to update question or privacy
+      // only allow students to update certain fields
       ask.question = req.body.data.question;
       ask.private = req.body.data.private;
+      ask.named = req.body.data.named;
     }
   } else {
     // merge existing model with new data

@@ -20,9 +20,12 @@ const fetch = PropTypes.shape({
 
 const ask = PropTypes.shape({
   id: PropTypes.string,
-  asker: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+  asker: PropTypes.oneOfType([
+    PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    PropTypes.string, // students receive ID
+  ]).isRequired,
   question: PropTypes.string,
   answer: PropTypes.string,
 });

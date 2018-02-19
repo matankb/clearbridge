@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 
 import colors from '~/shared/js/constants/colors';
+import Divider from 'material-ui/Divider/Divider';
 
 const style = {
   button: {
@@ -49,9 +50,12 @@ class MoreOptions extends React.Component {
 
   static propTypes = {
     private: PropTypes.bool.isRequired,
+    named: PropTypes.bool.isRequired,
 
     handlePrivateClick: PropTypes.func.isRequired,
     handlePublicClick: PropTypes.func.isRequired,
+    handleNamedClick: PropTypes.func.isRequired,
+    handleUnnamedClick: PropTypes.func.isRequired,
   }
 
   // MoreOptions keep ui state and passes data state to parent
@@ -72,6 +76,9 @@ class MoreOptions extends React.Component {
     const menuItems = [
       renderMenuItem('Public', this.props.handlePublicClick, !this.props.private, 0),
       renderMenuItem('Private', this.props.handlePrivateClick, this.props.private, 1),
+      <Divider key={ 2 } />,
+      renderMenuItem('Name Shown', this.props.handleNamedClick, this.props.named, 3),
+      renderMenuItem('Name Hidden', this.props.handleUnnamedClick, !this.props.named, 4),
     ];
 
     return (

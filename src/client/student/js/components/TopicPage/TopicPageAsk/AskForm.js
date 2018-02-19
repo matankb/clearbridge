@@ -38,35 +38,38 @@ class AskForm extends React.Component {
   state = {
     question: '',
     private: false,
+    named: true,
     validationError: false,
   }
 
 
   handleQuestionChange = e => this.setState({ question: e.target.value });
   handleAskClick = () => {
+
     if (this.state.question.trim() !== '') { // ensure question is not empty
-      this.props.sendAsk(this.state.question, this.state.private);
+      this.props.sendAsk({
+        question: this.state.question,
+        private: this.state.private,
+        named: this.state.named,
+      });
       this.setState({ question: '', validationError: false, private: false });
     } else {
       this.setState({ validationError: true });
     }
+
   }
 
-  // more options
-  handleMoreOptionsOpen = e => {
-    // prevent click on popover
-    e.preventDefault();
-    // popover uses moreOptionsElem as root
-    this.setState({ showMoreOptions: true });
-  }
-  handleMoreOptionsClose = () => {
-    this.setState({ showMoreOptions: false });
-  }
   handlePublicClick = () => {
     this.setState({ private: false });
   }
   handlePrivateClick = () => {
     this.setState({ private: true });
+  }
+  handleNamedClick = () => {
+    this.setState({ named: true });
+  }
+  handleUnnamedClick = () => {
+    this.setState({ named: false });
   }
 
   render() {
@@ -99,8 +102,12 @@ class AskForm extends React.Component {
 
           <MoreOptions
             private={ this.state.private }
+            named={ this.state.named }
+
             handlePrivateClick={ this.handlePrivateClick }
             handlePublicClick={ this.handlePublicClick }
+            handleNamedClick={ this.handleNamedClick }
+            handleUnnamedClick={ this.handleUnnamedClick }
           />
 
         </Paper>

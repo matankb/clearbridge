@@ -45,6 +45,7 @@ class AskItem extends React.Component {
     question: PropTypes.string.isRequired,
     answer: PropTypes.string,
     private: PropTypes.bool.isRequired,
+    named: PropTypes.bool.isRequired,
 
     showControls: PropTypes.bool.isRequired,
     handleDelete: PropTypes.func.isRequired,
@@ -60,6 +61,7 @@ class AskItem extends React.Component {
     editingData: {
       question: this.props.question,
       private: this.props.private,
+      named: this.props.named,
     },
   }
 
@@ -78,12 +80,20 @@ class AskItem extends React.Component {
   handleQuestionChange = e => {
     this.updateEditingData({ question: e.target.value });
   }
+
   handlePublicClick = () => {
     this.updateEditingData({ private: false });
   }
   handlePrivateClick = () => {
     this.updateEditingData({ private: true });
   }
+  handleNamedClick = () => {
+    this.updateEditingData({ named: true });
+  }
+  handleUnnamedClick = () => {
+    this.updateEditingData({ named: false });
+  }
+
   saveEdits = () => {
     this.setState({ isEditing: false });
     this.props.handleEdit(this.state.editingData);
@@ -105,9 +115,12 @@ class AskItem extends React.Component {
         />
         <MoreOptions
           private={ this.state.editingData.private }
+          named={ this.state.editingData.named }
 
           handlePublicClick={ this.handlePublicClick }
           handlePrivateClick={ this.handlePrivateClick }
+          handleNamedClick={ this.handleNamedClick }
+          handleUnnamedClick={ this.handleUnnamedClick }
         />
         <IconButton
           onClick={ this.saveEdits }
@@ -176,7 +189,9 @@ class AskItem extends React.Component {
 
 }
 
-const AskList = ({ asks, userID, deleteAsk, editAsk }) => {
+const AskList = ({
+  asks, userID, deleteAsk, editAsk,
+}) => {
 
   // display answered asks first
   // TODO: refactor first part to be a.answer === b.answer
@@ -191,6 +206,7 @@ const AskList = ({ asks, userID, deleteAsk, editAsk }) => {
       question={ ask.question }
       answer={ ask.answer }
       private={ ask.private }
+      named={ ask.named }
       showControls={ ask.asker === userID }
       handleDelete={ () => deleteAsk(ask.id) }
       handleEdit={ newAsk => editAsk(ask.id, newAsk) }

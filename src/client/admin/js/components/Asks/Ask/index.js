@@ -38,6 +38,8 @@ const baseStyle = {
   },
 };
 
+// TODO: Indicate when private or unnamed
+
 class Ask extends React.Component {
 
   static propTypes = {
@@ -49,13 +51,14 @@ class Ask extends React.Component {
       name: PropTypes.string,
       color: PropTypes.string,
     }).isRequired,
-    askerName: PropTypes.string.isRequired,
+    askerName: PropTypes.string,
     sendAnswer: PropTypes.func.isRequired,
     deleteAsk: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     answer: '',
+    askerName: 'Anonymous',
   }
 
   state = {
@@ -83,7 +86,7 @@ class Ask extends React.Component {
         <span style={ style.question }>
           &quot;{ this.props.question }&quot; - &nbsp;
           <span style={ style.askerName }>
-            { this.props.askerName }
+            { this.props.askerName || <i> Anonymous </i> }
           </span>
         </span>
         <span style={ style.topicName }>{ this.props.topic.name }</span>
