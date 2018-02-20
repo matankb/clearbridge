@@ -5,12 +5,12 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import LockOutlineIcon from 'material-ui/svg-icons/action/lock-outline';
-import LockOpenIcon from 'material-ui/svg-icons/action/lock-open';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import CheckIcon from 'material-ui/svg-icons/action/check-circle';
 import CancelIcon from 'material-ui/svg-icons/navigation/cancel';
 
+import HideIcon from '~/shared/assets/incognito.svg';
 import colors from '~/shared/js/constants/colors';
 
 import MoreOptions from './MoreOptions';
@@ -25,13 +25,17 @@ const style = {
     paddingBottom: 0,
     verticalAlign: 'bottom',
   },
+  iconsWrap: {
+    marginRight: 10,
+  },
   iconButton: {
     position: 'relative',
     top: 5, // same line as question
-    marginRight: 10,
+    marginRight: 0,
     paddingBottom: 0,
     paddingTop: 0,
     height: 0, // prevent iconbutton from changing vertical padding of askitem
+    cursor: 'normal',
   },
   lockIcon: {
     width: 20,
@@ -139,12 +143,20 @@ class AskItem extends React.Component {
 
     const question = (
       <span>
-        {
+        <span style={ style.iconsWrap }>
+          {
           this.props.private &&
           <IconButton style={ style.iconButton } disableTouchRipple tooltip="Private">
             <LockOutlineIcon style={ style.lockIcon } color={ colors.gray } />
           </IconButton>
         }
+          {
+          !this.props.named && this.props.showControls &&
+          <IconButton style={ style.iconButton } disableTouchRipple tooltip="Name Hidden">
+            <HideIcon style={ style.lockIcon } color={ colors.gray } />
+          </IconButton>
+        }
+        </span>
         { this.props.question }
       </span>
     );
