@@ -71,8 +71,6 @@ class Asks extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.props.asks);
     return (
       <div className="asks">
         <h1 className="title">Asks</h1>
@@ -90,6 +88,8 @@ class Asks extends React.Component {
                 question={ ask.question }
                 answer={ ask.answer }
                 topic={ ask.topic }
+                private={ ask.private }
+                named={ ask.named }
                 askerName={ ask.asker.name }
                 sendAnswer={ this.sendAnswer }
                 deleteAsk={ this.deleteAsk }

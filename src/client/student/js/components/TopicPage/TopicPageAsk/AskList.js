@@ -145,17 +145,17 @@ class AskItem extends React.Component {
       <span>
         <span style={ style.iconsWrap }>
           {
-          this.props.private &&
-          <IconButton style={ style.iconButton } disableTouchRipple tooltip="Private">
-            <LockOutlineIcon style={ style.lockIcon } color={ colors.gray } />
-          </IconButton>
-        }
+            this.props.private &&
+            <IconButton style={ style.iconButton } disableTouchRipple tooltip="Private">
+              <LockOutlineIcon style={ style.lockIcon } color={ colors.gray } />
+            </IconButton>
+          }
           {
-          !this.props.named && this.props.showControls &&
-          <IconButton style={ style.iconButton } disableTouchRipple tooltip="Name Hidden">
-            <HideIcon style={ style.lockIcon } color={ colors.gray } />
-          </IconButton>
-        }
+            !this.props.named && this.props.showControls &&
+            <IconButton style={ style.iconButton } disableTouchRipple tooltip="Name Hidden">
+              <HideIcon style={ style.lockIcon } color={ colors.gray } />
+            </IconButton>
+          }
         </span>
         { this.props.question }
       </span>

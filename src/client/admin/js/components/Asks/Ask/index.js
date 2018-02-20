@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-
 import colors from '~/shared/js/constants/colors';
+
 
 import AskMenu from './AskMenu';
 
@@ -23,18 +23,14 @@ const baseStyle = {
     fontSize: '14px',
     display: 'block',
   },
-  question: {
-    float: 'left',
-  },
-  topicName: {
-    color: colors.lightgray,
-    fontSize: 14,
-    float: 'right',
-    marginRight: 40,
-  },
   askerName: {
     color: colors.lightgray,
     fontSize: 14,
+  },
+  details: {
+    fontSize: 12,
+    color: colors.gray,
+    marginTop: 5,
   },
 };
 
@@ -51,6 +47,8 @@ class Ask extends React.Component {
       name: PropTypes.string,
       color: PropTypes.string,
     }).isRequired,
+    private: PropTypes.bool.isRequired,
+    named: PropTypes.bool.isRequired,
     askerName: PropTypes.string,
     sendAnswer: PropTypes.func.isRequired,
     deleteAsk: PropTypes.func.isRequired,
@@ -70,6 +68,13 @@ class Ask extends React.Component {
   handleSubmitTap = () => this.props.sendAnswer(this.props.id, this.state.answer);
   handleDeleteTap = () => this.props.deleteAsk(this.props.id);
 
+  generateDetailsText() {
+    const details = [];
+    if (this.props.private) { details.push('Private'); }
+    if (!this.props.named) { details.push('Asker Name Hidden'); }
+    return `${this.props.topic.name} (${details.join(', ')})`;
+  }
+
   render() {
 
     const style = {
@@ -83,14 +88,13 @@ class Ask extends React.Component {
     return (
       <Paper style={ style.wrap}>
 
-        <span style={ style.question }>
-          &quot;{ this.props.question }&quot; - &nbsp;
+        <span>
+          &quot;{ this.props.question }&quot; &nbsp; - &nbsp;
           <span style={ style.askerName }>
-            { this.props.askerName || <i> Anonymous </i> }
+            { this.props.askerName || <i>Anonymous</i> }
           </span>
         </span>
-        <span style={ style.topicName }>{ this.props.topic.name }</span>
-
+        <div style={ style.details }> { this.generateDetailsText() }</div>
 
         <AskMenu handleDeleteTap={ this.handleDeleteTap } />
 
@@ -102,6 +106,7 @@ class Ask extends React.Component {
           value={ this.state.answer }
           onChange={ this.handleAnswerChange }
           style={ style.textfield }
+          placeholder="No answer yet"
         />
 
         <FlatButton label="Answer" onClick={ this.handleSubmitTap } />

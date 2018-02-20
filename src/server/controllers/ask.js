@@ -4,11 +4,11 @@ const Topic = require('../models/Topic');
 const { unauthenticated } = require('../helpers/res-message');
 
 exports.getAsks = async (req, res) => {
-  const asks = await Ask.find()
+  const asks = (await Ask.find()
     .populate('topic', 'name color')
     .populate('asker', 'name')
     .lean() // plain array of objects, to allow .map
-    .exec()
+    .exec())
     .map(ask => { // remove name from unnamed asks
       if (!ask.named) {
         return {
