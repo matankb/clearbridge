@@ -44,6 +44,11 @@ async function unassignTopic(topicId, userId) {
 
 }
 
+async function removeTopic(topicId) {
+  await Topic.findByIdAndRemove(topicId).exec();
+  console.log(`Removed topic ${topicId}`);
+}
+
 program
   .version('1.0.0')
   .command('modify <id> <key> <value>')
@@ -54,5 +59,8 @@ program
 program
   .command('unassign <topic> <user>')
   .action(wrapAsync(unassignTopic));
+program
+  .command('rm <topic>')
+  .action(wrapAsync(removeTopic));
 
 program.parse(process.argv);
