@@ -15,10 +15,7 @@ exports.configureReadline = () => {
 };
 
 exports.connectToMongo = () => {
-  mongoose.Promise = global.Promise;
-  mongoose.connect(config.db.URL, {
-    useMongoClient: true,
-  });
+  mongoose.connect(config.db.URL);
 };
 
 exports.question = async (prompt, allowedInput = []) => {
