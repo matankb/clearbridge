@@ -1,10 +1,13 @@
 import React from 'react';
+
+import ExternalLink from '~/shared/js/components/ExternalLink';
 import '../../../css/about.less';
+
 
 const AboutText = () => (
   <div className="about">
     <h3>Created by
-      <a target="_blank" href="http://matankb.github.io/"> Matan Kotler-Berkowitz</a>
+      <ExternalLink href="http://matankb.github.io/"> Matan Kotler-Berkowitz</ExternalLink>
     </h3>
     <h4>Special Thanks</h4>
     <div>
@@ -26,18 +29,18 @@ const AboutText = () => (
     </div>
     <h4>Open Source Credits</h4>
     <div className="open-source">
-      <a target="_blank" href="https://facebook.github.io/react/">React</a>
-      <a target="_blank" href="http://redux.js.org/">Redux</a>
-      <a target="_blank" href="https://github.com/reactjs/react-redux">React-Redux</a>
-      <a target="_blank" href="http://www.material-ui.com/">Material UI</a>
-      <a target="_blank" href="https://nodejs.org">NodeJS</a>
-      <a target="_blank" href="https://webpack.github.io/">Webpack</a>
-      <a target="_blank" href="https://babeljs.io/">Babel</a>
-      <a target="_blank" href="http://lesscss.org/">Less</a>
-      <a target="_blank" href="https://expressjs.com/">Express</a>
-      <a target="_blank" href="http://passportjs.org/">Passport</a>
-      <a target="_blank" href="https://www.mongodb.com/">MongoDB</a>
-      <a target="_blank" href="http://mongoosejs.com/">Mongoose</a>
+      <ExternalLink href="https://facebook.github.io/react/">React</ExternalLink>
+      <ExternalLink href="http://redux.js.org/">Redux</ExternalLink>
+      <ExternalLink href="https://github.com/reactjs/react-redux">React-Redux</ExternalLink>
+      <ExternalLink href="http://www.material-ui.com/">Material UI</ExternalLink>
+      <ExternalLink href="https://nodejs.org">NodeJS</ExternalLink>
+      <ExternalLink href="https://webpack.github.io/">Webpack</ExternalLink>
+      <ExternalLink href="https://babeljs.io/">Babel</ExternalLink>
+      <ExternalLink href="http://lesscss.org/">Less</ExternalLink>
+      <ExternalLink href="https://expressjs.com/">Express</ExternalLink>
+      <ExternalLink href="http://passportjs.org/">Passport</ExternalLink>
+      <ExternalLink href="https://www.mongodb.com/">MongoDB</ExternalLink>
+      <ExternalLink href="http://mongoosejs.com/">Mongoose</ExternalLink>
     </div>
   </div>
 );
