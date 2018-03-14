@@ -38,6 +38,8 @@ class TopicList extends React.Component {
         name={ topic.data.name }
         image={ topic.data.image }
         color={ topic.data.color }
+        external={ topic.data.external }
+        externalLink={ topic.data.externalLink }
       />
     ));
 

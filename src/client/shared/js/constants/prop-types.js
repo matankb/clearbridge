@@ -6,6 +6,8 @@ const topic = PropTypes.shape({
   color: PropTypes.string,
   image: PropTypes.string,
   content: PropTypes.string,
+  external: PropTypes.bool,
+  externalLink: PropTypes.string,
 });
 
 const error = PropTypes.shape({

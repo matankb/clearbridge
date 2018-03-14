@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Paper from 'material-ui/Paper';
+import LaunchIcon from 'material-ui/svg-icons/action/launch';
 
 import AppLink from '~/shared/js/components/AppLink';
+import ExternalLink from '~/shared/js/components/ExternalLink';
 
 const style = {
   appLink: {
@@ -23,37 +25,57 @@ const style = {
     width: '100%',
     cursor: 'pointer',
   },
+  launchIcon: {
+    position: 'relative',
+    top: 30,
+    right: 30,
+    width: 30,
+    height: 30,
+  },
 };
 
-const ResultCard = ({ id, name, image, color, snippet }) => (
-  <div className="search-result-card">
-    <AppLink to={`/student/topic/${id}/`} style={ style.appLink }>
+const ResultCard = ({
+  id, name, image, color, snippet, external, externalLink,
+}) => {
 
-      <Paper style={ style.paper }>
+  const cardBody = (
+    <Paper style={ style.paper }>
+      <div className="image-wrap" style={{ background: color }}>
+        <img src={ image } alt={ name } />
+      </div>
+      <div className="details-wrap">
 
-        <div className="image-wrap" style={{ background: color }}>
-          <img src={ image } alt={ name } />
+        <div className="name">
+          { name }
         </div>
-        <div className="details-wrap">
-
-          <div className="name">
-            { name }
-          </div>
-          <div className="snippet">
-            {
-            snippet.map((part, index) => (
-              // using index as key is ok because the parts never move around in array
-              <span className={ part.type } key={ index }>{ part.content }</span> // eslint-disable-line
-            ))
-          }
-          </div>
-
+        <div className="snippet">
+          {
+          snippet.map((part, index) => (
+            // using index as key is ok because the parts never move around in array
+            <span className={ part.type } key={ index }>{ part.content }</span> // eslint-disable-line
+          ))
+        }
         </div>
-      </Paper>
 
-    </AppLink>
-  </div>
-);
+      </div>
+      { external && <LaunchIcon style={ style.launchIcon } /> }
+    </Paper>
+  );
+
+  return (
+    <div className="search-result-card">
+      {
+        external ?
+          <ExternalLink href={ externalLink } style={ style.appLink }>
+            { cardBody }
+          </ExternalLink> :
+          <AppLink to={`/student/topic/${id}/`} style={ style.appLink }>
+            { cardBody }
+          </AppLink>
+      }
+    </div>
+  );
+};
 
 ResultCard.propTypes = {
 
@@ -63,11 +85,18 @@ ResultCard.propTypes = {
   image: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
 
+  external: PropTypes.bool.isRequired,
+  externalLink: PropTypes.string,
+
   snippet: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string,
     content: PropTypes.string,
   })).isRequired,
 
+};
+
+ResultCard.defaultProps = {
+  externalLink: '#',
 };
 
 export default ResultCard;

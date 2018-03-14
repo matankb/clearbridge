@@ -22,7 +22,7 @@ const getTopic = id => state => getTopicById(state.topics.topics, id);
 // sagas
 function* onFetchTopicList() {
   try {
-    const topicList = yield fetchJson('/api/user/topics/?select=name color image');
+    const topicList = yield fetchJson('/api/user/topics/?select=name color image external externalLink');
     yield put(receiveTopicList(topicList));
   } catch (e) {
     yield put(fetchTopicListError(formatError(e)));

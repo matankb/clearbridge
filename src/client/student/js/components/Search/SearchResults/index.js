@@ -14,6 +14,8 @@ const SearchResults = ({ results }) => {
       name={ data.name }
       image={ data.image }
       color={ data.color }
+      external={ data.external }
+      externalLink={ data.externalLink }
     />
   ));
 

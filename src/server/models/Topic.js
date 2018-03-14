@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const sanitizeHtml = require('sanitize-html');
 
 const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const sanitizeOptions = {
   allowedTags: [...sanitizeHtml.defaults.allowedTags, 'h1', 'img', 'u', 's'],
@@ -23,6 +24,8 @@ const topicSchema = new Schema({
   students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
   asks: [{ type: Schema.Types.ObjectId, ref: 'Ask' }],
+  externalLink: String,
+  essentials: [{ type: Schema.Types.ObjectId, ref: 'Essential' }],
 });
 
 const Topic = mongoose.model('Topic', topicSchema);

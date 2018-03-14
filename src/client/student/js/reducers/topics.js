@@ -53,6 +53,8 @@ function topics(state = defaultState, action) {
             blurb: '',
             content: '',
             asks: [],
+            external: topic.external,
+            externalLink: topic.externalLink,
           },
           error: null,
           id: topic._id,
