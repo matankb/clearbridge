@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const sanitizeHtml = require('sanitize-html');
 
-const Schema = mongoose.Schema;
 const { Schema } = mongoose;
 
 const sanitizeOptions = {
