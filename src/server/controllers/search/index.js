@@ -58,8 +58,9 @@ class SearchWorker {
   }
 
   _handleWorkerExit(code) {
-    console.log('Search worker died. Restarting...'); // eslint-disable-line no-console
     if (code !== 0) {
+      console.log('Search worker died. Restarting...'); // eslint-disable-line no-console
+
       for (const [, { reject }] of this._pendingSearches) {
         reject(new Error('Search worker died'));
       }
