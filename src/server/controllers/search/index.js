@@ -10,7 +10,7 @@ require('../../models/Topic');
 
 class SearchWorker {
   constructor() {
-    this.pendingSearches = new Map();
+    this._pendingSearches = new Map();
     this._spawnWorker();
   }
 
@@ -24,8 +24,8 @@ class SearchWorker {
       reject = rej;
     });
 
-    this.pendingSearches.set(id, { resolve, reject });
-    this.child.send({
+    this._pendingSearches.set(id, { resolve, reject });
+    this._child.send({
       cmd: REQ_SEARCH,
       data: {
         id,
@@ -38,33 +38,33 @@ class SearchWorker {
   }
 
   _spawnWorker() {
-    this.child = fork(path.resolve(__dirname, './worker'));
-    this.child.on('message', msg => this._handleWorkerMessage(msg));
-    this.child.on('exit', code => this._handleWorkerExit(code));
+    this._child = fork(path.resolve(__dirname, './worker'));
+    this._child.on('message', msg => this._handleWorkerMessage(msg));
+    this._child.on('exit', code => this._handleWorkerExit(code));
   }
 
   _handleWorkerMessage(msg) {
     const { cmd, data } = msg;
 
     if (cmd === RECV_SEARCH) {
-      this.pendingSearches.get(data.id).resolve(data.results);
+      this._pendingSearches.get(data.id).resolve(data.results);
     } else if (cmd === RECV_SEARCH_ERR) {
       const err = new Error(data.err.message);
       err.stack = data.err.stack;
 
-      this.pendingSearches.get(data.id).reject(err);
+      this._pendingSearches.get(data.id).reject(err);
     }
-    this.pendingSearches.delete(data.id);
+    this._pendingSearches.delete(data.id);
   }
 
   _handleWorkerExit(code) {
     console.log('Search worker died. Restarting...'); // eslint-disable-line no-console
     if (code !== 0) {
-      for (const [, { reject }] of this.pendingSearches) {
+      for (const [, { reject }] of this._pendingSearches) {
         reject(new Error('Search worker died'));
       }
 
-      this.pendingSearches.clear();
+      this._pendingSearches.clear();
       this._spawnWorker();
     }
   }
