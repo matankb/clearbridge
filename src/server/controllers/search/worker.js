@@ -20,8 +20,8 @@ process.on('message', msg => {
         data: {
           id: data.id,
           err: {
-            message: err.message,
-            stack: err.stack,
+            message: (err && err.message) || `${err}`,
+            stack: (err && err.stack) || '',
           },
         },
       });
