@@ -15,17 +15,15 @@ const ELLIPSIS_CHAR = String.fromCharCode(0x2026);
 function stripHtml(topic) {
   // remove all tags, leave text as-is
   // append space after LIs and block elements
-  return sanitizeHtml(
-    sanitizeHtml(
-      sanitizeHtml(topic.content, {
-        allowedTags: ['h1', 'li', 'p'],
-      }),
-      {
-        allowedTags: [],
-        textFilter: text => `${text} `,
-      },
-    ),
-  );
+  return sanitizeHtml(sanitizeHtml(
+    sanitizeHtml(topic.content, {
+      allowedTags: ['h1', 'li', 'p'],
+    }),
+    {
+      allowedTags: [],
+      textFilter: text => `${text} `,
+    },
+  ));
 }
 
 // returns index of each piece, as well as its' content
@@ -71,7 +69,9 @@ function formatBackgroundString(string, isBeginning) {
       0,
       words[SNIPPET_LENGTH].index + words[SNIPPET_LENGTH].str.length,
     ); // first SNIPPET_LENGTH words
-    const end = string.slice(words[words.length - SNIPPET_LENGTH - 1].index); // last SNIPPET_LENGTH words
+
+    // last SNIPPET_LENGTH words
+    const end = string.slice(words[words.length - SNIPPET_LENGTH - 1].index);
 
     return `${beginning} ${ELLIPSIS_CHAR} ${end}`;
 
@@ -144,7 +144,7 @@ function getMatches(queryParts, words) {
   const queryMatches = new Map();
 
   for (const query of queryParts) {
-    queryMatches.set(query, []);  // all matches are initially empty
+    queryMatches.set(query, []); // all matches are initially empty
   }
 
   for (const word of words) {
@@ -161,7 +161,7 @@ function getMatches(queryParts, words) {
     }
 
     for (const { query, score } of wordMatches) {
-      queryMatches.get(query).push(score);  // record per-query scores
+      queryMatches.get(query).push(score); // record per-query scores
     }
   }
 
@@ -184,10 +184,10 @@ async function doSearch(query, userId) {
 
   const { topics } = await Student.findById(userId).populate('topics').exec();
   const queryParts = query
-                      .trim()
-                      .toLowerCase()
-                      .split(WORD_SPLIT)
-                      .filter(Boolean); // remove empty strings
+    .trim()
+    .toLowerCase()
+    .split(WORD_SPLIT)
+    .filter(Boolean); // remove empty strings
 
   const searchResults =
     topics
@@ -257,12 +257,10 @@ async function doSearch(query, userId) {
         }
 
         // highlight remaining matches
-        parts.push(
-          ...formatEndString(
-            result.content.slice(index),
-            result.contentMatch.matches.slice(SNIPPET_COUNT),
-          ),
-        );
+        parts.push(...formatEndString(
+          result.content.slice(index),
+          result.contentMatch.matches.slice(SNIPPET_COUNT),
+        ));
 
         return { id: result.id, parts };
       });
