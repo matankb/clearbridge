@@ -40,6 +40,7 @@ class SearchWorker {
   _spawnWorker() {
     this.child = fork(path.resolve(__dirname, './worker'));
     this.child.on('message', msg => this._handleWorkerMessage(msg));
+    this.child.on('exit', code => this._handleWorkerExit(code));
   }
 
   _handleWorkerMessage(msg) {
@@ -54,6 +55,18 @@ class SearchWorker {
       this.pendingSearches.get(data.id).reject(err);
     }
     this.pendingSearches.delete(data.id);
+  }
+
+  _handleWorkerExit(code) {
+    console.log('Search worker died. Restarting...'); // eslint-disable-line no-console
+    if (code !== 0) {
+      for (const [, { reject }] of this.pendingSearches) {
+        reject(new Error('Search worker died'));
+      }
+
+      this.pendingSearches.clear();
+      this._spawnWorker();
+    }
   }
 }
 
