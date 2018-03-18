@@ -10,10 +10,10 @@ class ErrorNotification extends React.Component {
   }
 
   componentDidMount() {
-    window.onerror = this.handleError;
+    window.onerror = this.handleError.bind(this);
   }
 
-  handleError = async (msg, url, ln, col, error) => {
+  async handleError(msg, url, ln, col, error) {
     try {
       if (process.env.NODE_ENV === 'production') {
         await sendReport(ERROR, { error: error ? error.stack : msg });
