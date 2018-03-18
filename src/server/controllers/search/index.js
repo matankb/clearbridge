@@ -1,4 +1,6 @@
 const { fork } = require('child_process');
+const path = require('path');
+
 const uuid = require('uuid/v4');
 
 const { REQ_SEARCH, RECV_SEARCH, RECV_SEARCH_ERR } = require('./commands');
@@ -9,7 +11,7 @@ require('../../models/Topic');
 class SearchWorker {
   constructor() {
     this.pendingSearches = new Map();
-    this.child = fork('./worker');
+    this.child = fork(path.resolve(__dirname, './worker'));
 
     this.child.on('message', msg => {
       const { cmd, data } = msg;
