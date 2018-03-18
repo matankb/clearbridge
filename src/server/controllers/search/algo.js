@@ -194,7 +194,7 @@ exports.doSearch = (topics, query) => {
       const contentMatch = getMatches(queryParts, contentParts);
 
       return {
-        id: topic.id,
+        id: topic._id,
         content,
         nameParts,
         contentParts,
