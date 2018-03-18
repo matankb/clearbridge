@@ -11,21 +11,7 @@ require('../../models/Topic');
 class SearchWorker {
   constructor() {
     this.pendingSearches = new Map();
-    this.child = fork(path.resolve(__dirname, './worker'));
-
-    this.child.on('message', msg => {
-      const { cmd, data } = msg;
-
-      if (cmd === RECV_SEARCH) {
-        this.pendingSearches.get(data.id).resolve(data.results);
-      } else if (cmd === RECV_SEARCH_ERR) {
-        const err = new Error(data.err.message);
-        err.stack = data.err.stack;
-
-        this.pendingSearches.get(data.id).reject(err);
-      }
-      this.pendingSearches.delete(data.id);
-    });
+    this._spawnWorker();
   }
 
   dispatchSearch(topics, query) {
@@ -49,6 +35,25 @@ class SearchWorker {
     });
 
     return ret;
+  }
+
+  _spawnWorker() {
+    this.child = fork(path.resolve(__dirname, './worker'));
+    this.child.on('message', msg => this._handleWorkerMessage(msg));
+  }
+
+  _handleWorkerMessage(msg) {
+    const { cmd, data } = msg;
+
+    if (cmd === RECV_SEARCH) {
+      this.pendingSearches.get(data.id).resolve(data.results);
+    } else if (cmd === RECV_SEARCH_ERR) {
+      const err = new Error(data.err.message);
+      err.stack = data.err.stack;
+
+      this.pendingSearches.get(data.id).reject(err);
+    }
+    this.pendingSearches.delete(data.id);
   }
 }
 
