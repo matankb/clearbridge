@@ -44,32 +44,42 @@ class SearchWorker {
   }
 
   _handleWorkerMessage(msg) {
-    const { cmd, data } = msg;
+    try {
+      const { cmd, data } = msg;
 
-    if (cmd === RECV_SEARCH) {
-      this._pendingSearches.get(data.id).resolve(data.results);
-    } else if (cmd === RECV_SEARCH_ERR) {
-      const err = new Error(data.err.message);
-      err.stack = data.err.stack;
+      if (cmd === RECV_SEARCH) {
+        this._pendingSearches.get(data.id).resolve(data.results);
+      } else if (cmd === RECV_SEARCH_ERR) {
+        const err = new Error(data.err.message);
+        err.stack = data.err.stack;
 
-      this._pendingSearches.get(data.id).reject(err);
+        this._pendingSearches.get(data.id).reject(err);
+      }
+      this._pendingSearches.delete(data.id);
+    } catch (e) {
+      console.log('Error while handling search worker message: ', e); // eslint-disable-line no-console, max-len
     }
-    this._pendingSearches.delete(data.id);
   }
 
   _handleWorkerExit(code) {
-    if (code !== 0) {
-      console.log('Search worker died. Restarting...'); // eslint-disable-line no-console
+    try {
+      this._child = null;
+      if (code !== 0) {
+        console.log('Search worker died. Restarting...'); // eslint-disable-line no-console
 
-      for (const [, { reject }] of this._pendingSearches) {
-        reject(new Error('Search worker died'));
+        for (const [, { reject }] of this._pendingSearches) {
+          reject(new Error('Search worker died'));
+        }
+
+        this._pendingSearches.clear();
+        this._spawnWorker();
       }
-
-      this._pendingSearches.clear();
-      this._spawnWorker();
+    } catch (e) {
+      console.log('Error while restarting search worker: ', e); // eslint-disable-line no-console, max-len
     }
   }
 }
+
 
 const mainWorker = new SearchWorker();
 
