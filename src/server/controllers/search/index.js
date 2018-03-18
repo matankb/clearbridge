@@ -19,7 +19,10 @@ class SearchWorker {
       if (cmd === RECV_SEARCH) {
         this.pendingSearches.get(data.id).resolve(data.results);
       } else if (cmd === RECV_SEARCH_ERR) {
-        this.pendingSearches.get(data.id).reject(data.err);
+        const err = new Error(data.err.message);
+        err.stack = data.err.stack;
+
+        this.pendingSearches.get(data.id).reject(err);
       }
       this.pendingSearches.delete(data.id);
     });
