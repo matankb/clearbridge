@@ -10,7 +10,7 @@ config.output.filename = 'js/[name].min.js';
 config.output.path = '/';
 
 for (let name of Object.keys(config.entry)) {
-  config.entry[name].unshift('webpack-hot-middleware/client', 'react-hot-loader/patch');
+  config.entry[name].unshift('webpack-hot-middleware/client');
 }
 
 config.plugins.push(

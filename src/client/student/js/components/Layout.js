@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { hot } from 'react-hot-loader';
+
 import Feedback from '~/shared/js/components/Feedback';
 import About from '~/shared/js/components/About';
 
@@ -33,4 +35,4 @@ const Layout = () => (
 );
 
 
-export default Layout;
+export default hot(module)(Layout);

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { hot } from 'react-hot-loader';
+
 import '~/teacher/css/layout.less';
 
 import Header from './Header';
@@ -18,4 +20,4 @@ class Layout extends React.Component {
 
 }
 
-export default Layout;
+export default hot(module)(Layout);
