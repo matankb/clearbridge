@@ -10,12 +10,10 @@ function createEntry(name) {
 }
 
 function createHtmlPlugin(name) {
-  const types = ['admin', 'teacher', 'student'];
-  types.splice(types.indexOf(name), 1);
   return new HtmlPlugin({
     filename: `${name}/index.html`,
     template: path.resolve(ENTRY_DIR, `${name}/index.html`),
-    excludeChunks: types,
+    chunks: [name],
   });
 }
 
