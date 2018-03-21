@@ -99,7 +99,6 @@
     "webpack": "^3.11.0",
     "webpack-dashboard": "^1.1.1",
     "webpack-dev-middleware": "^2.0.5",
-    "webpack-dev-server": "^2.11.1",
     "webpack-hot-middleware": "^2.21.2",
     "whatwg-fetch": "^2.0.3"
   }
