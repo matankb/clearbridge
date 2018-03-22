@@ -1,25 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, withRouter } from 'react-router-dom';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import TopicPage from './TopicPage';
 
 const TopicPageWrap = ({ location }) => (
 
-  <CSSTransitionGroup
-    transitionName="topic-page"
-    transitionEnterTimeout={ 300 }
-    transitionLeaveTimeout={ 300 }
-    component="div"
-  >
-    <Route
-      path="/student/topic/:id/"
-      location={ location }
+  <TransitionGroup>
+    <CSSTransition
+      classNames="topic-page"
+      timeout={ 300 }
       key={ location.key }
-      component={ TopicPage }
-    />
-  </CSSTransitionGroup>
+    >
+      <Switch location={ location }>
+        <Route
+          path="/student/topic/:id/"
+          component={ TopicPage }
+        />
+        { /* react-transition-group doesn't like null children, so render a fallback */ }
+        <Route render={ () => <div /> } />
+      </Switch>
+    </CSSTransition>
+  </TransitionGroup>
 
 );
 

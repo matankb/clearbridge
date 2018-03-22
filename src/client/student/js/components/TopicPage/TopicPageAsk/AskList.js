@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
@@ -212,30 +212,30 @@ const AskList = ({
   });
 
   const askElements = orderedAsks.map(ask => (
-    <AskItem
+    <CSSTransition
+      classNames="ask-item"
+      timeout={ 200 }
       key={ ask.id }
-      id={ ask.id }
-      question={ ask.question }
-      answer={ ask.answer }
-      private={ ask.private }
-      named={ ask.named }
-      showControls={ ask.asker === userID }
-      handleDelete={ () => deleteAsk(ask.id) }
-      handleEdit={ newAsk => editAsk(ask.id, newAsk) }
-    />
+    >
+      <AskItem
+        id={ ask.id }
+        question={ ask.question }
+        answer={ ask.answer }
+        private={ ask.private }
+        named={ ask.named }
+        showControls={ ask.asker === userID }
+        handleDelete={ () => deleteAsk(ask.id) }
+        handleEdit={ newAsk => editAsk(ask.id, newAsk) }
+      />
+    </CSSTransition>
   ));
 
   return (
     <div className="ask-list">
 
-      <CSSTransitionGroup
-        transitionName="ask-item"
-        transitionEnterTimeout={ 200 }
-        transitionLeaveTimeout={ 200 }
-        component="div"
-      >
+      <TransitionGroup>
         {askElements}
-      </CSSTransitionGroup>
+      </TransitionGroup>
 
     </div>
   );
