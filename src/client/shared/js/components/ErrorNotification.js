@@ -34,7 +34,7 @@ class ErrorNotification extends React.Component {
         open={ this.state.open }
         autoHideDuration={ 5000 }
         onRequestClose={ this.handleToastClose }
-        onActionClick={ () => location.reload() }
+        onActionClick={ () => window.location.reload() }
       />
     );
   }
