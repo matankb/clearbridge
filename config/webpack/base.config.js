@@ -1,6 +1,4 @@
 const path = require('path');
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
 const ENTRY_DIR = path.resolve(__dirname, '../../src/client/');
@@ -37,22 +35,6 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         use: ['babel-loader'],
-      },
-      {
-        test: /\.css?$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract({
-          use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true,
-            },
-          }, 'less-loader'],
-          fallback: 'style-loader',
-        }),
       },
       {
         test: /\.png$/,
