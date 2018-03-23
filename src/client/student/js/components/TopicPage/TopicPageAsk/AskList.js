@@ -11,6 +11,7 @@ import CheckIcon from 'material-ui/svg-icons/action/check-circle';
 import CancelIcon from 'material-ui/svg-icons/navigation/cancel';
 
 import HideIcon from '~/shared/assets/incognito.svg';
+import ErrorBoundry from '~/shared/js/components/ErrorBoundry';
 import colors from '~/shared/js/constants/colors';
 
 import MoreOptions from './MoreOptions';
@@ -160,7 +161,6 @@ class AskItem extends React.Component {
         { this.props.question }
       </span>
     );
-
     const editingControls = (
       <div className="controls">
         <IconButton
@@ -212,17 +212,19 @@ const AskList = ({
   });
 
   const askElements = orderedAsks.map(ask => (
-    <AskItem
-      key={ ask.id }
-      id={ ask.id }
-      question={ ask.question }
-      answer={ ask.answer }
-      private={ ask.private }
-      named={ ask.named }
-      showControls={ ask.asker === userID }
-      handleDelete={ () => deleteAsk(ask.id) }
-      handleEdit={ newAsk => editAsk(ask.id, newAsk) }
-    />
+    <ErrorBoundry>
+      <AskItem
+        key={ ask.id }
+        id={ ask.id }
+        question={ ask.question }
+        answer={ ask.answer }
+        private={ ask.private }
+        named={ ask.named }
+        showControls={ ask.asker === userID }
+        handleDelete={ () => deleteAsk(ask.id) }
+        handleEdit={ newAsk => editAsk(ask.id, newAsk) }
+      />
+    </ErrorBoundry>
   ));
 
   return (

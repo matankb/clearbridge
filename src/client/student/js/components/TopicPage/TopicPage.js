@@ -12,6 +12,7 @@ import colors from '~/student/js/constants/colors';
 
 import { getTopicById } from '~/shared/js/utils';
 
+import ErrorBoundry from '~/shared/js/components/ErrorBoundry';
 import '~/student/css/topic-page.less';
 
 import TopicPageHeader from './TopicPageHeader';
@@ -69,19 +70,24 @@ class TopicPage extends React.Component {
     const error = !this.props.topic && this.props.topicListLoaded ? notFoundError : topic.error;
     return (
       <div className="topic-page">
-        <TopicPageHeader
-          name={ data.name }
-          blurb={ data.blurb }
-          color={ data.color }
-          image={ data.image }
-        />
-        <LoadableContent
-          isLoading={ !this.props.topicListLoaded || topic.isFetching }
-          error={ error }
-          retry={ this.loadTopic }
-        >
-          <TopicPageMain id={ topic.id } content={ data.content } color={ data.color } />
-        </LoadableContent>
+        <ErrorBoundry>
+          <TopicPageHeader
+            name={ data.name }
+            blurb={ data.blurb }
+            color={ data.color }
+            image={ data.image }
+          />
+        </ErrorBoundry>
+
+        <ErrorBoundry>
+          <LoadableContent
+            isLoading={ !this.props.topicListLoaded || topic.isFetching }
+            error={ error }
+            retry={ this.loadTopic }
+          >
+            <TopicPageMain id={ topic.id } content={ data.content } color={ data.color } />
+          </LoadableContent>
+        </ErrorBoundry>
       </div>
     );
   }
