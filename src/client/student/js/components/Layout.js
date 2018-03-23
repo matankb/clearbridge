@@ -6,6 +6,7 @@ import About from '~/shared/js/components/About';
 
 import ErrorNotification from '~/shared/js/components/ErrorNotification';
 
+import ErrorBoundry from '~/shared/js/components/ErrorBoundry';
 import '~/student/css/layout.less';
 
 import Header from './Header';
@@ -16,9 +17,14 @@ import User from './User';
 const Layout = () => (
   <div className="layout">
 
-    <Header />
+    <ErrorBoundry>
+      <Header />
+    </ErrorBoundry>
 
-    <Feedback />
+    <ErrorBoundry>
+      <Feedback />
+    </ErrorBoundry>
+
     <About />
 
     <ErrorNotification />
