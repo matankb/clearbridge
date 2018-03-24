@@ -6,7 +6,6 @@ const config = require('../../../config/webpack/dev.config'); // use dev config
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const compiler = webpack(config);
 const opts = {
   noInfo: true, // only show 'webpack compiled'
   publicPath: config.output.publicPath,
@@ -16,6 +15,7 @@ module.exports = function(app) {
   if (!isProduction) {
 
     // generate middleware
+    const compiler = webpack(config);
     const compiledDevMiddleware = webpackDevMiddleware(compiler, opts);
     const copiledHotMiddleware = webpackHotMiddleware(compiler);
 
